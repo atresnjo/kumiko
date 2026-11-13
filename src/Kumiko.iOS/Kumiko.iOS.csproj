@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-ios</TargetFramework>
+    <SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
+    <KumikoStrict>false</KumikoStrict>
+    <IsAotCompatible>true</IsAotCompatible>
+    <IsTrimmable>true</IsTrimmable>
+    <IsPackable>true</IsPackable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591;RS0026;RS0027</NoWarn>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>ios;uikit;native;ui;kumiko;nativeaot</PackageTags>
+    <Description>Native UIKit host and controls for Kumiko iOS applications.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="/" />
+    <ProjectReference Include="../Kumiko/Kumiko.csproj" />
+    <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="5.6.0" PrivateAssets="all" />
+    <AdditionalFiles Include="PublicAPI/**/PublicAPI.*.txt" />
+  </ItemGroup>
+</Project>

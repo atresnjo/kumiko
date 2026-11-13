@@ -1,0 +1,98 @@
+#nullable enable
+Kumiko.App
+Kumiko.App.App(Kumiko.AppOptions? options = null) -> void
+Kumiko.App.Dispatch(System.Action! action) -> void
+Kumiko.App.Dispose() -> void
+Kumiko.App.Menu.get -> Kumiko.Desktop.Menu?
+Kumiko.App.NewPage(Kumiko.WindowOptions! options, Kumiko.Web.PageOptions! page, Kumiko.Runtime.IProgram! program) -> Kumiko.Window!
+Kumiko.App.NewWindow(Kumiko.WindowOptions! options, Kumiko.Runtime.IProgram! program) -> Kumiko.Window!
+Kumiko.App.Options.get -> Kumiko.AppOptions!
+Kumiko.App.Quit() -> void
+Kumiko.App.Run() -> void
+Kumiko.App.RunFor(System.TimeSpan duration) -> void
+Kumiko.App.Schedule(System.TimeSpan delay, System.Action! action, System.TimeSpan? period = null) -> System.IDisposable!
+Kumiko.App.Services.get -> Kumiko.Web.ServiceRegistry!
+Kumiko.App.SetMenu(params Kumiko.Desktop.MenuItem![]! items) -> void
+Kumiko.App.UnhandledException -> System.Action<System.Exception!>?
+Kumiko.App.Windows.get -> System.Collections.Generic.IReadOnlyList<Kumiko.Window!>!
+Kumiko.AppOptions
+Kumiko.AppOptions.<Clone>$() -> Kumiko.AppOptions!
+Kumiko.AppOptions.AppOptions(string! Name = "Kumiko", bool QuitOnLastWindow = true, bool Hidden = false) -> void
+Kumiko.AppOptions.Deconstruct(out string! Name, out bool QuitOnLastWindow, out bool Hidden) -> void
+Kumiko.AppOptions.Equals(Kumiko.AppOptions? other) -> bool
+Kumiko.AppOptions.Hidden.get -> bool
+Kumiko.AppOptions.Hidden.init -> void
+Kumiko.AppOptions.Name.get -> string!
+Kumiko.AppOptions.Name.init -> void
+Kumiko.AppOptions.QuitOnLastWindow.get -> bool
+Kumiko.AppOptions.QuitOnLastWindow.init -> void
+Kumiko.Dev
+Kumiko.HotReload
+Kumiko.Window
+Kumiko.Window.App.get -> Kumiko.App!
+Kumiko.Window.Capture() -> Kumiko.Rendering.Pixels!
+Kumiko.Window.Close() -> void
+Kumiko.Window.Closed -> System.Action?
+Kumiko.Window.Context.get -> Kumiko.UI.Context?
+Kumiko.Window.Dispose() -> void
+Kumiko.Window.Hide() -> void
+Kumiko.Window.Invalidate() -> void
+Kumiko.Window.IsVisible.get -> bool
+Kumiko.Window.Minimize() -> void
+Kumiko.Window.Options.get -> Kumiko.WindowOptions!
+Kumiko.Window.Page.get -> Kumiko.Web.Page?
+Kumiko.Window.Renderer.get -> string!
+Kumiko.Window.Resize(float width, float height) -> void
+Kumiko.Window.SetTitle(string! title) -> void
+Kumiko.Window.Show() -> void
+Kumiko.Window.ToggleMaximize() -> void
+Kumiko.WindowOptions
+Kumiko.WindowOptions.<Clone>$() -> Kumiko.WindowOptions!
+Kumiko.WindowOptions.AlwaysOnTop.get -> bool
+Kumiko.WindowOptions.AlwaysOnTop.init -> void
+Kumiko.WindowOptions.Deconstruct(out string! Title, out float Width, out float Height, out float MinWidth, out float MinHeight, out bool Resizable, out bool Visible, out bool HiddenTitleBar, out bool AlwaysOnTop, out float? X, out float? Y, out Kumiko.UI.Theme? Theme, out Kumiko.UI.ApplicationIconCache? Icons, out bool DevMode) -> void
+Kumiko.WindowOptions.DevMode.get -> bool
+Kumiko.WindowOptions.DevMode.init -> void
+Kumiko.WindowOptions.Equals(Kumiko.WindowOptions? other) -> bool
+Kumiko.WindowOptions.Height.get -> float
+Kumiko.WindowOptions.Height.init -> void
+Kumiko.WindowOptions.HiddenTitleBar.get -> bool
+Kumiko.WindowOptions.HiddenTitleBar.init -> void
+Kumiko.WindowOptions.Icons.get -> Kumiko.UI.ApplicationIconCache?
+Kumiko.WindowOptions.Icons.init -> void
+Kumiko.WindowOptions.MinHeight.get -> float
+Kumiko.WindowOptions.MinHeight.init -> void
+Kumiko.WindowOptions.MinWidth.get -> float
+Kumiko.WindowOptions.MinWidth.init -> void
+Kumiko.WindowOptions.Resizable.get -> bool
+Kumiko.WindowOptions.Resizable.init -> void
+Kumiko.WindowOptions.Theme.get -> Kumiko.UI.Theme?
+Kumiko.WindowOptions.Theme.init -> void
+Kumiko.WindowOptions.Title.get -> string!
+Kumiko.WindowOptions.Title.init -> void
+Kumiko.WindowOptions.Visible.get -> bool
+Kumiko.WindowOptions.Visible.init -> void
+Kumiko.WindowOptions.Width.get -> float
+Kumiko.WindowOptions.Width.init -> void
+Kumiko.WindowOptions.WindowOptions(string! Title = "", float Width = 800, float Height = 600, float MinWidth = 200, float MinHeight = 150, bool Resizable = true, bool Visible = true, bool HiddenTitleBar = false, bool AlwaysOnTop = false, float? X = null, float? Y = null, Kumiko.UI.Theme? Theme = null, Kumiko.UI.ApplicationIconCache? Icons = null, bool DevMode = false) -> void
+Kumiko.WindowOptions.X.get -> float?
+Kumiko.WindowOptions.X.init -> void
+Kumiko.WindowOptions.Y.get -> float?
+Kumiko.WindowOptions.Y.init -> void
+override Kumiko.AppOptions.Equals(object? obj) -> bool
+override Kumiko.AppOptions.GetHashCode() -> int
+override Kumiko.AppOptions.ToString() -> string!
+override Kumiko.WindowOptions.Equals(object? obj) -> bool
+override Kumiko.WindowOptions.GetHashCode() -> int
+override Kumiko.WindowOptions.ToString() -> string!
+static Kumiko.AppOptions.operator !=(Kumiko.AppOptions? left, Kumiko.AppOptions? right) -> bool
+static Kumiko.AppOptions.operator ==(Kumiko.AppOptions? left, Kumiko.AppOptions? right) -> bool
+static Kumiko.Dev.Option(string![]! args, string! name) -> string?
+static Kumiko.Dev.Run(string! title, float width, float height, Kumiko.Runtime.IProgram! program, string![]! args, Kumiko.WindowOptions? options = null) -> void
+static Kumiko.Dev.Run<TApp>(string! title, float width, float height, string![]! args, Kumiko.WindowOptions? options = null) -> void
+static Kumiko.Dev.StartVisibleBenchmark(Kumiko.App! app, Kumiko.Window! window, string![]! args, System.Func<long>! frames, System.Func<long>? samples = null, System.Action<int>? changePage = null, System.Func<int>? currentPage = null, System.Func<int>? processCount = null) -> void
+static Kumiko.HotReload.Persist(Kumiko.Runtime.IProgram! program, Kumiko.Window! window, string! path) -> bool
+static Kumiko.HotReload.UpdateApplication(System.Type![]? types) -> void
+static Kumiko.HotReload.Watching.get -> bool
+static Kumiko.WindowOptions.operator !=(Kumiko.WindowOptions? left, Kumiko.WindowOptions? right) -> bool
+static Kumiko.WindowOptions.operator ==(Kumiko.WindowOptions? left, Kumiko.WindowOptions? right) -> bool

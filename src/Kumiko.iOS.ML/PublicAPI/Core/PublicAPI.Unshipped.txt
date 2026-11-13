@@ -1,0 +1,8 @@
+#nullable enable
+Kumiko.iOS.ML.NativeTextRecognition
+Kumiko.iOS.ML.RecognizedText
+Kumiko.iOS.ML.RecognizedText.Bounds.get -> CoreGraphics.CGRect
+Kumiko.iOS.ML.RecognizedText.Confidence.get -> float
+Kumiko.iOS.ML.RecognizedText.Text.get -> string!
+static Kumiko.iOS.ML.NativeTextRecognition.Recognize(CoreGraphics.CGImage! image, ImageIO.CGImagePropertyOrientation orientation = ImageIO.CGImagePropertyOrientation.Up, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Collections.Immutable.ImmutableArray<Kumiko.iOS.ML.RecognizedText!>
+static Kumiko.iOS.ML.NativeTextRecognition.RecognizeAsync(CoreGraphics.CGImage! image, ImageIO.CGImagePropertyOrientation orientation = ImageIO.CGImagePropertyOrientation.Up, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<System.Collections.Immutable.ImmutableArray<Kumiko.iOS.ML.RecognizedText!>>!

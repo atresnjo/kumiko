@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-21T10:33:02Z",
+  "title": "Design System: Kumiko iOS Components",
+  "extensions": {},
+  "components": [],
+  "narrative": {
+    "overview": "This example inherits UIKit's system appearance. It demonstrates adding an item, selecting a native list row, and managing that item in a right-side drawer. The guidance here describes this example, not a new framework-wide identity.",
+    "keyCharacteristics": [
+      "UIKit owns control appearance and interaction feedback.",
+      "System text and semantic colors follow the current iOS appearance.",
+      "A scrolling list fills the space between the primary action and item count."
+    ],
+    "rules": [],
+    "dos": [
+      "Do retain UIKit button configurations, preferred fonts, and semantic colors.",
+      "Do use stable domain IDs for list selection and preserve scroll position when content or selection changes.",
+      "Do keep the example inside its host's safe area."
+    ],
+    "donts": [
+      "Don't hard-code colors or shapes sampled from one iOS appearance.",
+      "Don't allow the underlying list or primary action to respond while the drawer is open."
+    ]
+  }
+}

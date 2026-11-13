@@ -1,0 +1,24 @@
+<Project>
+  <!--
+    dotnet watch gives the app its hot reload agent as a path on this Mac and its endpoint as localhost.
+    A physical device has neither, so Debug device builds ship the agent in the bundle, and launches load it by
+    assembly name and connect to KumikoHotReloadHost (this Mac's address on the phone's network).
+  -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug' and '$(RuntimeIdentifier)' == 'ios-arm64'">
+    <_KumikoDeltaApplier>$(NetCoreRoot)sdk/$(NETCoreSdkVersion)/DotnetTools/dotnet-watch/$(NETCoreSdkVersion)/tools/net10.0/any/hotreload/net10.0/Microsoft.Extensions.DotNetDeltaApplier.dll</_KumikoDeltaApplier>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(_KumikoDeltaApplier)' != '' and Exists('$(_KumikoDeltaApplier)')">
+    <Reference Include="$(_KumikoDeltaApplier)" Private="true" />
+  </ItemGroup>
+  <Target Name="KumikoDeviceHotReload" BeforeTargets="_ComputeMlaunchRunArguments" Condition="'$(_KumikoDeltaApplier)' != ''">
+    <Error Condition="'$(KumikoHotReloadHost)' == ''" Text="Set KumikoHotReloadHost to this Mac's IP address on the device's network." />
+    <ItemGroup>
+      <RuntimeEnvironmentVariable Condition="'%(Identity)' == 'DOTNET_STARTUP_HOOKS'">
+        <Value>Microsoft.Extensions.DotNetDeltaApplier</Value>
+      </RuntimeEnvironmentVariable>
+      <RuntimeEnvironmentVariable Condition="'%(Identity)' == 'DOTNET_WATCH_HOTRELOAD_WEBSOCKET_ENDPOINT'">
+        <Value>$([System.String]::Copy('%(Value)').Replace('localhost', '$(KumikoHotReloadHost)'))</Value>
+      </RuntimeEnvironmentVariable>
+    </ItemGroup>
+  </Target>
+</Project>

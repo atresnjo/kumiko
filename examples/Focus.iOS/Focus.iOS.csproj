@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-ios</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
+    <ApplicationId>dev.kumiko.focus</ApplicationId>
+    <ApplicationTitle>Kumiko Focus</ApplicationTitle>
+    <IsAotCompatible>true</IsAotCompatible>
+    <!-- Keep PublishAot local to the app; a global value also reaches the net10.0 analyzer project. -->
+    <PublishAot Condition="'$(KumikoiOSNativeAot)' != ''">$(KumikoiOSNativeAot)</PublishAot>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <UseInterpreter>true</UseInterpreter>
+    <MtouchLink>None</MtouchLink>
+    <Registrar>dynamic</Registrar>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/Kumiko.iOS/Kumiko.iOS.csproj" />
+  </ItemGroup>
+</Project>

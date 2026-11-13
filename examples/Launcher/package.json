@@ -1,0 +1,25 @@
+{
+  "name": "Launcher",
+  "displayName": "Kumiko Launcher",
+  "identifier": "dev.kumiko.launcher",
+  "version": "1.0.0",
+  "publisher": "Kumiko Examples",
+  "description": "A keyboard-first native application launcher built with Kumiko.",
+  "license": "MIT",
+  "project": "Launcher.csproj",
+  "executable": "Launcher",
+  "icons": { "png": "packaging/AppIcon.png" },
+  "minimumOS": { "macos": "13.0", "windows": "10.0.17763.0" },
+  "macos": {
+    "bundleName": "Kumiko Launcher",
+    "category": "public.app-category.utilities",
+    "infoPlist": { "LSUIElement": true }
+  },
+  "windows": { "publisher": "CN=Kumiko Examples", "applicationId": "Launcher" },
+  "linux": {
+    "packageName": "kumiko-launcher",
+    "maintainer": "Kumiko Examples <packages@example.invalid>",
+    "categories": ["Utility"],
+    "section": "utils"
+  }
+}

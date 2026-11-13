@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <KumikoStrict>false</KumikoStrict>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../examples/CRMLite/CRMLite.csproj" />
+  </ItemGroup>
+</Project>

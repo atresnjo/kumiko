@@ -1,0 +1,37 @@
+{
+  "name": "CRMLite",
+  "displayName": "CRMLite",
+  "identifier": "dev.kumiko.crmlite",
+  "version": "1.0.0",
+  "publisher": "Kumiko Examples",
+  "description": "A light CRM with agent plans, desktop notifications and a native menu.",
+  "copyright": "Copyright (c) 2026 Adnan Tresnjo",
+  "license": "MIT",
+  "project": "CRMLite.csproj",
+  "executable": "CRMLite",
+  "icons": {
+    "png": "packaging/AppIcon.png"
+  },
+  "fileAssociations": [],
+  "urlSchemes": [],
+  "minimumOS": {
+    "macos": "13.0",
+    "windows": "10.0.17763.0"
+  },
+  "macos": {
+    "bundleName": "CRMLite",
+    "category": "public.app-category.business"
+  },
+  "windows": {
+    "publisher": "CN=Kumiko Examples",
+    "applicationId": "CRMLite",
+    "updateBaseUrl": "https://downloads.example.invalid/kumiko/crmlite/",
+    "hoursBetweenUpdateChecks": 8
+  },
+  "linux": {
+    "packageName": "kumiko-crmlite",
+    "maintainer": "Kumiko Examples <packages@example.invalid>",
+    "categories": ["Office"],
+    "section": "misc"
+  }
+}

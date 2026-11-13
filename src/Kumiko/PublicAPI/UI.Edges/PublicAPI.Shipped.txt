@@ -1,0 +1,474 @@
+#nullable enable
+const Kumiko.UI.Radius.Lg = 12 -> float
+const Kumiko.UI.Radius.Md = 8 -> float
+const Kumiko.UI.Radius.None = 0 -> float
+const Kumiko.UI.Radius.Pill = 999 -> float
+const Kumiko.UI.Radius.Sm = 4 -> float
+const Kumiko.UI.Radius.Xl = 20 -> float
+const Kumiko.UI.Space.S0 = 0 -> float
+const Kumiko.UI.Space.S1 = 4 -> float
+const Kumiko.UI.Space.S2 = 8 -> float
+const Kumiko.UI.Space.S3 = 12 -> float
+const Kumiko.UI.Space.S4 = 16 -> float
+const Kumiko.UI.Space.S5 = 24 -> float
+const Kumiko.UI.Space.S6 = 32 -> float
+const Kumiko.UI.Space.S7 = 48 -> float
+Kumiko.UI.Edges
+Kumiko.UI.Edges.Bottom.get -> float
+Kumiko.UI.Edges.Bottom.init -> void
+Kumiko.UI.Edges.Deconstruct(out float Top, out float Right, out float Bottom, out float Left) -> void
+Kumiko.UI.Edges.Edges() -> void
+Kumiko.UI.Edges.Edges(float Top, float Right, float Bottom, float Left) -> void
+Kumiko.UI.Edges.Equals(Kumiko.UI.Edges other) -> bool
+Kumiko.UI.Edges.Horizontal.get -> float
+Kumiko.UI.Edges.Left.get -> float
+Kumiko.UI.Edges.Left.init -> void
+Kumiko.UI.Edges.Right.get -> float
+Kumiko.UI.Edges.Right.init -> void
+Kumiko.UI.Edges.Top.get -> float
+Kumiko.UI.Edges.Top.init -> void
+Kumiko.UI.Edges.Vertical.get -> float
+Kumiko.UI.FrameStats
+Kumiko.UI.FrameStats.BuildMilliseconds.get -> double
+Kumiko.UI.FrameStats.BuildMilliseconds.init -> void
+Kumiko.UI.FrameStats.Deconstruct(out double BuildMilliseconds, out double LayoutMilliseconds, out double PaintMilliseconds, out int Passes, out int Nodes, out int Instances) -> void
+Kumiko.UI.FrameStats.Equals(Kumiko.UI.FrameStats other) -> bool
+Kumiko.UI.FrameStats.FrameStats() -> void
+Kumiko.UI.FrameStats.FrameStats(double BuildMilliseconds, double LayoutMilliseconds, double PaintMilliseconds, int Passes, int Nodes, int Instances) -> void
+Kumiko.UI.FrameStats.Instances.get -> int
+Kumiko.UI.FrameStats.Instances.init -> void
+Kumiko.UI.FrameStats.LayoutMilliseconds.get -> double
+Kumiko.UI.FrameStats.LayoutMilliseconds.init -> void
+Kumiko.UI.FrameStats.Nodes.get -> int
+Kumiko.UI.FrameStats.Nodes.init -> void
+Kumiko.UI.FrameStats.PaintMilliseconds.get -> double
+Kumiko.UI.FrameStats.PaintMilliseconds.init -> void
+Kumiko.UI.FrameStats.Passes.get -> int
+Kumiko.UI.FrameStats.Passes.init -> void
+Kumiko.UI.GlassStyle
+Kumiko.UI.GlassStyle.Clear.get -> bool
+Kumiko.UI.GlassStyle.Clear.init -> void
+Kumiko.UI.GlassStyle.Deconstruct(out bool Clear, out Kumiko.UI.Color Tint) -> void
+Kumiko.UI.GlassStyle.Equals(Kumiko.UI.GlassStyle other) -> bool
+Kumiko.UI.GlassStyle.GlassStyle() -> void
+Kumiko.UI.GlassStyle.GlassStyle(bool Clear = false, Kumiko.UI.Color Tint = default(Kumiko.UI.Color)) -> void
+Kumiko.UI.GlassStyle.Tint.get -> Kumiko.UI.Color
+Kumiko.UI.GlassStyle.Tint.init -> void
+Kumiko.UI.Input
+Kumiko.UI.Input.Button.get -> Kumiko.UI.PointerButton
+Kumiko.UI.Input.Button.set -> void
+Kumiko.UI.Input.ClickCount.get -> int
+Kumiko.UI.Input.ClickCount.set -> void
+Kumiko.UI.Input.CommitComposition.get -> bool
+Kumiko.UI.Input.CommitComposition.set -> void
+Kumiko.UI.Input.Composition.get -> string?
+Kumiko.UI.Input.Composition.set -> void
+Kumiko.UI.Input.Down.get -> bool
+Kumiko.UI.Input.Down.set -> void
+Kumiko.UI.Input.Input() -> void
+Kumiko.UI.Input.Key.get -> Kumiko.UI.Key
+Kumiko.UI.Input.Key.set -> void
+Kumiko.UI.Input.Modifiers.get -> Kumiko.UI.Modifiers
+Kumiko.UI.Input.Modifiers.set -> void
+Kumiko.UI.Input.Pointer.get -> Kumiko.UI.Point
+Kumiko.UI.Input.Pointer.set -> void
+Kumiko.UI.Input.Pressed.get -> bool
+Kumiko.UI.Input.Pressed.set -> void
+Kumiko.UI.Input.Primary.get -> bool
+Kumiko.UI.Input.Released.get -> bool
+Kumiko.UI.Input.Released.set -> void
+Kumiko.UI.Input.ScrollX.get -> float
+Kumiko.UI.Input.ScrollX.set -> void
+Kumiko.UI.Input.ScrollY.get -> float
+Kumiko.UI.Input.ScrollY.set -> void
+Kumiko.UI.Input.Text.get -> string!
+Kumiko.UI.Input.Text.set -> void
+Kumiko.UI.Interaction
+Kumiko.UI.Interaction.Clicked.get -> bool
+Kumiko.UI.Interaction.Clicked.init -> void
+Kumiko.UI.Interaction.Deconstruct(out ulong Id, out Kumiko.UI.Rect? Rect, out bool Hovered, out bool Pressed, out bool Clicked, out bool Focused, out bool DoubleClicked) -> void
+Kumiko.UI.Interaction.DoubleClicked.get -> bool
+Kumiko.UI.Interaction.DoubleClicked.init -> void
+Kumiko.UI.Interaction.Equals(Kumiko.UI.Interaction other) -> bool
+Kumiko.UI.Interaction.Focused.get -> bool
+Kumiko.UI.Interaction.Focused.init -> void
+Kumiko.UI.Interaction.Hovered.get -> bool
+Kumiko.UI.Interaction.Hovered.init -> void
+Kumiko.UI.Interaction.Id.get -> ulong
+Kumiko.UI.Interaction.Id.init -> void
+Kumiko.UI.Interaction.Interaction() -> void
+Kumiko.UI.Interaction.Interaction(ulong Id, Kumiko.UI.Rect? Rect, bool Hovered, bool Pressed, bool Clicked, bool Focused, bool DoubleClicked = false) -> void
+Kumiko.UI.Interaction.Pressed.get -> bool
+Kumiko.UI.Interaction.Pressed.init -> void
+Kumiko.UI.Interaction.Rect.get -> Kumiko.UI.Rect?
+Kumiko.UI.Interaction.Rect.init -> void
+Kumiko.UI.Justify
+Kumiko.UI.Justify.Center = 1 -> Kumiko.UI.Justify
+Kumiko.UI.Justify.End = 2 -> Kumiko.UI.Justify
+Kumiko.UI.Justify.SpaceBetween = 3 -> Kumiko.UI.Justify
+Kumiko.UI.Justify.Start = 0 -> Kumiko.UI.Justify
+Kumiko.UI.Key
+Kumiko.UI.Key.A = 13 -> Kumiko.UI.Key
+Kumiko.UI.Key.Backspace = 5 -> Kumiko.UI.Key
+Kumiko.UI.Key.C = 14 -> Kumiko.UI.Key
+Kumiko.UI.Key.D1 = 23 -> Kumiko.UI.Key
+Kumiko.UI.Key.D2 = 24 -> Kumiko.UI.Key
+Kumiko.UI.Key.D3 = 25 -> Kumiko.UI.Key
+Kumiko.UI.Key.D4 = 26 -> Kumiko.UI.Key
+Kumiko.UI.Key.D5 = 27 -> Kumiko.UI.Key
+Kumiko.UI.Key.D6 = 28 -> Kumiko.UI.Key
+Kumiko.UI.Key.D7 = 29 -> Kumiko.UI.Key
+Kumiko.UI.Key.D8 = 30 -> Kumiko.UI.Key
+Kumiko.UI.Key.D9 = 31 -> Kumiko.UI.Key
+Kumiko.UI.Key.Delete = 6 -> Kumiko.UI.Key
+Kumiko.UI.Key.Down = 10 -> Kumiko.UI.Key
+Kumiko.UI.Key.End = 12 -> Kumiko.UI.Key
+Kumiko.UI.Key.Enter = 1 -> Kumiko.UI.Key
+Kumiko.UI.Key.Escape = 4 -> Kumiko.UI.Key
+Kumiko.UI.Key.F = 20 -> Kumiko.UI.Key
+Kumiko.UI.Key.F10 = 35 -> Kumiko.UI.Key
+Kumiko.UI.Key.F2 = 34 -> Kumiko.UI.Key
+Kumiko.UI.Key.Home = 11 -> Kumiko.UI.Key
+Kumiko.UI.Key.I = 21 -> Kumiko.UI.Key
+Kumiko.UI.Key.Left = 7 -> Kumiko.UI.Key
+Kumiko.UI.Key.None = 0 -> Kumiko.UI.Key
+Kumiko.UI.Key.P = 19 -> Kumiko.UI.Key
+Kumiko.UI.Key.PageDown = 33 -> Kumiko.UI.Key
+Kumiko.UI.Key.PageUp = 32 -> Kumiko.UI.Key
+Kumiko.UI.Key.Q = 22 -> Kumiko.UI.Key
+Kumiko.UI.Key.Right = 8 -> Kumiko.UI.Key
+Kumiko.UI.Key.Space = 2 -> Kumiko.UI.Key
+Kumiko.UI.Key.Tab = 3 -> Kumiko.UI.Key
+Kumiko.UI.Key.Up = 9 -> Kumiko.UI.Key
+Kumiko.UI.Key.V = 16 -> Kumiko.UI.Key
+Kumiko.UI.Key.X = 15 -> Kumiko.UI.Key
+Kumiko.UI.Key.Y = 18 -> Kumiko.UI.Key
+Kumiko.UI.Key.Z = 17 -> Kumiko.UI.Key
+Kumiko.UI.LayoutWarning
+Kumiko.UI.LayoutWarning.<Clone>$() -> Kumiko.UI.LayoutWarning!
+Kumiko.UI.LayoutWarning.Code.get -> string!
+Kumiko.UI.LayoutWarning.Code.init -> void
+Kumiko.UI.LayoutWarning.Deconstruct(out string! Code, out string! Path, out string! Message, out string? RelatedPath, out int Node, out int? RelatedNode) -> void
+Kumiko.UI.LayoutWarning.Equals(Kumiko.UI.LayoutWarning? other) -> bool
+Kumiko.UI.LayoutWarning.LayoutWarning(string! Code, string! Path, string! Message, string? RelatedPath = null, int Node = -1, int? RelatedNode = null) -> void
+Kumiko.UI.LayoutWarning.Message.get -> string!
+Kumiko.UI.LayoutWarning.Message.init -> void
+Kumiko.UI.LayoutWarning.Node.get -> int
+Kumiko.UI.LayoutWarning.Node.init -> void
+Kumiko.UI.LayoutWarning.Path.get -> string!
+Kumiko.UI.LayoutWarning.Path.init -> void
+Kumiko.UI.LayoutWarning.RelatedNode.get -> int?
+Kumiko.UI.LayoutWarning.RelatedNode.init -> void
+Kumiko.UI.LayoutWarning.RelatedPath.get -> string?
+Kumiko.UI.LayoutWarning.RelatedPath.init -> void
+Kumiko.UI.Length
+Kumiko.UI.Length.Deconstruct(out Kumiko.UI.LengthKind Kind, out float Value) -> void
+Kumiko.UI.Length.Equals(Kumiko.UI.Length other) -> bool
+Kumiko.UI.Length.Kind.get -> Kumiko.UI.LengthKind
+Kumiko.UI.Length.Kind.init -> void
+Kumiko.UI.Length.Length() -> void
+Kumiko.UI.Length.Length(Kumiko.UI.LengthKind Kind, float Value = 0) -> void
+Kumiko.UI.Length.Value.get -> float
+Kumiko.UI.Length.Value.init -> void
+Kumiko.UI.LengthKind
+Kumiko.UI.LengthKind.Auto = 0 -> Kumiko.UI.LengthKind
+Kumiko.UI.LengthKind.Fill = 2 -> Kumiko.UI.LengthKind
+Kumiko.UI.LengthKind.Percent = 3 -> Kumiko.UI.LengthKind
+Kumiko.UI.LengthKind.Pixels = 1 -> Kumiko.UI.LengthKind
+Kumiko.UI.MenuCommand
+Kumiko.UI.MenuCommand.<Clone>$() -> Kumiko.UI.MenuCommand!
+Kumiko.UI.MenuCommand.Deconstruct(out string! Id, out string! Label, out System.Action! Run, out bool Disabled, out bool Destructive, out string! Shortcut) -> void
+Kumiko.UI.MenuCommand.Destructive.get -> bool
+Kumiko.UI.MenuCommand.Destructive.init -> void
+Kumiko.UI.MenuCommand.Disabled.get -> bool
+Kumiko.UI.MenuCommand.Disabled.init -> void
+Kumiko.UI.MenuCommand.Equals(Kumiko.UI.MenuCommand? other) -> bool
+Kumiko.UI.MenuCommand.Id.get -> string!
+Kumiko.UI.MenuCommand.Id.init -> void
+Kumiko.UI.MenuCommand.Label.get -> string!
+Kumiko.UI.MenuCommand.Label.init -> void
+Kumiko.UI.MenuCommand.MenuCommand(string! Id, string! Label, System.Action! Run, bool Disabled = false, bool Destructive = false, string! Shortcut = "") -> void
+Kumiko.UI.MenuCommand.Run.get -> System.Action!
+Kumiko.UI.MenuCommand.Run.init -> void
+Kumiko.UI.MenuCommand.Shortcut.get -> string!
+Kumiko.UI.MenuCommand.Shortcut.init -> void
+Kumiko.UI.Modifiers
+Kumiko.UI.Modifiers.Alt = 4 -> Kumiko.UI.Modifiers
+Kumiko.UI.Modifiers.Control = 2 -> Kumiko.UI.Modifiers
+Kumiko.UI.Modifiers.Meta = 8 -> Kumiko.UI.Modifiers
+Kumiko.UI.Modifiers.None = 0 -> Kumiko.UI.Modifiers
+Kumiko.UI.Modifiers.Primary = 16 -> Kumiko.UI.Modifiers
+Kumiko.UI.Modifiers.Shift = 1 -> Kumiko.UI.Modifiers
+Kumiko.UI.Motion
+Kumiko.UI.Motion.Gentle = 3 -> Kumiko.UI.Motion
+Kumiko.UI.Motion.None = 0 -> Kumiko.UI.Motion
+Kumiko.UI.Motion.Quick = 1 -> Kumiko.UI.Motion
+Kumiko.UI.Motion.Slow = 4 -> Kumiko.UI.Motion
+Kumiko.UI.Motion.Standard = 2 -> Kumiko.UI.Motion
+Kumiko.UI.MotionChannel
+Kumiko.UI.MotionChannel.Height = 2 -> Kumiko.UI.MotionChannel
+Kumiko.UI.MotionChannel.OffsetX = 3 -> Kumiko.UI.MotionChannel
+Kumiko.UI.MotionChannel.OffsetY = 4 -> Kumiko.UI.MotionChannel
+Kumiko.UI.MotionChannel.Opacity = 5 -> Kumiko.UI.MotionChannel
+Kumiko.UI.MotionChannel.Value = 0 -> Kumiko.UI.MotionChannel
+Kumiko.UI.MotionChannel.Width = 1 -> Kumiko.UI.MotionChannel
+Kumiko.UI.Node
+Kumiko.UI.Node.Accessible -> Kumiko.UI.AccessibleProperties?
+Kumiko.UI.Node.Checked -> bool
+Kumiko.UI.Node.ChildCount -> int
+Kumiko.UI.Node.ClipRect -> Kumiko.UI.Rect
+Kumiko.UI.Node.Disabled -> bool
+Kumiko.UI.Node.FirstChild -> int
+Kumiko.UI.Node.Flexible -> bool
+Kumiko.UI.Node.Id -> ulong
+Kumiko.UI.Node.Image -> Kumiko.Rendering.Image?
+Kumiko.UI.Node.Interactive -> bool
+Kumiko.UI.Node.Key -> string?
+Kumiko.UI.Node.Kind -> Kumiko.UI.ContentKind
+Kumiko.UI.Node.LastChild -> int
+Kumiko.UI.Node.Measured -> Kumiko.UI.Size
+Kumiko.UI.Node.MissingRowKey -> bool
+Kumiko.UI.Node.Name -> string?
+Kumiko.UI.Node.Next -> int
+Kumiko.UI.Node.Node() -> void
+Kumiko.UI.Node.Parent -> int
+Kumiko.UI.Node.Rect -> Kumiko.UI.Rect
+Kumiko.UI.Node.Role -> Kumiko.UI.Role
+Kumiko.UI.Node.Source -> string?
+Kumiko.UI.Node.SourceLine -> int
+Kumiko.UI.Node.Spans -> Kumiko.UI.TextSpan[]?
+Kumiko.UI.Node.Style -> Kumiko.UI.Style
+Kumiko.UI.Node.Text -> string?
+Kumiko.UI.Node.TextStyle -> Kumiko.UI.TextStyle
+Kumiko.UI.Node.Value -> string?
+Kumiko.UI.NodeKey
+Kumiko.UI.NodeKey.Deconstruct(out string? Value) -> void
+Kumiko.UI.NodeKey.Equals(Kumiko.UI.NodeKey other) -> bool
+Kumiko.UI.NodeKey.NodeKey() -> void
+Kumiko.UI.NodeKey.NodeKey(string? Value) -> void
+Kumiko.UI.NodeKey.Value.get -> string?
+Kumiko.UI.NodeKey.Value.init -> void
+Kumiko.UI.Point
+Kumiko.UI.Point.Deconstruct(out float X, out float Y) -> void
+Kumiko.UI.Point.Equals(Kumiko.UI.Point other) -> bool
+Kumiko.UI.Point.Point() -> void
+Kumiko.UI.Point.Point(float X = 0, float Y = 0) -> void
+Kumiko.UI.Point.X.get -> float
+Kumiko.UI.Point.X.init -> void
+Kumiko.UI.Point.Y.get -> float
+Kumiko.UI.Point.Y.init -> void
+Kumiko.UI.PointerButton
+Kumiko.UI.PointerButton.Middle = 2 -> Kumiko.UI.PointerButton
+Kumiko.UI.PointerButton.Primary = 0 -> Kumiko.UI.PointerButton
+Kumiko.UI.PointerButton.Secondary = 1 -> Kumiko.UI.PointerButton
+Kumiko.UI.Radius
+Kumiko.UI.RadiusScale
+Kumiko.UI.RadiusScale.<Clone>$() -> Kumiko.UI.RadiusScale!
+Kumiko.UI.RadiusScale.Deconstruct(out float None, out float Sm, out float Md, out float Lg, out float Xl, out float Pill) -> void
+Kumiko.UI.RadiusScale.Equals(Kumiko.UI.RadiusScale? other) -> bool
+Kumiko.UI.RadiusScale.Lg.get -> float
+Kumiko.UI.RadiusScale.Lg.init -> void
+Kumiko.UI.RadiusScale.Md.get -> float
+Kumiko.UI.RadiusScale.Md.init -> void
+Kumiko.UI.RadiusScale.None.get -> float
+Kumiko.UI.RadiusScale.None.init -> void
+Kumiko.UI.RadiusScale.Pill.get -> float
+Kumiko.UI.RadiusScale.Pill.init -> void
+Kumiko.UI.RadiusScale.RadiusScale(float None = 0, float Sm = 4, float Md = 8, float Lg = 12, float Xl = 20, float Pill = 999) -> void
+Kumiko.UI.RadiusScale.Sm.get -> float
+Kumiko.UI.RadiusScale.Sm.init -> void
+Kumiko.UI.RadiusScale.Xl.get -> float
+Kumiko.UI.RadiusScale.Xl.init -> void
+Kumiko.UI.Rect
+Kumiko.UI.Rect.Bottom.get -> float
+Kumiko.UI.Rect.Contains(Kumiko.UI.Point p) -> bool
+Kumiko.UI.Rect.Deconstruct(out float X, out float Y, out float Width, out float Height) -> void
+Kumiko.UI.Rect.Equals(Kumiko.UI.Rect other) -> bool
+Kumiko.UI.Rect.Height.get -> float
+Kumiko.UI.Rect.Height.init -> void
+Kumiko.UI.Rect.Inset(Kumiko.UI.Edges e) -> Kumiko.UI.Rect
+Kumiko.UI.Rect.Intersect(Kumiko.UI.Rect b) -> Kumiko.UI.Rect
+Kumiko.UI.Rect.Rect() -> void
+Kumiko.UI.Rect.Rect(float X, float Y, float Width, float Height) -> void
+Kumiko.UI.Rect.Right.get -> float
+Kumiko.UI.Rect.Width.get -> float
+Kumiko.UI.Rect.Width.init -> void
+Kumiko.UI.Rect.X.get -> float
+Kumiko.UI.Rect.X.init -> void
+Kumiko.UI.Rect.Y.get -> float
+Kumiko.UI.Rect.Y.init -> void
+Kumiko.UI.Role
+Kumiko.UI.Role.Alert = 20 -> Kumiko.UI.Role
+Kumiko.UI.Role.Button = 2 -> Kumiko.UI.Role
+Kumiko.UI.Role.Cell = 14 -> Kumiko.UI.Role
+Kumiko.UI.Role.Checkbox = 3 -> Kumiko.UI.Role
+Kumiko.UI.Role.ColumnHeader = 15 -> Kumiko.UI.Role
+Kumiko.UI.Role.ComboBox = 16 -> Kumiko.UI.Role
+Kumiko.UI.Role.Grid = 12 -> Kumiko.UI.Role
+Kumiko.UI.Role.Group = 1 -> Kumiko.UI.Role
+Kumiko.UI.Role.Heading = 11 -> Kumiko.UI.Role
+Kumiko.UI.Role.Image = 8 -> Kumiko.UI.Role
+Kumiko.UI.Role.List = 9 -> Kumiko.UI.Role
+Kumiko.UI.Role.ListItem = 10 -> Kumiko.UI.Role
+Kumiko.UI.Role.Menu = 18 -> Kumiko.UI.Role
+Kumiko.UI.Role.MenuItem = 19 -> Kumiko.UI.Role
+Kumiko.UI.Role.None = 0 -> Kumiko.UI.Role
+Kumiko.UI.Role.Option = 17 -> Kumiko.UI.Role
+Kumiko.UI.Role.Row = 13 -> Kumiko.UI.Role
+Kumiko.UI.Role.Slider = 5 -> Kumiko.UI.Role
+Kumiko.UI.Role.Switch = 4 -> Kumiko.UI.Role
+Kumiko.UI.Role.Text = 7 -> Kumiko.UI.Role
+Kumiko.UI.Role.TextField = 6 -> Kumiko.UI.Role
+Kumiko.UI.SearchDropdown
+Kumiko.UI.SearchDropdown.Capture() -> Kumiko.UI.DropdownState!
+Kumiko.UI.SearchDropdown.Disabled.get -> bool
+Kumiko.UI.SearchDropdown.Disabled.set -> void
+Kumiko.UI.SearchDropdown.Draw(Kumiko.UI.Context! c, string! name, System.Collections.Generic.IReadOnlyList<Kumiko.UI.Choice!>! choices, Kumiko.UI.NodeKey key, float width = 240, string! emptyMessage = "No matches") -> void
+Kumiko.UI.SearchDropdown.IsOpen.get -> bool
+Kumiko.UI.SearchDropdown.Placeholder.get -> string!
+Kumiko.UI.SearchDropdown.Placeholder.set -> void
+Kumiko.UI.SearchDropdown.Restore(Kumiko.UI.DropdownState! state) -> void
+Kumiko.UI.SearchDropdown.SearchDropdown() -> void
+Kumiko.UI.SearchDropdown.SelectedId.get -> string?
+Kumiko.UI.SearchDropdown.SelectedId.set -> void
+Kumiko.UI.SearchDropdown.SelectionChanged -> System.Action<string?>?
+Kumiko.UI.SearchDropdown.StateChanged -> System.Action<Kumiko.UI.DropdownState!>?
+Kumiko.UI.Shadow
+Kumiko.UI.Shadow.Blur.get -> float
+Kumiko.UI.Shadow.Blur.init -> void
+Kumiko.UI.Shadow.Color.get -> Kumiko.UI.Color
+Kumiko.UI.Shadow.Color.init -> void
+Kumiko.UI.Shadow.Deconstruct(out Kumiko.UI.Color Color, out float Blur, out float Y) -> void
+Kumiko.UI.Shadow.Equals(Kumiko.UI.Shadow other) -> bool
+Kumiko.UI.Shadow.Shadow() -> void
+Kumiko.UI.Shadow.Shadow(Kumiko.UI.Color Color, float Blur = 12, float Y = 4) -> void
+Kumiko.UI.Shadow.Y.get -> float
+Kumiko.UI.Shadow.Y.init -> void
+Kumiko.UI.Size
+Kumiko.UI.Size.Deconstruct(out float Width, out float Height) -> void
+Kumiko.UI.Size.Equals(Kumiko.UI.Size other) -> bool
+Kumiko.UI.Size.Height.get -> float
+Kumiko.UI.Size.Height.init -> void
+Kumiko.UI.Size.Size() -> void
+Kumiko.UI.Size.Size(float Width, float Height) -> void
+Kumiko.UI.Size.Width.get -> float
+Kumiko.UI.Size.Width.init -> void
+Kumiko.UI.SliderOptions
+Kumiko.UI.SliderOptions.Deconstruct(out float Min, out float Max, out float Width) -> void
+Kumiko.UI.SliderOptions.Equals(Kumiko.UI.SliderOptions other) -> bool
+Kumiko.UI.SliderOptions.Max.get -> float
+Kumiko.UI.SliderOptions.Max.init -> void
+Kumiko.UI.SliderOptions.Min.get -> float
+Kumiko.UI.SliderOptions.Min.init -> void
+Kumiko.UI.SliderOptions.SliderOptions() -> void
+Kumiko.UI.SliderOptions.SliderOptions(float Min = 0, float Max = 1, float Width = 200) -> void
+Kumiko.UI.SliderOptions.Width.get -> float
+Kumiko.UI.SliderOptions.Width.init -> void
+Kumiko.UI.Space
+Kumiko.UI.SpaceScale
+Kumiko.UI.SpaceScale.<Clone>$() -> Kumiko.UI.SpaceScale!
+Kumiko.UI.SpaceScale.Deconstruct(out float S0, out float S1, out float S2, out float S3, out float S4, out float S5, out float S6, out float S7) -> void
+Kumiko.UI.SpaceScale.Equals(Kumiko.UI.SpaceScale? other) -> bool
+Kumiko.UI.SpaceScale.S0.get -> float
+Kumiko.UI.SpaceScale.S0.init -> void
+Kumiko.UI.SpaceScale.S1.get -> float
+Kumiko.UI.SpaceScale.S1.init -> void
+Kumiko.UI.SpaceScale.S2.get -> float
+Kumiko.UI.SpaceScale.S2.init -> void
+Kumiko.UI.SpaceScale.S3.get -> float
+Kumiko.UI.SpaceScale.S3.init -> void
+Kumiko.UI.SpaceScale.S4.get -> float
+Kumiko.UI.SpaceScale.S4.init -> void
+Kumiko.UI.SpaceScale.S5.get -> float
+Kumiko.UI.SpaceScale.S5.init -> void
+Kumiko.UI.SpaceScale.S6.get -> float
+Kumiko.UI.SpaceScale.S6.init -> void
+Kumiko.UI.SpaceScale.S7.get -> float
+Kumiko.UI.SpaceScale.S7.init -> void
+Kumiko.UI.SpaceScale.SpaceScale(float S0 = 0, float S1 = 4, float S2 = 8, float S3 = 12, float S4 = 16, float S5 = 24, float S6 = 32, float S7 = 48) -> void
+override Kumiko.UI.Edges.GetHashCode() -> int
+override Kumiko.UI.FrameStats.GetHashCode() -> int
+override Kumiko.UI.GlassStyle.GetHashCode() -> int
+override Kumiko.UI.Interaction.GetHashCode() -> int
+override Kumiko.UI.LayoutWarning.Equals(object? obj) -> bool
+override Kumiko.UI.LayoutWarning.GetHashCode() -> int
+override Kumiko.UI.LayoutWarning.ToString() -> string!
+override Kumiko.UI.Length.GetHashCode() -> int
+override Kumiko.UI.MenuCommand.Equals(object? obj) -> bool
+override Kumiko.UI.MenuCommand.GetHashCode() -> int
+override Kumiko.UI.MenuCommand.ToString() -> string!
+override Kumiko.UI.NodeKey.GetHashCode() -> int
+override Kumiko.UI.Point.GetHashCode() -> int
+override Kumiko.UI.RadiusScale.Equals(object? obj) -> bool
+override Kumiko.UI.RadiusScale.GetHashCode() -> int
+override Kumiko.UI.RadiusScale.ToString() -> string!
+override Kumiko.UI.Rect.GetHashCode() -> int
+override Kumiko.UI.Shadow.GetHashCode() -> int
+override Kumiko.UI.Size.GetHashCode() -> int
+override Kumiko.UI.SliderOptions.GetHashCode() -> int
+override Kumiko.UI.SpaceScale.Equals(object? obj) -> bool
+override Kumiko.UI.SpaceScale.GetHashCode() -> int
+override Kumiko.UI.SpaceScale.ToString() -> string!
+static Kumiko.UI.Edges.All(float value) -> Kumiko.UI.Edges
+static Kumiko.UI.Edges.operator !=(Kumiko.UI.Edges left, Kumiko.UI.Edges right) -> bool
+static Kumiko.UI.Edges.operator ==(Kumiko.UI.Edges left, Kumiko.UI.Edges right) -> bool
+static Kumiko.UI.Edges.XY(float x, float y) -> Kumiko.UI.Edges
+static Kumiko.UI.FrameStats.operator !=(Kumiko.UI.FrameStats left, Kumiko.UI.FrameStats right) -> bool
+static Kumiko.UI.FrameStats.operator ==(Kumiko.UI.FrameStats left, Kumiko.UI.FrameStats right) -> bool
+static Kumiko.UI.GlassStyle.operator !=(Kumiko.UI.GlassStyle left, Kumiko.UI.GlassStyle right) -> bool
+static Kumiko.UI.GlassStyle.operator ==(Kumiko.UI.GlassStyle left, Kumiko.UI.GlassStyle right) -> bool
+static Kumiko.UI.Interaction.operator !=(Kumiko.UI.Interaction left, Kumiko.UI.Interaction right) -> bool
+static Kumiko.UI.Interaction.operator ==(Kumiko.UI.Interaction left, Kumiko.UI.Interaction right) -> bool
+static Kumiko.UI.LayoutWarning.operator !=(Kumiko.UI.LayoutWarning? left, Kumiko.UI.LayoutWarning? right) -> bool
+static Kumiko.UI.LayoutWarning.operator ==(Kumiko.UI.LayoutWarning? left, Kumiko.UI.LayoutWarning? right) -> bool
+static Kumiko.UI.Length.Auto.get -> Kumiko.UI.Length
+static Kumiko.UI.Length.Fill.get -> Kumiko.UI.Length
+static Kumiko.UI.Length.implicit operator Kumiko.UI.Length(float value) -> Kumiko.UI.Length
+static Kumiko.UI.Length.operator !=(Kumiko.UI.Length left, Kumiko.UI.Length right) -> bool
+static Kumiko.UI.Length.operator ==(Kumiko.UI.Length left, Kumiko.UI.Length right) -> bool
+static Kumiko.UI.Length.Percent(float value) -> Kumiko.UI.Length
+static Kumiko.UI.Length.Px(float value) -> Kumiko.UI.Length
+static Kumiko.UI.MenuCommand.operator !=(Kumiko.UI.MenuCommand? left, Kumiko.UI.MenuCommand? right) -> bool
+static Kumiko.UI.MenuCommand.operator ==(Kumiko.UI.MenuCommand? left, Kumiko.UI.MenuCommand? right) -> bool
+static Kumiko.UI.NodeKey.implicit operator Kumiko.UI.NodeKey(int value) -> Kumiko.UI.NodeKey
+static Kumiko.UI.NodeKey.implicit operator Kumiko.UI.NodeKey(string! value) -> Kumiko.UI.NodeKey
+static Kumiko.UI.NodeKey.implicit operator Kumiko.UI.NodeKey(ulong value) -> Kumiko.UI.NodeKey
+static Kumiko.UI.NodeKey.operator !=(Kumiko.UI.NodeKey left, Kumiko.UI.NodeKey right) -> bool
+static Kumiko.UI.NodeKey.operator ==(Kumiko.UI.NodeKey left, Kumiko.UI.NodeKey right) -> bool
+static Kumiko.UI.Point.operator !=(Kumiko.UI.Point left, Kumiko.UI.Point right) -> bool
+static Kumiko.UI.Point.operator ==(Kumiko.UI.Point left, Kumiko.UI.Point right) -> bool
+static Kumiko.UI.RadiusScale.operator !=(Kumiko.UI.RadiusScale? left, Kumiko.UI.RadiusScale? right) -> bool
+static Kumiko.UI.RadiusScale.operator ==(Kumiko.UI.RadiusScale? left, Kumiko.UI.RadiusScale? right) -> bool
+static Kumiko.UI.Rect.Infinite.get -> Kumiko.UI.Rect
+static Kumiko.UI.Rect.operator !=(Kumiko.UI.Rect left, Kumiko.UI.Rect right) -> bool
+static Kumiko.UI.Rect.operator ==(Kumiko.UI.Rect left, Kumiko.UI.Rect right) -> bool
+static Kumiko.UI.Shadow.operator !=(Kumiko.UI.Shadow left, Kumiko.UI.Shadow right) -> bool
+static Kumiko.UI.Shadow.operator ==(Kumiko.UI.Shadow left, Kumiko.UI.Shadow right) -> bool
+static Kumiko.UI.Size.operator !=(Kumiko.UI.Size left, Kumiko.UI.Size right) -> bool
+static Kumiko.UI.Size.operator ==(Kumiko.UI.Size left, Kumiko.UI.Size right) -> bool
+static Kumiko.UI.SliderOptions.operator !=(Kumiko.UI.SliderOptions left, Kumiko.UI.SliderOptions right) -> bool
+static Kumiko.UI.SliderOptions.operator ==(Kumiko.UI.SliderOptions left, Kumiko.UI.SliderOptions right) -> bool
+static Kumiko.UI.SpaceScale.operator !=(Kumiko.UI.SpaceScale? left, Kumiko.UI.SpaceScale? right) -> bool
+static Kumiko.UI.SpaceScale.operator ==(Kumiko.UI.SpaceScale? left, Kumiko.UI.SpaceScale? right) -> bool
+~override Kumiko.UI.Edges.Equals(object obj) -> bool
+~override Kumiko.UI.Edges.ToString() -> string
+~override Kumiko.UI.FrameStats.Equals(object obj) -> bool
+~override Kumiko.UI.FrameStats.ToString() -> string
+~override Kumiko.UI.GlassStyle.Equals(object obj) -> bool
+~override Kumiko.UI.GlassStyle.ToString() -> string
+~override Kumiko.UI.Interaction.Equals(object obj) -> bool
+~override Kumiko.UI.Interaction.ToString() -> string
+~override Kumiko.UI.Length.Equals(object obj) -> bool
+~override Kumiko.UI.Length.ToString() -> string
+~override Kumiko.UI.NodeKey.Equals(object obj) -> bool
+~override Kumiko.UI.NodeKey.ToString() -> string
+~override Kumiko.UI.Point.Equals(object obj) -> bool
+~override Kumiko.UI.Point.ToString() -> string
+~override Kumiko.UI.Rect.Equals(object obj) -> bool
+~override Kumiko.UI.Rect.ToString() -> string
+~override Kumiko.UI.Shadow.Equals(object obj) -> bool
+~override Kumiko.UI.Shadow.ToString() -> string
+~override Kumiko.UI.Size.Equals(object obj) -> bool
+~override Kumiko.UI.Size.ToString() -> string
+~override Kumiko.UI.SliderOptions.Equals(object obj) -> bool
+~override Kumiko.UI.SliderOptions.ToString() -> string

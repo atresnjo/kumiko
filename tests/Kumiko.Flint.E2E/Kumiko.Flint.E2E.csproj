@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><KumikoStrict>false</KumikoStrict><OutputType>Exe</OutputType></PropertyGroup>
+  <Import Project="../../examples/Flint/Hugeicons.props" />
+  <ItemGroup>
+    <ProjectReference Include="../../examples/Flint/Flint.csproj" />
+  </ItemGroup>
+</Project>

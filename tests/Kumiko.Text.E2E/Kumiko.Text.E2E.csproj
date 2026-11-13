@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><KumikoStrict>false</KumikoStrict><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/Kumiko/Kumiko.csproj" />
+    <Compile Include="../Kumiko.E2E/TextOverflowChecks.cs" Link="TextOverflowChecks.cs" />
+  </ItemGroup>
+</Project>

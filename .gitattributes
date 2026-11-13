@@ -1,0 +1,3 @@
+# Preserve original tool output and license formatting verbatim.
+artifacts/** -whitespace
+third_party/licenses/** -whitespace

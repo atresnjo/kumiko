@@ -1,0 +1,496 @@
+#nullable enable
+const Kumiko.UI.Context.MinimumTargetSize = 24 -> float
+const Kumiko.UI.DragKinds.Files = "kumiko/files" -> string!
+Kumiko.UI.AccessibilityAction.Reveal = 10 -> Kumiko.UI.AccessibilityAction
+Kumiko.UI.AccessibilityAction.Scroll = 9 -> Kumiko.UI.AccessibilityAction
+Kumiko.UI.AccessibilityActions
+Kumiko.UI.AccessibilityActions.Collapse = 256 -> Kumiko.UI.AccessibilityActions
+Kumiko.UI.AccessibilityActions.Expand = 128 -> Kumiko.UI.AccessibilityActions
+Kumiko.UI.AccessibilityActions.Focus = 2 -> Kumiko.UI.AccessibilityActions
+Kumiko.UI.AccessibilityActions.Invoke = 1 -> Kumiko.UI.AccessibilityActions
+Kumiko.UI.AccessibilityActions.None = 0 -> Kumiko.UI.AccessibilityActions
+Kumiko.UI.AccessibilityActions.Reveal = 1024 -> Kumiko.UI.AccessibilityActions
+Kumiko.UI.AccessibilityActions.Scroll = 512 -> Kumiko.UI.AccessibilityActions
+Kumiko.UI.AccessibilityActions.Select = 64 -> Kumiko.UI.AccessibilityActions
+Kumiko.UI.AccessibilityActions.SetRange = 8 -> Kumiko.UI.AccessibilityActions
+Kumiko.UI.AccessibilityActions.SetSelection = 32 -> Kumiko.UI.AccessibilityActions
+Kumiko.UI.AccessibilityActions.SetValue = 4 -> Kumiko.UI.AccessibilityActions
+Kumiko.UI.AccessibilityActions.Toggle = 16 -> Kumiko.UI.AccessibilityActions
+Kumiko.UI.AccessibilityFinding
+Kumiko.UI.AccessibilityFinding.<Clone>$() -> Kumiko.UI.AccessibilityFinding!
+Kumiko.UI.AccessibilityFinding.AccessibilityFinding(string! Code, string! Path, string! Message, ulong Node) -> void
+Kumiko.UI.AccessibilityFinding.Code.get -> string!
+Kumiko.UI.AccessibilityFinding.Code.init -> void
+Kumiko.UI.AccessibilityFinding.Deconstruct(out string! Code, out string! Path, out string! Message, out ulong Node) -> void
+Kumiko.UI.AccessibilityFinding.Equals(Kumiko.UI.AccessibilityFinding? other) -> bool
+Kumiko.UI.AccessibilityFinding.Message.get -> string!
+Kumiko.UI.AccessibilityFinding.Message.init -> void
+Kumiko.UI.AccessibilityFinding.Node.get -> ulong
+Kumiko.UI.AccessibilityFinding.Node.init -> void
+Kumiko.UI.AccessibilityFinding.Path.get -> string!
+Kumiko.UI.AccessibilityFinding.Path.init -> void
+Kumiko.UI.AccessibleNode.Actions.get -> Kumiko.UI.AccessibilityActions
+Kumiko.UI.AccessibleNode.Actions.init -> void
+Kumiko.UI.AccessibleNode.Hidden.get -> bool
+Kumiko.UI.AccessibleNode.Hidden.init -> void
+Kumiko.UI.AccessibleNode.Inert.get -> bool
+Kumiko.UI.AccessibleNode.Inert.init -> void
+Kumiko.UI.AccessibleNode.Key.get -> string?
+Kumiko.UI.AccessibleNode.Key.init -> void
+Kumiko.UI.AccessibleNode.Supports(Kumiko.UI.AccessibilityAction action) -> bool
+Kumiko.UI.AccessibleProperties.Description.get -> string?
+Kumiko.UI.AccessibleProperties.Description.init -> void
+Kumiko.UI.AccessibleProperties.Horizontal.get -> bool
+Kumiko.UI.AccessibleProperties.Horizontal.init -> void
+Kumiko.UI.AccessibleProperties.Level.get -> int
+Kumiko.UI.AccessibleProperties.Level.init -> void
+Kumiko.UI.ActionResult
+Kumiko.UI.ActionResult.<Clone>$() -> Kumiko.UI.ActionResult!
+Kumiko.UI.ActionResult.ActionResult(Kumiko.UI.ActionStatus Status, long Revision, string? Detail = null) -> void
+Kumiko.UI.ActionResult.Deconstruct(out Kumiko.UI.ActionStatus Status, out long Revision, out string? Detail) -> void
+Kumiko.UI.ActionResult.Detail.get -> string?
+Kumiko.UI.ActionResult.Detail.init -> void
+Kumiko.UI.ActionResult.Equals(Kumiko.UI.ActionResult? other) -> bool
+Kumiko.UI.ActionResult.Revision.get -> long
+Kumiko.UI.ActionResult.Revision.init -> void
+Kumiko.UI.ActionResult.Status.get -> Kumiko.UI.ActionStatus
+Kumiko.UI.ActionResult.Status.init -> void
+Kumiko.UI.ActionResult.Succeeded.get -> bool
+Kumiko.UI.ActionStatus
+Kumiko.UI.ActionStatus.Applied = 0 -> Kumiko.UI.ActionStatus
+Kumiko.UI.ActionStatus.Disabled = 3 -> Kumiko.UI.ActionStatus
+Kumiko.UI.ActionStatus.Inert = 4 -> Kumiko.UI.ActionStatus
+Kumiko.UI.ActionStatus.InvalidValue = 8 -> Kumiko.UI.ActionStatus
+Kumiko.UI.ActionStatus.NotFound = 2 -> Kumiko.UI.ActionStatus
+Kumiko.UI.ActionStatus.Offscreen = 5 -> Kumiko.UI.ActionStatus
+Kumiko.UI.ActionStatus.Queued = 1 -> Kumiko.UI.ActionStatus
+Kumiko.UI.ActionStatus.StaleRevision = 7 -> Kumiko.UI.ActionStatus
+Kumiko.UI.ActionStatus.Unsupported = 6 -> Kumiko.UI.ActionStatus
+Kumiko.UI.Align.Baseline = 4 -> Kumiko.UI.Align
+Kumiko.UI.BoxSizing
+Kumiko.UI.BoxSizing.BorderBox = 0 -> Kumiko.UI.BoxSizing
+Kumiko.UI.BoxSizing.ContentBox = 1 -> Kumiko.UI.BoxSizing
+Kumiko.UI.Breakpoint
+Kumiko.UI.Breakpoint.Compact = 0 -> Kumiko.UI.Breakpoint
+Kumiko.UI.Breakpoint.Expanded = 2 -> Kumiko.UI.Breakpoint
+Kumiko.UI.Breakpoint.Medium = 1 -> Kumiko.UI.Breakpoint
+Kumiko.UI.Breakpoint.Wide = 3 -> Kumiko.UI.Breakpoint
+Kumiko.UI.Choice.Detail.get -> string?
+Kumiko.UI.Choice.Detail.init -> void
+Kumiko.UI.Choice.Section.get -> string?
+Kumiko.UI.Choice.Section.init -> void
+Kumiko.UI.ContentAlign
+Kumiko.UI.ContentAlign.Center = 1 -> Kumiko.UI.ContentAlign
+Kumiko.UI.ContentAlign.End = 2 -> Kumiko.UI.ContentAlign
+Kumiko.UI.ContentAlign.SpaceAround = 5 -> Kumiko.UI.ContentAlign
+Kumiko.UI.ContentAlign.SpaceBetween = 4 -> Kumiko.UI.ContentAlign
+Kumiko.UI.ContentAlign.SpaceEvenly = 6 -> Kumiko.UI.ContentAlign
+Kumiko.UI.ContentAlign.Start = 0 -> Kumiko.UI.ContentAlign
+Kumiko.UI.ContentAlign.Stretch = 3 -> Kumiko.UI.ContentAlign
+Kumiko.UI.Context.AuditAccessibility() -> System.Collections.Generic.IReadOnlyList<Kumiko.UI.AccessibilityFinding!>!
+Kumiko.UI.Context.BackShortcut() -> bool
+Kumiko.UI.Context.Culture.get -> System.Globalization.CultureInfo!
+Kumiko.UI.Context.Culture.set -> void
+Kumiko.UI.Context.DraggedRect.get -> Kumiko.UI.Rect?
+Kumiko.UI.Context.Dragging.get -> Kumiko.UI.DragPayload?
+Kumiko.UI.Context.FlowDirection.get -> Kumiko.UI.FlowDirection
+Kumiko.UI.Context.FlowDirection.set -> void
+Kumiko.UI.Context.FocusVisible.get -> bool
+Kumiko.UI.Context.ForwardShortcut() -> bool
+Kumiko.UI.Context.HorizontalSizeClass.get -> Kumiko.UI.SizeClass
+Kumiko.UI.Context.IsComposing.get -> bool
+Kumiko.UI.Context.MenuRequested(Kumiko.UI.Interaction control) -> Kumiko.UI.Point?
+Kumiko.UI.Context.PerformAction(ulong id, Kumiko.UI.AccessibilityRequest request, long? expectedRevision = null) -> Kumiko.UI.ActionResult!
+Kumiko.UI.Context.Query(Kumiko.UI.SemanticQuery! query) -> System.Collections.Generic.IReadOnlyList<Kumiko.UI.AccessibleNode!>!
+Kumiko.UI.Context.ReadRichClipboard.get -> System.Func<Kumiko.Desktop.TransferData!>?
+Kumiko.UI.Context.ReadRichClipboard.set -> void
+Kumiko.UI.Context.RetainedScope(Kumiko.UI.NodeKey key, bool visible = true) -> Kumiko.UI.RetainedScope!
+Kumiko.UI.Context.Revision.get -> long
+Kumiko.UI.Context.SafeAreaInsets.get -> Kumiko.UI.Edges
+Kumiko.UI.Context.Shortcut(char character, Kumiko.UI.Modifiers modifiers = Kumiko.UI.Modifiers.None) -> bool
+Kumiko.UI.Context.Strings.get -> Kumiko.UI.UiStrings!
+Kumiko.UI.Context.Strings.set -> void
+Kumiko.UI.Context.ToLayout(Kumiko.UI.Rect window) -> Kumiko.UI.Rect
+Kumiko.UI.Context.UniformList(string! key, int count, float rowHeight, System.Action<Kumiko.UI.Context!>! header, System.Action<Kumiko.UI.Context!, int>! row, System.Action<Kumiko.UI.Context!>? footer = null, int overscan = 2, int? revealRow = null, System.Func<int, ulong>? rowKey = null) -> void
+Kumiko.UI.Context.VerticalSizeClass.get -> Kumiko.UI.SizeClass
+Kumiko.UI.Context.VirtualList(string! key, System.Collections.Generic.IReadOnlyList<float>! offsets, System.Func<int, ulong>! rowKey, System.Action<Kumiko.UI.Context!, Kumiko.UI.VirtualRow>! row, Kumiko.UI.VirtualListOptions? options = null) -> Kumiko.UI.VirtualListView
+Kumiko.UI.Context.WebView(string! id, float width, float height, Kumiko.UI.NodeKey key, string! label = "Web content", string! source = "", int line = 0) -> void
+Kumiko.UI.Context.WidthBreakpoint.get -> Kumiko.UI.Breakpoint
+Kumiko.UI.Context.WriteRichClipboard.get -> System.Action<Kumiko.Desktop.TransferData!>?
+Kumiko.UI.Context.WriteRichClipboard.set -> void
+Kumiko.UI.CsvOptions
+Kumiko.UI.CsvOptions.AllowFormulas.get -> bool
+Kumiko.UI.CsvOptions.AllowFormulas.init -> void
+Kumiko.UI.CsvOptions.CsvOptions() -> void
+Kumiko.UI.CsvOptions.CsvOptions(char Separator = ',', bool OmitHeader = false, bool AllowFormulas = false) -> void
+Kumiko.UI.CsvOptions.Deconstruct(out char Separator, out bool OmitHeader, out bool AllowFormulas) -> void
+Kumiko.UI.CsvOptions.Equals(Kumiko.UI.CsvOptions other) -> bool
+Kumiko.UI.CsvOptions.OmitHeader.get -> bool
+Kumiko.UI.CsvOptions.OmitHeader.init -> void
+Kumiko.UI.CsvOptions.Separator.get -> char
+Kumiko.UI.CsvOptions.Separator.init -> void
+Kumiko.UI.DataGrid<T>.CellActions.get -> System.Func<T!, Kumiko.UI.DataGridColumn<T!>!, System.Collections.Generic.IReadOnlyList<Kumiko.UI.MenuCommand!>!>?
+Kumiko.UI.DataGrid<T>.CellActions.set -> void
+Kumiko.UI.DataGrid<T>.ColumnOrder.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Kumiko.UI.DataGrid<T>.ColumnWidth(string! id) -> float
+Kumiko.UI.DataGrid<T>.Filter.get -> string!
+Kumiko.UI.DataGrid<T>.Filter.set -> void
+Kumiko.UI.DataGrid<T>.GroupBy.get -> string?
+Kumiko.UI.DataGrid<T>.GroupBy.set -> void
+Kumiko.UI.DataGrid<T>.MultiSelect.get -> bool
+Kumiko.UI.DataGrid<T>.MultiSelect.set -> void
+Kumiko.UI.DataGrid<T>.SelectedIds.get -> System.Collections.Generic.IReadOnlyList<ulong>!
+Kumiko.UI.DataGrid<T>.SelectedRows.get -> System.Collections.Generic.IReadOnlyList<T!>!
+Kumiko.UI.DataGrid<T>.ToCsv(Kumiko.UI.CsvOptions options = default(Kumiko.UI.CsvOptions)) -> string!
+Kumiko.UI.DataGrid<T>.TotalCount.get -> int
+Kumiko.UI.DataGrid<T>.WriteCsv(System.IO.TextWriter! writer, Kumiko.UI.CsvOptions options = default(Kumiko.UI.CsvOptions)) -> void
+Kumiko.UI.DataGridColumn<T>.MinWidth.get -> float
+Kumiko.UI.DataGridColumn<T>.MinWidth.init -> void
+Kumiko.UI.DataGridDrag
+Kumiko.UI.DataGridDrag.<Clone>$() -> Kumiko.UI.DataGridDrag!
+Kumiko.UI.DataGridDrag.Column.get -> string!
+Kumiko.UI.DataGridDrag.Column.init -> void
+Kumiko.UI.DataGridDrag.DataGridDrag(string! Column, bool Resize, float Origin, float StartWidth, bool Moved = false) -> void
+Kumiko.UI.DataGridDrag.Deconstruct(out string! Column, out bool Resize, out float Origin, out float StartWidth, out bool Moved) -> void
+Kumiko.UI.DataGridDrag.Equals(Kumiko.UI.DataGridDrag? other) -> bool
+Kumiko.UI.DataGridDrag.Moved.get -> bool
+Kumiko.UI.DataGridDrag.Moved.init -> void
+Kumiko.UI.DataGridDrag.Origin.get -> float
+Kumiko.UI.DataGridDrag.Origin.init -> void
+Kumiko.UI.DataGridDrag.Resize.get -> bool
+Kumiko.UI.DataGridDrag.Resize.init -> void
+Kumiko.UI.DataGridDrag.StartWidth.get -> float
+Kumiko.UI.DataGridDrag.StartWidth.init -> void
+Kumiko.UI.DataGridState.AnchorId.get -> ulong?
+Kumiko.UI.DataGridState.AnchorId.init -> void
+Kumiko.UI.DataGridState.CollapsedGroups.get -> System.Collections.Immutable.ImmutableArray<string!>
+Kumiko.UI.DataGridState.CollapsedGroups.init -> void
+Kumiko.UI.DataGridState.ColumnOrder.get -> System.Collections.Immutable.ImmutableArray<string!>
+Kumiko.UI.DataGridState.ColumnOrder.init -> void
+Kumiko.UI.DataGridState.ColumnWidths.get -> System.Collections.Immutable.ImmutableDictionary<string!, float>!
+Kumiko.UI.DataGridState.ColumnWidths.init -> void
+Kumiko.UI.DataGridState.Drag.get -> Kumiko.UI.DataGridDrag?
+Kumiko.UI.DataGridState.Drag.init -> void
+Kumiko.UI.DataGridState.SelectedIds.get -> System.Collections.Immutable.ImmutableArray<ulong>
+Kumiko.UI.DataGridState.SelectedIds.init -> void
+Kumiko.UI.DesktopActions<TMessage>
+Kumiko.UI.DesktopActions<TMessage>.Button(string! id, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+Kumiko.UI.DesktopActions<TMessage>.Invoke(string! id) -> bool
+Kumiko.UI.DesktopActions<TMessage>.Menu(TMessage close, Kumiko.UI.Rect? anchor = null, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+Kumiko.UI.DesktopActions<TMessage>.MenuItem(string! id, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+Kumiko.UI.DesktopActions<TMessage>.MenuItems() -> Kumiko.Desktop.MenuItem![]!
+Kumiko.UI.DesktopActions<TMessage>.Palette(string! query, System.Func<string!, TMessage>! queryChanged, TMessage close, Kumiko.UI.Rect? anchor = null, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+Kumiko.UI.DesktopActions<TMessage>.PaletteItems() -> System.Collections.Generic.IReadOnlyList<Kumiko.Components.CommandItem!>!
+Kumiko.UI.DesktopActions<TMessage>.Shortcuts() -> bool
+Kumiko.UI.DisplayMode
+Kumiko.UI.DisplayMode.Contents = 2 -> Kumiko.UI.DisplayMode
+Kumiko.UI.DisplayMode.Flex = 0 -> Kumiko.UI.DisplayMode
+Kumiko.UI.DisplayMode.None = 1 -> Kumiko.UI.DisplayMode
+Kumiko.UI.Div.AlignContent(Kumiko.UI.ContentAlign value) -> Kumiko.UI.Div
+Kumiko.UI.Div.AlignSelf(Kumiko.UI.Align? value) -> Kumiko.UI.Div
+Kumiko.UI.Div.AspectRatio(float value) -> Kumiko.UI.Div
+Kumiko.UI.Div.AspectRatio(float? value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Background(Kumiko.UI.Color? value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Basis(Kumiko.UI.Length value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Border(Kumiko.UI.Color? value, float width = 1) -> Kumiko.UI.Div
+Kumiko.UI.Div.BoxSizing(Kumiko.UI.BoxSizing value) -> Kumiko.UI.Div
+Kumiko.UI.Div.ColumnGap(float value) -> Kumiko.UI.Div
+Kumiko.UI.Div.ColumnGap(Kumiko.UI.Length value) -> Kumiko.UI.Div
+Kumiko.UI.Div.ColumnReverse() -> Kumiko.UI.Div
+Kumiko.UI.Div.ContainingBlock(bool value = true) -> Kumiko.UI.Div
+Kumiko.UI.Div.Display(Kumiko.UI.DisplayMode value) -> Kumiko.UI.Div
+Kumiko.UI.Div.DragSource(Kumiko.Desktop.TransferData! data, string? label = null) -> Kumiko.UI.Div
+Kumiko.UI.Div.DragSource(string! kind, string! value, Kumiko.UI.DragStyle style) -> Kumiko.UI.Div
+Kumiko.UI.Div.DragSource(string! kind, string! value, string? label = null) -> Kumiko.UI.Div
+Kumiko.UI.Div.DropTarget(params string![]! accepts) -> Kumiko.UI.DropState
+Kumiko.UI.Div.Enter(Kumiko.UI.Transition from) -> Kumiko.UI.Div
+Kumiko.UI.Div.Exit(Kumiko.UI.Transition to) -> Kumiko.UI.Div
+Kumiko.UI.Div.FlexValue(float? value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Flow(Kumiko.UI.FlowDirection value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Gap(Kumiko.UI.Length value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Glass(Kumiko.UI.GlassStyle? value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Inset(Kumiko.UI.LayoutEdge edge, Kumiko.UI.Length value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Inset(Kumiko.UI.Length value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Inset(Kumiko.UI.LengthEdges value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Layout(Kumiko.UI.LayoutOptions! value) -> Kumiko.UI.Div
+Kumiko.UI.Div.LayoutBorder(Kumiko.UI.Edges value) -> Kumiko.UI.Div
+Kumiko.UI.Div.LayoutBorder(Kumiko.UI.LayoutEdge edge, float value) -> Kumiko.UI.Div
+Kumiko.UI.Div.LayoutBorder(Kumiko.UI.LengthEdges value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Margin(float value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Margin(Kumiko.UI.Edges value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Margin(Kumiko.UI.LayoutEdge edge, Kumiko.UI.Length value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Margin(Kumiko.UI.Length value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Margin(Kumiko.UI.LengthEdges value) -> Kumiko.UI.Div
+Kumiko.UI.Div.MaxHeight(Kumiko.UI.Length value) -> Kumiko.UI.Div
+Kumiko.UI.Div.MaxWidth(Kumiko.UI.Length value) -> Kumiko.UI.Div
+Kumiko.UI.Div.MinHeight(Kumiko.UI.Length value) -> Kumiko.UI.Div
+Kumiko.UI.Div.MinWidth(Kumiko.UI.Length value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Mx(float value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Mx(Kumiko.UI.Length value) -> Kumiko.UI.Div
+Kumiko.UI.Div.My(float value) -> Kumiko.UI.Div
+Kumiko.UI.Div.My(Kumiko.UI.Length value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Overflow(Kumiko.UI.OverflowMode value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Padding(Kumiko.UI.LayoutEdge edge, Kumiko.UI.Length value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Padding(Kumiko.UI.Length value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Padding(Kumiko.UI.LengthEdges value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Position(Kumiko.UI.PositionMode value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Px(Kumiko.UI.Length value) -> Kumiko.UI.Div
+Kumiko.UI.Div.Py(Kumiko.UI.Length value) -> Kumiko.UI.Div
+Kumiko.UI.Div.ReferenceBaseline(bool value = true) -> Kumiko.UI.Div
+Kumiko.UI.Div.Reveal(long request, float margin = 0, Kumiko.UI.Motion animate = Kumiko.UI.Motion.Gentle) -> Kumiko.UI.Div
+Kumiko.UI.Div.Rotate(float degrees) -> Kumiko.UI.Div
+Kumiko.UI.Div.RowGap(float value) -> Kumiko.UI.Div
+Kumiko.UI.Div.RowGap(Kumiko.UI.Length value) -> Kumiko.UI.Div
+Kumiko.UI.Div.RowReverse() -> Kumiko.UI.Div
+Kumiko.UI.Div.Scale(float factor) -> Kumiko.UI.Div
+Kumiko.UI.Div.Shadow(Kumiko.UI.Shadow? value) -> Kumiko.UI.Div
+Kumiko.UI.Div.SharedLayout(string! id, Kumiko.UI.Motion animate = Kumiko.UI.Motion.Gentle) -> Kumiko.UI.Div
+Kumiko.UI.Div.Shrink(float? value = 1) -> Kumiko.UI.Div
+Kumiko.UI.Div.Wrap(Kumiko.UI.FlexWrap value = Kumiko.UI.FlexWrap.Wrap) -> Kumiko.UI.Div
+Kumiko.UI.DragKinds
+Kumiko.UI.DragPayload
+Kumiko.UI.DragPayload.<Clone>$() -> Kumiko.UI.DragPayload!
+Kumiko.UI.DragPayload.Deconstruct(out string! Kind, out string! Value) -> void
+Kumiko.UI.DragPayload.DragPayload(string! Kind, string! Value) -> void
+Kumiko.UI.DragPayload.Equals(Kumiko.UI.DragPayload? other) -> bool
+Kumiko.UI.DragPayload.Kind.get -> string!
+Kumiko.UI.DragPayload.Kind.init -> void
+Kumiko.UI.DragPayload.Value.get -> string!
+Kumiko.UI.DragPayload.Value.init -> void
+Kumiko.UI.DragPlaceholder
+Kumiko.UI.DragPlaceholder.Ghost = 0 -> Kumiko.UI.DragPlaceholder
+Kumiko.UI.DragPlaceholder.Hidden = 1 -> Kumiko.UI.DragPlaceholder
+Kumiko.UI.DragPlaceholder.Keep = 2 -> Kumiko.UI.DragPlaceholder
+Kumiko.UI.DragStyle
+Kumiko.UI.DragStyle.Angle.get -> float
+Kumiko.UI.DragStyle.Angle.init -> void
+Kumiko.UI.DragStyle.Deconstruct(out float Angle, out float Sway, out float MaxAngle, out float Scale, out float Opacity, out float Shadow, out Kumiko.UI.DragPlaceholder Placeholder, out Kumiko.UI.Color? PlaceholderColor, out Kumiko.UI.Motion Lift, out Kumiko.UI.Motion Settle) -> void
+Kumiko.UI.DragStyle.DragStyle() -> void
+Kumiko.UI.DragStyle.DragStyle(float Angle = 2, float Sway = 1.5, float MaxAngle = 8, float Scale = 1.03, float Opacity = 1, float Shadow = 1, Kumiko.UI.DragPlaceholder Placeholder = Kumiko.UI.DragPlaceholder.Ghost, Kumiko.UI.Color? PlaceholderColor = null, Kumiko.UI.Motion Lift = Kumiko.UI.Motion.Quick, Kumiko.UI.Motion Settle = Kumiko.UI.Motion.Standard) -> void
+Kumiko.UI.DragStyle.Equals(Kumiko.UI.DragStyle other) -> bool
+Kumiko.UI.DragStyle.Lift.get -> Kumiko.UI.Motion
+Kumiko.UI.DragStyle.Lift.init -> void
+Kumiko.UI.DragStyle.MaxAngle.get -> float
+Kumiko.UI.DragStyle.MaxAngle.init -> void
+Kumiko.UI.DragStyle.Opacity.get -> float
+Kumiko.UI.DragStyle.Opacity.init -> void
+Kumiko.UI.DragStyle.Placeholder.get -> Kumiko.UI.DragPlaceholder
+Kumiko.UI.DragStyle.Placeholder.init -> void
+Kumiko.UI.DragStyle.PlaceholderColor.get -> Kumiko.UI.Color?
+Kumiko.UI.DragStyle.PlaceholderColor.init -> void
+Kumiko.UI.DragStyle.Scale.get -> float
+Kumiko.UI.DragStyle.Scale.init -> void
+Kumiko.UI.DragStyle.Settle.get -> Kumiko.UI.Motion
+Kumiko.UI.DragStyle.Settle.init -> void
+Kumiko.UI.DragStyle.Shadow.get -> float
+Kumiko.UI.DragStyle.Shadow.init -> void
+Kumiko.UI.DragStyle.Sway.get -> float
+Kumiko.UI.DragStyle.Sway.init -> void
+Kumiko.UI.DropdownOptions
+Kumiko.UI.DropdownOptions.Deconstruct(out float? Width, out string? Placeholder, out string? EmptyMessage, out bool Multiple, out bool Remote, out bool Loading, out string? LoadError, out bool Invalid, out bool Disabled) -> void
+Kumiko.UI.DropdownOptions.Disabled.get -> bool
+Kumiko.UI.DropdownOptions.Disabled.init -> void
+Kumiko.UI.DropdownOptions.DropdownOptions() -> void
+Kumiko.UI.DropdownOptions.DropdownOptions(float? Width = null, string? Placeholder = null, string? EmptyMessage = null, bool Multiple = false, bool Remote = false, bool Loading = false, string? LoadError = null, bool Invalid = false, bool Disabled = false) -> void
+Kumiko.UI.DropdownOptions.EmptyMessage.get -> string?
+Kumiko.UI.DropdownOptions.EmptyMessage.init -> void
+Kumiko.UI.DropdownOptions.Equals(Kumiko.UI.DropdownOptions other) -> bool
+Kumiko.UI.DropdownOptions.Invalid.get -> bool
+Kumiko.UI.DropdownOptions.Invalid.init -> void
+Kumiko.UI.DropdownOptions.LoadError.get -> string?
+Kumiko.UI.DropdownOptions.LoadError.init -> void
+Kumiko.UI.DropdownOptions.Loading.get -> bool
+Kumiko.UI.DropdownOptions.Loading.init -> void
+Kumiko.UI.DropdownOptions.Multiple.get -> bool
+Kumiko.UI.DropdownOptions.Multiple.init -> void
+Kumiko.UI.DropdownOptions.Placeholder.get -> string?
+Kumiko.UI.DropdownOptions.Placeholder.init -> void
+Kumiko.UI.DropdownOptions.Remote.get -> bool
+Kumiko.UI.DropdownOptions.Remote.init -> void
+Kumiko.UI.DropdownOptions.Width.get -> float?
+Kumiko.UI.DropdownOptions.Width.init -> void
+Kumiko.UI.DropdownState.SelectedIds.get -> System.Collections.Immutable.ImmutableArray<string!>
+Kumiko.UI.DropdownState.SelectedIds.init -> void
+Kumiko.UI.DropdownState.Selection.get -> System.Collections.Immutable.ImmutableArray<Kumiko.UI.Choice!>
+Kumiko.UI.DropdownState.Selection.init -> void
+Kumiko.UI.DropEvent
+Kumiko.UI.DropEvent.<Clone>$() -> Kumiko.UI.DropEvent!
+Kumiko.UI.DropEvent.Deconstruct(out Kumiko.UI.DragPayload? Item, out System.Collections.Generic.IReadOnlyList<string!>! Files, out Kumiko.UI.Point Position) -> void
+Kumiko.UI.DropEvent.DropEvent(Kumiko.UI.DragPayload? Item, System.Collections.Generic.IReadOnlyList<string!>! Files, Kumiko.UI.Point Position) -> void
+Kumiko.UI.DropEvent.Equals(Kumiko.UI.DropEvent? other) -> bool
+Kumiko.UI.DropEvent.Files.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Kumiko.UI.DropEvent.Files.init -> void
+Kumiko.UI.DropEvent.Item.get -> Kumiko.UI.DragPayload?
+Kumiko.UI.DropEvent.Item.init -> void
+Kumiko.UI.DropEvent.Position.get -> Kumiko.UI.Point
+Kumiko.UI.DropEvent.Position.init -> void
+Kumiko.UI.DropState
+Kumiko.UI.DropState.Deconstruct(out bool IsOver, out Kumiko.UI.DropEvent? Dropped) -> void
+Kumiko.UI.DropState.Dropped.get -> Kumiko.UI.DropEvent?
+Kumiko.UI.DropState.Dropped.init -> void
+Kumiko.UI.DropState.DropState() -> void
+Kumiko.UI.DropState.DropState(bool IsOver, Kumiko.UI.DropEvent? Dropped) -> void
+Kumiko.UI.DropState.Equals(Kumiko.UI.DropState other) -> bool
+Kumiko.UI.DropState.IsOver.get -> bool
+Kumiko.UI.DropState.IsOver.init -> void
+Kumiko.UI.FlexWrap
+Kumiko.UI.FlexWrap.NoWrap = 0 -> Kumiko.UI.FlexWrap
+Kumiko.UI.FlexWrap.Wrap = 1 -> Kumiko.UI.FlexWrap
+Kumiko.UI.FlexWrap.WrapReverse = 2 -> Kumiko.UI.FlexWrap
+Kumiko.UI.FlowDirection
+Kumiko.UI.FlowDirection.Inherit = 0 -> Kumiko.UI.FlowDirection
+Kumiko.UI.FlowDirection.LeftToRight = 1 -> Kumiko.UI.FlowDirection
+Kumiko.UI.FlowDirection.RightToLeft = 2 -> Kumiko.UI.FlowDirection
+Kumiko.UI.Input.Character.get -> char
+Kumiko.UI.Input.Character.set -> void
+Kumiko.UI.Input.DragFiles.get -> string![]?
+Kumiko.UI.Input.DragFiles.set -> void
+Kumiko.UI.Input.DroppedFiles.get -> string![]?
+Kumiko.UI.Input.DroppedFiles.set -> void
+Kumiko.UI.Input.HeldModifiers.get -> Kumiko.UI.Modifiers
+Kumiko.UI.Input.HeldModifiers.set -> void
+Kumiko.UI.Input.Navigation.get -> Kumiko.UI.NavigationDirection
+Kumiko.UI.Input.Navigation.set -> void
+Kumiko.UI.Justify.SpaceAround = 4 -> Kumiko.UI.Justify
+Kumiko.UI.Justify.SpaceEvenly = 5 -> Kumiko.UI.Justify
+Kumiko.UI.Key.B = 36 -> Kumiko.UI.Key
+Kumiko.UI.Key.Backquote = 63 -> Kumiko.UI.Key
+Kumiko.UI.Key.Backslash = 47 -> Kumiko.UI.Key
+Kumiko.UI.Key.BracketLeft = 48 -> Kumiko.UI.Key
+Kumiko.UI.Key.BracketRight = 49 -> Kumiko.UI.Key
+Kumiko.UI.Key.Comma = 57 -> Kumiko.UI.Key
+Kumiko.UI.Key.D = 50 -> Kumiko.UI.Key
+Kumiko.UI.Key.D0 = 46 -> Kumiko.UI.Key
+Kumiko.UI.Key.E = 52 -> Kumiko.UI.Key
+Kumiko.UI.Key.Equal = 60 -> Kumiko.UI.Key
+Kumiko.UI.Key.F1 = 64 -> Kumiko.UI.Key
+Kumiko.UI.Key.F11 = 72 -> Kumiko.UI.Key
+Kumiko.UI.Key.F12 = 73 -> Kumiko.UI.Key
+Kumiko.UI.Key.F3 = 65 -> Kumiko.UI.Key
+Kumiko.UI.Key.F4 = 66 -> Kumiko.UI.Key
+Kumiko.UI.Key.F5 = 67 -> Kumiko.UI.Key
+Kumiko.UI.Key.F6 = 68 -> Kumiko.UI.Key
+Kumiko.UI.Key.F7 = 69 -> Kumiko.UI.Key
+Kumiko.UI.Key.F8 = 70 -> Kumiko.UI.Key
+Kumiko.UI.Key.F9 = 71 -> Kumiko.UI.Key
+Kumiko.UI.Key.G = 37 -> Kumiko.UI.Key
+Kumiko.UI.Key.H = 53 -> Kumiko.UI.Key
+Kumiko.UI.Key.J = 54 -> Kumiko.UI.Key
+Kumiko.UI.Key.K = 38 -> Kumiko.UI.Key
+Kumiko.UI.Key.L = 39 -> Kumiko.UI.Key
+Kumiko.UI.Key.M = 55 -> Kumiko.UI.Key
+Kumiko.UI.Key.Minus = 59 -> Kumiko.UI.Key
+Kumiko.UI.Key.N = 45 -> Kumiko.UI.Key
+Kumiko.UI.Key.O = 40 -> Kumiko.UI.Key
+Kumiko.UI.Key.Period = 58 -> Kumiko.UI.Key
+Kumiko.UI.Key.Quote = 62 -> Kumiko.UI.Key
+Kumiko.UI.Key.R = 41 -> Kumiko.UI.Key
+Kumiko.UI.Key.S = 42 -> Kumiko.UI.Key
+Kumiko.UI.Key.Semicolon = 61 -> Kumiko.UI.Key
+Kumiko.UI.Key.Slash = 56 -> Kumiko.UI.Key
+Kumiko.UI.Key.T = 43 -> Kumiko.UI.Key
+Kumiko.UI.Key.U = 51 -> Kumiko.UI.Key
+Kumiko.UI.Key.W = 44 -> Kumiko.UI.Key
+Kumiko.UI.LayoutEdge
+Kumiko.UI.LayoutEdge.All = 8 -> Kumiko.UI.LayoutEdge
+Kumiko.UI.LayoutEdge.Bottom = 2 -> Kumiko.UI.LayoutEdge
+Kumiko.UI.LayoutEdge.End = 5 -> Kumiko.UI.LayoutEdge
+Kumiko.UI.LayoutEdge.Horizontal = 6 -> Kumiko.UI.LayoutEdge
+Kumiko.UI.LayoutEdge.Left = 3 -> Kumiko.UI.LayoutEdge
+Kumiko.UI.LayoutEdge.Right = 1 -> Kumiko.UI.LayoutEdge
+Kumiko.UI.LayoutEdge.Start = 4 -> Kumiko.UI.LayoutEdge
+Kumiko.UI.LayoutEdge.Top = 0 -> Kumiko.UI.LayoutEdge
+Kumiko.UI.LayoutEdge.Vertical = 7 -> Kumiko.UI.LayoutEdge
+Kumiko.UI.LayoutOptions
+Kumiko.UI.LayoutOptions.<Clone>$() -> Kumiko.UI.LayoutOptions!
+Kumiko.UI.LayoutOptions.Border.get -> Kumiko.UI.LengthEdges?
+Kumiko.UI.LayoutOptions.Border.init -> void
+Kumiko.UI.LayoutOptions.BoxSizing.get -> Kumiko.UI.BoxSizing
+Kumiko.UI.LayoutOptions.BoxSizing.init -> void
+Kumiko.UI.LayoutOptions.ColumnGap.get -> Kumiko.UI.Length?
+Kumiko.UI.LayoutOptions.ColumnGap.init -> void
+Kumiko.UI.LayoutOptions.ContainingBlock.get -> bool
+Kumiko.UI.LayoutOptions.ContainingBlock.init -> void
+Kumiko.UI.LayoutOptions.Deconstruct(out Kumiko.UI.LengthEdges? Margin, out Kumiko.UI.LengthEdges? Padding, out Kumiko.UI.LengthEdges? Insets, out Kumiko.UI.LengthEdges? Border, out Kumiko.UI.Length? Gap, out Kumiko.UI.Length? RowGap, out Kumiko.UI.Length? ColumnGap, out Kumiko.UI.Length? MinWidth, out Kumiko.UI.Length? MinHeight, out Kumiko.UI.Length? MaxWidth, out Kumiko.UI.Length? MaxHeight, out Kumiko.UI.DisplayMode Display, out Kumiko.UI.PositionMode? Position, out Kumiko.UI.BoxSizing BoxSizing, out float? FlexValue, out bool ReferenceBaseline, out bool ContainingBlock) -> void
+Kumiko.UI.LayoutOptions.Display.get -> Kumiko.UI.DisplayMode
+Kumiko.UI.LayoutOptions.Display.init -> void
+Kumiko.UI.LayoutOptions.Equals(Kumiko.UI.LayoutOptions? other) -> bool
+Kumiko.UI.LayoutOptions.FlexValue.get -> float?
+Kumiko.UI.LayoutOptions.FlexValue.init -> void
+Kumiko.UI.LayoutOptions.Gap.get -> Kumiko.UI.Length?
+Kumiko.UI.LayoutOptions.Gap.init -> void
+Kumiko.UI.LayoutOptions.Insets.get -> Kumiko.UI.LengthEdges?
+Kumiko.UI.LayoutOptions.Insets.init -> void
+Kumiko.UI.LayoutOptions.LayoutOptions(Kumiko.UI.LengthEdges? Margin = null, Kumiko.UI.LengthEdges? Padding = null, Kumiko.UI.LengthEdges? Insets = null, Kumiko.UI.LengthEdges? Border = null, Kumiko.UI.Length? Gap = null, Kumiko.UI.Length? RowGap = null, Kumiko.UI.Length? ColumnGap = null, Kumiko.UI.Length? MinWidth = null, Kumiko.UI.Length? MinHeight = null, Kumiko.UI.Length? MaxWidth = null, Kumiko.UI.Length? MaxHeight = null, Kumiko.UI.DisplayMode Display = Kumiko.UI.DisplayMode.Flex, Kumiko.UI.PositionMode? Position = null, Kumiko.UI.BoxSizing BoxSizing = Kumiko.UI.BoxSizing.BorderBox, float? FlexValue = null, bool ReferenceBaseline = false, bool ContainingBlock = false) -> void
+Kumiko.UI.LayoutOptions.Margin.get -> Kumiko.UI.LengthEdges?
+Kumiko.UI.LayoutOptions.Margin.init -> void
+Kumiko.UI.LayoutOptions.MaxHeight.get -> Kumiko.UI.Length?
+Kumiko.UI.LayoutOptions.MaxHeight.init -> void
+Kumiko.UI.LayoutOptions.MaxWidth.get -> Kumiko.UI.Length?
+Kumiko.UI.LayoutOptions.MaxWidth.init -> void
+Kumiko.UI.LayoutOptions.MinHeight.get -> Kumiko.UI.Length?
+Kumiko.UI.LayoutOptions.MinHeight.init -> void
+Kumiko.UI.LayoutOptions.MinWidth.get -> Kumiko.UI.Length?
+Kumiko.UI.LayoutOptions.MinWidth.init -> void
+Kumiko.UI.LayoutOptions.Padding.get -> Kumiko.UI.LengthEdges?
+Kumiko.UI.LayoutOptions.Padding.init -> void
+Kumiko.UI.LayoutOptions.Position.get -> Kumiko.UI.PositionMode?
+Kumiko.UI.LayoutOptions.Position.init -> void
+Kumiko.UI.LayoutOptions.ReferenceBaseline.get -> bool
+Kumiko.UI.LayoutOptions.ReferenceBaseline.init -> void
+Kumiko.UI.LayoutOptions.RowGap.get -> Kumiko.UI.Length?
+Kumiko.UI.LayoutOptions.RowGap.init -> void
+override Kumiko.UI.AccessibilityFinding.Equals(object? obj) -> bool
+override Kumiko.UI.AccessibilityFinding.GetHashCode() -> int
+override Kumiko.UI.AccessibilityFinding.ToString() -> string!
+override Kumiko.UI.ActionResult.Equals(object? obj) -> bool
+override Kumiko.UI.ActionResult.GetHashCode() -> int
+override Kumiko.UI.ActionResult.ToString() -> string!
+override Kumiko.UI.CsvOptions.GetHashCode() -> int
+override Kumiko.UI.DataGridDrag.Equals(object? obj) -> bool
+override Kumiko.UI.DataGridDrag.GetHashCode() -> int
+override Kumiko.UI.DataGridDrag.ToString() -> string!
+override Kumiko.UI.DragPayload.Equals(object? obj) -> bool
+override Kumiko.UI.DragPayload.GetHashCode() -> int
+override Kumiko.UI.DragPayload.ToString() -> string!
+override Kumiko.UI.DragStyle.GetHashCode() -> int
+override Kumiko.UI.DropdownOptions.GetHashCode() -> int
+override Kumiko.UI.DropEvent.Equals(object? obj) -> bool
+override Kumiko.UI.DropEvent.GetHashCode() -> int
+override Kumiko.UI.DropEvent.ToString() -> string!
+override Kumiko.UI.DropState.GetHashCode() -> int
+override Kumiko.UI.LayoutOptions.Equals(object? obj) -> bool
+override Kumiko.UI.LayoutOptions.GetHashCode() -> int
+override Kumiko.UI.LayoutOptions.ToString() -> string!
+static Kumiko.UI.AccessibilityFinding.operator !=(Kumiko.UI.AccessibilityFinding? left, Kumiko.UI.AccessibilityFinding? right) -> bool
+static Kumiko.UI.AccessibilityFinding.operator ==(Kumiko.UI.AccessibilityFinding? left, Kumiko.UI.AccessibilityFinding? right) -> bool
+static Kumiko.UI.ActionResult.operator !=(Kumiko.UI.ActionResult? left, Kumiko.UI.ActionResult? right) -> bool
+static Kumiko.UI.ActionResult.operator ==(Kumiko.UI.ActionResult? left, Kumiko.UI.ActionResult? right) -> bool
+static Kumiko.UI.CsvOptions.operator !=(Kumiko.UI.CsvOptions left, Kumiko.UI.CsvOptions right) -> bool
+static Kumiko.UI.CsvOptions.operator ==(Kumiko.UI.CsvOptions left, Kumiko.UI.CsvOptions right) -> bool
+static Kumiko.UI.DataGridDrag.operator !=(Kumiko.UI.DataGridDrag? left, Kumiko.UI.DataGridDrag? right) -> bool
+static Kumiko.UI.DataGridDrag.operator ==(Kumiko.UI.DataGridDrag? left, Kumiko.UI.DataGridDrag? right) -> bool
+static Kumiko.UI.DragPayload.operator !=(Kumiko.UI.DragPayload? left, Kumiko.UI.DragPayload? right) -> bool
+static Kumiko.UI.DragPayload.operator ==(Kumiko.UI.DragPayload? left, Kumiko.UI.DragPayload? right) -> bool
+static Kumiko.UI.DragStyle.Flat.get -> Kumiko.UI.DragStyle
+static Kumiko.UI.DragStyle.operator !=(Kumiko.UI.DragStyle left, Kumiko.UI.DragStyle right) -> bool
+static Kumiko.UI.DragStyle.operator ==(Kumiko.UI.DragStyle left, Kumiko.UI.DragStyle right) -> bool
+static Kumiko.UI.DragStyle.Playful.get -> Kumiko.UI.DragStyle
+static Kumiko.UI.DragStyle.Tilted.get -> Kumiko.UI.DragStyle
+static Kumiko.UI.DropdownOptions.operator !=(Kumiko.UI.DropdownOptions left, Kumiko.UI.DropdownOptions right) -> bool
+static Kumiko.UI.DropdownOptions.operator ==(Kumiko.UI.DropdownOptions left, Kumiko.UI.DropdownOptions right) -> bool
+static Kumiko.UI.DropEvent.operator !=(Kumiko.UI.DropEvent? left, Kumiko.UI.DropEvent? right) -> bool
+static Kumiko.UI.DropEvent.operator ==(Kumiko.UI.DropEvent? left, Kumiko.UI.DropEvent? right) -> bool
+static Kumiko.UI.DropState.operator !=(Kumiko.UI.DropState left, Kumiko.UI.DropState right) -> bool
+static Kumiko.UI.DropState.operator ==(Kumiko.UI.DropState left, Kumiko.UI.DropState right) -> bool
+static Kumiko.UI.LayoutOptions.Default.get -> Kumiko.UI.LayoutOptions!
+static Kumiko.UI.LayoutOptions.operator !=(Kumiko.UI.LayoutOptions? left, Kumiko.UI.LayoutOptions? right) -> bool
+static Kumiko.UI.LayoutOptions.operator ==(Kumiko.UI.LayoutOptions? left, Kumiko.UI.LayoutOptions? right) -> bool
+~override Kumiko.UI.CsvOptions.Equals(object obj) -> bool
+~override Kumiko.UI.CsvOptions.ToString() -> string
+~override Kumiko.UI.DragStyle.Equals(object obj) -> bool
+~override Kumiko.UI.DragStyle.ToString() -> string
+~override Kumiko.UI.DropdownOptions.Equals(object obj) -> bool
+~override Kumiko.UI.DropdownOptions.ToString() -> string
+~override Kumiko.UI.DropState.Equals(object obj) -> bool
+~override Kumiko.UI.DropState.ToString() -> string

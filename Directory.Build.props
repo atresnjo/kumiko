@@ -1,0 +1,40 @@
+<Project>
+  <PropertyGroup>
+    <KumikoStrict Condition="'$(KumikoStrict)' == ''">true</KumikoStrict>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>14.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Deterministic>true</Deterministic>
+    <PathMap Condition="'$(Configuration)' == 'Release'">$(MSBuildThisFileDirectory)=/</PathMap>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <OptimizationPreference>Speed</OptimizationPreference>
+    <JsonSerializerIsReflectionEnabledByDefault>false</JsonSerializerIsReflectionEnabledByDefault>
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+  </PropertyGroup>
+  <!-- Package identity. Framework libraries and templates opt into packing. -->
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <Version>0.2.0</Version>
+    <Authors>Kumiko contributors</Authors>
+    <Copyright>Copyright (c) 2026 Adnan Tresnjo and Kumiko contributors</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>desktop;ui;native;kumiko;nativeaot;macos;linux;windows</PackageTags>
+    <PackageReleaseNotes>See CHANGELOG.md in the source repository.</PackageReleaseNotes>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+    <RepositoryUrl Condition="'$(RepositoryUrl)' == '' and '$(GITHUB_REPOSITORY)' != ''">$(GITHUB_SERVER_URL)/$(GITHUB_REPOSITORY)</RepositoryUrl>
+    <PackageProjectUrl Condition="'$(PackageProjectUrl)' == ''">$(RepositoryUrl)</PackageProjectUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <CompilerVisibleProperty Include="KumikoStrict" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(MSBuildProjectName)' != 'Kumiko.Analyzers' and '$(MSBuildProjectName)' != 'Kumiko.Analyzers.E2E'">
+    <ProjectReference Include="$(MSBuildThisFileDirectory)src/Kumiko.Analyzers/Kumiko.Analyzers.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" Private="false" GlobalPropertiesToRemove="RuntimeIdentifier;SelfContained;PublishAot;PlatformTarget" />
+  </ItemGroup>
+</Project>

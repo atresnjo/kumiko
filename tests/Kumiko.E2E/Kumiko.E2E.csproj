@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><KumikoStrict>false</KumikoStrict><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../../src/Kumiko/Kumiko.csproj" /><ProjectReference Include="../../examples/CRMLite/CRMLite.csproj" /><ProjectReference Include="../../src/Kumiko.Icons.Hugeicons/Kumiko.Icons.Hugeicons.csproj" /></ItemGroup>
+  <ItemGroup>
+    <Compile Include="../Shared/YogaFeaturesApp.cs" Link="Shared/YogaFeaturesApp.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><KumikoStrict>false</KumikoStrict><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/Kumiko/Kumiko.csproj" />
+    <ProjectReference Include="../../examples/Workbench/Workbench.csproj" />
+  </ItemGroup>
+</Project>

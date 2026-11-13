@@ -1,0 +1,10 @@
+{
+  "package": "@hugeicons/core-free-icons",
+  "version": "4.3.5",
+  "url": "https://registry.npmjs.org/@hugeicons/core-free-icons/-/core-free-icons-4.3.5.tgz",
+  "integrity": "sha512-Sv+NjHRPnQk+yZsGCMcGznCHdTfJR9PMMOEKcJYAQU4gy90dmlc9PwdtvYOImBZIjiheMsTLL5eMn2DmHxUiUg==",
+  "license": "MIT",
+  "style": "Stroke Rounded",
+  "count": 6067,
+  "svgSha256": "cc634449eb069aded71b22a641b4d031d682d70ab3b3036c43d73f49ec60a4c4"
+}

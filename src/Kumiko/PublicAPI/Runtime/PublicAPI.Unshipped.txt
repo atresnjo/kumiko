@@ -1,0 +1,373 @@
+#nullable enable
+abstract Kumiko.Runtime.NavigationShell<TProps, TMessage>.Render() -> void
+abstract Kumiko.Runtime.Screen<TProps, TMessage>.Render() -> void
+abstract Kumiko.Runtime.View<TProps, TMessage>.Render() -> void
+Kumiko.Runtime.BackRequest
+Kumiko.Runtime.BackRequest.<Clone>$() -> Kumiko.Runtime.BackRequest!
+Kumiko.Runtime.BackRequest.BackRequest(string! Stack, long Revision, int From, int To) -> void
+Kumiko.Runtime.BackRequest.Deconstruct(out string! Stack, out long Revision, out int From, out int To) -> void
+Kumiko.Runtime.BackRequest.Equals(Kumiko.Runtime.BackRequest? other) -> bool
+Kumiko.Runtime.BackRequest.From.get -> int
+Kumiko.Runtime.BackRequest.From.init -> void
+Kumiko.Runtime.BackRequest.Revision.get -> long
+Kumiko.Runtime.BackRequest.Revision.init -> void
+Kumiko.Runtime.BackRequest.Stack.get -> string!
+Kumiko.Runtime.BackRequest.Stack.init -> void
+Kumiko.Runtime.BackRequest.To.get -> int
+Kumiko.Runtime.BackRequest.To.init -> void
+Kumiko.Runtime.DocumentEffects
+Kumiko.Runtime.HeldCommand<TMessage>
+Kumiko.Runtime.HeldCommand<TMessage>.Fail(System.Exception! error) -> void
+Kumiko.Runtime.HeldCommand<TMessage>.IsHeld.get -> bool
+Kumiko.Runtime.HeldCommand<TMessage>.Name.get -> string!
+Kumiko.Runtime.HeldCommand<TMessage>.Resolve(TMessage message) -> void
+Kumiko.Runtime.HeldCommand<TMessage>.Run() -> void
+Kumiko.Runtime.HeldCommands<TMessage>
+Kumiko.Runtime.HeldCommands<TMessage>.Count.get -> int
+Kumiko.Runtime.HeldCommands<TMessage>.Expect(params string![]! names) -> void
+Kumiko.Runtime.HeldCommands<TMessage>.ExpectNone() -> void
+Kumiko.Runtime.HeldCommands<TMessage>.Get(string! name) -> Kumiko.Runtime.HeldCommand<TMessage>!
+Kumiko.Runtime.HeldCommands<TMessage>.GetEnumerator() -> System.Collections.Generic.IEnumerator<Kumiko.Runtime.HeldCommand<TMessage>!>!
+Kumiko.Runtime.HeldCommands<TMessage>.Names.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Kumiko.Runtime.HeldCommands<TMessage>.this[int index].get -> Kumiko.Runtime.HeldCommand<TMessage>!
+Kumiko.Runtime.HistoryRequest
+Kumiko.Runtime.HistoryRequest.<Clone>$() -> Kumiko.Runtime.HistoryRequest!
+Kumiko.Runtime.HistoryRequest.Deconstruct(out string! Stack, out long Revision, out int From, out int To) -> void
+Kumiko.Runtime.HistoryRequest.Equals(Kumiko.Runtime.HistoryRequest? other) -> bool
+Kumiko.Runtime.HistoryRequest.From.get -> int
+Kumiko.Runtime.HistoryRequest.From.init -> void
+Kumiko.Runtime.HistoryRequest.HistoryRequest(string! Stack, long Revision, int From, int To) -> void
+Kumiko.Runtime.HistoryRequest.Revision.get -> long
+Kumiko.Runtime.HistoryRequest.Revision.init -> void
+Kumiko.Runtime.HistoryRequest.Stack.get -> string!
+Kumiko.Runtime.HistoryRequest.Stack.init -> void
+Kumiko.Runtime.HistoryRequest.To.get -> int
+Kumiko.Runtime.HistoryRequest.To.init -> void
+Kumiko.Runtime.IKumiko<TModel, TMessage>.Root(TModel model) -> Kumiko.Runtime.NavigationRoot<TMessage>!
+Kumiko.Runtime.IKumikoComponent<TModel, TMessage, TOutMessage>
+Kumiko.Runtime.IKumikoComponent<TModel, TMessage, TOutMessage>.Update(TModel model, TMessage message) -> Kumiko.Runtime.Outcome<TModel, TMessage, TOutMessage!>
+Kumiko.Runtime.IKumikoComponent<TModel, TMessage>
+Kumiko.Runtime.IKumikoComponent<TModel, TMessage>.Update(TModel model, TMessage message) -> (TModel, Kumiko.Runtime.Cmd<TMessage>!)
+Kumiko.Runtime.IKumikoWindows<TModel, TMessage, TWindow>
+Kumiko.Runtime.IKumikoWindows<TModel, TMessage, TWindow>.WindowRoot(TModel model, TWindow window) -> Kumiko.Runtime.NavigationRoot<TMessage>!
+Kumiko.Runtime.IKumikoWindows<TModel, TMessage, TWindow>.Windows(TModel model) -> System.Collections.Generic.IEnumerable<Kumiko.Runtime.WindowSpec<TWindow, TMessage>!>!
+Kumiko.Runtime.INavigationEntry<TRoute, TEntry>
+Kumiko.Runtime.INavigationEntry<TRoute, TEntry>.Create(int id, TRoute route) -> TEntry!
+Kumiko.Runtime.INavigationEntry<TRoute, TEntry>.Id.get -> int
+Kumiko.Runtime.INavigationEntry<TRoute, TEntry>.IsValidPath(System.Collections.Immutable.ImmutableArray<TEntry!> entries) -> bool
+Kumiko.Runtime.INavigationEntry<TRoute, TEntry>.Route.get -> TRoute
+Kumiko.Runtime.IProgram.Disposing -> System.Action?
+Kumiko.Runtime.IProgram.PendingCommands.get -> int
+Kumiko.Runtime.KumikoServices
+Kumiko.Runtime.KumikoServices.Add<TService>(TService! service) -> Kumiko.Runtime.KumikoServices!
+Kumiko.Runtime.KumikoServices.KumikoServices() -> void
+Kumiko.Runtime.KumikoServices.Validate(params System.Type![]! services) -> Kumiko.Runtime.KumikoServices!
+Kumiko.Runtime.MessageSource.Window.get -> string?
+Kumiko.Runtime.MessageSource.Window.init -> void
+Kumiko.Runtime.NavigationGuard<TRoute, TEntry>
+Kumiko.Runtime.NavigationGuard<TRoute, TEntry>.Cancel() -> Kumiko.Runtime.NavigationGuard<TRoute, TEntry!>!
+Kumiko.Runtime.NavigationGuard<TRoute, TEntry>.NavigationGuard(long sequence = 0, Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry!>? pending = null) -> void
+Kumiko.Runtime.NavigationGuard<TRoute, TEntry>.Pending.get -> Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry!>?
+Kumiko.Runtime.NavigationGuard<TRoute, TEntry>.Resolve<TModel>(TModel model, Kumiko.Runtime.NavigationPath<TRoute, TEntry!>! current, Kumiko.Runtime.RouteGuardReply<TRoute>! reply, string! stack, System.Func<TModel, TRoute, Kumiko.Runtime.RouteDecision<TRoute>!>! beforeEnter) -> Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry!>!
+Kumiko.Runtime.NavigationGuard<TRoute, TEntry>.Sequence.get -> long
+Kumiko.Runtime.NavigationGuard<TRoute, TEntry>.Start(Kumiko.Runtime.NavigationPath<TRoute, TEntry!>! current, Kumiko.Runtime.NavigationPath<TRoute, TEntry!>! desired, string! stack) -> Kumiko.Runtime.NavigationGuard<TRoute, TEntry!>!
+Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>
+Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>.Decision.get -> Kumiko.Runtime.RouteDecision<TRoute>?
+Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>.Decision.init -> void
+Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>.Deconstruct(out Kumiko.Runtime.NavigationGuard<TRoute, TEntry!>! State, out Kumiko.Runtime.NavigationPath<TRoute, TEntry!>? Path, out Kumiko.Runtime.RouteDecision<TRoute>? Decision) -> void
+Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>.NavigationGuardResolution(Kumiko.Runtime.NavigationGuard<TRoute, TEntry!>! State, Kumiko.Runtime.NavigationPath<TRoute, TEntry!>? Path, Kumiko.Runtime.RouteDecision<TRoute>? Decision) -> void
+Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>.Path.get -> Kumiko.Runtime.NavigationPath<TRoute, TEntry!>?
+Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>.Path.init -> void
+Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>.State.get -> Kumiko.Runtime.NavigationGuard<TRoute, TEntry!>!
+Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>.State.init -> void
+Kumiko.Runtime.NavigationHistory<TRoute>
+Kumiko.Runtime.NavigationHistory<TRoute>.<Clone>$() -> Kumiko.Runtime.NavigationHistory<TRoute>!
+Kumiko.Runtime.NavigationHistory<TRoute>.BackRequest(string! stack) -> Kumiko.Runtime.HistoryRequest?
+Kumiko.Runtime.NavigationHistory<TRoute>.CanGoBack.get -> bool
+Kumiko.Runtime.NavigationHistory<TRoute>.CanGoForward.get -> bool
+Kumiko.Runtime.NavigationHistory<TRoute>.Current.get -> Kumiko.Runtime.NavigationVisit<TRoute>!
+Kumiko.Runtime.NavigationHistory<TRoute>.Equals(Kumiko.Runtime.NavigationHistory<TRoute>? other) -> bool
+Kumiko.Runtime.NavigationHistory<TRoute>.ForwardRequest(string! stack) -> Kumiko.Runtime.HistoryRequest?
+Kumiko.Runtime.NavigationHistory<TRoute>.Move(Kumiko.Runtime.HistoryRequest! request, string! stack) -> Kumiko.Runtime.NavigationHistory<TRoute>!
+Kumiko.Runtime.NavigationHistory<TRoute>.NavigationHistory(Kumiko.Runtime.NavigationPath<TRoute, Kumiko.Runtime.NavigationVisit<TRoute>!>! path, int position) -> void
+Kumiko.Runtime.NavigationHistory<TRoute>.Path.get -> Kumiko.Runtime.NavigationPath<TRoute, Kumiko.Runtime.NavigationVisit<TRoute>!>!
+Kumiko.Runtime.NavigationHistory<TRoute>.Position.get -> int
+Kumiko.Runtime.NavigationHistory<TRoute>.Push(TRoute route) -> Kumiko.Runtime.NavigationHistory<TRoute>!
+Kumiko.Runtime.NavigationHistory<TRoute>.Replace(TRoute route) -> Kumiko.Runtime.NavigationHistory<TRoute>!
+Kumiko.Runtime.NavigationHistory<TRoute>.Reset(TRoute route) -> Kumiko.Runtime.NavigationHistory<TRoute>!
+Kumiko.Runtime.NavigationPath<TRoute, TEntry>
+Kumiko.Runtime.NavigationPath<TRoute, TEntry>.Back(Kumiko.Runtime.BackRequest! request, string! stack) -> Kumiko.Runtime.NavigationPath<TRoute, TEntry!>?
+Kumiko.Runtime.NavigationPath<TRoute, TEntry>.Edit(int id, System.Func<TEntry!, TEntry!>! edit) -> Kumiko.Runtime.NavigationPath<TRoute, TEntry!>!
+Kumiko.Runtime.NavigationPath<TRoute, TEntry>.Entries.get -> System.Collections.Immutable.ImmutableArray<TEntry!>
+Kumiko.Runtime.NavigationPath<TRoute, TEntry>.Follow(Kumiko.Runtime.NavigationPath<TRoute, TEntry!>! desired) -> Kumiko.Runtime.NavigationPath<TRoute, TEntry!>?
+Kumiko.Runtime.NavigationPath<TRoute, TEntry>.IndexOf(int id) -> int
+Kumiko.Runtime.NavigationPath<TRoute, TEntry>.NavigationPath(System.Collections.Immutable.ImmutableArray<TEntry!> entries, int nextId, long revision) -> void
+Kumiko.Runtime.NavigationPath<TRoute, TEntry>.NextId.get -> int
+Kumiko.Runtime.NavigationPath<TRoute, TEntry>.Pop(int target) -> Kumiko.Runtime.NavigationPath<TRoute, TEntry!>!
+Kumiko.Runtime.NavigationPath<TRoute, TEntry>.Push(TRoute route) -> Kumiko.Runtime.NavigationPath<TRoute, TEntry!>!
+Kumiko.Runtime.NavigationPath<TRoute, TEntry>.RemoveWhere(System.Func<TEntry!, bool>! remove) -> Kumiko.Runtime.NavigationPath<TRoute, TEntry!>!
+Kumiko.Runtime.NavigationPath<TRoute, TEntry>.Replace(TRoute route) -> Kumiko.Runtime.NavigationPath<TRoute, TEntry!>!
+Kumiko.Runtime.NavigationPath<TRoute, TEntry>.RequestTo(int target, string! stack) -> Kumiko.Runtime.BackRequest!
+Kumiko.Runtime.NavigationPath<TRoute, TEntry>.RequiresConfirmation(Kumiko.Runtime.NavigationPath<TRoute, TEntry!>! desired, System.Func<TEntry!, bool>! unsaved, Kumiko.Runtime.NavigationPath<TRoute, TEntry!>? confirmed = null) -> bool
+Kumiko.Runtime.NavigationPath<TRoute, TEntry>.Reset(TRoute root) -> Kumiko.Runtime.NavigationPath<TRoute, TEntry!>!
+Kumiko.Runtime.NavigationPath<TRoute, TEntry>.Revision.get -> long
+Kumiko.Runtime.NavigationPath<TRoute, TEntry>.Top.get -> TEntry!
+Kumiko.Runtime.NavigationRoot<TMessage>
+Kumiko.Runtime.NavigationShell<TMessage>
+Kumiko.Runtime.NavigationShell<TProps, TMessage>
+Kumiko.Runtime.NavigationShell<TProps, TMessage>.C.get -> Kumiko.UI.Context!
+Kumiko.Runtime.NavigationShell<TProps, TMessage>.Map<TParent>(System.Func<TMessage, TParent>! toParent) -> Kumiko.Runtime.NavigationShell<TParent>!
+Kumiko.Runtime.NavigationShell<TProps, TMessage>.Model.get -> TProps
+Kumiko.Runtime.NavigationShell<TProps, TMessage>.NavigationShell(TProps model) -> void
+Kumiko.Runtime.NavigationShell<TProps, TMessage>.Outlet() -> void
+Kumiko.Runtime.NavigationShell<TProps, TMessage>.Ui.get -> Kumiko.UI.Ui<TMessage>!
+Kumiko.Runtime.NavigationVisit<TRoute>
+Kumiko.Runtime.NavigationVisit<TRoute>.<Clone>$() -> Kumiko.Runtime.NavigationVisit<TRoute>!
+Kumiko.Runtime.NavigationVisit<TRoute>.Deconstruct(out int Id, out TRoute Route) -> void
+Kumiko.Runtime.NavigationVisit<TRoute>.Equals(Kumiko.Runtime.NavigationVisit<TRoute>? other) -> bool
+Kumiko.Runtime.NavigationVisit<TRoute>.Id.get -> int
+Kumiko.Runtime.NavigationVisit<TRoute>.Id.init -> void
+Kumiko.Runtime.NavigationVisit<TRoute>.NavigationVisit(int Id, TRoute Route) -> void
+Kumiko.Runtime.NavigationVisit<TRoute>.Route.get -> TRoute
+Kumiko.Runtime.NavigationVisit<TRoute>.Route.init -> void
+Kumiko.Runtime.Outcome
+Kumiko.Runtime.Outcome<TModel, TMessage, TOutMessage>
+Kumiko.Runtime.Outcome<TModel, TMessage, TOutMessage>.Cmd.get -> Kumiko.Runtime.Cmd<TMessage>!
+Kumiko.Runtime.Outcome<TModel, TMessage, TOutMessage>.Fold<TParent, TParentMessage>(System.Func<TModel, TParent>! write, System.Func<TMessage, TParentMessage>! toParent, System.Func<TParent, TOutMessage!, (TParent, Kumiko.Runtime.Cmd<TParentMessage>!)>! onOutMessage) -> (TParent, Kumiko.Runtime.Cmd<TParentMessage>!)
+Kumiko.Runtime.Outcome<TModel, TMessage, TOutMessage>.Model.get -> TModel
+Kumiko.Runtime.Outcome<TModel, TMessage, TOutMessage>.Outcome() -> void
+Kumiko.Runtime.Outcome<TModel, TMessage, TOutMessage>.Outcome(TModel model, Kumiko.Runtime.Cmd<TMessage>? cmd = null, TOutMessage? outMessage = null) -> void
+Kumiko.Runtime.Outcome<TModel, TMessage, TOutMessage>.OutMessage.get -> TOutMessage?
+Kumiko.Runtime.PendingNavigation<TRoute, TEntry>
+Kumiko.Runtime.PendingNavigation<TRoute, TEntry>.Confirm(Kumiko.Runtime.NavigationPath<TRoute, TEntry!>! current, Kumiko.Runtime.BackRequest! request, string! stack) -> Kumiko.Runtime.NavigationPath<TRoute, TEntry!>?
+Kumiko.Runtime.PendingNavigation<TRoute, TEntry>.Desired.get -> Kumiko.Runtime.NavigationPath<TRoute, TEntry!>!
+Kumiko.Runtime.PendingNavigation<TRoute, TEntry>.PendingNavigation(Kumiko.Runtime.BackRequest! request, Kumiko.Runtime.NavigationPath<TRoute, TEntry!>! desired) -> void
+Kumiko.Runtime.PendingNavigation<TRoute, TEntry>.Request.get -> Kumiko.Runtime.BackRequest!
+Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry>
+Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry>.Check.get -> Kumiko.Runtime.RouteGuardRequest<TRoute>!
+Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry>.Desired.get -> Kumiko.Runtime.NavigationPath<TRoute, TEntry!>!
+Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry>.PendingRouteGuard(long request, Kumiko.Runtime.BackRequest! source, Kumiko.Runtime.NavigationPath<TRoute, TEntry!>! desired, int step) -> void
+Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry>.Request.get -> long
+Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry>.Source.get -> Kumiko.Runtime.BackRequest!
+Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry>.Step.get -> int
+Kumiko.Runtime.Program<TModel, TMessage>.DisposeAsync() -> System.Threading.Tasks.ValueTask
+Kumiko.Runtime.Program<TModel, TMessage>.Disposing -> System.Action?
+Kumiko.Runtime.Program<TModel, TMessage>.Held.get -> Kumiko.Runtime.HeldCommands<TMessage>!
+Kumiko.Runtime.Program<TModel, TMessage>.HoldCommands.get -> bool
+Kumiko.Runtime.Program<TModel, TMessage>.HoldCommands.set -> void
+Kumiko.Runtime.Program<TModel, TMessage>.Program(TModel initial, System.Func<TModel, TMessage, (TModel Model, Kumiko.Runtime.Cmd<TMessage>! Command)>! update, System.Func<TModel, Kumiko.Runtime.NavigationRoot<TMessage>!>! root, System.Text.Json.Serialization.Metadata.JsonTypeInfo<TModel>! modelType, System.Text.Json.Serialization.Metadata.JsonTypeInfo<TMessage>! messageType, System.Func<TModel, System.Collections.Generic.IEnumerable<Kumiko.Runtime.Sub<TMessage>!>!>? subscriptions = null) -> void
+Kumiko.Runtime.Program<TModel, TMessage>.Program(TModel initial, System.Func<TModel, TMessage, (TModel Model, Kumiko.Runtime.Cmd<TMessage>! Command)>! update, System.Func<TModel, Kumiko.Runtime.NavigationRoot<TMessage>!>! root, System.Text.Json.Serialization.Metadata.JsonTypeInfo<TModel>! modelType, System.Text.Json.Serialization.Metadata.JsonTypeInfo<TMessage>! messageType, System.Func<TModel, System.Collections.Generic.IEnumerable<Kumiko.Runtime.Sub<TMessage>!>!>? subscriptions, Kumiko.Runtime.KumikoServices! services) -> void
+Kumiko.Runtime.Program<TModel, TMessage>.RetainHistory.get -> bool
+Kumiko.Runtime.Program<TModel, TMessage>.RetainHistory.set -> void
+Kumiko.Runtime.Program<TModel, TMessage>.Windows.get -> System.Collections.Generic.IReadOnlyList<Kumiko.Runtime.ProgramWindow!>!
+Kumiko.Runtime.Program<TModel, TMessage>.WithWindows<TWindow>(System.Func<TModel, System.Collections.Generic.IEnumerable<Kumiko.Runtime.WindowSpec<TWindow, TMessage>!>!>! windows, System.Func<TModel, TWindow, Kumiko.Runtime.NavigationRoot<TMessage>!>! root, System.Text.Json.Serialization.Metadata.JsonTypeInfo<TWindow>! windowType) -> Kumiko.Runtime.Program<TModel, TMessage>!
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.Window.get -> string?
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.Window.init -> void
+Kumiko.Runtime.ProgramWindow
+Kumiko.Runtime.ProgramWindow.<Clone>$() -> Kumiko.Runtime.ProgramWindow!
+Kumiko.Runtime.ProgramWindow.Deconstruct(out string! Key, out string! Title, out float Width, out float Height) -> void
+Kumiko.Runtime.ProgramWindow.Equals(Kumiko.Runtime.ProgramWindow? other) -> bool
+Kumiko.Runtime.ProgramWindow.Height.get -> float
+Kumiko.Runtime.ProgramWindow.Height.init -> void
+Kumiko.Runtime.ProgramWindow.Key.get -> string!
+Kumiko.Runtime.ProgramWindow.Key.init -> void
+Kumiko.Runtime.ProgramWindow.ProgramWindow(string! Key, string! Title, float Width, float Height) -> void
+Kumiko.Runtime.ProgramWindow.Title.get -> string!
+Kumiko.Runtime.ProgramWindow.Title.init -> void
+Kumiko.Runtime.ProgramWindow.Width.get -> float
+Kumiko.Runtime.ProgramWindow.Width.init -> void
+Kumiko.Runtime.RouteAdmission
+Kumiko.Runtime.RouteAdmission.Allow = 0 -> Kumiko.Runtime.RouteAdmission
+Kumiko.Runtime.RouteAdmission.Defer = 2 -> Kumiko.Runtime.RouteAdmission
+Kumiko.Runtime.RouteAdmission.Redirect = 1 -> Kumiko.Runtime.RouteAdmission
+Kumiko.Runtime.RouteAdmission.Reject = 3 -> Kumiko.Runtime.RouteAdmission
+Kumiko.Runtime.RouteAttribute
+Kumiko.Runtime.RouteAttribute.Discriminator.get -> string!
+Kumiko.Runtime.RouteAttribute.Kind.get -> int
+Kumiko.Runtime.RouteAttribute.Name.get -> string?
+Kumiko.Runtime.RouteAttribute.Name.set -> void
+Kumiko.Runtime.RouteAttribute.RouteAttribute(string! template, string! discriminator, int kind) -> void
+Kumiko.Runtime.RouteAttribute.Template.get -> string!
+Kumiko.Runtime.RouteDecision<TRoute>
+Kumiko.Runtime.RouteDecision<TRoute>.Allow
+Kumiko.Runtime.RouteDecision<TRoute>.Allow.Allow() -> void
+Kumiko.Runtime.RouteDecision<TRoute>.Defer
+Kumiko.Runtime.RouteDecision<TRoute>.Defer.Defer() -> void
+Kumiko.Runtime.RouteDecision<TRoute>.Redirect
+Kumiko.Runtime.RouteDecision<TRoute>.Redirect.Redirect(TRoute to) -> void
+Kumiko.Runtime.RouteDecision<TRoute>.Redirect.To.get -> TRoute
+Kumiko.Runtime.RouteGuard
+Kumiko.Runtime.RouteGuardReply<TRoute>
+Kumiko.Runtime.RouteGuardReply<TRoute>.<Clone>$() -> Kumiko.Runtime.RouteGuardReply<TRoute>!
+Kumiko.Runtime.RouteGuardReply<TRoute>.Admission.get -> Kumiko.Runtime.RouteAdmission
+Kumiko.Runtime.RouteGuardReply<TRoute>.Equals(Kumiko.Runtime.RouteGuardReply<TRoute>? other) -> bool
+Kumiko.Runtime.RouteGuardReply<TRoute>.RedirectTo.get -> TRoute?
+Kumiko.Runtime.RouteGuardReply<TRoute>.Request.get -> long
+Kumiko.Runtime.RouteGuardReply<TRoute>.RouteGuardReply(string! stack, long request, int step, Kumiko.Runtime.RouteAdmission admission, TRoute? redirectTo = default(TRoute?)) -> void
+Kumiko.Runtime.RouteGuardReply<TRoute>.Stack.get -> string!
+Kumiko.Runtime.RouteGuardReply<TRoute>.Step.get -> int
+Kumiko.Runtime.RouteGuardRequest<TRoute>
+Kumiko.Runtime.RouteGuardRequest<TRoute>.<Clone>$() -> Kumiko.Runtime.RouteGuardRequest<TRoute>!
+Kumiko.Runtime.RouteGuardRequest<TRoute>.Deconstruct(out string! Stack, out long Request, out int Step, out TRoute Route) -> void
+Kumiko.Runtime.RouteGuardRequest<TRoute>.Equals(Kumiko.Runtime.RouteGuardRequest<TRoute>? other) -> bool
+Kumiko.Runtime.RouteGuardRequest<TRoute>.Request.get -> long
+Kumiko.Runtime.RouteGuardRequest<TRoute>.Request.init -> void
+Kumiko.Runtime.RouteGuardRequest<TRoute>.Route.get -> TRoute
+Kumiko.Runtime.RouteGuardRequest<TRoute>.Route.init -> void
+Kumiko.Runtime.RouteGuardRequest<TRoute>.RouteGuardRequest(string! Stack, long Request, int Step, TRoute Route) -> void
+Kumiko.Runtime.RouteGuardRequest<TRoute>.Stack.get -> string!
+Kumiko.Runtime.RouteGuardRequest<TRoute>.Stack.init -> void
+Kumiko.Runtime.RouteGuardRequest<TRoute>.Step.get -> int
+Kumiko.Runtime.RouteGuardRequest<TRoute>.Step.init -> void
+Kumiko.Runtime.RoutePath
+Kumiko.Runtime.RouteUnionAttribute
+Kumiko.Runtime.RouteUnionAttribute.DiscriminatorProperty.get -> string!
+Kumiko.Runtime.RouteUnionAttribute.RouteUnionAttribute(string! discriminatorProperty = "route") -> void
+Kumiko.Runtime.Screen<TMessage>
+Kumiko.Runtime.Screen<TProps, TMessage>
+Kumiko.Runtime.Screen<TProps, TMessage>.C.get -> Kumiko.UI.Context!
+Kumiko.Runtime.Screen<TProps, TMessage>.Map<TParent>(System.Func<TMessage, TParent>! toParent) -> Kumiko.Runtime.Screen<TParent>!
+Kumiko.Runtime.Screen<TProps, TMessage>.Model.get -> TProps
+Kumiko.Runtime.Screen<TProps, TMessage>.Screen(TProps model) -> void
+Kumiko.Runtime.Screen<TProps, TMessage>.Ui.get -> Kumiko.UI.Ui<TMessage>!
+Kumiko.Runtime.Sub<TMessage>.Map<TParent>(System.Func<TMessage, TParent>! map) -> Kumiko.Runtime.Sub<TParent>!
+Kumiko.Runtime.View<TProps, TMessage>
+Kumiko.Runtime.View<TProps, TMessage>.C.get -> Kumiko.UI.Context!
+Kumiko.Runtime.View<TProps, TMessage>.Model.get -> TProps
+Kumiko.Runtime.View<TProps, TMessage>.Ui.get -> Kumiko.UI.Ui<TMessage>!
+Kumiko.Runtime.View<TProps, TMessage>.View(TProps model) -> void
+Kumiko.Runtime.WindowScreen<TModel, TMessage, TWindow>
+Kumiko.Runtime.WindowScreen<TModel, TMessage, TWindow>.Window.get -> TWindow
+Kumiko.Runtime.WindowScreen<TModel, TMessage, TWindow>.WindowScreen(TModel model, TWindow window) -> void
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.<Clone>$() -> Kumiko.Runtime.WindowSpec<TWindow, TMessage>!
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.AlwaysOnTop.get -> bool
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.AlwaysOnTop.init -> void
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.Deconstruct(out TWindow Id, out string! Title, out TMessage OnClose) -> void
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.Equals(Kumiko.Runtime.WindowSpec<TWindow, TMessage>? other) -> bool
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.Height.get -> float
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.Height.init -> void
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.HiddenTitleBar.get -> bool
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.HiddenTitleBar.init -> void
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.Id.get -> TWindow
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.Id.init -> void
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.MinHeight.get -> float
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.MinHeight.init -> void
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.MinWidth.get -> float
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.MinWidth.init -> void
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.OnClose.get -> TMessage
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.OnClose.init -> void
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.RememberAs.get -> string?
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.RememberAs.init -> void
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.Resizable.get -> bool
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.Resizable.init -> void
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.Theme.get -> Kumiko.UI.Theme?
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.Theme.init -> void
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.Title.get -> string!
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.Title.init -> void
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.Width.get -> float
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.Width.init -> void
+Kumiko.Runtime.WindowSpec<TWindow, TMessage>.WindowSpec(TWindow Id, string! Title, TMessage OnClose) -> void
+override Kumiko.Runtime.BackRequest.Equals(object? obj) -> bool
+override Kumiko.Runtime.BackRequest.GetHashCode() -> int
+override Kumiko.Runtime.BackRequest.ToString() -> string!
+override Kumiko.Runtime.HistoryRequest.Equals(object? obj) -> bool
+override Kumiko.Runtime.HistoryRequest.GetHashCode() -> int
+override Kumiko.Runtime.HistoryRequest.ToString() -> string!
+override Kumiko.Runtime.NavigationGuard<TRoute, TEntry>.Equals(object? obj) -> bool
+override Kumiko.Runtime.NavigationGuard<TRoute, TEntry>.GetHashCode() -> int
+override Kumiko.Runtime.NavigationGuard<TRoute, TEntry>.ToString() -> string!
+override Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>.Equals(object? obj) -> bool
+override Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>.GetHashCode() -> int
+override Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>.ToString() -> string!
+override Kumiko.Runtime.NavigationHistory<TRoute>.Equals(object? obj) -> bool
+override Kumiko.Runtime.NavigationHistory<TRoute>.GetHashCode() -> int
+override Kumiko.Runtime.NavigationHistory<TRoute>.ToString() -> string!
+override Kumiko.Runtime.NavigationPath<TRoute, TEntry>.Equals(object? obj) -> bool
+override Kumiko.Runtime.NavigationPath<TRoute, TEntry>.GetHashCode() -> int
+override Kumiko.Runtime.NavigationPath<TRoute, TEntry>.ToString() -> string!
+override Kumiko.Runtime.NavigationVisit<TRoute>.Equals(object? obj) -> bool
+override Kumiko.Runtime.NavigationVisit<TRoute>.GetHashCode() -> int
+override Kumiko.Runtime.NavigationVisit<TRoute>.ToString() -> string!
+override Kumiko.Runtime.Outcome<TModel, TMessage, TOutMessage>.GetHashCode() -> int
+override Kumiko.Runtime.PendingNavigation<TRoute, TEntry>.Equals(object? obj) -> bool
+override Kumiko.Runtime.PendingNavigation<TRoute, TEntry>.GetHashCode() -> int
+override Kumiko.Runtime.PendingNavigation<TRoute, TEntry>.ToString() -> string!
+override Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry>.Equals(object? obj) -> bool
+override Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry>.GetHashCode() -> int
+override Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry>.ToString() -> string!
+override Kumiko.Runtime.ProgramWindow.Equals(object? obj) -> bool
+override Kumiko.Runtime.ProgramWindow.GetHashCode() -> int
+override Kumiko.Runtime.ProgramWindow.ToString() -> string!
+override Kumiko.Runtime.RouteGuardReply<TRoute>.Equals(object? obj) -> bool
+override Kumiko.Runtime.RouteGuardReply<TRoute>.GetHashCode() -> int
+override Kumiko.Runtime.RouteGuardReply<TRoute>.ToString() -> string!
+override Kumiko.Runtime.RouteGuardRequest<TRoute>.Equals(object? obj) -> bool
+override Kumiko.Runtime.RouteGuardRequest<TRoute>.GetHashCode() -> int
+override Kumiko.Runtime.RouteGuardRequest<TRoute>.ToString() -> string!
+override Kumiko.Runtime.WindowSpec<TWindow, TMessage>.Equals(object? obj) -> bool
+override Kumiko.Runtime.WindowSpec<TWindow, TMessage>.GetHashCode() -> int
+override Kumiko.Runtime.WindowSpec<TWindow, TMessage>.ToString() -> string!
+static Kumiko.Runtime.BackRequest.operator !=(Kumiko.Runtime.BackRequest? left, Kumiko.Runtime.BackRequest? right) -> bool
+static Kumiko.Runtime.BackRequest.operator ==(Kumiko.Runtime.BackRequest? left, Kumiko.Runtime.BackRequest? right) -> bool
+static Kumiko.Runtime.Cmd<TMessage>.Debounce(string! key, System.TimeSpan delay, System.Func<System.Threading.CancellationToken, System.Threading.Tasks.Task<TMessage>!>! work, System.Func<System.Exception!, TMessage>! onError) -> Kumiko.Runtime.Cmd<TMessage>!
+static Kumiko.Runtime.Cmd<TMessage>.Debounce<TService>(string! key, System.TimeSpan delay, System.Func<TService!, System.Threading.CancellationToken, System.Threading.Tasks.Task<TMessage>!>! work, System.Func<System.Exception!, TMessage>! onError) -> Kumiko.Runtime.Cmd<TMessage>!
+static Kumiko.Runtime.Cmd<TMessage>.Run<TService>(string! name, System.Func<TService!, System.Threading.CancellationToken, System.Threading.Tasks.Task<TMessage>!>! work, System.Func<System.Exception!, TMessage>! onError) -> Kumiko.Runtime.Cmd<TMessage>!
+static Kumiko.Runtime.DocumentEffects.Autosave<T, TMessage>(Kumiko.Documents.DocumentRequest<T>! request, Kumiko.Documents.IDocumentCodec<T>! codec, System.TimeSpan delay, System.Func<Kumiko.Documents.DocumentSaved<T>!, TMessage>! saved, System.Func<System.Exception!, TMessage>! failed) -> Kumiko.Runtime.Cmd<TMessage>!
+static Kumiko.Runtime.DocumentEffects.Open<T, TMessage>(string! path, Kumiko.Documents.IDocumentCodec<T>! codec, System.Func<Kumiko.Documents.DocumentRead<T>!, TMessage>! opened, System.Func<System.Exception!, TMessage>! failed) -> Kumiko.Runtime.Cmd<TMessage>!
+static Kumiko.Runtime.DocumentEffects.Save<T, TMessage>(Kumiko.Documents.DocumentRequest<T>! request, Kumiko.Documents.IDocumentCodec<T>! codec, System.Func<Kumiko.Documents.DocumentSaved<T>!, TMessage>! saved, System.Func<System.Exception!, TMessage>! failed) -> Kumiko.Runtime.Cmd<TMessage>!
+static Kumiko.Runtime.HistoryRequest.operator !=(Kumiko.Runtime.HistoryRequest? left, Kumiko.Runtime.HistoryRequest? right) -> bool
+static Kumiko.Runtime.HistoryRequest.operator ==(Kumiko.Runtime.HistoryRequest? left, Kumiko.Runtime.HistoryRequest? right) -> bool
+static Kumiko.Runtime.KumikoServices.From(System.IServiceProvider! provider) -> Kumiko.Runtime.KumikoServices!
+static Kumiko.Runtime.KumikoServices.From(System.IServiceProvider! provider, params System.Type![]! services) -> Kumiko.Runtime.KumikoServices!
+static Kumiko.Runtime.NavigationHistory<TRoute>.operator !=(Kumiko.Runtime.NavigationHistory<TRoute>? left, Kumiko.Runtime.NavigationHistory<TRoute>? right) -> bool
+static Kumiko.Runtime.NavigationHistory<TRoute>.operator ==(Kumiko.Runtime.NavigationHistory<TRoute>? left, Kumiko.Runtime.NavigationHistory<TRoute>? right) -> bool
+static Kumiko.Runtime.NavigationHistory<TRoute>.Start(TRoute route) -> Kumiko.Runtime.NavigationHistory<TRoute>!
+static Kumiko.Runtime.NavigationPath<TRoute, TEntry>.Start(TRoute root) -> Kumiko.Runtime.NavigationPath<TRoute, TEntry!>!
+static Kumiko.Runtime.NavigationRoot<TMessage>.Create<TRoute>(Kumiko.Runtime.NavigationHistory<TRoute>! history, Kumiko.UI.NodeKey key, System.Func<TRoute, Kumiko.Runtime.Screen<TMessage>!>! resolve, System.Func<Kumiko.Runtime.HistoryRequest!, TMessage>! onNavigate) -> Kumiko.Runtime.NavigationRoot<TMessage>!
+static Kumiko.Runtime.NavigationRoot<TMessage>.Create<TRoute>(Kumiko.Runtime.NavigationHistory<TRoute>! history, Kumiko.UI.NodeKey key, System.Func<TRoute, Kumiko.Runtime.Screen<TMessage>!>! resolve, System.Func<Kumiko.Runtime.HistoryRequest!, TMessage>! onNavigate, Kumiko.Runtime.NavigationShell<TMessage>! shell) -> Kumiko.Runtime.NavigationRoot<TMessage>!
+static Kumiko.Runtime.NavigationVisit<TRoute>.Create(int id, TRoute route) -> Kumiko.Runtime.NavigationVisit<TRoute>!
+static Kumiko.Runtime.NavigationVisit<TRoute>.IsValidPath(System.Collections.Immutable.ImmutableArray<Kumiko.Runtime.NavigationVisit<TRoute>!> entries) -> bool
+static Kumiko.Runtime.NavigationVisit<TRoute>.operator !=(Kumiko.Runtime.NavigationVisit<TRoute>? left, Kumiko.Runtime.NavigationVisit<TRoute>? right) -> bool
+static Kumiko.Runtime.NavigationVisit<TRoute>.operator ==(Kumiko.Runtime.NavigationVisit<TRoute>? left, Kumiko.Runtime.NavigationVisit<TRoute>? right) -> bool
+static Kumiko.Runtime.Outcome.Fold<TModel, TMessage, TParent, TParentMessage>(this (TModel Model, Kumiko.Runtime.Cmd<TMessage>! Cmd) update, System.Func<TModel, TParent>! write, System.Func<TMessage, TParentMessage>! toParent) -> (TParent, Kumiko.Runtime.Cmd<TParentMessage>!)
+static Kumiko.Runtime.ProgramWindow.operator !=(Kumiko.Runtime.ProgramWindow? left, Kumiko.Runtime.ProgramWindow? right) -> bool
+static Kumiko.Runtime.ProgramWindow.operator ==(Kumiko.Runtime.ProgramWindow? left, Kumiko.Runtime.ProgramWindow? right) -> bool
+static Kumiko.Runtime.RouteGuard.BeforeLoad<TModel, TRoute>(TModel model, System.Collections.Generic.IEnumerable<TRoute>! path, System.Func<TModel, TRoute, Kumiko.Runtime.RouteDecision<TRoute>!>! beforeLoad) -> Kumiko.Runtime.RouteDecision<TRoute>!
+static Kumiko.Runtime.RouteGuardReply<TRoute>.operator !=(Kumiko.Runtime.RouteGuardReply<TRoute>? left, Kumiko.Runtime.RouteGuardReply<TRoute>? right) -> bool
+static Kumiko.Runtime.RouteGuardReply<TRoute>.operator ==(Kumiko.Runtime.RouteGuardReply<TRoute>? left, Kumiko.Runtime.RouteGuardReply<TRoute>? right) -> bool
+static Kumiko.Runtime.RouteGuardRequest<TRoute>.operator !=(Kumiko.Runtime.RouteGuardRequest<TRoute>? left, Kumiko.Runtime.RouteGuardRequest<TRoute>? right) -> bool
+static Kumiko.Runtime.RouteGuardRequest<TRoute>.operator ==(Kumiko.Runtime.RouteGuardRequest<TRoute>? left, Kumiko.Runtime.RouteGuardRequest<TRoute>? right) -> bool
+static Kumiko.Runtime.RoutePath.Encode(string! value) -> string!
+static Kumiko.Runtime.RoutePath.Segments(string? path) -> System.Collections.Immutable.ImmutableArray<string!>
+static Kumiko.Runtime.Sub<TMessage>.From<TService>(string! key, System.Func<TService!, Kumiko.Runtime.Dispatch<TMessage>!, System.IDisposable!>! start) -> Kumiko.Runtime.Sub<TMessage>!
+static Kumiko.Runtime.WindowSpec<TWindow, TMessage>.operator !=(Kumiko.Runtime.WindowSpec<TWindow, TMessage>? left, Kumiko.Runtime.WindowSpec<TWindow, TMessage>? right) -> bool
+static Kumiko.Runtime.WindowSpec<TWindow, TMessage>.operator ==(Kumiko.Runtime.WindowSpec<TWindow, TMessage>? left, Kumiko.Runtime.WindowSpec<TWindow, TMessage>? right) -> bool
+virtual Kumiko.Runtime.PendingNavigation<TRoute, TEntry>.EqualityContract.get -> System.Type!
+virtual Kumiko.Runtime.PendingNavigation<TRoute, TEntry>.PrintMembers(System.Text.StringBuilder! builder) -> bool
+~Kumiko.Runtime.NavigationGuard<TRoute, TEntry>.<Clone>$() -> Kumiko.Runtime.NavigationGuard<TRoute, TEntry>!
+~Kumiko.Runtime.NavigationGuard<TRoute, TEntry>.Equals(Kumiko.Runtime.NavigationGuard<TRoute, TEntry>? other) -> bool
+~Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>.<Clone>$() -> Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>!
+~Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>.Equals(Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>? other) -> bool
+~Kumiko.Runtime.NavigationPath<TRoute, TEntry>.<Clone>$() -> Kumiko.Runtime.NavigationPath<TRoute, TEntry>!
+~Kumiko.Runtime.NavigationPath<TRoute, TEntry>.Equals(Kumiko.Runtime.NavigationPath<TRoute, TEntry>? other) -> bool
+~Kumiko.Runtime.Outcome<TModel, TMessage, TOutMessage>.Equals(Kumiko.Runtime.Outcome<TModel, TMessage, TOutMessage> other) -> bool
+~Kumiko.Runtime.PendingNavigation<TRoute, TEntry>.PendingNavigation(Kumiko.Runtime.PendingNavigation<TRoute, TEntry>! original) -> void
+~Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry>.<Clone>$() -> Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry>!
+~Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry>.Equals(Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry>? other) -> bool
+~override Kumiko.Runtime.Outcome<TModel, TMessage, TOutMessage>.Equals(object obj) -> bool
+~override Kumiko.Runtime.Outcome<TModel, TMessage, TOutMessage>.ToString() -> string
+~static Kumiko.Runtime.NavigationGuard<TRoute, TEntry>.operator !=(Kumiko.Runtime.NavigationGuard<TRoute, TEntry>? left, Kumiko.Runtime.NavigationGuard<TRoute, TEntry>? right) -> bool
+~static Kumiko.Runtime.NavigationGuard<TRoute, TEntry>.operator ==(Kumiko.Runtime.NavigationGuard<TRoute, TEntry>? left, Kumiko.Runtime.NavigationGuard<TRoute, TEntry>? right) -> bool
+~static Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>.operator !=(Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>? left, Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>? right) -> bool
+~static Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>.operator ==(Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>? left, Kumiko.Runtime.NavigationGuardResolution<TRoute, TEntry>? right) -> bool
+~static Kumiko.Runtime.NavigationPath<TRoute, TEntry>.operator !=(Kumiko.Runtime.NavigationPath<TRoute, TEntry>? left, Kumiko.Runtime.NavigationPath<TRoute, TEntry>? right) -> bool
+~static Kumiko.Runtime.NavigationPath<TRoute, TEntry>.operator ==(Kumiko.Runtime.NavigationPath<TRoute, TEntry>? left, Kumiko.Runtime.NavigationPath<TRoute, TEntry>? right) -> bool
+~static Kumiko.Runtime.Outcome<TModel, TMessage, TOutMessage>.operator !=(Kumiko.Runtime.Outcome<TModel, TMessage, TOutMessage> left, Kumiko.Runtime.Outcome<TModel, TMessage, TOutMessage> right) -> bool
+~static Kumiko.Runtime.Outcome<TModel, TMessage, TOutMessage>.operator ==(Kumiko.Runtime.Outcome<TModel, TMessage, TOutMessage> left, Kumiko.Runtime.Outcome<TModel, TMessage, TOutMessage> right) -> bool
+~static Kumiko.Runtime.PendingNavigation<TRoute, TEntry>.operator !=(Kumiko.Runtime.PendingNavigation<TRoute, TEntry>? left, Kumiko.Runtime.PendingNavigation<TRoute, TEntry>? right) -> bool
+~static Kumiko.Runtime.PendingNavigation<TRoute, TEntry>.operator ==(Kumiko.Runtime.PendingNavigation<TRoute, TEntry>? left, Kumiko.Runtime.PendingNavigation<TRoute, TEntry>? right) -> bool
+~static Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry>.operator !=(Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry>? left, Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry>? right) -> bool
+~static Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry>.operator ==(Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry>? left, Kumiko.Runtime.PendingRouteGuard<TRoute, TEntry>? right) -> bool
+~virtual Kumiko.Runtime.PendingNavigation<TRoute, TEntry>.<Clone>$() -> Kumiko.Runtime.PendingNavigation<TRoute, TEntry>!
+~virtual Kumiko.Runtime.PendingNavigation<TRoute, TEntry>.Equals(Kumiko.Runtime.PendingNavigation<TRoute, TEntry>? other) -> bool

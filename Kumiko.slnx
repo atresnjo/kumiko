@@ -1,0 +1,54 @@
+<Solution>
+  <Folder Name="/benchmarks/">
+    <Project Path="benchmarks/Kumiko.Benchmarks/Kumiko.Benchmarks.csproj" />
+    <Project Path="benchmarks/Kumiko.Flint.Benchmarks/Kumiko.Flint.Benchmarks.csproj" />
+    <Project Path="benchmarks/Kumiko.Footprint/Kumiko.Footprint.csproj" />
+  </Folder>
+  <Folder Name="/examples/">
+    <Project Path="examples/RichTextEditor/RichTextEditor.csproj" />
+    <Project Path="examples/DocumentEditor/DocumentEditor.csproj" />
+    <Project Path="examples/DiffViewer/DiffViewer.csproj" />
+    <Project Path="examples/DiskMap/DiskMap.csproj" />
+    <Project Path="examples/DesktopNotes/DesktopNotes.csproj" />
+    <Project Path="examples/TypedViews/TypedViews.csproj" />
+    <Project Path="examples/SharedWindows/SharedWindows.csproj" />
+    <Project Path="examples/Components/Components.csproj" />
+    <Project Path="examples/NativeButton/NativeButton.csproj" />
+    <Project Path="examples/ReactOnly/ReactOnly.csproj" />
+    <Project Path="examples/ReactVite/ReactVite.csproj" />
+    <Project Path="examples/CRMLite/CRMLite.csproj" />
+    <Project Path="examples/Flint/Flint.csproj" />
+    <Project Path="examples/Launcher/Launcher.csproj" />
+    <Project Path="examples/Todo.Components/Todo.Components.csproj" />
+    <Project Path="examples/TraceWaterfall/TraceWaterfall.csproj" />
+    <Project Path="examples/Workbench/Workbench.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Kumiko.Icons.Hugeicons/Kumiko.Icons.Hugeicons.csproj" />
+    <Project Path="src/Kumiko.Hosting/Kumiko.Hosting.csproj" />
+    <Project Path="src/Kumiko/Kumiko.csproj" />
+    <Project Path="src/Kumiko.Analyzers/Kumiko.Analyzers.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Kumiko.Documents.E2E/Kumiko.Documents.E2E.csproj" />
+    <Project Path="tests/Kumiko.Audio.E2E/Kumiko.Audio.E2E.csproj" />
+    <Project Path="tests/Kumiko.RichText.E2E/Kumiko.RichText.E2E.csproj" />
+    <Project Path="tests/Kumiko.DesktopFormats.E2E/Kumiko.DesktopFormats.E2E.csproj" />
+    <Project Path="tests/Kumiko.DesktopActions.E2E/Kumiko.DesktopActions.E2E.csproj" />
+    <Project Path="tests/Kumiko.TypedViews.E2E/Kumiko.TypedViews.E2E.csproj" />
+    <Project Path="tests/Kumiko.V2.E2E/Kumiko.V2.E2E.csproj" />
+    <Project Path="tests/Kumiko.Agent.E2E/Kumiko.Agent.E2E.csproj" />
+    <Project Path="tests/Kumiko.E2E/Kumiko.E2E.csproj" />
+    <Project Path="tests/Kumiko.Text.E2E/Kumiko.Text.E2E.csproj" />
+    <Project Path="tests/Kumiko.Components.E2E/Kumiko.Components.E2E.csproj" />
+    <Project Path="tests/Kumiko.CRMLite.E2E/Kumiko.CRMLite.E2E.csproj" />
+    <Project Path="tests/Kumiko.Flint.E2E/Kumiko.Flint.E2E.csproj" />
+    <Project Path="tests/Kumiko.Desktop.E2E/Kumiko.Desktop.E2E.csproj" />
+    <Project Path="tests/Kumiko.Launcher.E2E/Kumiko.Launcher.E2E.csproj" />
+    <Project Path="tests/Kumiko.Navigation.E2E/Kumiko.Navigation.E2E.csproj" />
+    <Project Path="tests/Kumiko.TraceWaterfall.E2E/Kumiko.TraceWaterfall.E2E.csproj" />
+    <Project Path="tests/Kumiko.DiffViewer.E2E/Kumiko.DiffViewer.E2E.csproj" />
+    <Project Path="tests/Kumiko.DiskMap.E2E/Kumiko.DiskMap.E2E.csproj" />
+    <Project Path="tests/Kumiko.Analyzers.E2E/Kumiko.Analyzers.E2E.csproj" />
+  </Folder>
+</Solution>

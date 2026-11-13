@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-ios</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
+    <ApplicationId>dev.kumiko.mlchecks</ApplicationId>
+    <KumikoStrict>false</KumikoStrict>
+    <IsAotCompatible>true</IsAotCompatible>
+    <PublishAot Condition="'$(KumikoiOSNativeAot)' != ''">$(KumikoiOSNativeAot)</PublishAot>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/Kumiko.iOS.ML/Kumiko.iOS.ML.csproj" />
+    <Compile Include="../../examples/ML.iOS/*.cs" Exclude="../../examples/ML.iOS/Main.cs" Link="Example/%(Filename)%(Extension)" />
+    <None Include="../../examples/NativeButton.iOS/Info.plist" Link="Info.plist" />
+  </ItemGroup>
+</Project>

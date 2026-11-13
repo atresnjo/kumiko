@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "ExpoButton",
+    "slug": "expo-button-size",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "jsEngine": "hermes",
+    "ios": {
+      "bundleIdentifier": "dev.kumiko.expobuttonsize",
+      "supportsTablet": true
+    }
+  }
+}

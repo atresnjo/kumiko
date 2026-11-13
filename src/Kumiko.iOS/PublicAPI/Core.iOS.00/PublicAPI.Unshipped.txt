@@ -1,0 +1,501 @@
+#nullable enable
+const Kumiko.iOS.NativeApplication.SceneDelegateName = "KumikoSceneDelegate" -> string!
+Kumiko.iOS.KumikoAppDelegate
+Kumiko.iOS.KumikoAppDelegate.KumikoAppDelegate() -> void
+Kumiko.iOS.KumikoSceneDelegate
+Kumiko.iOS.KumikoSceneDelegate.KumikoSceneDelegate() -> void
+Kumiko.iOS.NativeActionOptions
+Kumiko.iOS.NativeActionOptions.Accent.get -> bool
+Kumiko.iOS.NativeActionOptions.Accent.init -> void
+Kumiko.iOS.NativeActionOptions.Chevron.get -> bool
+Kumiko.iOS.NativeActionOptions.Chevron.init -> void
+Kumiko.iOS.NativeActionOptions.Compact.get -> bool
+Kumiko.iOS.NativeActionOptions.Compact.init -> void
+Kumiko.iOS.NativeActionOptions.Deconstruct(out string? Symbol, out Kumiko.iOS.NativeActionStyle Style, out bool Disabled, out bool Compact, out bool Chevron, out bool Accent, out float? Width, out float Height, out bool FillWidth) -> void
+Kumiko.iOS.NativeActionOptions.Disabled.get -> bool
+Kumiko.iOS.NativeActionOptions.Disabled.init -> void
+Kumiko.iOS.NativeActionOptions.Equals(Kumiko.iOS.NativeActionOptions other) -> bool
+Kumiko.iOS.NativeActionOptions.FillWidth.get -> bool
+Kumiko.iOS.NativeActionOptions.FillWidth.init -> void
+Kumiko.iOS.NativeActionOptions.Height.get -> float
+Kumiko.iOS.NativeActionOptions.Height.init -> void
+Kumiko.iOS.NativeActionOptions.NativeActionOptions() -> void
+Kumiko.iOS.NativeActionOptions.NativeActionOptions(string? Symbol = null, Kumiko.iOS.NativeActionStyle Style = Kumiko.iOS.NativeActionStyle.Tonal, bool Disabled = false, bool Compact = false, bool Chevron = false, bool Accent = false, float? Width = null, float Height = 48, bool FillWidth = false) -> void
+Kumiko.iOS.NativeActionOptions.Style.get -> Kumiko.iOS.NativeActionStyle
+Kumiko.iOS.NativeActionOptions.Style.init -> void
+Kumiko.iOS.NativeActionOptions.Symbol.get -> string?
+Kumiko.iOS.NativeActionOptions.Symbol.init -> void
+Kumiko.iOS.NativeActionOptions.Width.get -> float?
+Kumiko.iOS.NativeActionOptions.Width.init -> void
+Kumiko.iOS.NativeActionStyle
+Kumiko.iOS.NativeActionStyle.Glow = 3 -> Kumiko.iOS.NativeActionStyle
+Kumiko.iOS.NativeActionStyle.Mint = 2 -> Kumiko.iOS.NativeActionStyle
+Kumiko.iOS.NativeActionStyle.Plain = 0 -> Kumiko.iOS.NativeActionStyle
+Kumiko.iOS.NativeActionStyle.Tonal = 1 -> Kumiko.iOS.NativeActionStyle
+Kumiko.iOS.NativeAlertAction
+Kumiko.iOS.NativeAlertAction.<Clone>$() -> Kumiko.iOS.NativeAlertAction!
+Kumiko.iOS.NativeAlertAction.Deconstruct(out string! Id, out string! Label, out Kumiko.iOS.NativeAlertActionStyle Style, out bool Enabled) -> void
+Kumiko.iOS.NativeAlertAction.Enabled.get -> bool
+Kumiko.iOS.NativeAlertAction.Enabled.init -> void
+Kumiko.iOS.NativeAlertAction.Equals(Kumiko.iOS.NativeAlertAction? other) -> bool
+Kumiko.iOS.NativeAlertAction.Id.get -> string!
+Kumiko.iOS.NativeAlertAction.Id.init -> void
+Kumiko.iOS.NativeAlertAction.Label.get -> string!
+Kumiko.iOS.NativeAlertAction.Label.init -> void
+Kumiko.iOS.NativeAlertAction.NativeAlertAction(string! Id, string! Label, Kumiko.iOS.NativeAlertActionStyle Style = Kumiko.iOS.NativeAlertActionStyle.Default, bool Enabled = true) -> void
+Kumiko.iOS.NativeAlertAction.Style.get -> Kumiko.iOS.NativeAlertActionStyle
+Kumiko.iOS.NativeAlertAction.Style.init -> void
+Kumiko.iOS.NativeAlertActionStyle
+Kumiko.iOS.NativeAlertActionStyle.Cancel = 1 -> Kumiko.iOS.NativeAlertActionStyle
+Kumiko.iOS.NativeAlertActionStyle.Default = 0 -> Kumiko.iOS.NativeAlertActionStyle
+Kumiko.iOS.NativeAlertActionStyle.Destructive = 2 -> Kumiko.iOS.NativeAlertActionStyle
+Kumiko.iOS.NativeAlertField
+Kumiko.iOS.NativeAlertField.<Clone>$() -> Kumiko.iOS.NativeAlertField!
+Kumiko.iOS.NativeAlertField.Deconstruct(out string! Id, out string! Value, out string? Placeholder, out bool Secure) -> void
+Kumiko.iOS.NativeAlertField.Equals(Kumiko.iOS.NativeAlertField? other) -> bool
+Kumiko.iOS.NativeAlertField.Id.get -> string!
+Kumiko.iOS.NativeAlertField.Id.init -> void
+Kumiko.iOS.NativeAlertField.NativeAlertField(string! Id, string! Value, string? Placeholder = null, bool Secure = false) -> void
+Kumiko.iOS.NativeAlertField.Placeholder.get -> string?
+Kumiko.iOS.NativeAlertField.Placeholder.init -> void
+Kumiko.iOS.NativeAlertField.Secure.get -> bool
+Kumiko.iOS.NativeAlertField.Secure.init -> void
+Kumiko.iOS.NativeAlertField.Value.get -> string!
+Kumiko.iOS.NativeAlertField.Value.init -> void
+Kumiko.iOS.NativeApplication
+Kumiko.iOS.NativeAppPhase
+Kumiko.iOS.NativeAppPhase.Active = 0 -> Kumiko.iOS.NativeAppPhase
+Kumiko.iOS.NativeAppPhase.Background = 2 -> Kumiko.iOS.NativeAppPhase
+Kumiko.iOS.NativeAppPhase.Inactive = 1 -> Kumiko.iOS.NativeAppPhase
+Kumiko.iOS.NativeArcCard
+Kumiko.iOS.NativeArcCard.<Clone>$() -> Kumiko.iOS.NativeArcCard!
+Kumiko.iOS.NativeArcCard.Accent.get -> Kumiko.UI.Color
+Kumiko.iOS.NativeArcCard.Accent.init -> void
+Kumiko.iOS.NativeArcCard.Category.get -> string!
+Kumiko.iOS.NativeArcCard.Category.init -> void
+Kumiko.iOS.NativeArcCard.Deconstruct(out string! Id, out string! Category, out string! Symbol, out string! Time, out string! Title, out string! Detail, out System.Collections.Immutable.ImmutableArray<string!> Marks, out string! Value, out string! Label, out Kumiko.UI.Color Tint, out Kumiko.UI.Color Accent) -> void
+Kumiko.iOS.NativeArcCard.Detail.get -> string!
+Kumiko.iOS.NativeArcCard.Detail.init -> void
+Kumiko.iOS.NativeArcCard.Equals(Kumiko.iOS.NativeArcCard? other) -> bool
+Kumiko.iOS.NativeArcCard.Id.get -> string!
+Kumiko.iOS.NativeArcCard.Id.init -> void
+Kumiko.iOS.NativeArcCard.Label.get -> string!
+Kumiko.iOS.NativeArcCard.Label.init -> void
+Kumiko.iOS.NativeArcCard.Marks.get -> System.Collections.Immutable.ImmutableArray<string!>
+Kumiko.iOS.NativeArcCard.Marks.init -> void
+Kumiko.iOS.NativeArcCard.NativeArcCard(string! Id, string! Category, string! Symbol, string! Time, string! Title, string! Detail, System.Collections.Immutable.ImmutableArray<string!> Marks, string! Value, string! Label, Kumiko.UI.Color Tint, Kumiko.UI.Color Accent) -> void
+Kumiko.iOS.NativeArcCard.Symbol.get -> string!
+Kumiko.iOS.NativeArcCard.Symbol.init -> void
+Kumiko.iOS.NativeArcCard.Time.get -> string!
+Kumiko.iOS.NativeArcCard.Time.init -> void
+Kumiko.iOS.NativeArcCard.Tint.get -> Kumiko.UI.Color
+Kumiko.iOS.NativeArcCard.Tint.init -> void
+Kumiko.iOS.NativeArcCard.Title.get -> string!
+Kumiko.iOS.NativeArcCard.Title.init -> void
+Kumiko.iOS.NativeArcCard.Value.get -> string!
+Kumiko.iOS.NativeArcCard.Value.init -> void
+Kumiko.iOS.NativeArcHeading
+Kumiko.iOS.NativeArcHeading.<Clone>$() -> Kumiko.iOS.NativeArcHeading!
+Kumiko.iOS.NativeArcHeading.Accent.get -> string!
+Kumiko.iOS.NativeArcHeading.Accent.init -> void
+Kumiko.iOS.NativeArcHeading.Deconstruct(out string! Title, out string! Accent, out string! Subtitle) -> void
+Kumiko.iOS.NativeArcHeading.Equals(Kumiko.iOS.NativeArcHeading? other) -> bool
+Kumiko.iOS.NativeArcHeading.NativeArcHeading(string! Title, string! Accent, string! Subtitle) -> void
+Kumiko.iOS.NativeArcHeading.Subtitle.get -> string!
+Kumiko.iOS.NativeArcHeading.Subtitle.init -> void
+Kumiko.iOS.NativeArcHeading.Title.get -> string!
+Kumiko.iOS.NativeArcHeading.Title.init -> void
+Kumiko.iOS.NativeBackRequest
+Kumiko.iOS.NativeBackRequest.<Clone>$() -> Kumiko.iOS.NativeBackRequest!
+Kumiko.iOS.NativeBackRequest.Deconstruct(out string! Stack, out long Revision, out int From, out int To) -> void
+Kumiko.iOS.NativeBackRequest.Equals(Kumiko.iOS.NativeBackRequest? other) -> bool
+Kumiko.iOS.NativeBackRequest.From.get -> int
+Kumiko.iOS.NativeBackRequest.From.init -> void
+Kumiko.iOS.NativeBackRequest.NativeBackRequest(string! Stack, long Revision, int From, int To) -> void
+Kumiko.iOS.NativeBackRequest.Revision.get -> long
+Kumiko.iOS.NativeBackRequest.Revision.init -> void
+Kumiko.iOS.NativeBackRequest.Stack.get -> string!
+Kumiko.iOS.NativeBackRequest.Stack.init -> void
+Kumiko.iOS.NativeBackRequest.To.get -> int
+Kumiko.iOS.NativeBackRequest.To.init -> void
+Kumiko.iOS.NativeCarouselItem
+Kumiko.iOS.NativeCarouselItem.<Clone>$() -> Kumiko.iOS.NativeCarouselItem!
+Kumiko.iOS.NativeCarouselItem.Deconstruct(out string! Id, out string! Title, out string! Emoji, out int Motif) -> void
+Kumiko.iOS.NativeCarouselItem.Emoji.get -> string!
+Kumiko.iOS.NativeCarouselItem.Emoji.init -> void
+Kumiko.iOS.NativeCarouselItem.Equals(Kumiko.iOS.NativeCarouselItem? other) -> bool
+Kumiko.iOS.NativeCarouselItem.Id.get -> string!
+Kumiko.iOS.NativeCarouselItem.Id.init -> void
+Kumiko.iOS.NativeCarouselItem.Motif.get -> int
+Kumiko.iOS.NativeCarouselItem.Motif.init -> void
+Kumiko.iOS.NativeCarouselItem.NativeCarouselItem(string! Id, string! Title, string! Emoji, int Motif = 0) -> void
+Kumiko.iOS.NativeCarouselItem.Title.get -> string!
+Kumiko.iOS.NativeCarouselItem.Title.init -> void
+Kumiko.iOS.NativeChoice
+Kumiko.iOS.NativeChoice.<Clone>$() -> Kumiko.iOS.NativeChoice!
+Kumiko.iOS.NativeChoice.Deconstruct(out string! Id, out string! Label) -> void
+Kumiko.iOS.NativeChoice.Equals(Kumiko.iOS.NativeChoice? other) -> bool
+Kumiko.iOS.NativeChoice.Id.get -> string!
+Kumiko.iOS.NativeChoice.Id.init -> void
+Kumiko.iOS.NativeChoice.Label.get -> string!
+Kumiko.iOS.NativeChoice.Label.init -> void
+Kumiko.iOS.NativeChoice.NativeChoice(string! Id, string! Label) -> void
+Kumiko.iOS.NativeCommand
+Kumiko.iOS.NativeCommand.<Clone>$() -> Kumiko.iOS.NativeCommand!
+Kumiko.iOS.NativeCommand.Deconstruct(out string! Id, out string! Label, out string? Symbol, out bool Enabled, out bool Destructive, out bool Leading) -> void
+Kumiko.iOS.NativeCommand.Destructive.get -> bool
+Kumiko.iOS.NativeCommand.Destructive.init -> void
+Kumiko.iOS.NativeCommand.Enabled.get -> bool
+Kumiko.iOS.NativeCommand.Enabled.init -> void
+Kumiko.iOS.NativeCommand.Equals(Kumiko.iOS.NativeCommand? other) -> bool
+Kumiko.iOS.NativeCommand.Id.get -> string!
+Kumiko.iOS.NativeCommand.Id.init -> void
+Kumiko.iOS.NativeCommand.Label.get -> string!
+Kumiko.iOS.NativeCommand.Label.init -> void
+Kumiko.iOS.NativeCommand.Leading.get -> bool
+Kumiko.iOS.NativeCommand.Leading.init -> void
+Kumiko.iOS.NativeCommand.NativeCommand(string! Id, string! Label, string? Symbol = null, bool Enabled = true, bool Destructive = false, bool Leading = false) -> void
+Kumiko.iOS.NativeCommand.Symbol.get -> string?
+Kumiko.iOS.NativeCommand.Symbol.init -> void
+Kumiko.iOS.NativeComponents
+Kumiko.iOS.NativeDatePickerMode
+Kumiko.iOS.NativeDatePickerMode.Date = 0 -> Kumiko.iOS.NativeDatePickerMode
+Kumiko.iOS.NativeDatePickerMode.DateAndTime = 2 -> Kumiko.iOS.NativeDatePickerMode
+Kumiko.iOS.NativeDatePickerMode.Time = 1 -> Kumiko.iOS.NativeDatePickerMode
+Kumiko.iOS.NativeFontDesign
+Kumiko.iOS.NativeFontDesign.Default = 0 -> Kumiko.iOS.NativeFontDesign
+Kumiko.iOS.NativeFontDesign.Monospaced = 3 -> Kumiko.iOS.NativeFontDesign
+Kumiko.iOS.NativeFontDesign.Rounded = 2 -> Kumiko.iOS.NativeFontDesign
+Kumiko.iOS.NativeFontDesign.Serif = 1 -> Kumiko.iOS.NativeFontDesign
+Kumiko.iOS.NativeHostOptions
+Kumiko.iOS.NativeHostOptions.<Clone>$() -> Kumiko.iOS.NativeHostOptions!
+Kumiko.iOS.NativeHostOptions.Background.get -> UIKit.UIColor?
+Kumiko.iOS.NativeHostOptions.Background.init -> void
+Kumiko.iOS.NativeHostOptions.EdgeToEdge.get -> bool
+Kumiko.iOS.NativeHostOptions.EdgeToEdge.init -> void
+Kumiko.iOS.NativeHostOptions.Equals(Kumiko.iOS.NativeHostOptions? other) -> bool
+Kumiko.iOS.NativeHostOptions.InterfaceStyle.get -> UIKit.UIUserInterfaceStyle
+Kumiko.iOS.NativeHostOptions.InterfaceStyle.init -> void
+Kumiko.iOS.NativeHostOptions.NativeHostOptions() -> void
+Kumiko.iOS.NativeHostOptions.RestoreState.get -> bool
+Kumiko.iOS.NativeHostOptions.RestoreState.init -> void
+Kumiko.iOS.NativeHostOptions.StatePath.get -> string?
+Kumiko.iOS.NativeHostOptions.StatePath.init -> void
+Kumiko.iOS.NativeInputStyle
+Kumiko.iOS.NativeInputStyle.<Clone>$() -> Kumiko.iOS.NativeInputStyle!
+Kumiko.iOS.NativeInputStyle.Dark.get -> bool
+Kumiko.iOS.NativeInputStyle.Dark.init -> void
+Kumiko.iOS.NativeInputStyle.Deconstruct(out Kumiko.UI.TextStyle Text, out Kumiko.UI.Color Placeholder, out Kumiko.UI.Color Tint, out bool Dark) -> void
+Kumiko.iOS.NativeInputStyle.Equals(Kumiko.iOS.NativeInputStyle? other) -> bool
+Kumiko.iOS.NativeInputStyle.NativeInputStyle(Kumiko.UI.TextStyle Text, Kumiko.UI.Color Placeholder, Kumiko.UI.Color Tint, bool Dark = false) -> void
+Kumiko.iOS.NativeInputStyle.Placeholder.get -> Kumiko.UI.Color
+Kumiko.iOS.NativeInputStyle.Placeholder.init -> void
+Kumiko.iOS.NativeInputStyle.Text.get -> Kumiko.UI.TextStyle
+Kumiko.iOS.NativeInputStyle.Text.init -> void
+Kumiko.iOS.NativeInputStyle.Tint.get -> Kumiko.UI.Color
+Kumiko.iOS.NativeInputStyle.Tint.init -> void
+Kumiko.iOS.NativeLifecycle
+Kumiko.iOS.NativeListItem
+Kumiko.iOS.NativeListItem.<Clone>$() -> Kumiko.iOS.NativeListItem!
+Kumiko.iOS.NativeListItem.Deconstruct(out string! Id, out string! Title, out string? Detail, out bool Enabled) -> void
+Kumiko.iOS.NativeListItem.Detail.get -> string?
+Kumiko.iOS.NativeListItem.Detail.init -> void
+Kumiko.iOS.NativeListItem.Enabled.get -> bool
+Kumiko.iOS.NativeListItem.Enabled.init -> void
+Kumiko.iOS.NativeListItem.Equals(Kumiko.iOS.NativeListItem? other) -> bool
+Kumiko.iOS.NativeListItem.Id.get -> string!
+Kumiko.iOS.NativeListItem.Id.init -> void
+Kumiko.iOS.NativeListItem.NativeListItem(string! Id, string! Title, string? Detail = null, bool Enabled = true) -> void
+Kumiko.iOS.NativeListItem.Title.get -> string!
+Kumiko.iOS.NativeListItem.Title.init -> void
+Kumiko.iOS.NativeNavigationAppearance
+Kumiko.iOS.NativeNavigationAppearance.<Clone>$() -> Kumiko.iOS.NativeNavigationAppearance!
+Kumiko.iOS.NativeNavigationAppearance.Background.get -> Kumiko.UI.Color
+Kumiko.iOS.NativeNavigationAppearance.Background.init -> void
+Kumiko.iOS.NativeNavigationAppearance.BottomInset.get -> float
+Kumiko.iOS.NativeNavigationAppearance.BottomInset.init -> void
+Kumiko.iOS.NativeNavigationAppearance.Deconstruct(out Kumiko.UI.Color Background, out Kumiko.UI.Color Title, out Kumiko.UI.Color Tint, out Kumiko.UI.Color Separator, out float TitleSize, out Kumiko.UI.Weight TitleWeight, out float BottomInset) -> void
+Kumiko.iOS.NativeNavigationAppearance.Equals(Kumiko.iOS.NativeNavigationAppearance? other) -> bool
+Kumiko.iOS.NativeNavigationAppearance.NativeNavigationAppearance(Kumiko.UI.Color Background, Kumiko.UI.Color Title, Kumiko.UI.Color Tint, Kumiko.UI.Color Separator, float TitleSize = 17, Kumiko.UI.Weight TitleWeight = Kumiko.UI.Weight.Semibold, float BottomInset = 0) -> void
+Kumiko.iOS.NativeNavigationAppearance.Separator.get -> Kumiko.UI.Color
+Kumiko.iOS.NativeNavigationAppearance.Separator.init -> void
+Kumiko.iOS.NativeNavigationAppearance.Tint.get -> Kumiko.UI.Color
+Kumiko.iOS.NativeNavigationAppearance.Tint.init -> void
+Kumiko.iOS.NativeNavigationAppearance.Title.get -> Kumiko.UI.Color
+Kumiko.iOS.NativeNavigationAppearance.Title.init -> void
+Kumiko.iOS.NativeNavigationAppearance.TitleSize.get -> float
+Kumiko.iOS.NativeNavigationAppearance.TitleSize.init -> void
+Kumiko.iOS.NativeNavigationAppearance.TitleWeight.get -> Kumiko.UI.Weight
+Kumiko.iOS.NativeNavigationAppearance.TitleWeight.init -> void
+Kumiko.iOS.NativeOrbMark
+Kumiko.iOS.NativeOrbMark.Check = 1 -> Kumiko.iOS.NativeOrbMark
+Kumiko.iOS.NativeOrbMark.Dot = 2 -> Kumiko.iOS.NativeOrbMark
+Kumiko.iOS.NativeOrbMark.Empty = 3 -> Kumiko.iOS.NativeOrbMark
+Kumiko.iOS.NativeOrbMark.None = 0 -> Kumiko.iOS.NativeOrbMark
+Kumiko.iOS.NativePalette
+Kumiko.iOS.NativePalette.<Clone>$() -> Kumiko.iOS.NativePalette!
+Kumiko.iOS.NativePalette.Accent.get -> Kumiko.UI.Color
+Kumiko.iOS.NativePalette.Accent.init -> void
+Kumiko.iOS.NativePalette.Background.get -> Kumiko.UI.Color
+Kumiko.iOS.NativePalette.Background.init -> void
+Kumiko.iOS.NativePalette.Border.get -> Kumiko.UI.Color
+Kumiko.iOS.NativePalette.Border.init -> void
+Kumiko.iOS.NativePalette.Deconstruct(out Kumiko.UI.Color Background, out Kumiko.UI.Color Surface, out Kumiko.UI.Color Raised, out Kumiko.UI.Color Text, out Kumiko.UI.Color Muted, out Kumiko.UI.Color Accent, out Kumiko.UI.Color Warm, out Kumiko.UI.Color Border) -> void
+Kumiko.iOS.NativePalette.Equals(Kumiko.iOS.NativePalette? other) -> bool
+Kumiko.iOS.NativePalette.Muted.get -> Kumiko.UI.Color
+Kumiko.iOS.NativePalette.Muted.init -> void
+Kumiko.iOS.NativePalette.NativePalette(Kumiko.UI.Color Background, Kumiko.UI.Color Surface, Kumiko.UI.Color Raised, Kumiko.UI.Color Text, Kumiko.UI.Color Muted, Kumiko.UI.Color Accent, Kumiko.UI.Color Warm, Kumiko.UI.Color Border) -> void
+Kumiko.iOS.NativePalette.Raised.get -> Kumiko.UI.Color
+Kumiko.iOS.NativePalette.Raised.init -> void
+Kumiko.iOS.NativePalette.Surface.get -> Kumiko.UI.Color
+Kumiko.iOS.NativePalette.Surface.init -> void
+Kumiko.iOS.NativePalette.Text.get -> Kumiko.UI.Color
+Kumiko.iOS.NativePalette.Text.init -> void
+Kumiko.iOS.NativePalette.Warm.get -> Kumiko.UI.Color
+Kumiko.iOS.NativePalette.Warm.init -> void
+Kumiko.iOS.NativePose
+Kumiko.iOS.NativePose.Deconstruct(out float X, out float Y, out float ScaleX, out float ScaleY, out float Opacity, out bool Interactive, out float FadeDelay) -> void
+Kumiko.iOS.NativePose.Equals(Kumiko.iOS.NativePose other) -> bool
+Kumiko.iOS.NativePose.FadeDelay.get -> float
+Kumiko.iOS.NativePose.FadeDelay.init -> void
+Kumiko.iOS.NativePose.Interactive.get -> bool
+Kumiko.iOS.NativePose.Interactive.init -> void
+Kumiko.iOS.NativePose.NativePose() -> void
+Kumiko.iOS.NativePose.NativePose(float X = 0, float Y = 0, float ScaleX = 1, float ScaleY = 1, float Opacity = 1, bool Interactive = true, float FadeDelay = 0) -> void
+Kumiko.iOS.NativePose.Opacity.get -> float
+Kumiko.iOS.NativePose.Opacity.init -> void
+Kumiko.iOS.NativePose.ScaleX.get -> float
+Kumiko.iOS.NativePose.ScaleX.init -> void
+Kumiko.iOS.NativePose.ScaleY.get -> float
+Kumiko.iOS.NativePose.ScaleY.init -> void
+Kumiko.iOS.NativePose.X.get -> float
+Kumiko.iOS.NativePose.X.init -> void
+Kumiko.iOS.NativePose.Y.get -> float
+Kumiko.iOS.NativePose.Y.init -> void
+Kumiko.iOS.NativeSpring
+Kumiko.iOS.NativeSpring.Damping.get -> float
+Kumiko.iOS.NativeSpring.Damping.init -> void
+Kumiko.iOS.NativeSpring.Deconstruct(out float Stiffness, out float Damping, out float Duration) -> void
+Kumiko.iOS.NativeSpring.Duration.get -> float
+Kumiko.iOS.NativeSpring.Duration.init -> void
+Kumiko.iOS.NativeSpring.Equals(Kumiko.iOS.NativeSpring other) -> bool
+Kumiko.iOS.NativeSpring.NativeSpring() -> void
+Kumiko.iOS.NativeSpring.NativeSpring(float Stiffness, float Damping, float Duration) -> void
+Kumiko.iOS.NativeSpring.Stiffness.get -> float
+Kumiko.iOS.NativeSpring.Stiffness.init -> void
+Kumiko.iOS.NativeStackScope<TMessage>
+Kumiko.iOS.NativeStackScope<TMessage>.Dispose() -> void
+Kumiko.iOS.NativeStackScope<TMessage>.Page(int id, string! title, bool guarded = false) -> Kumiko.UI.Div
+Kumiko.iOS.NativeSurfaceOptions
+Kumiko.iOS.NativeSurfaceOptions.Background.get -> Kumiko.UI.Color
+Kumiko.iOS.NativeSurfaceOptions.Background.init -> void
+Kumiko.iOS.NativeSurfaceOptions.Border.get -> Kumiko.UI.Color?
+Kumiko.iOS.NativeSurfaceOptions.Border.init -> void
+Kumiko.iOS.NativeSurfaceOptions.Deconstruct(out Kumiko.UI.Color Background, out Kumiko.UI.Color? Border, out float Radius, out Kumiko.UI.Color? Glow, out float Elevation) -> void
+Kumiko.iOS.NativeSurfaceOptions.Elevation.get -> float
+Kumiko.iOS.NativeSurfaceOptions.Elevation.init -> void
+Kumiko.iOS.NativeSurfaceOptions.Equals(Kumiko.iOS.NativeSurfaceOptions other) -> bool
+Kumiko.iOS.NativeSurfaceOptions.Glow.get -> Kumiko.UI.Color?
+Kumiko.iOS.NativeSurfaceOptions.Glow.init -> void
+Kumiko.iOS.NativeSurfaceOptions.NativeSurfaceOptions() -> void
+Kumiko.iOS.NativeSurfaceOptions.NativeSurfaceOptions(Kumiko.UI.Color Background, Kumiko.UI.Color? Border = null, float Radius = 0, Kumiko.UI.Color? Glow = null, float Elevation = 0) -> void
+Kumiko.iOS.NativeSurfaceOptions.Radius.get -> float
+Kumiko.iOS.NativeSurfaceOptions.Radius.init -> void
+Kumiko.iOS.NativeSwipeDirection
+Kumiko.iOS.NativeSwipeDirection.Left = 0 -> Kumiko.iOS.NativeSwipeDirection
+Kumiko.iOS.NativeSwipeDirection.Right = 1 -> Kumiko.iOS.NativeSwipeDirection
+Kumiko.iOS.NativeSwipeSelection
+Kumiko.iOS.NativeSwipeSelection.<Clone>$() -> Kumiko.iOS.NativeSwipeSelection!
+Kumiko.iOS.NativeSwipeSelection.Deconstruct(out string! Id, out Kumiko.iOS.NativeSwipeDirection Direction) -> void
+Kumiko.iOS.NativeSwipeSelection.Direction.get -> Kumiko.iOS.NativeSwipeDirection
+Kumiko.iOS.NativeSwipeSelection.Direction.init -> void
+Kumiko.iOS.NativeSwipeSelection.Equals(Kumiko.iOS.NativeSwipeSelection? other) -> bool
+Kumiko.iOS.NativeSwipeSelection.Id.get -> string!
+Kumiko.iOS.NativeSwipeSelection.Id.init -> void
+Kumiko.iOS.NativeSwipeSelection.NativeSwipeSelection(string! Id, Kumiko.iOS.NativeSwipeDirection Direction) -> void
+Kumiko.iOS.NativeTabItem
+Kumiko.iOS.NativeTabItem.<Clone>$() -> Kumiko.iOS.NativeTabItem!
+Kumiko.iOS.NativeTabItem.Badge.get -> string?
+Kumiko.iOS.NativeTabItem.Badge.init -> void
+Kumiko.iOS.NativeTabItem.Deconstruct(out string! Id, out string! Label, out string! Symbol) -> void
+Kumiko.iOS.NativeTabItem.Equals(Kumiko.iOS.NativeTabItem? other) -> bool
+Kumiko.iOS.NativeTabItem.Id.get -> string!
+Kumiko.iOS.NativeTabItem.Id.init -> void
+Kumiko.iOS.NativeTabItem.Label.get -> string!
+Kumiko.iOS.NativeTabItem.Label.init -> void
+Kumiko.iOS.NativeTabItem.NativeTabItem(string! Id, string! Label, string! Symbol) -> void
+Kumiko.iOS.NativeTabItem.Symbol.get -> string!
+Kumiko.iOS.NativeTabItem.Symbol.init -> void
+Kumiko.iOS.NativeTimelineSegment
+Kumiko.iOS.NativeTimelineSegment.<Clone>$() -> Kumiko.iOS.NativeTimelineSegment!
+Kumiko.iOS.NativeTimelineSegment.Color.get -> Kumiko.UI.Color
+Kumiko.iOS.NativeTimelineSegment.Color.init -> void
+Kumiko.iOS.NativeTimelineSegment.Deconstruct(out float Start, out float End, out Kumiko.UI.Color Color) -> void
+Kumiko.iOS.NativeTimelineSegment.End.get -> float
+Kumiko.iOS.NativeTimelineSegment.End.init -> void
+Kumiko.iOS.NativeTimelineSegment.Equals(Kumiko.iOS.NativeTimelineSegment? other) -> bool
+Kumiko.iOS.NativeTimelineSegment.NativeTimelineSegment(float Start, float End, Kumiko.UI.Color Color) -> void
+Kumiko.iOS.NativeTimelineSegment.Start.get -> float
+Kumiko.iOS.NativeTimelineSegment.Start.init -> void
+Kumiko.iOS.NativeView
+Kumiko.iOS.NativeView.NativeView(Kumiko.Runtime.IProgram! program) -> void
+Kumiko.iOS.NativeView.Render() -> void
+Kumiko.iOS.NativeView.UnhandledException -> System.Action<System.Exception!>?
+Kumiko.iOS.NativeViewController
+Kumiko.iOS.NativeViewController.Content.get -> Kumiko.iOS.NativeView?
+Kumiko.iOS.NativeViewController.NativeViewController(System.Func<Kumiko.Runtime.IProgram!>! create, Kumiko.iOS.NativeHostOptions? options = null) -> void
+Kumiko.iOS.NativeViewController.Options.get -> Kumiko.iOS.NativeHostOptions!
+Kumiko.iOS.NativeViewController.Program.get -> Kumiko.Runtime.IProgram?
+Kumiko.iOS.NativeViewController.SaveState() -> void
+Kumiko.iOS.NativeViewController.UnhandledException -> System.Action<System.Exception!>?
+override Kumiko.iOS.KumikoAppDelegate.DidDiscardSceneSessions(UIKit.UIApplication! application, Foundation.NSSet<UIKit.UISceneSession!>! sceneSessions) -> void
+override Kumiko.iOS.KumikoAppDelegate.FinishedLaunching(UIKit.UIApplication! application, Foundation.NSDictionary? launchOptions) -> bool
+override Kumiko.iOS.KumikoSceneDelegate.DidDisconnect(UIKit.UIScene! scene) -> void
+override Kumiko.iOS.KumikoSceneDelegate.WillConnect(UIKit.UIScene! scene, UIKit.UISceneSession! session, UIKit.UISceneConnectionOptions! connectionOptions) -> void
+override Kumiko.iOS.KumikoSceneDelegate.Window.get -> UIKit.UIWindow?
+override Kumiko.iOS.KumikoSceneDelegate.Window.set -> void
+override Kumiko.iOS.NativeActionOptions.GetHashCode() -> int
+override Kumiko.iOS.NativeAlertAction.Equals(object? obj) -> bool
+override Kumiko.iOS.NativeAlertAction.GetHashCode() -> int
+override Kumiko.iOS.NativeAlertAction.ToString() -> string!
+override Kumiko.iOS.NativeAlertField.Equals(object? obj) -> bool
+override Kumiko.iOS.NativeAlertField.GetHashCode() -> int
+override Kumiko.iOS.NativeAlertField.ToString() -> string!
+override Kumiko.iOS.NativeArcCard.Equals(object? obj) -> bool
+override Kumiko.iOS.NativeArcCard.GetHashCode() -> int
+override Kumiko.iOS.NativeArcCard.ToString() -> string!
+override Kumiko.iOS.NativeArcHeading.Equals(object? obj) -> bool
+override Kumiko.iOS.NativeArcHeading.GetHashCode() -> int
+override Kumiko.iOS.NativeArcHeading.ToString() -> string!
+override Kumiko.iOS.NativeBackRequest.Equals(object? obj) -> bool
+override Kumiko.iOS.NativeBackRequest.GetHashCode() -> int
+override Kumiko.iOS.NativeBackRequest.ToString() -> string!
+override Kumiko.iOS.NativeCarouselItem.Equals(object? obj) -> bool
+override Kumiko.iOS.NativeCarouselItem.GetHashCode() -> int
+override Kumiko.iOS.NativeCarouselItem.ToString() -> string!
+override Kumiko.iOS.NativeChoice.Equals(object? obj) -> bool
+override Kumiko.iOS.NativeChoice.GetHashCode() -> int
+override Kumiko.iOS.NativeChoice.ToString() -> string!
+override Kumiko.iOS.NativeCommand.Equals(object? obj) -> bool
+override Kumiko.iOS.NativeCommand.GetHashCode() -> int
+override Kumiko.iOS.NativeCommand.ToString() -> string!
+override Kumiko.iOS.NativeHostOptions.Equals(object? obj) -> bool
+override Kumiko.iOS.NativeHostOptions.GetHashCode() -> int
+override Kumiko.iOS.NativeHostOptions.ToString() -> string!
+override Kumiko.iOS.NativeInputStyle.Equals(object? obj) -> bool
+override Kumiko.iOS.NativeInputStyle.GetHashCode() -> int
+override Kumiko.iOS.NativeInputStyle.ToString() -> string!
+override Kumiko.iOS.NativeListItem.Equals(object? obj) -> bool
+override Kumiko.iOS.NativeListItem.GetHashCode() -> int
+override Kumiko.iOS.NativeListItem.ToString() -> string!
+override Kumiko.iOS.NativeNavigationAppearance.Equals(object? obj) -> bool
+override Kumiko.iOS.NativeNavigationAppearance.GetHashCode() -> int
+override Kumiko.iOS.NativeNavigationAppearance.ToString() -> string!
+override Kumiko.iOS.NativePalette.Equals(object? obj) -> bool
+override Kumiko.iOS.NativePalette.GetHashCode() -> int
+override Kumiko.iOS.NativePalette.ToString() -> string!
+override Kumiko.iOS.NativePose.GetHashCode() -> int
+override Kumiko.iOS.NativeSpring.GetHashCode() -> int
+override Kumiko.iOS.NativeSurfaceOptions.GetHashCode() -> int
+override Kumiko.iOS.NativeSwipeSelection.Equals(object? obj) -> bool
+override Kumiko.iOS.NativeSwipeSelection.GetHashCode() -> int
+override Kumiko.iOS.NativeSwipeSelection.ToString() -> string!
+override Kumiko.iOS.NativeTabItem.Equals(object? obj) -> bool
+override Kumiko.iOS.NativeTabItem.GetHashCode() -> int
+override Kumiko.iOS.NativeTabItem.ToString() -> string!
+override Kumiko.iOS.NativeTimelineSegment.Equals(object? obj) -> bool
+override Kumiko.iOS.NativeTimelineSegment.GetHashCode() -> int
+override Kumiko.iOS.NativeTimelineSegment.ToString() -> string!
+override Kumiko.iOS.NativeView.LayoutSubviews() -> void
+override Kumiko.iOS.NativeView.SafeAreaInsetsDidChange() -> void
+override Kumiko.iOS.NativeView.TraitCollectionDidChange(UIKit.UITraitCollection? previousTraitCollection) -> void
+override Kumiko.iOS.NativeViewController.ViewDidLayoutSubviews() -> void
+override Kumiko.iOS.NativeViewController.ViewDidLoad() -> void
+static Kumiko.iOS.NativeActionOptions.operator !=(Kumiko.iOS.NativeActionOptions left, Kumiko.iOS.NativeActionOptions right) -> bool
+static Kumiko.iOS.NativeActionOptions.operator ==(Kumiko.iOS.NativeActionOptions left, Kumiko.iOS.NativeActionOptions right) -> bool
+static Kumiko.iOS.NativeAlertAction.operator !=(Kumiko.iOS.NativeAlertAction? left, Kumiko.iOS.NativeAlertAction? right) -> bool
+static Kumiko.iOS.NativeAlertAction.operator ==(Kumiko.iOS.NativeAlertAction? left, Kumiko.iOS.NativeAlertAction? right) -> bool
+static Kumiko.iOS.NativeAlertField.operator !=(Kumiko.iOS.NativeAlertField? left, Kumiko.iOS.NativeAlertField? right) -> bool
+static Kumiko.iOS.NativeAlertField.operator ==(Kumiko.iOS.NativeAlertField? left, Kumiko.iOS.NativeAlertField? right) -> bool
+static Kumiko.iOS.NativeApplication.DiscardState(System.Collections.Generic.IEnumerable<string!>! sceneIdentifiers, string? directory = null) -> void
+static Kumiko.iOS.NativeApplication.Run(string![]! args, System.Func<Kumiko.Runtime.IProgram!>! create, Kumiko.iOS.NativeHostOptions? options = null) -> void
+static Kumiko.iOS.NativeApplication.StatePath(string! sceneIdentifier, string? directory = null) -> string!
+static Kumiko.iOS.NativeArcCard.operator !=(Kumiko.iOS.NativeArcCard? left, Kumiko.iOS.NativeArcCard? right) -> bool
+static Kumiko.iOS.NativeArcCard.operator ==(Kumiko.iOS.NativeArcCard? left, Kumiko.iOS.NativeArcCard? right) -> bool
+static Kumiko.iOS.NativeArcHeading.operator !=(Kumiko.iOS.NativeArcHeading? left, Kumiko.iOS.NativeArcHeading? right) -> bool
+static Kumiko.iOS.NativeArcHeading.operator ==(Kumiko.iOS.NativeArcHeading? left, Kumiko.iOS.NativeArcHeading? right) -> bool
+static Kumiko.iOS.NativeBackRequest.operator !=(Kumiko.iOS.NativeBackRequest? left, Kumiko.iOS.NativeBackRequest? right) -> bool
+static Kumiko.iOS.NativeBackRequest.operator ==(Kumiko.iOS.NativeBackRequest? left, Kumiko.iOS.NativeBackRequest? right) -> bool
+static Kumiko.iOS.NativeCarouselItem.operator !=(Kumiko.iOS.NativeCarouselItem? left, Kumiko.iOS.NativeCarouselItem? right) -> bool
+static Kumiko.iOS.NativeCarouselItem.operator ==(Kumiko.iOS.NativeCarouselItem? left, Kumiko.iOS.NativeCarouselItem? right) -> bool
+static Kumiko.iOS.NativeChoice.operator !=(Kumiko.iOS.NativeChoice? left, Kumiko.iOS.NativeChoice? right) -> bool
+static Kumiko.iOS.NativeChoice.operator ==(Kumiko.iOS.NativeChoice? left, Kumiko.iOS.NativeChoice? right) -> bool
+static Kumiko.iOS.NativeCommand.operator !=(Kumiko.iOS.NativeCommand? left, Kumiko.iOS.NativeCommand? right) -> bool
+static Kumiko.iOS.NativeCommand.operator ==(Kumiko.iOS.NativeCommand? left, Kumiko.iOS.NativeCommand? right) -> bool
+static Kumiko.iOS.NativeComponents.ArcMorphCollapseDistance(float width) -> float
+static Kumiko.iOS.NativeComponents.ArcMorphHeight(float width) -> float
+static Kumiko.iOS.NativeComponents.NativeAction<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, TMessage onPress, Kumiko.iOS.NativeActionOptions options = default(Kumiko.iOS.NativeActionOptions), Kumiko.iOS.NativePalette? palette = null, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeActivityIndicator(this Kumiko.UI.Context! context, string! label, bool running = true, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeAlert<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! title, string? message, System.Collections.Immutable.ImmutableArray<Kumiko.iOS.NativeAlertAction!> actions, System.Func<string!, TMessage>! onAction, TMessage onDismiss, System.Collections.Immutable.ImmutableArray<Kumiko.iOS.NativeAlertField!> fields = default(System.Collections.Immutable.ImmutableArray<Kumiko.iOS.NativeAlertField!>), System.Func<string!, string!, TMessage>? onFieldChange = null, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeArcMorphCarousel<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, System.Collections.Immutable.ImmutableArray<Kumiko.iOS.NativeArcCard!> cards, int selectedIndex, Kumiko.iOS.NativeArcHeading! heading, Kumiko.UI.Color background, System.Func<int, TMessage>! onSelect, System.Func<int, TMessage>! onPlay, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> Kumiko.UI.Div
+static Kumiko.iOS.NativeComponents.NativeBottomDrawer<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! title, TMessage onClose, float height = 380, Kumiko.iOS.NativePalette? palette = null, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> Kumiko.Components.KitScope
+static Kumiko.iOS.NativeComponents.NativeCheckList<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, System.Collections.Immutable.ImmutableArray<Kumiko.iOS.NativeListItem!> items, System.Collections.Immutable.ImmutableHashSet<string!>! selectedIds, System.Func<string!, TMessage>! onToggle, Kumiko.iOS.NativePalette? palette = null, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeCircularCarousel(this Kumiko.UI.Context! context, System.Collections.Immutable.ImmutableArray<Kumiko.iOS.NativeCarouselItem!> items, int selectedIndex, bool preview = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> Kumiko.UI.Div
+static Kumiko.iOS.NativeComponents.NativeCircularCarousel<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, System.Collections.Immutable.ImmutableArray<Kumiko.iOS.NativeCarouselItem!> items, int selectedIndex, System.Func<int, TMessage>! onSelect, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> Kumiko.UI.Div
+static Kumiko.iOS.NativeComponents.NativeConfirmationDialog<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string? title, string? message, System.Collections.Immutable.ImmutableArray<Kumiko.iOS.NativeAlertAction!> actions, Kumiko.UI.NodeKey source, System.Func<string!, TMessage>! onAction, TMessage onDismiss, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeContextMenu<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, System.Collections.Immutable.ImmutableArray<Kumiko.iOS.NativeCommand!> items, System.Func<string!, TMessage>! onSelect, string? title = null, bool disabled = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> Kumiko.UI.Div
+static Kumiko.iOS.NativeComponents.NativeDashedLine(this Kumiko.UI.Context! context, Kumiko.UI.Color color, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> Kumiko.UI.Div
+static Kumiko.iOS.NativeComponents.NativeDatePicker<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, System.DateTimeOffset value, System.Func<System.DateTimeOffset, TMessage>! onChange, Kumiko.iOS.NativeDatePickerMode mode = Kumiko.iOS.NativeDatePickerMode.Date, System.DateTimeOffset? minimum = null, System.DateTimeOffset? maximum = null, bool disabled = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeDrawer<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! title, TMessage onClose, float width = 340, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> Kumiko.Components.KitScope
+static Kumiko.iOS.NativeComponents.NativeExactText(this Kumiko.UI.Context! context) -> void
+static Kumiko.iOS.NativeComponents.NativeFlipCounter(this Kumiko.UI.Context! context, int value, string! suffix, Kumiko.UI.TextStyle style, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeImage(this Kumiko.UI.Context! context, System.Collections.Immutable.ImmutableArray<byte> data, float width, float height, string? accessibleName = null, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeInterfaceStyle(this Kumiko.UI.Context! context, bool dark) -> void
+static Kumiko.iOS.NativeComponents.NativeLabel(this Kumiko.UI.Context! context, string! text, Kumiko.UI.TextStyle style, Kumiko.iOS.NativeFontDesign design, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+static Kumiko.iOS.NativeComponents.NativeLabel(this Kumiko.UI.Context! context, string! text, Kumiko.UI.TextStyle style, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+static Kumiko.iOS.NativeComponents.NativeLinearGradient(this Kumiko.UI.Context! context, Kumiko.UI.Color start, Kumiko.UI.Color end, bool diagonal = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> Kumiko.UI.Div
+static Kumiko.iOS.NativeComponents.NativeList<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, System.Collections.Immutable.ImmutableArray<Kumiko.iOS.NativeListItem!> items, string? selectedId, System.Func<string!, TMessage>! onSelect, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+static Kumiko.iOS.NativeComponents.NativeMenu<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, System.Collections.Immutable.ImmutableArray<Kumiko.iOS.NativeCommand!> items, System.Func<string!, TMessage>! onSelect, bool disabled = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeNavigationAppearance(this Kumiko.UI.Context! context, Kumiko.iOS.NativeNavigationAppearance! appearance) -> void
+static Kumiko.iOS.NativeComponents.NativeNavigationBar<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! title, System.Collections.Immutable.ImmutableArray<Kumiko.iOS.NativeCommand!> items, System.Func<string!, TMessage>! onSelect, bool disabled = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeOrb(this Kumiko.UI.Context! context, Kumiko.UI.Color color, float diameter, Kumiko.iOS.NativeOrbMark mark = Kumiko.iOS.NativeOrbMark.None, float glow = 0.5, string? accessibleName = null, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativePageControl<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, int count, int page, System.Func<int, TMessage>! onChange, bool disabled = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativePicker<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, System.Collections.Immutable.ImmutableArray<Kumiko.iOS.NativeChoice!> items, string! selectedId, System.Func<string!, TMessage>! onChange, bool disabled = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativePresentation(this Kumiko.UI.Context! context, Kumiko.iOS.NativePose pose, Kumiko.iOS.NativeSpring spring, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> Kumiko.UI.Div
+static Kumiko.iOS.NativeComponents.NativePressable<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, System.Func<long, TMessage>! onPress, float pressedScale = 1, bool enabled = true, bool haptics = false, bool pressOnTouchDown = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> Kumiko.UI.Div
+static Kumiko.iOS.NativeComponents.NativePressable<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, TMessage onPress, bool enabled = true, bool haptics = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> Kumiko.UI.Div
+static Kumiko.iOS.NativeComponents.NativeProgress(this Kumiko.UI.Context! context, string! label, float value, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeRubberSlider<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, System.Collections.Immutable.ImmutableArray<Kumiko.iOS.NativeChoice!> items, string! selectedId, System.Func<string!, TMessage>! onChange, int minimumIndex = 0, bool disabled = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeSearchField<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, string! value, System.Func<string!, TMessage>! onChange, string! placeholder = "Search", bool disabled = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeSegmentedControl<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, System.Collections.Immutable.ImmutableArray<Kumiko.iOS.NativeChoice!> items, string! selectedId, System.Func<string!, TMessage>! onChange, bool disabled = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeSeparator(this Kumiko.UI.Context! context, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeSlider<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, float value, System.Func<float, TMessage>! onChange, float minimum = 0, float maximum = 1, bool disabled = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeStack<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! stack, long revision, System.Func<Kumiko.iOS.NativeBackRequest!, TMessage>! onBack, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> Kumiko.iOS.NativeStackScope<TMessage>!
+static Kumiko.iOS.NativeComponents.NativeStepper<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, double value, System.Func<double, TMessage>! onChange, double minimum = 0, double maximum = 100, double step = 1, bool disabled = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeSurface(this Kumiko.UI.Context! context, Kumiko.iOS.NativeSurfaceOptions options, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> Kumiko.UI.Div
+static Kumiko.iOS.NativeComponents.NativeSwipeCard(this Kumiko.UI.Context! context, string! id, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> Kumiko.UI.Div
+static Kumiko.iOS.NativeComponents.NativeSwipeDeck(this Kumiko.UI.Context! context, System.Collections.Immutable.ImmutableArray<string!> ids, int index, Kumiko.iOS.NativeSwipeDirection direction, Kumiko.iOS.NativePalette! palette, bool preview = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> Kumiko.UI.Div
+static Kumiko.iOS.NativeComponents.NativeSwipeDeck<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, System.Collections.Immutable.ImmutableArray<string!> ids, int index, Kumiko.iOS.NativeSwipeDirection direction, System.Func<Kumiko.iOS.NativeSwipeSelection!, TMessage>! onSwipe, Kumiko.iOS.NativePalette! palette, bool disabled = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> Kumiko.UI.Div
+static Kumiko.iOS.NativeComponents.NativeSwitch<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, bool value, System.Func<bool, TMessage>! onChange, bool disabled = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeSwitch<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, bool value, System.Func<bool, TMessage>! onChange, Kumiko.UI.Color tint, bool disabled = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeSymbol(this Kumiko.UI.Context! context, string! symbol, float size = 28, string? accessibleName = null, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeSymbol(this Kumiko.UI.Context! context, string! symbol, Kumiko.UI.Color tint, float size = 28, string? accessibleName = null, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeTabBar<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, System.Collections.Immutable.ImmutableArray<Kumiko.iOS.NativeTabItem!> items, string! selectedId, System.Func<string!, TMessage>! onSelect, Kumiko.iOS.NativePalette? palette = null, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeTabBar<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, System.Collections.Immutable.ImmutableArray<Kumiko.iOS.NativeTabItem!> items, string! selectedId, System.Func<string!, TMessage>! onSelect, Kumiko.UI.Color tint, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeTabBarHeight(this Kumiko.UI.Context! context) -> float
+static Kumiko.iOS.NativeComponents.NativeTextEditor<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, string! value, System.Func<string!, TMessage>! onChange, float height = 132, bool disabled = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeTextEditor<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, string! value, System.Func<string!, TMessage>! onChange, Kumiko.iOS.NativeInputStyle! style, string! placeholder = "", float height = 88, bool disabled = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeTextField<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, string! value, System.Func<string!, TMessage>! onChange, Kumiko.iOS.NativeInputStyle! style, string! placeholder = "", float height = 44, bool disabled = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeTimeline(this Kumiko.UI.Context! context, System.Collections.Immutable.ImmutableArray<Kumiko.iOS.NativeTimelineSegment!> segments, float marker, Kumiko.iOS.NativePalette? palette = null, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeTimerDial(this Kumiko.UI.Context! context, string! value, string! status, string! detail, float diameter = 264, float progress = 0, Kumiko.iOS.NativePalette? palette = null, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeComponents.NativeToolbar<TMessage>(this Kumiko.UI.Ui<TMessage>! ui, string! label, System.Collections.Immutable.ImmutableArray<Kumiko.iOS.NativeCommand!> items, System.Func<string!, TMessage>! onSelect, bool disabled = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey)) -> void
+static Kumiko.iOS.NativeHostOptions.operator !=(Kumiko.iOS.NativeHostOptions? left, Kumiko.iOS.NativeHostOptions? right) -> bool
+static Kumiko.iOS.NativeHostOptions.operator ==(Kumiko.iOS.NativeHostOptions? left, Kumiko.iOS.NativeHostOptions? right) -> bool
+static Kumiko.iOS.NativeInputStyle.operator !=(Kumiko.iOS.NativeInputStyle? left, Kumiko.iOS.NativeInputStyle? right) -> bool
+static Kumiko.iOS.NativeInputStyle.operator ==(Kumiko.iOS.NativeInputStyle? left, Kumiko.iOS.NativeInputStyle? right) -> bool
+static Kumiko.iOS.NativeLifecycle.Phases<TMessage>(System.Func<Kumiko.iOS.NativeAppPhase, TMessage>! message) -> Kumiko.Runtime.Sub<TMessage>!
+static Kumiko.iOS.NativeListItem.operator !=(Kumiko.iOS.NativeListItem? left, Kumiko.iOS.NativeListItem? right) -> bool
+static Kumiko.iOS.NativeListItem.operator ==(Kumiko.iOS.NativeListItem? left, Kumiko.iOS.NativeListItem? right) -> bool
+static Kumiko.iOS.NativeNavigationAppearance.operator !=(Kumiko.iOS.NativeNavigationAppearance? left, Kumiko.iOS.NativeNavigationAppearance? right) -> bool
+static Kumiko.iOS.NativeNavigationAppearance.operator ==(Kumiko.iOS.NativeNavigationAppearance? left, Kumiko.iOS.NativeNavigationAppearance? right) -> bool
+static Kumiko.iOS.NativePalette.FocusDark.get -> Kumiko.iOS.NativePalette!

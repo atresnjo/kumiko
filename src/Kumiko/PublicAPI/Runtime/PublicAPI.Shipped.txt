@@ -1,0 +1,120 @@
+#nullable enable
+Kumiko.Runtime.Cmd<TMessage>
+Kumiko.Runtime.Cmd<TMessage>.Map<TParent>(System.Func<TMessage, TParent>! map) -> Kumiko.Runtime.Cmd<TParent>!
+Kumiko.Runtime.Dispatch
+Kumiko.Runtime.Dispatch<TMessage>
+Kumiko.Runtime.KumikoUpdateAttribute
+Kumiko.Runtime.KumikoUpdateAttribute.KumikoUpdateAttribute() -> void
+Kumiko.Runtime.KumikoViewAttribute
+Kumiko.Runtime.KumikoViewAttribute.KumikoViewAttribute() -> void
+Kumiko.Runtime.IKumiko
+Kumiko.Runtime.IKumiko.Create() -> Kumiko.Runtime.IProgram!
+Kumiko.Runtime.IKumiko<TModel, TMessage>
+Kumiko.Runtime.IKumiko<TModel, TMessage>.Init.get -> TModel
+Kumiko.Runtime.IKumiko<TModel, TMessage>.Subscriptions(TModel model) -> System.Collections.Generic.IEnumerable<Kumiko.Runtime.Sub<TMessage>!>!
+Kumiko.Runtime.IKumiko<TModel, TMessage>.Update(TModel model, TMessage message) -> (TModel, Kumiko.Runtime.Cmd<TMessage>!)
+Kumiko.Runtime.IProgram
+Kumiko.Runtime.IProgram.Attach(Kumiko.Window! window) -> void
+Kumiko.Runtime.IProgram.DebugEnabled.get -> bool
+Kumiko.Runtime.IProgram.DebugEnabled.set -> void
+Kumiko.Runtime.IProgram.DevMode.get -> bool
+Kumiko.Runtime.IProgram.DevMode.set -> void
+Kumiko.Runtime.IProgram.ModelChanged -> System.Action?
+Kumiko.Runtime.IProgram.Record(string! path) -> void
+Kumiko.Runtime.IProgram.Replay(string! path) -> void
+Kumiko.Runtime.IProgram.RestoreModel(string! path) -> bool
+Kumiko.Runtime.IProgram.Save(string! path) -> void
+Kumiko.Runtime.IProgram.SaveModel(string! path) -> void
+Kumiko.Runtime.IProgram.Step(int step) -> void
+Kumiko.Runtime.IProgram.View(Kumiko.UI.Context! context) -> void
+Kumiko.Runtime.MessageSource
+Kumiko.Runtime.MessageSource.<Clone>$() -> Kumiko.Runtime.MessageSource!
+Kumiko.Runtime.MessageSource.Deconstruct(out Kumiko.UI.Role Role, out string! Name, out string? Key, out string! Path) -> void
+Kumiko.Runtime.MessageSource.Equals(Kumiko.Runtime.MessageSource? other) -> bool
+Kumiko.Runtime.MessageSource.Key.get -> string?
+Kumiko.Runtime.MessageSource.Key.init -> void
+Kumiko.Runtime.MessageSource.MessageSource(Kumiko.UI.Role Role, string! Name, string? Key, string! Path) -> void
+Kumiko.Runtime.MessageSource.Name.get -> string!
+Kumiko.Runtime.MessageSource.Name.init -> void
+Kumiko.Runtime.MessageSource.Path.get -> string!
+Kumiko.Runtime.MessageSource.Path.init -> void
+Kumiko.Runtime.MessageSource.Role.get -> Kumiko.UI.Role
+Kumiko.Runtime.MessageSource.Role.init -> void
+Kumiko.Runtime.Program<TModel, TMessage>
+Kumiko.Runtime.Program<TModel, TMessage>.Attach(Kumiko.Window! window) -> void
+Kumiko.Runtime.Program<TModel, TMessage>.Back() -> bool
+Kumiko.Runtime.Program<TModel, TMessage>.CanGoBack.get -> bool
+Kumiko.Runtime.Program<TModel, TMessage>.CanGoForward.get -> bool
+Kumiko.Runtime.Program<TModel, TMessage>.DebugEnabled.get -> bool
+Kumiko.Runtime.Program<TModel, TMessage>.DebugEnabled.set -> void
+Kumiko.Runtime.Program<TModel, TMessage>.DevMode.get -> bool
+Kumiko.Runtime.Program<TModel, TMessage>.DevMode.set -> void
+Kumiko.Runtime.Program<TModel, TMessage>.Dispose() -> void
+Kumiko.Runtime.Program<TModel, TMessage>.Forward() -> bool
+Kumiko.Runtime.Program<TModel, TMessage>.History.get -> System.Collections.Generic.IReadOnlyList<Kumiko.Runtime.ProgramStep<TModel, TMessage>!>!
+Kumiko.Runtime.Program<TModel, TMessage>.IsPaused.get -> bool
+Kumiko.Runtime.Program<TModel, TMessage>.Model.get -> TModel
+Kumiko.Runtime.Program<TModel, TMessage>.ModelChanged -> System.Action?
+Kumiko.Runtime.Program<TModel, TMessage>.PendingCommands.get -> int
+Kumiko.Runtime.Program<TModel, TMessage>.Position.get -> int
+Kumiko.Runtime.Program<TModel, TMessage>.ProcessMessages() -> void
+Kumiko.Runtime.Program<TModel, TMessage>.Record(string! path) -> void
+Kumiko.Runtime.Program<TModel, TMessage>.Replay(string! path) -> void
+Kumiko.Runtime.Program<TModel, TMessage>.RestoreModel(string! path) -> bool
+Kumiko.Runtime.Program<TModel, TMessage>.Resume() -> void
+Kumiko.Runtime.Program<TModel, TMessage>.Save(string! path) -> void
+Kumiko.Runtime.Program<TModel, TMessage>.SaveModel(string! path) -> void
+Kumiko.Runtime.Program<TModel, TMessage>.Send.get -> Kumiko.Runtime.Dispatch<TMessage>!
+Kumiko.Runtime.Program<TModel, TMessage>.Step(int step) -> void
+Kumiko.Runtime.Program<TModel, TMessage>.UnhandledException -> System.Action<System.Exception!>?
+Kumiko.Runtime.Program<TModel, TMessage>.View(Kumiko.UI.Context! context) -> void
+Kumiko.Runtime.Program<TModel, TMessage>.WriteDiagram(string! path, string! statePointer) -> void
+Kumiko.Runtime.ProgramStep<TModel, TMessage>
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.<Clone>$() -> Kumiko.Runtime.ProgramStep<TModel, TMessage>!
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.Commands.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.Commands.init -> void
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.Deconstruct(out int Id, out int Parent, out long Frame, out double Time, out Kumiko.Runtime.MessageSource? Source, out TMessage? Message, out TModel Model, out System.Collections.Generic.IReadOnlyList<string!>! Commands) -> void
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.Equals(Kumiko.Runtime.ProgramStep<TModel, TMessage>? other) -> bool
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.Frame.get -> long
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.Frame.init -> void
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.Id.get -> int
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.Id.init -> void
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.Message.get -> TMessage?
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.Message.init -> void
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.Model.get -> TModel
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.Model.init -> void
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.Parent.get -> int
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.Parent.init -> void
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.ProgramStep(int Id, int Parent, long Frame, double Time, Kumiko.Runtime.MessageSource? Source, TMessage? Message, TModel Model, System.Collections.Generic.IReadOnlyList<string!>! Commands) -> void
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.Source.get -> Kumiko.Runtime.MessageSource?
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.Source.init -> void
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.Time.get -> double
+Kumiko.Runtime.ProgramStep<TModel, TMessage>.Time.init -> void
+Kumiko.Runtime.Sub<TMessage>
+Kumiko.Runtime.Sub<TMessage>.<Clone>$() -> Kumiko.Runtime.Sub<TMessage>!
+Kumiko.Runtime.Sub<TMessage>.Equals(Kumiko.Runtime.Sub<TMessage>? other) -> bool
+Kumiko.Runtime.Sub<TMessage>.Key.get -> string!
+Kumiko.Runtime.Sub<TMessage>.Sub(string! key, System.Func<Kumiko.Runtime.Dispatch<TMessage>!, System.IDisposable!>! start) -> void
+override Kumiko.Runtime.MessageSource.Equals(object? obj) -> bool
+override Kumiko.Runtime.MessageSource.GetHashCode() -> int
+override Kumiko.Runtime.MessageSource.ToString() -> string!
+override Kumiko.Runtime.ProgramStep<TModel, TMessage>.Equals(object? obj) -> bool
+override Kumiko.Runtime.ProgramStep<TModel, TMessage>.GetHashCode() -> int
+override Kumiko.Runtime.ProgramStep<TModel, TMessage>.ToString() -> string!
+override Kumiko.Runtime.Sub<TMessage>.Equals(object? obj) -> bool
+override Kumiko.Runtime.Sub<TMessage>.GetHashCode() -> int
+override Kumiko.Runtime.Sub<TMessage>.ToString() -> string!
+static Kumiko.Runtime.Cmd<TMessage>.Batch(params Kumiko.Runtime.Cmd<TMessage>![]! commands) -> Kumiko.Runtime.Cmd<TMessage>!
+static Kumiko.Runtime.Cmd<TMessage>.None.get -> Kumiko.Runtime.Cmd<TMessage>!
+static Kumiko.Runtime.Cmd<TMessage>.Run(string! name, System.Func<System.Threading.CancellationToken, System.Threading.Tasks.Task<TMessage>!>! work, System.Func<System.Exception!, TMessage>! onError) -> Kumiko.Runtime.Cmd<TMessage>!
+static Kumiko.Runtime.Dispatch.Map<TParent, TChild>(this Kumiko.Runtime.Dispatch<TParent>! send, System.Func<TChild, TParent>! map) -> Kumiko.Runtime.Dispatch<TChild>!
+static Kumiko.Runtime.MessageSource.operator !=(Kumiko.Runtime.MessageSource? left, Kumiko.Runtime.MessageSource? right) -> bool
+static Kumiko.Runtime.MessageSource.operator ==(Kumiko.Runtime.MessageSource? left, Kumiko.Runtime.MessageSource? right) -> bool
+static Kumiko.Runtime.ProgramStep<TModel, TMessage>.operator !=(Kumiko.Runtime.ProgramStep<TModel, TMessage>? left, Kumiko.Runtime.ProgramStep<TModel, TMessage>? right) -> bool
+static Kumiko.Runtime.ProgramStep<TModel, TMessage>.operator ==(Kumiko.Runtime.ProgramStep<TModel, TMessage>? left, Kumiko.Runtime.ProgramStep<TModel, TMessage>? right) -> bool
+static Kumiko.Runtime.Sub<TMessage>.Appearance(System.Func<bool, TMessage>! message) -> Kumiko.Runtime.Sub<TMessage>!
+static Kumiko.Runtime.Sub<TMessage>.Every(string! key, System.TimeSpan interval, System.Func<TMessage>! tick) -> Kumiko.Runtime.Sub<TMessage>!
+static Kumiko.Runtime.Sub<TMessage>.operator !=(Kumiko.Runtime.Sub<TMessage>? left, Kumiko.Runtime.Sub<TMessage>? right) -> bool
+static Kumiko.Runtime.Sub<TMessage>.operator ==(Kumiko.Runtime.Sub<TMessage>? left, Kumiko.Runtime.Sub<TMessage>? right) -> bool
+static Kumiko.Runtime.Sub<TMessage>.Run(string! key, System.Func<System.Threading.CancellationToken, System.Threading.Tasks.Task<TMessage>!>! work, System.Func<System.Exception!, TMessage>! onError) -> Kumiko.Runtime.Sub<TMessage>!
+virtual Kumiko.Runtime.Dispatch<TMessage>.Invoke(TMessage message) -> void

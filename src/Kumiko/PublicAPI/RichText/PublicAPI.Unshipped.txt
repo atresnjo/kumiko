@@ -1,0 +1,384 @@
+#nullable enable
+abstract Kumiko.RichText.RichCommand.<Clone>$() -> Kumiko.RichText.RichCommand!
+const Kumiko.RichText.RichExchange.Format = "application/x-kumiko-richtext+json" -> string!
+Kumiko.RichText.RichAffinity
+Kumiko.RichText.RichAffinity.Downstream = 0 -> Kumiko.RichText.RichAffinity
+Kumiko.RichText.RichAffinity.Upstream = 1 -> Kumiko.RichText.RichAffinity
+Kumiko.RichText.RichAlignment
+Kumiko.RichText.RichAlignment.Center = 1 -> Kumiko.RichText.RichAlignment
+Kumiko.RichText.RichAlignment.End = 2 -> Kumiko.RichText.RichAlignment
+Kumiko.RichText.RichAlignment.Start = 0 -> Kumiko.RichText.RichAlignment
+Kumiko.RichText.RichAttachment
+Kumiko.RichText.RichAttachment.<Clone>$() -> Kumiko.RichText.RichAttachment!
+Kumiko.RichText.RichAttachment.Data.get -> System.Collections.Immutable.ImmutableArray<byte>
+Kumiko.RichText.RichAttachment.Data.init -> void
+Kumiko.RichText.RichAttachment.Deconstruct(out string! Id, out string! Name, out string! Mime, out System.Collections.Immutable.ImmutableArray<byte> Data, out float Width, out float Height) -> void
+Kumiko.RichText.RichAttachment.Equals(Kumiko.RichText.RichAttachment? other) -> bool
+Kumiko.RichText.RichAttachment.Height.get -> float
+Kumiko.RichText.RichAttachment.Height.init -> void
+Kumiko.RichText.RichAttachment.Id.get -> string!
+Kumiko.RichText.RichAttachment.Id.init -> void
+Kumiko.RichText.RichAttachment.Mime.get -> string!
+Kumiko.RichText.RichAttachment.Mime.init -> void
+Kumiko.RichText.RichAttachment.Name.get -> string!
+Kumiko.RichText.RichAttachment.Name.init -> void
+Kumiko.RichText.RichAttachment.RichAttachment(string! Id, string! Name, string! Mime, System.Collections.Immutable.ImmutableArray<byte> Data, float Width = 120, float Height = 80) -> void
+Kumiko.RichText.RichAttachment.Width.get -> float
+Kumiko.RichText.RichAttachment.Width.init -> void
+Kumiko.RichText.RichAttributes
+Kumiko.RichText.RichAttributes.<Clone>$() -> Kumiko.RichText.RichAttributes!
+Kumiko.RichText.RichAttributes.Attachment.get -> Kumiko.RichText.RichAttachment?
+Kumiko.RichText.RichAttributes.Attachment.init -> void
+Kumiko.RichText.RichAttributes.Bold.get -> bool
+Kumiko.RichText.RichAttributes.Bold.init -> void
+Kumiko.RichText.RichAttributes.Code.get -> bool
+Kumiko.RichText.RichAttributes.Code.init -> void
+Kumiko.RichText.RichAttributes.Deconstruct(out bool Bold, out bool Italic, out bool Underline, out bool Strike, out bool Code, out string? Link, out Kumiko.RichText.RichAttachment? Attachment) -> void
+Kumiko.RichText.RichAttributes.Equals(Kumiko.RichText.RichAttributes? other) -> bool
+Kumiko.RichText.RichAttributes.Italic.get -> bool
+Kumiko.RichText.RichAttributes.Italic.init -> void
+Kumiko.RichText.RichAttributes.Link.get -> string?
+Kumiko.RichText.RichAttributes.Link.init -> void
+Kumiko.RichText.RichAttributes.RichAttributes(bool Bold = false, bool Italic = false, bool Underline = false, bool Strike = false, bool Code = false, string? Link = null, Kumiko.RichText.RichAttachment? Attachment = null) -> void
+Kumiko.RichText.RichAttributes.Strike.get -> bool
+Kumiko.RichText.RichAttributes.Strike.init -> void
+Kumiko.RichText.RichAttributes.Underline.get -> bool
+Kumiko.RichText.RichAttributes.Underline.init -> void
+Kumiko.RichText.RichCommand
+Kumiko.RichText.RichCommand.ActivateLink
+Kumiko.RichText.RichCommand.ActivateLink.ActivateLink(string! Url) -> void
+Kumiko.RichText.RichCommand.ActivateLink.Deconstruct(out string! Url) -> void
+Kumiko.RichText.RichCommand.ActivateLink.Equals(Kumiko.RichText.RichCommand.ActivateLink? other) -> bool
+Kumiko.RichText.RichCommand.ActivateLink.Url.get -> string!
+Kumiko.RichText.RichCommand.ActivateLink.Url.init -> void
+Kumiko.RichText.RichCommand.Attachment
+Kumiko.RichText.RichCommand.Attachment.Attachment(Kumiko.RichText.RichAttachment! Value) -> void
+Kumiko.RichText.RichCommand.Attachment.Deconstruct(out Kumiko.RichText.RichAttachment! Value) -> void
+Kumiko.RichText.RichCommand.Attachment.Equals(Kumiko.RichText.RichCommand.Attachment? other) -> bool
+Kumiko.RichText.RichCommand.Attachment.Value.get -> Kumiko.RichText.RichAttachment!
+Kumiko.RichText.RichCommand.Attachment.Value.init -> void
+Kumiko.RichText.RichCommand.CheckTask
+Kumiko.RichText.RichCommand.CheckTask.CheckTask(int ParagraphIndex) -> void
+Kumiko.RichText.RichCommand.CheckTask.Deconstruct(out int ParagraphIndex) -> void
+Kumiko.RichText.RichCommand.CheckTask.Equals(Kumiko.RichText.RichCommand.CheckTask? other) -> bool
+Kumiko.RichText.RichCommand.CheckTask.ParagraphIndex.get -> int
+Kumiko.RichText.RichCommand.CheckTask.ParagraphIndex.init -> void
+Kumiko.RichText.RichCommand.Insert
+Kumiko.RichText.RichCommand.Insert.Deconstruct(out string! Text) -> void
+Kumiko.RichText.RichCommand.Insert.Equals(Kumiko.RichText.RichCommand.Insert? other) -> bool
+Kumiko.RichText.RichCommand.Insert.Insert(string! Text) -> void
+Kumiko.RichText.RichCommand.Insert.Text.get -> string!
+Kumiko.RichText.RichCommand.Insert.Text.init -> void
+Kumiko.RichText.RichCommand.Link
+Kumiko.RichText.RichCommand.Link.Deconstruct(out string? Url) -> void
+Kumiko.RichText.RichCommand.Link.Equals(Kumiko.RichText.RichCommand.Link? other) -> bool
+Kumiko.RichText.RichCommand.Link.Link(string? Url) -> void
+Kumiko.RichText.RichCommand.Link.Url.get -> string?
+Kumiko.RichText.RichCommand.Link.Url.init -> void
+Kumiko.RichText.RichCommand.Paragraph
+Kumiko.RichText.RichCommand.Paragraph.Deconstruct(out Kumiko.RichText.RichParagraphStyle! Style) -> void
+Kumiko.RichText.RichCommand.Paragraph.Equals(Kumiko.RichText.RichCommand.Paragraph? other) -> bool
+Kumiko.RichText.RichCommand.Paragraph.Paragraph(Kumiko.RichText.RichParagraphStyle! Style) -> void
+Kumiko.RichText.RichCommand.Paragraph.Style.get -> Kumiko.RichText.RichParagraphStyle!
+Kumiko.RichText.RichCommand.Paragraph.Style.init -> void
+Kumiko.RichText.RichCommand.Paste
+Kumiko.RichText.RichCommand.Paste.Deconstruct(out Kumiko.RichText.RichValue! Value) -> void
+Kumiko.RichText.RichCommand.Paste.Equals(Kumiko.RichText.RichCommand.Paste? other) -> bool
+Kumiko.RichText.RichCommand.Paste.Paste(Kumiko.RichText.RichValue! Value) -> void
+Kumiko.RichText.RichCommand.Paste.Value.get -> Kumiko.RichText.RichValue!
+Kumiko.RichText.RichCommand.Paste.Value.init -> void
+Kumiko.RichText.RichCommand.Redo
+Kumiko.RichText.RichCommand.Redo.Equals(Kumiko.RichText.RichCommand.Redo? other) -> bool
+Kumiko.RichText.RichCommand.Redo.Redo() -> void
+Kumiko.RichText.RichCommand.RequestLink
+Kumiko.RichText.RichCommand.RequestLink.Equals(Kumiko.RichText.RichCommand.RequestLink? other) -> bool
+Kumiko.RichText.RichCommand.RequestLink.RequestLink() -> void
+Kumiko.RichText.RichCommand.RichCommand() -> void
+Kumiko.RichText.RichCommand.RichCommand(Kumiko.RichText.RichCommand! original) -> void
+Kumiko.RichText.RichCommand.Select
+Kumiko.RichText.RichCommand.Select.Affinity.get -> Kumiko.RichText.RichAffinity
+Kumiko.RichText.RichCommand.Select.Affinity.init -> void
+Kumiko.RichText.RichCommand.Select.Anchor.get -> int
+Kumiko.RichText.RichCommand.Select.Anchor.init -> void
+Kumiko.RichText.RichCommand.Select.Cursor.get -> int
+Kumiko.RichText.RichCommand.Select.Cursor.init -> void
+Kumiko.RichText.RichCommand.Select.Deconstruct(out int Anchor, out int Cursor) -> void
+Kumiko.RichText.RichCommand.Select.Equals(Kumiko.RichText.RichCommand.Select? other) -> bool
+Kumiko.RichText.RichCommand.Select.Select(int Anchor, int Cursor) -> void
+Kumiko.RichText.RichCommand.Toggle
+Kumiko.RichText.RichCommand.Toggle.Deconstruct(out Kumiko.RichText.RichFormat Format) -> void
+Kumiko.RichText.RichCommand.Toggle.Equals(Kumiko.RichText.RichCommand.Toggle? other) -> bool
+Kumiko.RichText.RichCommand.Toggle.Format.get -> Kumiko.RichText.RichFormat
+Kumiko.RichText.RichCommand.Toggle.Format.init -> void
+Kumiko.RichText.RichCommand.Toggle.Toggle(Kumiko.RichText.RichFormat Format) -> void
+Kumiko.RichText.RichCommand.Undo
+Kumiko.RichText.RichCommand.Undo.Equals(Kumiko.RichText.RichCommand.Undo? other) -> bool
+Kumiko.RichText.RichCommand.Undo.Undo() -> void
+Kumiko.RichText.RichDocument
+Kumiko.RichText.RichDocument.<Clone>$() -> Kumiko.RichText.RichDocument!
+Kumiko.RichText.RichDocument.Apply(Kumiko.RichText.RichCommand! command) -> Kumiko.RichText.RichDocument!
+Kumiko.RichText.RichDocument.Deconstruct(out Kumiko.RichText.RichValue! Value, out Kumiko.RichText.RichSelection Selection, out Kumiko.RichText.RichAttributes! Typing, out System.Collections.Immutable.ImmutableList<Kumiko.RichText.RichSnapshot!>! Undo, out System.Collections.Immutable.ImmutableList<Kumiko.RichText.RichSnapshot!>! Redo) -> void
+Kumiko.RichText.RichDocument.Equals(Kumiko.RichText.RichDocument? other) -> bool
+Kumiko.RichText.RichDocument.Redo.get -> System.Collections.Immutable.ImmutableList<Kumiko.RichText.RichSnapshot!>!
+Kumiko.RichText.RichDocument.Redo.init -> void
+Kumiko.RichText.RichDocument.RichDocument(Kumiko.RichText.RichValue! Value, Kumiko.RichText.RichSelection Selection, Kumiko.RichText.RichAttributes! Typing, System.Collections.Immutable.ImmutableList<Kumiko.RichText.RichSnapshot!>! Undo, System.Collections.Immutable.ImmutableList<Kumiko.RichText.RichSnapshot!>! Redo) -> void
+Kumiko.RichText.RichDocument.Select(int anchor, int cursor) -> Kumiko.RichText.RichDocument!
+Kumiko.RichText.RichDocument.Select(int anchor, int cursor, Kumiko.RichText.RichAffinity affinity) -> Kumiko.RichText.RichDocument!
+Kumiko.RichText.RichDocument.Selection.get -> Kumiko.RichText.RichSelection
+Kumiko.RichText.RichDocument.Selection.init -> void
+Kumiko.RichText.RichDocument.Typing.get -> Kumiko.RichText.RichAttributes!
+Kumiko.RichText.RichDocument.Typing.init -> void
+Kumiko.RichText.RichDocument.Undo.get -> System.Collections.Immutable.ImmutableList<Kumiko.RichText.RichSnapshot!>!
+Kumiko.RichText.RichDocument.Undo.init -> void
+Kumiko.RichText.RichDocument.Value.get -> Kumiko.RichText.RichValue!
+Kumiko.RichText.RichDocument.Value.init -> void
+Kumiko.RichText.RichExchange
+Kumiko.RichText.RichFormat
+Kumiko.RichText.RichFormat.Bold = 0 -> Kumiko.RichText.RichFormat
+Kumiko.RichText.RichFormat.Code = 4 -> Kumiko.RichText.RichFormat
+Kumiko.RichText.RichFormat.Italic = 1 -> Kumiko.RichText.RichFormat
+Kumiko.RichText.RichFormat.Strike = 3 -> Kumiko.RichText.RichFormat
+Kumiko.RichText.RichFormat.Underline = 2 -> Kumiko.RichText.RichFormat
+Kumiko.RichText.RichList
+Kumiko.RichText.RichList.Bullet = 1 -> Kumiko.RichText.RichList
+Kumiko.RichText.RichList.None = 0 -> Kumiko.RichText.RichList
+Kumiko.RichText.RichList.Number = 2 -> Kumiko.RichText.RichList
+Kumiko.RichText.RichList.Task = 3 -> Kumiko.RichText.RichList
+Kumiko.RichText.RichParagraph
+Kumiko.RichText.RichParagraph.<Clone>$() -> Kumiko.RichText.RichParagraph!
+Kumiko.RichText.RichParagraph.Deconstruct(out System.Collections.Immutable.ImmutableList<Kumiko.RichText.RichRun!>! Runs, out Kumiko.RichText.RichParagraphStyle! Style) -> void
+Kumiko.RichText.RichParagraph.Equals(Kumiko.RichText.RichParagraph? other) -> bool
+Kumiko.RichText.RichParagraph.RichParagraph(System.Collections.Immutable.ImmutableList<Kumiko.RichText.RichRun!>! Runs, Kumiko.RichText.RichParagraphStyle! Style) -> void
+Kumiko.RichText.RichParagraph.Runs.get -> System.Collections.Immutable.ImmutableList<Kumiko.RichText.RichRun!>!
+Kumiko.RichText.RichParagraph.Runs.init -> void
+Kumiko.RichText.RichParagraph.Style.get -> Kumiko.RichText.RichParagraphStyle!
+Kumiko.RichText.RichParagraph.Style.init -> void
+Kumiko.RichText.RichParagraph.Text.get -> string!
+Kumiko.RichText.RichParagraphStyle
+Kumiko.RichText.RichParagraphStyle.<Clone>$() -> Kumiko.RichText.RichParagraphStyle!
+Kumiko.RichText.RichParagraphStyle.Alignment.get -> Kumiko.RichText.RichAlignment
+Kumiko.RichText.RichParagraphStyle.Alignment.init -> void
+Kumiko.RichText.RichParagraphStyle.Checked.get -> bool
+Kumiko.RichText.RichParagraphStyle.Checked.init -> void
+Kumiko.RichText.RichParagraphStyle.Code.get -> bool
+Kumiko.RichText.RichParagraphStyle.Code.init -> void
+Kumiko.RichText.RichParagraphStyle.Deconstruct(out int Heading, out Kumiko.RichText.RichList List, out bool Checked, out int Indent, out bool Quote, out bool Code, out Kumiko.RichText.RichAlignment Alignment) -> void
+Kumiko.RichText.RichParagraphStyle.Equals(Kumiko.RichText.RichParagraphStyle? other) -> bool
+Kumiko.RichText.RichParagraphStyle.Heading.get -> int
+Kumiko.RichText.RichParagraphStyle.Heading.init -> void
+Kumiko.RichText.RichParagraphStyle.Indent.get -> int
+Kumiko.RichText.RichParagraphStyle.Indent.init -> void
+Kumiko.RichText.RichParagraphStyle.List.get -> Kumiko.RichText.RichList
+Kumiko.RichText.RichParagraphStyle.List.init -> void
+Kumiko.RichText.RichParagraphStyle.Quote.get -> bool
+Kumiko.RichText.RichParagraphStyle.Quote.init -> void
+Kumiko.RichText.RichParagraphStyle.RichParagraphStyle(int Heading = 0, Kumiko.RichText.RichList List = Kumiko.RichText.RichList.None, bool Checked = false, int Indent = 0, bool Quote = false, bool Code = false, Kumiko.RichText.RichAlignment Alignment = Kumiko.RichText.RichAlignment.Start) -> void
+Kumiko.RichText.RichRun
+Kumiko.RichText.RichRun.<Clone>$() -> Kumiko.RichText.RichRun!
+Kumiko.RichText.RichRun.Attributes.get -> Kumiko.RichText.RichAttributes!
+Kumiko.RichText.RichRun.Attributes.init -> void
+Kumiko.RichText.RichRun.Deconstruct(out string! Text, out Kumiko.RichText.RichAttributes! Attributes) -> void
+Kumiko.RichText.RichRun.Equals(Kumiko.RichText.RichRun? other) -> bool
+Kumiko.RichText.RichRun.RichRun(string! Text, Kumiko.RichText.RichAttributes! Attributes) -> void
+Kumiko.RichText.RichRun.Text.get -> string!
+Kumiko.RichText.RichRun.Text.init -> void
+Kumiko.RichText.RichSelection
+Kumiko.RichText.RichSelection.Affinity.get -> Kumiko.RichText.RichAffinity
+Kumiko.RichText.RichSelection.Affinity.init -> void
+Kumiko.RichText.RichSelection.Anchor.get -> int
+Kumiko.RichText.RichSelection.Anchor.init -> void
+Kumiko.RichText.RichSelection.Cursor.get -> int
+Kumiko.RichText.RichSelection.Cursor.init -> void
+Kumiko.RichText.RichSelection.Deconstruct(out int Anchor, out int Cursor) -> void
+Kumiko.RichText.RichSelection.Empty.get -> bool
+Kumiko.RichText.RichSelection.End.get -> int
+Kumiko.RichText.RichSelection.Equals(Kumiko.RichText.RichSelection other) -> bool
+Kumiko.RichText.RichSelection.RichSelection() -> void
+Kumiko.RichText.RichSelection.RichSelection(int Anchor, int Cursor) -> void
+Kumiko.RichText.RichSelection.Start.get -> int
+Kumiko.RichText.RichSnapshot
+Kumiko.RichText.RichSnapshot.<Clone>$() -> Kumiko.RichText.RichSnapshot!
+Kumiko.RichText.RichSnapshot.Deconstruct(out Kumiko.RichText.RichValue! Value, out Kumiko.RichText.RichSelection Selection, out Kumiko.RichText.RichAttributes! Typing) -> void
+Kumiko.RichText.RichSnapshot.Equals(Kumiko.RichText.RichSnapshot? other) -> bool
+Kumiko.RichText.RichSnapshot.RichSnapshot(Kumiko.RichText.RichValue! Value, Kumiko.RichText.RichSelection Selection, Kumiko.RichText.RichAttributes! Typing) -> void
+Kumiko.RichText.RichSnapshot.Selection.get -> Kumiko.RichText.RichSelection
+Kumiko.RichText.RichSnapshot.Selection.init -> void
+Kumiko.RichText.RichSnapshot.Typing.get -> Kumiko.RichText.RichAttributes!
+Kumiko.RichText.RichSnapshot.Typing.init -> void
+Kumiko.RichText.RichSnapshot.Value.get -> Kumiko.RichText.RichValue!
+Kumiko.RichText.RichSnapshot.Value.init -> void
+Kumiko.RichText.RichValue
+Kumiko.RichText.RichValue.<Clone>$() -> Kumiko.RichText.RichValue!
+Kumiko.RichText.RichValue.AttributesAt(int position) -> Kumiko.RichText.RichAttributes!
+Kumiko.RichText.RichValue.Equals(Kumiko.RichText.RichValue? other) -> bool
+Kumiko.RichText.RichValue.Format(int start, int end, System.Func<Kumiko.RichText.RichAttributes!, Kumiko.RichText.RichAttributes!>! format) -> Kumiko.RichText.RichValue!
+Kumiko.RichText.RichValue.FormatParagraphs(int start, int end, Kumiko.RichText.RichParagraphStyle! style) -> Kumiko.RichText.RichValue!
+Kumiko.RichText.RichValue.Length.get -> int
+Kumiko.RichText.RichValue.ParagraphAt(int position) -> int
+Kumiko.RichText.RichValue.Paragraphs.get -> System.Collections.Immutable.ImmutableList<Kumiko.RichText.RichParagraph!>!
+Kumiko.RichText.RichValue.ParagraphStarts.get -> System.Collections.Immutable.ImmutableArray<int>
+Kumiko.RichText.RichValue.PlainText.get -> string!
+Kumiko.RichText.RichValue.Replace(int start, int end, Kumiko.RichText.RichValue! inserted) -> Kumiko.RichText.RichValue!
+Kumiko.RichText.RichValue.RichValue(System.Collections.Immutable.ImmutableList<Kumiko.RichText.RichParagraph!>! paragraphs) -> void
+Kumiko.RichText.RichValue.Slice(int start, int end) -> Kumiko.RichText.RichValue!
+Kumiko.RichText.RichValue.Snap(int position, bool forward = false) -> int
+Kumiko.RichText.RichValueCodec
+Kumiko.RichText.RichValueCodec.<Clone>$() -> Kumiko.RichText.RichValueCodec!
+Kumiko.RichText.RichValueCodec.Decode(System.ReadOnlyMemory<byte> bytes) -> Kumiko.RichText.RichValue!
+Kumiko.RichText.RichValueCodec.Encode(Kumiko.RichText.RichValue! value) -> System.ReadOnlyMemory<byte>
+Kumiko.RichText.RichValueCodec.Equals(Kumiko.RichText.RichValueCodec? other) -> bool
+Kumiko.RichText.RichValueCodec.RichValueCodec() -> void
+override Kumiko.RichText.RichAttachment.Equals(object? obj) -> bool
+override Kumiko.RichText.RichAttachment.GetHashCode() -> int
+override Kumiko.RichText.RichAttachment.ToString() -> string!
+override Kumiko.RichText.RichAttributes.Equals(object? obj) -> bool
+override Kumiko.RichText.RichAttributes.GetHashCode() -> int
+override Kumiko.RichText.RichAttributes.ToString() -> string!
+override Kumiko.RichText.RichCommand.ActivateLink.<Clone>$() -> Kumiko.RichText.RichCommand.ActivateLink!
+override Kumiko.RichText.RichCommand.ActivateLink.Equals(object? obj) -> bool
+override Kumiko.RichText.RichCommand.ActivateLink.GetHashCode() -> int
+override Kumiko.RichText.RichCommand.ActivateLink.ToString() -> string!
+override Kumiko.RichText.RichCommand.Attachment.<Clone>$() -> Kumiko.RichText.RichCommand.Attachment!
+override Kumiko.RichText.RichCommand.Attachment.Equals(object? obj) -> bool
+override Kumiko.RichText.RichCommand.Attachment.GetHashCode() -> int
+override Kumiko.RichText.RichCommand.Attachment.ToString() -> string!
+override Kumiko.RichText.RichCommand.CheckTask.<Clone>$() -> Kumiko.RichText.RichCommand.CheckTask!
+override Kumiko.RichText.RichCommand.CheckTask.Equals(object? obj) -> bool
+override Kumiko.RichText.RichCommand.CheckTask.GetHashCode() -> int
+override Kumiko.RichText.RichCommand.CheckTask.ToString() -> string!
+override Kumiko.RichText.RichCommand.Equals(object? obj) -> bool
+override Kumiko.RichText.RichCommand.GetHashCode() -> int
+override Kumiko.RichText.RichCommand.Insert.<Clone>$() -> Kumiko.RichText.RichCommand.Insert!
+override Kumiko.RichText.RichCommand.Insert.Equals(object? obj) -> bool
+override Kumiko.RichText.RichCommand.Insert.GetHashCode() -> int
+override Kumiko.RichText.RichCommand.Insert.ToString() -> string!
+override Kumiko.RichText.RichCommand.Link.<Clone>$() -> Kumiko.RichText.RichCommand.Link!
+override Kumiko.RichText.RichCommand.Link.Equals(object? obj) -> bool
+override Kumiko.RichText.RichCommand.Link.GetHashCode() -> int
+override Kumiko.RichText.RichCommand.Link.ToString() -> string!
+override Kumiko.RichText.RichCommand.Paragraph.<Clone>$() -> Kumiko.RichText.RichCommand.Paragraph!
+override Kumiko.RichText.RichCommand.Paragraph.Equals(object? obj) -> bool
+override Kumiko.RichText.RichCommand.Paragraph.GetHashCode() -> int
+override Kumiko.RichText.RichCommand.Paragraph.ToString() -> string!
+override Kumiko.RichText.RichCommand.Paste.<Clone>$() -> Kumiko.RichText.RichCommand.Paste!
+override Kumiko.RichText.RichCommand.Paste.Equals(object? obj) -> bool
+override Kumiko.RichText.RichCommand.Paste.GetHashCode() -> int
+override Kumiko.RichText.RichCommand.Paste.ToString() -> string!
+override Kumiko.RichText.RichCommand.Redo.<Clone>$() -> Kumiko.RichText.RichCommand.Redo!
+override Kumiko.RichText.RichCommand.Redo.Equals(object? obj) -> bool
+override Kumiko.RichText.RichCommand.Redo.GetHashCode() -> int
+override Kumiko.RichText.RichCommand.Redo.ToString() -> string!
+override Kumiko.RichText.RichCommand.RequestLink.<Clone>$() -> Kumiko.RichText.RichCommand.RequestLink!
+override Kumiko.RichText.RichCommand.RequestLink.Equals(object? obj) -> bool
+override Kumiko.RichText.RichCommand.RequestLink.GetHashCode() -> int
+override Kumiko.RichText.RichCommand.RequestLink.ToString() -> string!
+override Kumiko.RichText.RichCommand.Select.<Clone>$() -> Kumiko.RichText.RichCommand.Select!
+override Kumiko.RichText.RichCommand.Select.Equals(object? obj) -> bool
+override Kumiko.RichText.RichCommand.Select.GetHashCode() -> int
+override Kumiko.RichText.RichCommand.Select.ToString() -> string!
+override Kumiko.RichText.RichCommand.Toggle.<Clone>$() -> Kumiko.RichText.RichCommand.Toggle!
+override Kumiko.RichText.RichCommand.Toggle.Equals(object? obj) -> bool
+override Kumiko.RichText.RichCommand.Toggle.GetHashCode() -> int
+override Kumiko.RichText.RichCommand.Toggle.ToString() -> string!
+override Kumiko.RichText.RichCommand.ToString() -> string!
+override Kumiko.RichText.RichCommand.Undo.<Clone>$() -> Kumiko.RichText.RichCommand.Undo!
+override Kumiko.RichText.RichCommand.Undo.Equals(object? obj) -> bool
+override Kumiko.RichText.RichCommand.Undo.GetHashCode() -> int
+override Kumiko.RichText.RichCommand.Undo.ToString() -> string!
+override Kumiko.RichText.RichDocument.Equals(object? obj) -> bool
+override Kumiko.RichText.RichDocument.GetHashCode() -> int
+override Kumiko.RichText.RichDocument.ToString() -> string!
+override Kumiko.RichText.RichParagraph.Equals(object? obj) -> bool
+override Kumiko.RichText.RichParagraph.GetHashCode() -> int
+override Kumiko.RichText.RichParagraph.ToString() -> string!
+override Kumiko.RichText.RichParagraphStyle.Equals(object? obj) -> bool
+override Kumiko.RichText.RichParagraphStyle.GetHashCode() -> int
+override Kumiko.RichText.RichParagraphStyle.ToString() -> string!
+override Kumiko.RichText.RichRun.Equals(object? obj) -> bool
+override Kumiko.RichText.RichRun.GetHashCode() -> int
+override Kumiko.RichText.RichRun.ToString() -> string!
+override Kumiko.RichText.RichSelection.GetHashCode() -> int
+override Kumiko.RichText.RichSnapshot.Equals(object? obj) -> bool
+override Kumiko.RichText.RichSnapshot.GetHashCode() -> int
+override Kumiko.RichText.RichSnapshot.ToString() -> string!
+override Kumiko.RichText.RichValue.Equals(object? obj) -> bool
+override Kumiko.RichText.RichValue.GetHashCode() -> int
+override Kumiko.RichText.RichValue.ToString() -> string!
+override Kumiko.RichText.RichValueCodec.Equals(object? obj) -> bool
+override Kumiko.RichText.RichValueCodec.GetHashCode() -> int
+override Kumiko.RichText.RichValueCodec.ToString() -> string!
+override sealed Kumiko.RichText.RichCommand.ActivateLink.Equals(Kumiko.RichText.RichCommand? other) -> bool
+override sealed Kumiko.RichText.RichCommand.Attachment.Equals(Kumiko.RichText.RichCommand? other) -> bool
+override sealed Kumiko.RichText.RichCommand.CheckTask.Equals(Kumiko.RichText.RichCommand? other) -> bool
+override sealed Kumiko.RichText.RichCommand.Insert.Equals(Kumiko.RichText.RichCommand? other) -> bool
+override sealed Kumiko.RichText.RichCommand.Link.Equals(Kumiko.RichText.RichCommand? other) -> bool
+override sealed Kumiko.RichText.RichCommand.Paragraph.Equals(Kumiko.RichText.RichCommand? other) -> bool
+override sealed Kumiko.RichText.RichCommand.Paste.Equals(Kumiko.RichText.RichCommand? other) -> bool
+override sealed Kumiko.RichText.RichCommand.Redo.Equals(Kumiko.RichText.RichCommand? other) -> bool
+override sealed Kumiko.RichText.RichCommand.RequestLink.Equals(Kumiko.RichText.RichCommand? other) -> bool
+override sealed Kumiko.RichText.RichCommand.Select.Equals(Kumiko.RichText.RichCommand? other) -> bool
+override sealed Kumiko.RichText.RichCommand.Toggle.Equals(Kumiko.RichText.RichCommand? other) -> bool
+override sealed Kumiko.RichText.RichCommand.Undo.Equals(Kumiko.RichText.RichCommand? other) -> bool
+static Kumiko.RichText.RichAttachment.operator !=(Kumiko.RichText.RichAttachment? left, Kumiko.RichText.RichAttachment? right) -> bool
+static Kumiko.RichText.RichAttachment.operator ==(Kumiko.RichText.RichAttachment? left, Kumiko.RichText.RichAttachment? right) -> bool
+static Kumiko.RichText.RichAttributes.operator !=(Kumiko.RichText.RichAttributes? left, Kumiko.RichText.RichAttributes? right) -> bool
+static Kumiko.RichText.RichAttributes.operator ==(Kumiko.RichText.RichAttributes? left, Kumiko.RichText.RichAttributes? right) -> bool
+static Kumiko.RichText.RichCommand.ActivateLink.operator !=(Kumiko.RichText.RichCommand.ActivateLink? left, Kumiko.RichText.RichCommand.ActivateLink? right) -> bool
+static Kumiko.RichText.RichCommand.ActivateLink.operator ==(Kumiko.RichText.RichCommand.ActivateLink? left, Kumiko.RichText.RichCommand.ActivateLink? right) -> bool
+static Kumiko.RichText.RichCommand.Attachment.operator !=(Kumiko.RichText.RichCommand.Attachment? left, Kumiko.RichText.RichCommand.Attachment? right) -> bool
+static Kumiko.RichText.RichCommand.Attachment.operator ==(Kumiko.RichText.RichCommand.Attachment? left, Kumiko.RichText.RichCommand.Attachment? right) -> bool
+static Kumiko.RichText.RichCommand.CheckTask.operator !=(Kumiko.RichText.RichCommand.CheckTask? left, Kumiko.RichText.RichCommand.CheckTask? right) -> bool
+static Kumiko.RichText.RichCommand.CheckTask.operator ==(Kumiko.RichText.RichCommand.CheckTask? left, Kumiko.RichText.RichCommand.CheckTask? right) -> bool
+static Kumiko.RichText.RichCommand.Insert.operator !=(Kumiko.RichText.RichCommand.Insert? left, Kumiko.RichText.RichCommand.Insert? right) -> bool
+static Kumiko.RichText.RichCommand.Insert.operator ==(Kumiko.RichText.RichCommand.Insert? left, Kumiko.RichText.RichCommand.Insert? right) -> bool
+static Kumiko.RichText.RichCommand.Link.operator !=(Kumiko.RichText.RichCommand.Link? left, Kumiko.RichText.RichCommand.Link? right) -> bool
+static Kumiko.RichText.RichCommand.Link.operator ==(Kumiko.RichText.RichCommand.Link? left, Kumiko.RichText.RichCommand.Link? right) -> bool
+static Kumiko.RichText.RichCommand.operator !=(Kumiko.RichText.RichCommand? left, Kumiko.RichText.RichCommand? right) -> bool
+static Kumiko.RichText.RichCommand.operator ==(Kumiko.RichText.RichCommand? left, Kumiko.RichText.RichCommand? right) -> bool
+static Kumiko.RichText.RichCommand.Paragraph.operator !=(Kumiko.RichText.RichCommand.Paragraph? left, Kumiko.RichText.RichCommand.Paragraph? right) -> bool
+static Kumiko.RichText.RichCommand.Paragraph.operator ==(Kumiko.RichText.RichCommand.Paragraph? left, Kumiko.RichText.RichCommand.Paragraph? right) -> bool
+static Kumiko.RichText.RichCommand.Paste.operator !=(Kumiko.RichText.RichCommand.Paste? left, Kumiko.RichText.RichCommand.Paste? right) -> bool
+static Kumiko.RichText.RichCommand.Paste.operator ==(Kumiko.RichText.RichCommand.Paste? left, Kumiko.RichText.RichCommand.Paste? right) -> bool
+static Kumiko.RichText.RichCommand.Redo.operator !=(Kumiko.RichText.RichCommand.Redo? left, Kumiko.RichText.RichCommand.Redo? right) -> bool
+static Kumiko.RichText.RichCommand.Redo.operator ==(Kumiko.RichText.RichCommand.Redo? left, Kumiko.RichText.RichCommand.Redo? right) -> bool
+static Kumiko.RichText.RichCommand.RequestLink.operator !=(Kumiko.RichText.RichCommand.RequestLink? left, Kumiko.RichText.RichCommand.RequestLink? right) -> bool
+static Kumiko.RichText.RichCommand.RequestLink.operator ==(Kumiko.RichText.RichCommand.RequestLink? left, Kumiko.RichText.RichCommand.RequestLink? right) -> bool
+static Kumiko.RichText.RichCommand.Select.operator !=(Kumiko.RichText.RichCommand.Select? left, Kumiko.RichText.RichCommand.Select? right) -> bool
+static Kumiko.RichText.RichCommand.Select.operator ==(Kumiko.RichText.RichCommand.Select? left, Kumiko.RichText.RichCommand.Select? right) -> bool
+static Kumiko.RichText.RichCommand.Toggle.operator !=(Kumiko.RichText.RichCommand.Toggle? left, Kumiko.RichText.RichCommand.Toggle? right) -> bool
+static Kumiko.RichText.RichCommand.Toggle.operator ==(Kumiko.RichText.RichCommand.Toggle? left, Kumiko.RichText.RichCommand.Toggle? right) -> bool
+static Kumiko.RichText.RichCommand.Undo.operator !=(Kumiko.RichText.RichCommand.Undo? left, Kumiko.RichText.RichCommand.Undo? right) -> bool
+static Kumiko.RichText.RichCommand.Undo.operator ==(Kumiko.RichText.RichCommand.Undo? left, Kumiko.RichText.RichCommand.Undo? right) -> bool
+static Kumiko.RichText.RichDocument.Create(string! text) -> Kumiko.RichText.RichDocument!
+static Kumiko.RichText.RichDocument.FromValue(Kumiko.RichText.RichValue! value) -> Kumiko.RichText.RichDocument!
+static Kumiko.RichText.RichDocument.operator !=(Kumiko.RichText.RichDocument? left, Kumiko.RichText.RichDocument? right) -> bool
+static Kumiko.RichText.RichDocument.operator ==(Kumiko.RichText.RichDocument? left, Kumiko.RichText.RichDocument? right) -> bool
+static Kumiko.RichText.RichExchange.Decode(System.ReadOnlyMemory<byte> bytes) -> Kumiko.RichText.RichValue!
+static Kumiko.RichText.RichExchange.Encode(Kumiko.RichText.RichValue! value) -> byte[]!
+static Kumiko.RichText.RichExchange.FromTransfer(Kumiko.Desktop.TransferData! data) -> Kumiko.RichText.RichValue!
+static Kumiko.RichText.RichExchange.Html(Kumiko.RichText.RichValue! value) -> string!
+static Kumiko.RichText.RichExchange.Markdown(Kumiko.RichText.RichValue! value) -> string!
+static Kumiko.RichText.RichExchange.ParseHtml(string! html) -> Kumiko.RichText.RichValue!
+static Kumiko.RichText.RichExchange.ParseMarkdown(string! markdown) -> Kumiko.RichText.RichValue!
+static Kumiko.RichText.RichExchange.SafeLink(string! link) -> bool
+static Kumiko.RichText.RichExchange.Transfer(Kumiko.RichText.RichValue! value) -> Kumiko.Desktop.TransferData!
+static Kumiko.RichText.RichParagraph.operator !=(Kumiko.RichText.RichParagraph? left, Kumiko.RichText.RichParagraph? right) -> bool
+static Kumiko.RichText.RichParagraph.operator ==(Kumiko.RichText.RichParagraph? left, Kumiko.RichText.RichParagraph? right) -> bool
+static Kumiko.RichText.RichParagraphStyle.operator !=(Kumiko.RichText.RichParagraphStyle? left, Kumiko.RichText.RichParagraphStyle? right) -> bool
+static Kumiko.RichText.RichParagraphStyle.operator ==(Kumiko.RichText.RichParagraphStyle? left, Kumiko.RichText.RichParagraphStyle? right) -> bool
+static Kumiko.RichText.RichRun.operator !=(Kumiko.RichText.RichRun? left, Kumiko.RichText.RichRun? right) -> bool
+static Kumiko.RichText.RichRun.operator ==(Kumiko.RichText.RichRun? left, Kumiko.RichText.RichRun? right) -> bool
+static Kumiko.RichText.RichSelection.operator !=(Kumiko.RichText.RichSelection left, Kumiko.RichText.RichSelection right) -> bool
+static Kumiko.RichText.RichSelection.operator ==(Kumiko.RichText.RichSelection left, Kumiko.RichText.RichSelection right) -> bool
+static Kumiko.RichText.RichSnapshot.operator !=(Kumiko.RichText.RichSnapshot? left, Kumiko.RichText.RichSnapshot? right) -> bool
+static Kumiko.RichText.RichSnapshot.operator ==(Kumiko.RichText.RichSnapshot? left, Kumiko.RichText.RichSnapshot? right) -> bool
+static Kumiko.RichText.RichValue.operator !=(Kumiko.RichText.RichValue? left, Kumiko.RichText.RichValue? right) -> bool
+static Kumiko.RichText.RichValue.operator ==(Kumiko.RichText.RichValue? left, Kumiko.RichText.RichValue? right) -> bool
+static Kumiko.RichText.RichValue.Text(string! text, Kumiko.RichText.RichAttributes? attributes = null, Kumiko.RichText.RichParagraphStyle? style = null) -> Kumiko.RichText.RichValue!
+static Kumiko.RichText.RichValueCodec.operator !=(Kumiko.RichText.RichValueCodec? left, Kumiko.RichText.RichValueCodec? right) -> bool
+static Kumiko.RichText.RichValueCodec.operator ==(Kumiko.RichText.RichValueCodec? left, Kumiko.RichText.RichValueCodec? right) -> bool
+virtual Kumiko.RichText.RichCommand.EqualityContract.get -> System.Type!
+virtual Kumiko.RichText.RichCommand.Equals(Kumiko.RichText.RichCommand? other) -> bool
+virtual Kumiko.RichText.RichCommand.PrintMembers(System.Text.StringBuilder! builder) -> bool
+~override Kumiko.RichText.RichSelection.Equals(object obj) -> bool
+~override Kumiko.RichText.RichSelection.ToString() -> string

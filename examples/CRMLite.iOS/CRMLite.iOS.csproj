@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-ios</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
+    <ApplicationId>dev.kumiko.crmlite</ApplicationId>
+    <ApplicationTitle>CRMLite</ApplicationTitle>
+    <IsAotCompatible>true</IsAotCompatible>
+    <PublishAot Condition="'$(KumikoiOSNativeAot)' != ''">$(KumikoiOSNativeAot)</PublishAot>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <UseInterpreter>true</UseInterpreter>
+    <MtouchLink>None</MtouchLink>
+    <Registrar>dynamic</Registrar>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/Kumiko.iOS/Kumiko.iOS.csproj" />
+    <ProjectReference Include="../../src/Kumiko.Icons.Hugeicons/Kumiko.Icons.Hugeicons.csproj" />
+    <Compile Include="../CRMLite/*.cs" Exclude="../CRMLite/Program.cs;../CRMLite/View*.cs;../CRMLite/Styles.cs;../CRMLite/Desktop.Host.cs;../CRMLite/Desktop.Native.cs" Link="Shared/%(Filename)%(Extension)" />
+  </ItemGroup>
+</Project>

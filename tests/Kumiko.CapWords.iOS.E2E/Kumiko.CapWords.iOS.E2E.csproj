@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-ios</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
+    <ApplicationId>dev.kumiko.capwordschecks</ApplicationId>
+    <KumikoStrict>false</KumikoStrict>
+    <IsAotCompatible>true</IsAotCompatible>
+    <PublishAot Condition="'$(KumikoiOSNativeAot)' != ''">$(KumikoiOSNativeAot)</PublishAot>
+    <CapWordsAssetRoot Condition="'$(CapWordsAssetRoot)' == ''">$(HOME)/projects/personal/rn-makeitanimated/assets/images/apps/cap-words</CapWordsAssetRoot>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/Kumiko.iOS/Kumiko.iOS.csproj" />
+    <Compile Include="../../examples/CapWords.iOS/*.cs" Exclude="../../examples/CapWords.iOS/Main.cs" Link="CapWords/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="$(CapWordsAssetRoot)/mouse.png" LogicalName="CapWords.mouse.png" />
+    <EmbeddedResource Include="$(CapWordsAssetRoot)/ice-cream.png" LogicalName="CapWords.ice-cream.png" />
+    <None Include="../../examples/CapWords.iOS/Info.plist" Link="Info.plist" />
+  </ItemGroup>
+</Project>

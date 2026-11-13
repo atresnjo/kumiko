@@ -1,0 +1,5 @@
+#nullable enable
+Kumiko.Hosting.NativeApplication.CreateWindows(Kumiko.Runtime.IProgram! program, Kumiko.WindowOptions? defaults = null) -> void
+Kumiko.Hosting.NativeApplication.DisposeAsync() -> System.Threading.Tasks.ValueTask
+Kumiko.Hosting.NativeApplication.Windows.get -> System.Collections.Generic.IReadOnlyList<Kumiko.Window!>!
+static Kumiko.Hosting.NativeHost.AddKumiko(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services, Kumiko.AppOptions! options, params System.Type![]! effectServices) -> Microsoft.Extensions.DependencyInjection.IServiceCollection!

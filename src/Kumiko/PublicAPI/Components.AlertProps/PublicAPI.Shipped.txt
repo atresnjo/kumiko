@@ -1,0 +1,492 @@
+#nullable enable
+Kumiko.Components.AlertProps
+Kumiko.Components.AlertProps.AlertProps() -> void
+Kumiko.Components.AlertProps.AlertProps(Kumiko.Components.Tone Tone = Kumiko.Components.Tone.Default, string? Icon = null, Kumiko.Components.ControlSize Size = Kumiko.Components.ControlSize.Medium) -> void
+Kumiko.Components.AlertProps.Deconstruct(out Kumiko.Components.Tone Tone, out string? Icon, out Kumiko.Components.ControlSize Size) -> void
+Kumiko.Components.AlertProps.Equals(Kumiko.Components.AlertProps other) -> bool
+Kumiko.Components.AlertProps.Icon.get -> string?
+Kumiko.Components.AlertProps.Icon.init -> void
+Kumiko.Components.AlertProps.Size.get -> Kumiko.Components.ControlSize
+Kumiko.Components.AlertProps.Size.init -> void
+Kumiko.Components.AlertProps.Tone.get -> Kumiko.Components.Tone
+Kumiko.Components.AlertProps.Tone.init -> void
+Kumiko.Components.Appearance
+Kumiko.Components.Appearance.Ghost = 3 -> Kumiko.Components.Appearance
+Kumiko.Components.Appearance.Link = 4 -> Kumiko.Components.Appearance
+Kumiko.Components.Appearance.Outline = 2 -> Kumiko.Components.Appearance
+Kumiko.Components.Appearance.Soft = 1 -> Kumiko.Components.Appearance
+Kumiko.Components.Appearance.Solid = 0 -> Kumiko.Components.Appearance
+Kumiko.Components.AvatarProps
+Kumiko.Components.AvatarProps.AvatarProps() -> void
+Kumiko.Components.AvatarProps.AvatarProps(Kumiko.Components.ControlSize Size = Kumiko.Components.ControlSize.Medium, Kumiko.Rendering.Image? Image = null, Kumiko.UI.Color? Color = null) -> void
+Kumiko.Components.AvatarProps.Color.get -> Kumiko.UI.Color?
+Kumiko.Components.AvatarProps.Color.init -> void
+Kumiko.Components.AvatarProps.Deconstruct(out Kumiko.Components.ControlSize Size, out Kumiko.Rendering.Image? Image, out Kumiko.UI.Color? Color) -> void
+Kumiko.Components.AvatarProps.Equals(Kumiko.Components.AvatarProps other) -> bool
+Kumiko.Components.AvatarProps.Image.get -> Kumiko.Rendering.Image?
+Kumiko.Components.AvatarProps.Image.init -> void
+Kumiko.Components.AvatarProps.Size.get -> Kumiko.Components.ControlSize
+Kumiko.Components.AvatarProps.Size.init -> void
+Kumiko.Components.BadgeProps
+Kumiko.Components.BadgeProps.Appearance.get -> Kumiko.Components.Appearance
+Kumiko.Components.BadgeProps.Appearance.init -> void
+Kumiko.Components.BadgeProps.BadgeProps() -> void
+Kumiko.Components.BadgeProps.BadgeProps(Kumiko.Components.Tone Tone = Kumiko.Components.Tone.Primary, Kumiko.Components.Appearance Appearance = Kumiko.Components.Appearance.Solid, Kumiko.Components.ControlSize Size = Kumiko.Components.ControlSize.Medium, string? Icon = null, bool Pill = false, Kumiko.Components.ToneColors? Colors = null) -> void
+Kumiko.Components.BadgeProps.Colors.get -> Kumiko.Components.ToneColors?
+Kumiko.Components.BadgeProps.Colors.init -> void
+Kumiko.Components.BadgeProps.Deconstruct(out Kumiko.Components.Tone Tone, out Kumiko.Components.Appearance Appearance, out Kumiko.Components.ControlSize Size, out string? Icon, out bool Pill, out Kumiko.Components.ToneColors? Colors) -> void
+Kumiko.Components.BadgeProps.Equals(Kumiko.Components.BadgeProps other) -> bool
+Kumiko.Components.BadgeProps.Icon.get -> string?
+Kumiko.Components.BadgeProps.Icon.init -> void
+Kumiko.Components.BadgeProps.Pill.get -> bool
+Kumiko.Components.BadgeProps.Pill.init -> void
+Kumiko.Components.BadgeProps.Size.get -> Kumiko.Components.ControlSize
+Kumiko.Components.BadgeProps.Size.init -> void
+Kumiko.Components.BadgeProps.Tone.get -> Kumiko.Components.Tone
+Kumiko.Components.BadgeProps.Tone.init -> void
+Kumiko.Components.ButtonProps
+Kumiko.Components.ButtonProps.Appearance.get -> Kumiko.Components.Appearance
+Kumiko.Components.ButtonProps.Appearance.init -> void
+Kumiko.Components.ButtonProps.ButtonProps() -> void
+Kumiko.Components.ButtonProps.ButtonProps(Kumiko.Components.Tone Tone = Kumiko.Components.Tone.Default, Kumiko.Components.Appearance Appearance = Kumiko.Components.Appearance.Solid, Kumiko.Components.ControlSize Size = Kumiko.Components.ControlSize.Medium, string? Icon = null, string? TrailingIcon = null, bool Disabled = false, bool Selected = false, float? Width = null, bool Pill = false, Kumiko.Components.ToneColors? Colors = null) -> void
+Kumiko.Components.ButtonProps.Colors.get -> Kumiko.Components.ToneColors?
+Kumiko.Components.ButtonProps.Colors.init -> void
+Kumiko.Components.ButtonProps.Deconstruct(out Kumiko.Components.Tone Tone, out Kumiko.Components.Appearance Appearance, out Kumiko.Components.ControlSize Size, out string? Icon, out string? TrailingIcon, out bool Disabled, out bool Selected, out float? Width, out bool Pill, out Kumiko.Components.ToneColors? Colors) -> void
+Kumiko.Components.ButtonProps.Disabled.get -> bool
+Kumiko.Components.ButtonProps.Disabled.init -> void
+Kumiko.Components.ButtonProps.Equals(Kumiko.Components.ButtonProps other) -> bool
+Kumiko.Components.ButtonProps.Icon.get -> string?
+Kumiko.Components.ButtonProps.Icon.init -> void
+Kumiko.Components.ButtonProps.Pill.get -> bool
+Kumiko.Components.ButtonProps.Pill.init -> void
+Kumiko.Components.ButtonProps.Selected.get -> bool
+Kumiko.Components.ButtonProps.Selected.init -> void
+Kumiko.Components.ButtonProps.Size.get -> Kumiko.Components.ControlSize
+Kumiko.Components.ButtonProps.Size.init -> void
+Kumiko.Components.ButtonProps.Tone.get -> Kumiko.Components.Tone
+Kumiko.Components.ButtonProps.Tone.init -> void
+Kumiko.Components.ButtonProps.TrailingIcon.get -> string?
+Kumiko.Components.ButtonProps.TrailingIcon.init -> void
+Kumiko.Components.ButtonProps.Width.get -> float?
+Kumiko.Components.ButtonProps.Width.init -> void
+Kumiko.Components.CheckboxProps
+Kumiko.Components.CheckboxProps.CheckboxProps() -> void
+Kumiko.Components.CheckboxProps.CheckboxProps(string? Description = null, bool Disabled = false, Kumiko.Components.ControlSize Size = Kumiko.Components.ControlSize.Medium) -> void
+Kumiko.Components.CheckboxProps.Deconstruct(out string? Description, out bool Disabled, out Kumiko.Components.ControlSize Size) -> void
+Kumiko.Components.CheckboxProps.Description.get -> string?
+Kumiko.Components.CheckboxProps.Description.init -> void
+Kumiko.Components.CheckboxProps.Disabled.get -> bool
+Kumiko.Components.CheckboxProps.Disabled.init -> void
+Kumiko.Components.CheckboxProps.Equals(Kumiko.Components.CheckboxProps other) -> bool
+Kumiko.Components.CheckboxProps.Size.get -> Kumiko.Components.ControlSize
+Kumiko.Components.CheckboxProps.Size.init -> void
+Kumiko.Components.CommandItem
+Kumiko.Components.CommandItem.<Clone>$() -> Kumiko.Components.CommandItem!
+Kumiko.Components.CommandItem.CommandItem(string! Id, string! Label, string? Group = null, string? Icon = null, string? Hint = null, string! Keywords = "") -> void
+Kumiko.Components.CommandItem.Deconstruct(out string! Id, out string! Label, out string? Group, out string? Icon, out string? Hint, out string! Keywords) -> void
+Kumiko.Components.CommandItem.Equals(Kumiko.Components.CommandItem? other) -> bool
+Kumiko.Components.CommandItem.Group.get -> string?
+Kumiko.Components.CommandItem.Group.init -> void
+Kumiko.Components.CommandItem.Hint.get -> string?
+Kumiko.Components.CommandItem.Hint.init -> void
+Kumiko.Components.CommandItem.Icon.get -> string?
+Kumiko.Components.CommandItem.Icon.init -> void
+Kumiko.Components.CommandItem.Id.get -> string!
+Kumiko.Components.CommandItem.Id.init -> void
+Kumiko.Components.CommandItem.Keywords.get -> string!
+Kumiko.Components.CommandItem.Keywords.init -> void
+Kumiko.Components.CommandItem.Label.get -> string!
+Kumiko.Components.CommandItem.Label.init -> void
+Kumiko.Components.CommandProps
+Kumiko.Components.CommandProps.Align.get -> Kumiko.Components.PopoverAlign
+Kumiko.Components.CommandProps.Align.init -> void
+Kumiko.Components.CommandProps.CommandProps() -> void
+Kumiko.Components.CommandProps.CommandProps(string! Placeholder = "Type to search…", string! Empty = "No results found.", float Width = 380, float MaxHeight = 320, Kumiko.Components.Side Side = Kumiko.Components.Side.Bottom, Kumiko.Components.PopoverAlign Align = Kumiko.Components.PopoverAlign.Start) -> void
+Kumiko.Components.CommandProps.Deconstruct(out string! Placeholder, out string! Empty, out float Width, out float MaxHeight, out Kumiko.Components.Side Side, out Kumiko.Components.PopoverAlign Align) -> void
+Kumiko.Components.CommandProps.Empty.get -> string!
+Kumiko.Components.CommandProps.Empty.init -> void
+Kumiko.Components.CommandProps.Equals(Kumiko.Components.CommandProps other) -> bool
+Kumiko.Components.CommandProps.MaxHeight.get -> float
+Kumiko.Components.CommandProps.MaxHeight.init -> void
+Kumiko.Components.CommandProps.Placeholder.get -> string!
+Kumiko.Components.CommandProps.Placeholder.init -> void
+Kumiko.Components.CommandProps.Side.get -> Kumiko.Components.Side
+Kumiko.Components.CommandProps.Side.init -> void
+Kumiko.Components.CommandProps.Width.get -> float
+Kumiko.Components.CommandProps.Width.init -> void
+Kumiko.Components.ControlSize
+Kumiko.Components.ControlSize.Large = 3 -> Kumiko.Components.ControlSize
+Kumiko.Components.ControlSize.Medium = 0 -> Kumiko.Components.ControlSize
+Kumiko.Components.ControlSize.Small = 2 -> Kumiko.Components.ControlSize
+Kumiko.Components.ControlSize.XSmall = 1 -> Kumiko.Components.ControlSize
+Kumiko.Components.DialogProps
+Kumiko.Components.DialogProps.CloseOnBackdrop.get -> bool
+Kumiko.Components.DialogProps.CloseOnBackdrop.init -> void
+Kumiko.Components.DialogProps.Deconstruct(out string? Description, out float? Width, out bool CloseOnBackdrop, out bool ShowClose) -> void
+Kumiko.Components.DialogProps.Description.get -> string?
+Kumiko.Components.DialogProps.Description.init -> void
+Kumiko.Components.DialogProps.DialogProps() -> void
+Kumiko.Components.DialogProps.DialogProps(string? Description = null, float? Width = null, bool CloseOnBackdrop = true, bool ShowClose = true) -> void
+Kumiko.Components.DialogProps.Equals(Kumiko.Components.DialogProps other) -> bool
+Kumiko.Components.DialogProps.ShowClose.get -> bool
+Kumiko.Components.DialogProps.ShowClose.init -> void
+Kumiko.Components.DialogProps.Width.get -> float?
+Kumiko.Components.DialogProps.Width.init -> void
+Kumiko.Components.FieldProps
+Kumiko.Components.FieldProps.Deconstruct(out string? Description, out string? Error, out bool Required, out string! Placeholder, out float? Width, out bool Password, out bool Disabled, out bool Multiline, out float? Height) -> void
+Kumiko.Components.FieldProps.Description.get -> string?
+Kumiko.Components.FieldProps.Description.init -> void
+Kumiko.Components.FieldProps.Disabled.get -> bool
+Kumiko.Components.FieldProps.Disabled.init -> void
+Kumiko.Components.FieldProps.Equals(Kumiko.Components.FieldProps other) -> bool
+Kumiko.Components.FieldProps.Error.get -> string?
+Kumiko.Components.FieldProps.Error.init -> void
+Kumiko.Components.FieldProps.FieldProps() -> void
+Kumiko.Components.FieldProps.FieldProps(string? Description = null, string? Error = null, bool Required = false, string! Placeholder = "", float? Width = null, bool Password = false, bool Disabled = false, bool Multiline = false, float? Height = null) -> void
+Kumiko.Components.FieldProps.Height.get -> float?
+Kumiko.Components.FieldProps.Height.init -> void
+Kumiko.Components.FieldProps.Multiline.get -> bool
+Kumiko.Components.FieldProps.Multiline.init -> void
+Kumiko.Components.FieldProps.Password.get -> bool
+Kumiko.Components.FieldProps.Password.init -> void
+Kumiko.Components.FieldProps.Placeholder.get -> string!
+Kumiko.Components.FieldProps.Placeholder.init -> void
+Kumiko.Components.FieldProps.Required.get -> bool
+Kumiko.Components.FieldProps.Required.init -> void
+Kumiko.Components.FieldProps.Width.get -> float?
+Kumiko.Components.FieldProps.Width.init -> void
+Kumiko.Components.Kit
+Kumiko.Components.Kit.AccordionItem(string! title, bool open, System.Action<bool>! toggled, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> Kumiko.Components.Section
+Kumiko.Components.Kit.Alert(string! title, string? description = null, Kumiko.Components.AlertProps props = default(Kumiko.Components.AlertProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.Apply(Kumiko.Components.KitTheme! theme) -> void
+Kumiko.Components.Kit.Avatar(string! name, Kumiko.Components.AvatarProps props = default(Kumiko.Components.AvatarProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.AvatarGroup(System.Collections.Generic.IReadOnlyList<string!>! names, int max = 4, Kumiko.Components.ControlSize size = Kumiko.Components.ControlSize.Medium, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.Badge(string! text, Kumiko.Components.BadgeProps props = default(Kumiko.Components.BadgeProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.Breadcrumb(System.Collections.Generic.IReadOnlyList<Kumiko.UI.Choice!>! items, System.Action<string!>? navigate = null, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.Button(string! label, Kumiko.Components.ButtonProps props = default(Kumiko.Components.ButtonProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> Kumiko.UI.Interaction
+Kumiko.Components.Kit.Card(Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> Kumiko.UI.Div
+Kumiko.Components.Kit.CardHeader(string! title, string? description = null, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.Checkbox(string! label, bool value, System.Action<bool>! changed, Kumiko.Components.CheckboxProps props = default(Kumiko.Components.CheckboxProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> bool
+Kumiko.Components.Kit.Code(string! text, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.CommandMenu(Kumiko.UI.Rect? anchor, string! query, System.Action<string!>! queryChanged, System.Collections.Generic.IReadOnlyList<Kumiko.Components.CommandItem!>! items, System.Action<string!>! selected, System.Action! onClose, Kumiko.Components.CommandProps props = default(Kumiko.Components.CommandProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> bool
+Kumiko.Components.Kit.Context.get -> Kumiko.UI.Context!
+Kumiko.Components.Kit.Dialog(string! title, System.Action! onClose, Kumiko.Components.DialogProps props = default(Kumiko.Components.DialogProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> Kumiko.Components.KitScope
+Kumiko.Components.Kit.Empty(string! title, string? description = null, string! icon = "doc", Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.Field(string! label, string! value, System.Action<string!>! changed, Kumiko.Components.FieldProps props = default(Kumiko.Components.FieldProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> bool
+Kumiko.Components.Kit.Footer(Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> Kumiko.UI.Div
+Kumiko.Components.Kit.GroupBox(string? title = null, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> Kumiko.Components.KitScope
+Kumiko.Components.Kit.H1(string! text, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.H2(string! text, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.H3(string! text, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.H4(string! text, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.IconButton(string! icon, string! name, Kumiko.Components.ButtonProps props = default(Kumiko.Components.ButtonProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> Kumiko.UI.Interaction
+Kumiko.Components.Kit.Kbd(string! text, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.Kit() -> void
+Kumiko.Components.Kit.Kit(Kumiko.UI.Context! context) -> void
+Kumiko.Components.Kit.Label(string! text, bool required = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.Large(string! text, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.Lead(string! text, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.MenuItem(string! label, Kumiko.Components.MenuItemProps props = default(Kumiko.Components.MenuItemProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> Kumiko.UI.Interaction
+Kumiko.Components.Kit.MenuLabel(string! text, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.MenuSeparator(Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.Muted(string! text, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.Notification(string! title, string? description = null, Kumiko.Components.Tone tone = Kumiko.Components.Tone.Default, System.Action? onClose = null, float width = 360, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.P(string! text, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.Pagination(int page, int pages, System.Action<int>! changed, int siblings = 1, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> bool
+Kumiko.Components.Kit.Popover(Kumiko.UI.Rect? anchor, System.Action! onClose, Kumiko.Components.PopoverProps props = default(Kumiko.Components.PopoverProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> Kumiko.Components.KitScope
+Kumiko.Components.Kit.Progress(float fraction, Kumiko.Components.ProgressProps props = default(Kumiko.Components.ProgressProps), string? name = null, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.RadioGroup(string! name, System.Collections.Generic.IReadOnlyList<Kumiko.UI.Choice!>! choices, string? selected, System.Action<string!>! changed, Kumiko.Components.RadioGroupProps props = default(Kumiko.Components.RadioGroupProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> bool
+Kumiko.Components.Kit.Rating(string! name, int value, System.Action<int>! changed, int max = 5, float size = 20, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> bool
+Kumiko.Components.Kit.Separator(string? label = null, Kumiko.Components.Orientation orientation = Kumiko.Components.Orientation.Horizontal, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.Sidebar(float? width = null, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> Kumiko.Components.Section
+Kumiko.Components.Kit.SidebarItem(string! label, Kumiko.Components.SidebarItemProps props = default(Kumiko.Components.SidebarItemProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> Kumiko.UI.Interaction
+Kumiko.Components.Kit.SidebarLabel(string! text, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.Skeleton(Kumiko.UI.Length width, float height = 16, bool circle = false, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.Slider(string! name, float value, System.Action<float>! changed, Kumiko.Components.SliderProps props = default(Kumiko.Components.SliderProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> bool
+Kumiko.Components.Kit.Small(string! text, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.Switch(string! label, bool value, System.Action<bool>! changed, Kumiko.Components.SwitchProps props = default(Kumiko.Components.SwitchProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> bool
+Kumiko.Components.Kit.Tabs(string! name, System.Collections.Generic.IReadOnlyList<Kumiko.UI.Choice!>! tabs, string! selected, System.Action<string!>! changed, Kumiko.Components.TabsProps props = default(Kumiko.Components.TabsProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> bool
+Kumiko.Components.Kit.Theme.get -> Kumiko.Components.KitTheme!
+Kumiko.Components.Kit.ToggleGroup(string! name, System.Collections.Generic.IReadOnlyList<Kumiko.UI.Choice!>! choices, string? selected, System.Action<string!>! changed, Kumiko.Components.ToggleGroupProps props = default(Kumiko.Components.ToggleGroupProps), System.Collections.Generic.IReadOnlyList<string!>? icons = null, Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> bool
+Kumiko.Components.Kit.Use(Kumiko.Components.KitTheme! theme) -> Kumiko.Components.ThemeScope
+Kumiko.Components.KitMetrics
+Kumiko.Components.KitMetrics.<Clone>$() -> Kumiko.Components.KitMetrics!
+Kumiko.Components.KitMetrics.Deconstruct(out float HeightXSmall, out float HeightSmall, out float HeightMedium, out float HeightLarge, out float PaddingXSmall, out float PaddingSmall, out float PaddingMedium, out float PaddingLarge, out float FocusWidth, out float DisabledOpacity, out float DialogWidth, out float SidebarWidth) -> void
+Kumiko.Components.KitMetrics.DialogWidth.get -> float
+Kumiko.Components.KitMetrics.DialogWidth.init -> void
+Kumiko.Components.KitMetrics.DisabledOpacity.get -> float
+Kumiko.Components.KitMetrics.DisabledOpacity.init -> void
+Kumiko.Components.KitMetrics.Equals(Kumiko.Components.KitMetrics? other) -> bool
+Kumiko.Components.KitMetrics.FocusWidth.get -> float
+Kumiko.Components.KitMetrics.FocusWidth.init -> void
+Kumiko.Components.KitMetrics.Height(Kumiko.Components.ControlSize size) -> float
+Kumiko.Components.KitMetrics.HeightLarge.get -> float
+Kumiko.Components.KitMetrics.HeightLarge.init -> void
+Kumiko.Components.KitMetrics.HeightMedium.get -> float
+Kumiko.Components.KitMetrics.HeightMedium.init -> void
+Kumiko.Components.KitMetrics.HeightSmall.get -> float
+Kumiko.Components.KitMetrics.HeightSmall.init -> void
+Kumiko.Components.KitMetrics.HeightXSmall.get -> float
+Kumiko.Components.KitMetrics.HeightXSmall.init -> void
+Kumiko.Components.KitMetrics.KitMetrics(float HeightXSmall = 20, float HeightSmall = 24, float HeightMedium = 32, float HeightLarge = 40, float PaddingXSmall = 4, float PaddingSmall = 8, float PaddingMedium = 12, float PaddingLarge = 16, float FocusWidth = 2, float DisabledOpacity = 0.5, float DialogWidth = 440, float SidebarWidth = 232) -> void
+Kumiko.Components.KitMetrics.Padding(Kumiko.Components.ControlSize size) -> float
+Kumiko.Components.KitMetrics.PaddingLarge.get -> float
+Kumiko.Components.KitMetrics.PaddingLarge.init -> void
+Kumiko.Components.KitMetrics.PaddingMedium.get -> float
+Kumiko.Components.KitMetrics.PaddingMedium.init -> void
+Kumiko.Components.KitMetrics.PaddingSmall.get -> float
+Kumiko.Components.KitMetrics.PaddingSmall.init -> void
+Kumiko.Components.KitMetrics.PaddingXSmall.get -> float
+Kumiko.Components.KitMetrics.PaddingXSmall.init -> void
+Kumiko.Components.KitMetrics.SidebarWidth.get -> float
+Kumiko.Components.KitMetrics.SidebarWidth.init -> void
+Kumiko.Components.KitScope
+Kumiko.Components.KitScope.Dispose() -> void
+Kumiko.Components.KitScope.KitScope() -> void
+Kumiko.Components.KitTheme
+Kumiko.Components.KitTheme.<Clone>$() -> Kumiko.Components.KitTheme!
+Kumiko.Components.KitTheme.Accent.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.Accent.init -> void
+Kumiko.Components.KitTheme.AccentForeground.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.AccentForeground.init -> void
+Kumiko.Components.KitTheme.Background.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.Background.init -> void
+Kumiko.Components.KitTheme.Border.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.Border.init -> void
+Kumiko.Components.KitTheme.Card.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.Card.init -> void
+Kumiko.Components.KitTheme.CardForeground.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.CardForeground.init -> void
+Kumiko.Components.KitTheme.Danger.get -> Kumiko.Components.ToneColors!
+Kumiko.Components.KitTheme.Danger.init -> void
+Kumiko.Components.KitTheme.Equals(Kumiko.Components.KitTheme? other) -> bool
+Kumiko.Components.KitTheme.Font.get -> string?
+Kumiko.Components.KitTheme.Font.init -> void
+Kumiko.Components.KitTheme.FontSize.get -> float
+Kumiko.Components.KitTheme.FontSize.init -> void
+Kumiko.Components.KitTheme.Foreground.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.Foreground.init -> void
+Kumiko.Components.KitTheme.Info.get -> Kumiko.Components.ToneColors!
+Kumiko.Components.KitTheme.Info.init -> void
+Kumiko.Components.KitTheme.Input.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.Input.init -> void
+Kumiko.Components.KitTheme.IsDark.get -> bool
+Kumiko.Components.KitTheme.IsDark.init -> void
+Kumiko.Components.KitTheme.KitTheme() -> void
+Kumiko.Components.KitTheme.Link.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.Link.init -> void
+Kumiko.Components.KitTheme.LinkHover.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.LinkHover.init -> void
+Kumiko.Components.KitTheme.ListHover.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.ListHover.init -> void
+Kumiko.Components.KitTheme.Metrics.get -> Kumiko.Components.KitMetrics!
+Kumiko.Components.KitTheme.Metrics.init -> void
+Kumiko.Components.KitTheme.MonoFont.get -> string?
+Kumiko.Components.KitTheme.MonoFont.init -> void
+Kumiko.Components.KitTheme.Muted.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.Muted.init -> void
+Kumiko.Components.KitTheme.MutedForeground.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.MutedForeground.init -> void
+Kumiko.Components.KitTheme.Overlay.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.Overlay.init -> void
+Kumiko.Components.KitTheme.Popover.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.Popover.init -> void
+Kumiko.Components.KitTheme.PopoverForeground.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.PopoverForeground.init -> void
+Kumiko.Components.KitTheme.Primary.get -> Kumiko.Components.ToneColors!
+Kumiko.Components.KitTheme.Primary.init -> void
+Kumiko.Components.KitTheme.ProgressBar.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.ProgressBar.init -> void
+Kumiko.Components.KitTheme.Radius.get -> float
+Kumiko.Components.KitTheme.Radius.init -> void
+Kumiko.Components.KitTheme.RadiusFull.get -> float
+Kumiko.Components.KitTheme.RadiusLarge.get -> float
+Kumiko.Components.KitTheme.RadiusLarge.init -> void
+Kumiko.Components.KitTheme.RadiusSmall.get -> float
+Kumiko.Components.KitTheme.Ring.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.Ring.init -> void
+Kumiko.Components.KitTheme.Secondary.get -> Kumiko.Components.ToneColors!
+Kumiko.Components.KitTheme.Secondary.init -> void
+Kumiko.Components.KitTheme.Selection.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.Selection.init -> void
+Kumiko.Components.KitTheme.Shadows.get -> bool
+Kumiko.Components.KitTheme.Shadows.init -> void
+Kumiko.Components.KitTheme.Sidebar.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.Sidebar.init -> void
+Kumiko.Components.KitTheme.SidebarAccent.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.SidebarAccent.init -> void
+Kumiko.Components.KitTheme.SidebarBorder.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.SidebarBorder.init -> void
+Kumiko.Components.KitTheme.SidebarForeground.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.SidebarForeground.init -> void
+Kumiko.Components.KitTheme.Skeleton.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.Skeleton.init -> void
+Kumiko.Components.KitTheme.SliderBar.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.SliderBar.init -> void
+Kumiko.Components.KitTheme.SliderThumb.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.SliderThumb.init -> void
+Kumiko.Components.KitTheme.Star.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.Star.init -> void
+Kumiko.Components.KitTheme.Success.get -> Kumiko.Components.ToneColors!
+Kumiko.Components.KitTheme.Success.init -> void
+Kumiko.Components.KitTheme.Switch.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.Switch.init -> void
+Kumiko.Components.KitTheme.SwitchThumb.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.SwitchThumb.init -> void
+Kumiko.Components.KitTheme.TabActive.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.TabActive.init -> void
+Kumiko.Components.KitTheme.TabActiveForeground.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.TabActiveForeground.init -> void
+Kumiko.Components.KitTheme.TabBar.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.TabBar.init -> void
+Kumiko.Components.KitTheme.TabForeground.get -> Kumiko.UI.Color
+Kumiko.Components.KitTheme.TabForeground.init -> void
+Kumiko.Components.KitTheme.Theme.get -> Kumiko.UI.Theme!
+Kumiko.Components.KitTheme.Warning.get -> Kumiko.Components.ToneColors!
+Kumiko.Components.KitTheme.Warning.init -> void
+Kumiko.Components.MenuItemProps
+Kumiko.Components.MenuItemProps.Checked.get -> bool
+Kumiko.Components.MenuItemProps.Checked.init -> void
+Kumiko.Components.MenuItemProps.Deconstruct(out string? Icon, out string? Shortcut, out bool Destructive, out bool Disabled, out bool Checked) -> void
+Kumiko.Components.MenuItemProps.Destructive.get -> bool
+Kumiko.Components.MenuItemProps.Destructive.init -> void
+Kumiko.Components.MenuItemProps.Disabled.get -> bool
+Kumiko.Components.MenuItemProps.Disabled.init -> void
+Kumiko.Components.MenuItemProps.Equals(Kumiko.Components.MenuItemProps other) -> bool
+Kumiko.Components.MenuItemProps.Icon.get -> string?
+Kumiko.Components.MenuItemProps.Icon.init -> void
+Kumiko.Components.MenuItemProps.MenuItemProps() -> void
+Kumiko.Components.MenuItemProps.MenuItemProps(string? Icon = null, string? Shortcut = null, bool Destructive = false, bool Disabled = false, bool Checked = false) -> void
+Kumiko.Components.MenuItemProps.Shortcut.get -> string?
+Kumiko.Components.MenuItemProps.Shortcut.init -> void
+Kumiko.Components.Orientation
+Kumiko.Components.Orientation.Horizontal = 1 -> Kumiko.Components.Orientation
+Kumiko.Components.Orientation.Vertical = 0 -> Kumiko.Components.Orientation
+Kumiko.Components.Palette
+Kumiko.Components.Palette.Palette() -> void
+Kumiko.Components.PopoverAlign
+Kumiko.Components.PopoverAlign.Center = 1 -> Kumiko.Components.PopoverAlign
+Kumiko.Components.PopoverAlign.End = 2 -> Kumiko.Components.PopoverAlign
+Kumiko.Components.PopoverAlign.Start = 0 -> Kumiko.Components.PopoverAlign
+Kumiko.Components.PopoverProps
+Kumiko.Components.PopoverProps.Align.get -> Kumiko.Components.PopoverAlign
+Kumiko.Components.PopoverProps.Align.init -> void
+Kumiko.Components.PopoverProps.Deconstruct(out Kumiko.Components.Side Side, out Kumiko.Components.PopoverAlign Align, out float? Width, out float Offset, out string? Name, out float Padding, out bool MatchAnchorWidth) -> void
+Kumiko.Components.PopoverProps.Equals(Kumiko.Components.PopoverProps other) -> bool
+Kumiko.Components.PopoverProps.MatchAnchorWidth.get -> bool
+Kumiko.Components.PopoverProps.MatchAnchorWidth.init -> void
+Kumiko.Components.PopoverProps.Name.get -> string?
+Kumiko.Components.PopoverProps.Name.init -> void
+Kumiko.Components.PopoverProps.Offset.get -> float
+Kumiko.Components.PopoverProps.Offset.init -> void
+Kumiko.Components.PopoverProps.Padding.get -> float
+Kumiko.Components.PopoverProps.Padding.init -> void
+Kumiko.Components.PopoverProps.PopoverProps() -> void
+Kumiko.Components.PopoverProps.PopoverProps(Kumiko.Components.Side Side = Kumiko.Components.Side.Bottom, Kumiko.Components.PopoverAlign Align = Kumiko.Components.PopoverAlign.Start, float? Width = null, float Offset = 6, string? Name = null, float Padding = 4, bool MatchAnchorWidth = false) -> void
+Kumiko.Components.PopoverProps.Side.get -> Kumiko.Components.Side
+Kumiko.Components.PopoverProps.Side.init -> void
+Kumiko.Components.PopoverProps.Width.get -> float?
+Kumiko.Components.PopoverProps.Width.init -> void
+Kumiko.Components.ProgressProps
+Kumiko.Components.ProgressProps.Deconstruct(out Kumiko.Components.Tone Tone, out Kumiko.Components.ControlSize Size, out float? Width) -> void
+Kumiko.Components.ProgressProps.Equals(Kumiko.Components.ProgressProps other) -> bool
+Kumiko.Components.ProgressProps.ProgressProps() -> void
+Kumiko.Components.ProgressProps.ProgressProps(Kumiko.Components.Tone Tone = Kumiko.Components.Tone.Default, Kumiko.Components.ControlSize Size = Kumiko.Components.ControlSize.Medium, float? Width = null) -> void
+Kumiko.Components.ProgressProps.Size.get -> Kumiko.Components.ControlSize
+Kumiko.Components.ProgressProps.Size.init -> void
+Kumiko.Components.ProgressProps.Tone.get -> Kumiko.Components.Tone
+Kumiko.Components.ProgressProps.Tone.init -> void
+Kumiko.Components.ProgressProps.Width.get -> float?
+Kumiko.Components.ProgressProps.Width.init -> void
+override Kumiko.Components.AlertProps.GetHashCode() -> int
+override Kumiko.Components.AvatarProps.GetHashCode() -> int
+override Kumiko.Components.BadgeProps.GetHashCode() -> int
+override Kumiko.Components.ButtonProps.GetHashCode() -> int
+override Kumiko.Components.CheckboxProps.GetHashCode() -> int
+override Kumiko.Components.CommandItem.Equals(object? obj) -> bool
+override Kumiko.Components.CommandItem.GetHashCode() -> int
+override Kumiko.Components.CommandItem.ToString() -> string!
+override Kumiko.Components.CommandProps.GetHashCode() -> int
+override Kumiko.Components.DialogProps.GetHashCode() -> int
+override Kumiko.Components.FieldProps.GetHashCode() -> int
+override Kumiko.Components.KitMetrics.Equals(object? obj) -> bool
+override Kumiko.Components.KitMetrics.GetHashCode() -> int
+override Kumiko.Components.KitMetrics.ToString() -> string!
+override Kumiko.Components.KitTheme.Equals(object? obj) -> bool
+override Kumiko.Components.KitTheme.GetHashCode() -> int
+override Kumiko.Components.KitTheme.ToString() -> string!
+override Kumiko.Components.MenuItemProps.GetHashCode() -> int
+override Kumiko.Components.PopoverProps.GetHashCode() -> int
+override Kumiko.Components.ProgressProps.GetHashCode() -> int
+static Kumiko.Components.AlertProps.operator !=(Kumiko.Components.AlertProps left, Kumiko.Components.AlertProps right) -> bool
+static Kumiko.Components.AlertProps.operator ==(Kumiko.Components.AlertProps left, Kumiko.Components.AlertProps right) -> bool
+static Kumiko.Components.AvatarProps.operator !=(Kumiko.Components.AvatarProps left, Kumiko.Components.AvatarProps right) -> bool
+static Kumiko.Components.AvatarProps.operator ==(Kumiko.Components.AvatarProps left, Kumiko.Components.AvatarProps right) -> bool
+static Kumiko.Components.BadgeProps.operator !=(Kumiko.Components.BadgeProps left, Kumiko.Components.BadgeProps right) -> bool
+static Kumiko.Components.BadgeProps.operator ==(Kumiko.Components.BadgeProps left, Kumiko.Components.BadgeProps right) -> bool
+static Kumiko.Components.ButtonProps.operator !=(Kumiko.Components.ButtonProps left, Kumiko.Components.ButtonProps right) -> bool
+static Kumiko.Components.ButtonProps.operator ==(Kumiko.Components.ButtonProps left, Kumiko.Components.ButtonProps right) -> bool
+static Kumiko.Components.CheckboxProps.operator !=(Kumiko.Components.CheckboxProps left, Kumiko.Components.CheckboxProps right) -> bool
+static Kumiko.Components.CheckboxProps.operator ==(Kumiko.Components.CheckboxProps left, Kumiko.Components.CheckboxProps right) -> bool
+static Kumiko.Components.CommandItem.operator !=(Kumiko.Components.CommandItem? left, Kumiko.Components.CommandItem? right) -> bool
+static Kumiko.Components.CommandItem.operator ==(Kumiko.Components.CommandItem? left, Kumiko.Components.CommandItem? right) -> bool
+static Kumiko.Components.CommandProps.operator !=(Kumiko.Components.CommandProps left, Kumiko.Components.CommandProps right) -> bool
+static Kumiko.Components.CommandProps.operator ==(Kumiko.Components.CommandProps left, Kumiko.Components.CommandProps right) -> bool
+static Kumiko.Components.DialogProps.operator !=(Kumiko.Components.DialogProps left, Kumiko.Components.DialogProps right) -> bool
+static Kumiko.Components.DialogProps.operator ==(Kumiko.Components.DialogProps left, Kumiko.Components.DialogProps right) -> bool
+static Kumiko.Components.FieldProps.operator !=(Kumiko.Components.FieldProps left, Kumiko.Components.FieldProps right) -> bool
+static Kumiko.Components.FieldProps.operator ==(Kumiko.Components.FieldProps left, Kumiko.Components.FieldProps right) -> bool
+static Kumiko.Components.Kit.ShortcutLabel(string! key, Kumiko.UI.Modifiers modifiers = Kumiko.UI.Modifiers.Primary) -> string!
+static Kumiko.Components.KitMetrics.operator !=(Kumiko.Components.KitMetrics? left, Kumiko.Components.KitMetrics? right) -> bool
+static Kumiko.Components.KitMetrics.operator ==(Kumiko.Components.KitMetrics? left, Kumiko.Components.KitMetrics? right) -> bool
+static Kumiko.Components.KitTheme.Brand(Kumiko.UI.Color color, bool dark) -> Kumiko.Components.ToneColors!
+static Kumiko.Components.KitTheme.Contrast(Kumiko.UI.Color a, Kumiko.UI.Color b) -> float
+static Kumiko.Components.KitTheme.Dark.get -> Kumiko.Components.KitTheme!
+static Kumiko.Components.KitTheme.Light.get -> Kumiko.Components.KitTheme!
+static Kumiko.Components.KitTheme.Of(Kumiko.UI.Theme! theme) -> Kumiko.Components.KitTheme!
+static Kumiko.Components.KitTheme.operator !=(Kumiko.Components.KitTheme? left, Kumiko.Components.KitTheme? right) -> bool
+static Kumiko.Components.KitTheme.operator ==(Kumiko.Components.KitTheme? left, Kumiko.Components.KitTheme? right) -> bool
+static Kumiko.Components.MenuItemProps.operator !=(Kumiko.Components.MenuItemProps left, Kumiko.Components.MenuItemProps right) -> bool
+static Kumiko.Components.MenuItemProps.operator ==(Kumiko.Components.MenuItemProps left, Kumiko.Components.MenuItemProps right) -> bool
+static Kumiko.Components.Palette.Blue.get -> Kumiko.UI.Color
+static Kumiko.Components.Palette.Green.get -> Kumiko.UI.Color
+static Kumiko.Components.Palette.Neutral100.get -> Kumiko.UI.Color
+static Kumiko.Components.Palette.Neutral200.get -> Kumiko.UI.Color
+static Kumiko.Components.Palette.Neutral300.get -> Kumiko.UI.Color
+static Kumiko.Components.Palette.Neutral400.get -> Kumiko.UI.Color
+static Kumiko.Components.Palette.Neutral50.get -> Kumiko.UI.Color
+static Kumiko.Components.Palette.Neutral500.get -> Kumiko.UI.Color
+static Kumiko.Components.Palette.Neutral600.get -> Kumiko.UI.Color
+static Kumiko.Components.Palette.Neutral700.get -> Kumiko.UI.Color
+static Kumiko.Components.Palette.Neutral800.get -> Kumiko.UI.Color
+static Kumiko.Components.Palette.Neutral900.get -> Kumiko.UI.Color
+static Kumiko.Components.Palette.Neutral950.get -> Kumiko.UI.Color
+static Kumiko.Components.Palette.Orange.get -> Kumiko.UI.Color
+static Kumiko.Components.Palette.Rose.get -> Kumiko.UI.Color
+static Kumiko.Components.Palette.Violet.get -> Kumiko.UI.Color
+static Kumiko.Components.PopoverProps.operator !=(Kumiko.Components.PopoverProps left, Kumiko.Components.PopoverProps right) -> bool
+static Kumiko.Components.PopoverProps.operator ==(Kumiko.Components.PopoverProps left, Kumiko.Components.PopoverProps right) -> bool
+static Kumiko.Components.ProgressProps.operator !=(Kumiko.Components.ProgressProps left, Kumiko.Components.ProgressProps right) -> bool
+static Kumiko.Components.ProgressProps.operator ==(Kumiko.Components.ProgressProps left, Kumiko.Components.ProgressProps right) -> bool
+~override Kumiko.Components.AlertProps.Equals(object obj) -> bool
+~override Kumiko.Components.AlertProps.ToString() -> string
+~override Kumiko.Components.AvatarProps.Equals(object obj) -> bool
+~override Kumiko.Components.AvatarProps.ToString() -> string
+~override Kumiko.Components.BadgeProps.Equals(object obj) -> bool
+~override Kumiko.Components.BadgeProps.ToString() -> string
+~override Kumiko.Components.ButtonProps.Equals(object obj) -> bool
+~override Kumiko.Components.ButtonProps.ToString() -> string
+~override Kumiko.Components.CheckboxProps.Equals(object obj) -> bool
+~override Kumiko.Components.CheckboxProps.ToString() -> string
+~override Kumiko.Components.CommandProps.Equals(object obj) -> bool
+~override Kumiko.Components.CommandProps.ToString() -> string
+~override Kumiko.Components.DialogProps.Equals(object obj) -> bool
+~override Kumiko.Components.DialogProps.ToString() -> string
+~override Kumiko.Components.FieldProps.Equals(object obj) -> bool
+~override Kumiko.Components.FieldProps.ToString() -> string
+~override Kumiko.Components.MenuItemProps.Equals(object obj) -> bool
+~override Kumiko.Components.MenuItemProps.ToString() -> string
+~override Kumiko.Components.PopoverProps.Equals(object obj) -> bool
+~override Kumiko.Components.PopoverProps.ToString() -> string
+~override Kumiko.Components.ProgressProps.Equals(object obj) -> bool
+~override Kumiko.Components.ProgressProps.ToString() -> string

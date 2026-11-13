@@ -1,0 +1,40 @@
+<Project>
+  <UsingTask TaskName="ExtractKumikoMetal" TaskFactory="RoslynCodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)/Microsoft.Build.Tasks.Core.dll">
+    <ParameterGroup>
+      <Source ParameterType="System.String" Required="true" />
+      <Output ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Code Type="Fragment" Language="cs"><![CDATA[
+        var text = System.IO.File.ReadAllText(Source);
+        var delimiter = new string('"', 3);
+        var start = text.IndexOf(delimiter, System.StringComparison.Ordinal) + 3;
+        var end = text.LastIndexOf(delimiter, System.StringComparison.Ordinal);
+        if (start < 3 || end <= start) throw new System.InvalidOperationException("Metal shader raw string not found.");
+        System.IO.File.WriteAllText(Output, text.Substring(start, end - start));
+      ]]></Code>
+    </Task>
+  </UsingTask>
+  <Target Name="PrepareKumikoMetal" BeforeTargets="AssignTargetPaths"
+          Condition="$([MSBuild]::IsOSPlatform('OSX')) and '$(KumikoCompileMetal)' != 'false'">
+    <Exec Command="xcrun -sdk macosx metal --version" IgnoreExitCode="true" StandardOutputImportance="Low" StandardErrorImportance="Low">
+      <Output TaskParameter="ExitCode" PropertyName="KumikoMetalCompilerExitCode" />
+    </Exec>
+    <CallTarget Targets="CompileKumikoMetal" Condition="'$(KumikoMetalCompilerExitCode)' == '0'" />
+    <ItemGroup Condition="'$(KumikoMetalCompilerExitCode)' == '0'">
+      <EmbeddedResource Include="$(IntermediateOutputPath)Kumiko.metallib" LogicalName="Kumiko.Shaders.metallib" />
+    </ItemGroup>
+    <PropertyGroup Condition="'$(KumikoMetalCompilerExitCode)' == '0'">
+      <DefineConstants>$(DefineConstants);KUMIKO_PRECOMPILED_METAL</DefineConstants>
+    </PropertyGroup>
+    <Message Condition="'$(KumikoMetalCompilerExitCode)' != '0'" Importance="High"
+             Text="Metal toolchain unavailable; using runtime shader compilation. Install it with xcodebuild -downloadComponent MetalToolchain to reduce startup memory." />
+  </Target>
+  <Target Name="CompileKumikoMetal" Inputs="$(MSBuildProjectDirectory)/Rendering/MetalShader.cs"
+          Outputs="$(IntermediateOutputPath)Kumiko.metallib">
+    <MakeDir Directories="$(IntermediateOutputPath)" />
+    <ExtractKumikoMetal Source="$(MSBuildProjectDirectory)/Rendering/MetalShader.cs" Output="$(IntermediateOutputPath)Kumiko.metal" />
+    <Exec Command="xcrun -sdk macosx metal -std=metal3.1 -c &quot;$(IntermediateOutputPath)Kumiko.metal&quot; -o &quot;$(IntermediateOutputPath)Kumiko.air&quot;" />
+    <Exec Command="xcrun -sdk macosx metallib &quot;$(IntermediateOutputPath)Kumiko.air&quot; -o &quot;$(IntermediateOutputPath)Kumiko.metallib&quot;" />
+  </Target>
+</Project>

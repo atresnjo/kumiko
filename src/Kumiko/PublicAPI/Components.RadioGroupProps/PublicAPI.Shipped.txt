@@ -1,0 +1,154 @@
+#nullable enable
+Kumiko.Components.RadioGroupProps
+Kumiko.Components.RadioGroupProps.Deconstruct(out Kumiko.Components.Orientation Orientation, out bool Disabled, out Kumiko.Components.ControlSize Size) -> void
+Kumiko.Components.RadioGroupProps.Disabled.get -> bool
+Kumiko.Components.RadioGroupProps.Disabled.init -> void
+Kumiko.Components.RadioGroupProps.Equals(Kumiko.Components.RadioGroupProps other) -> bool
+Kumiko.Components.RadioGroupProps.Orientation.get -> Kumiko.Components.Orientation
+Kumiko.Components.RadioGroupProps.Orientation.init -> void
+Kumiko.Components.RadioGroupProps.RadioGroupProps() -> void
+Kumiko.Components.RadioGroupProps.RadioGroupProps(Kumiko.Components.Orientation Orientation = Kumiko.Components.Orientation.Vertical, bool Disabled = false, Kumiko.Components.ControlSize Size = Kumiko.Components.ControlSize.Medium) -> void
+Kumiko.Components.RadioGroupProps.Size.get -> Kumiko.Components.ControlSize
+Kumiko.Components.RadioGroupProps.Size.init -> void
+Kumiko.Components.Section
+Kumiko.Components.Section.Dispose() -> void
+Kumiko.Components.Section.Open.get -> bool
+Kumiko.Components.Section.Section() -> void
+Kumiko.Components.Side
+Kumiko.Components.Side.Bottom = 0 -> Kumiko.Components.Side
+Kumiko.Components.Side.Left = 3 -> Kumiko.Components.Side
+Kumiko.Components.Side.Right = 2 -> Kumiko.Components.Side
+Kumiko.Components.Side.Top = 1 -> Kumiko.Components.Side
+Kumiko.Components.SidebarItemProps
+Kumiko.Components.SidebarItemProps.Badge.get -> string?
+Kumiko.Components.SidebarItemProps.Badge.init -> void
+Kumiko.Components.SidebarItemProps.Deconstruct(out string? Icon, out bool Selected, out string? Badge, out int Depth, out bool Disabled) -> void
+Kumiko.Components.SidebarItemProps.Depth.get -> int
+Kumiko.Components.SidebarItemProps.Depth.init -> void
+Kumiko.Components.SidebarItemProps.Disabled.get -> bool
+Kumiko.Components.SidebarItemProps.Disabled.init -> void
+Kumiko.Components.SidebarItemProps.Equals(Kumiko.Components.SidebarItemProps other) -> bool
+Kumiko.Components.SidebarItemProps.Icon.get -> string?
+Kumiko.Components.SidebarItemProps.Icon.init -> void
+Kumiko.Components.SidebarItemProps.Selected.get -> bool
+Kumiko.Components.SidebarItemProps.Selected.init -> void
+Kumiko.Components.SidebarItemProps.SidebarItemProps() -> void
+Kumiko.Components.SidebarItemProps.SidebarItemProps(string? Icon = null, bool Selected = false, string? Badge = null, int Depth = 0, bool Disabled = false) -> void
+Kumiko.Components.SliderProps
+Kumiko.Components.SliderProps.Colors.get -> Kumiko.Components.ToneColors?
+Kumiko.Components.SliderProps.Colors.init -> void
+Kumiko.Components.SliderProps.Deconstruct(out float Min, out float Max, out float Step, out float Width, out bool Disabled, out Kumiko.Components.ToneColors? Colors) -> void
+Kumiko.Components.SliderProps.Disabled.get -> bool
+Kumiko.Components.SliderProps.Disabled.init -> void
+Kumiko.Components.SliderProps.Equals(Kumiko.Components.SliderProps other) -> bool
+Kumiko.Components.SliderProps.Max.get -> float
+Kumiko.Components.SliderProps.Max.init -> void
+Kumiko.Components.SliderProps.Min.get -> float
+Kumiko.Components.SliderProps.Min.init -> void
+Kumiko.Components.SliderProps.SliderProps() -> void
+Kumiko.Components.SliderProps.SliderProps(float Min = 0, float Max = 100, float Step = 1, float Width = 240, bool Disabled = false, Kumiko.Components.ToneColors? Colors = null) -> void
+Kumiko.Components.SliderProps.Step.get -> float
+Kumiko.Components.SliderProps.Step.init -> void
+Kumiko.Components.SliderProps.Width.get -> float
+Kumiko.Components.SliderProps.Width.init -> void
+Kumiko.Components.SwitchProps
+Kumiko.Components.SwitchProps.Deconstruct(out string? Description, out bool Disabled, out Kumiko.Components.ControlSize Size, out bool LabelFirst) -> void
+Kumiko.Components.SwitchProps.Description.get -> string?
+Kumiko.Components.SwitchProps.Description.init -> void
+Kumiko.Components.SwitchProps.Disabled.get -> bool
+Kumiko.Components.SwitchProps.Disabled.init -> void
+Kumiko.Components.SwitchProps.Equals(Kumiko.Components.SwitchProps other) -> bool
+Kumiko.Components.SwitchProps.LabelFirst.get -> bool
+Kumiko.Components.SwitchProps.LabelFirst.init -> void
+Kumiko.Components.SwitchProps.Size.get -> Kumiko.Components.ControlSize
+Kumiko.Components.SwitchProps.Size.init -> void
+Kumiko.Components.SwitchProps.SwitchProps() -> void
+Kumiko.Components.SwitchProps.SwitchProps(string? Description = null, bool Disabled = false, Kumiko.Components.ControlSize Size = Kumiko.Components.ControlSize.Medium, bool LabelFirst = false) -> void
+Kumiko.Components.TabsProps
+Kumiko.Components.TabsProps.Deconstruct(out Kumiko.Components.TabsVariant Variant, out Kumiko.Components.ControlSize Size, out bool Fill) -> void
+Kumiko.Components.TabsProps.Equals(Kumiko.Components.TabsProps other) -> bool
+Kumiko.Components.TabsProps.Fill.get -> bool
+Kumiko.Components.TabsProps.Fill.init -> void
+Kumiko.Components.TabsProps.Size.get -> Kumiko.Components.ControlSize
+Kumiko.Components.TabsProps.Size.init -> void
+Kumiko.Components.TabsProps.TabsProps() -> void
+Kumiko.Components.TabsProps.TabsProps(Kumiko.Components.TabsVariant Variant = Kumiko.Components.TabsVariant.Segmented, Kumiko.Components.ControlSize Size = Kumiko.Components.ControlSize.Medium, bool Fill = false) -> void
+Kumiko.Components.TabsProps.Variant.get -> Kumiko.Components.TabsVariant
+Kumiko.Components.TabsProps.Variant.init -> void
+Kumiko.Components.TabsVariant
+Kumiko.Components.TabsVariant.Pill = 2 -> Kumiko.Components.TabsVariant
+Kumiko.Components.TabsVariant.Segmented = 0 -> Kumiko.Components.TabsVariant
+Kumiko.Components.TabsVariant.Underline = 1 -> Kumiko.Components.TabsVariant
+Kumiko.Components.ThemeScope
+Kumiko.Components.ThemeScope.Dispose() -> void
+Kumiko.Components.ThemeScope.ThemeScope() -> void
+Kumiko.Components.ToggleGroupProps
+Kumiko.Components.ToggleGroupProps.Deconstruct(out Kumiko.Components.ControlSize Size, out bool Disabled, out bool Outline) -> void
+Kumiko.Components.ToggleGroupProps.Disabled.get -> bool
+Kumiko.Components.ToggleGroupProps.Disabled.init -> void
+Kumiko.Components.ToggleGroupProps.Equals(Kumiko.Components.ToggleGroupProps other) -> bool
+Kumiko.Components.ToggleGroupProps.Outline.get -> bool
+Kumiko.Components.ToggleGroupProps.Outline.init -> void
+Kumiko.Components.ToggleGroupProps.Size.get -> Kumiko.Components.ControlSize
+Kumiko.Components.ToggleGroupProps.Size.init -> void
+Kumiko.Components.ToggleGroupProps.ToggleGroupProps() -> void
+Kumiko.Components.ToggleGroupProps.ToggleGroupProps(Kumiko.Components.ControlSize Size = Kumiko.Components.ControlSize.Medium, bool Disabled = false, bool Outline = true) -> void
+Kumiko.Components.Tone
+Kumiko.Components.Tone.Danger = 3 -> Kumiko.Components.Tone
+Kumiko.Components.Tone.Default = 0 -> Kumiko.Components.Tone
+Kumiko.Components.Tone.Info = 6 -> Kumiko.Components.Tone
+Kumiko.Components.Tone.Primary = 1 -> Kumiko.Components.Tone
+Kumiko.Components.Tone.Secondary = 2 -> Kumiko.Components.Tone
+Kumiko.Components.Tone.Success = 4 -> Kumiko.Components.Tone
+Kumiko.Components.Tone.Warning = 5 -> Kumiko.Components.Tone
+Kumiko.Components.ToneColors
+Kumiko.Components.ToneColors.<Clone>$() -> Kumiko.Components.ToneColors!
+Kumiko.Components.ToneColors.Active.get -> Kumiko.UI.Color
+Kumiko.Components.ToneColors.Active.init -> void
+Kumiko.Components.ToneColors.Background.get -> Kumiko.UI.Color
+Kumiko.Components.ToneColors.Background.init -> void
+Kumiko.Components.ToneColors.Deconstruct(out Kumiko.UI.Color Background, out Kumiko.UI.Color Foreground, out Kumiko.UI.Color Text) -> void
+Kumiko.Components.ToneColors.Equals(Kumiko.Components.ToneColors? other) -> bool
+Kumiko.Components.ToneColors.Foreground.get -> Kumiko.UI.Color
+Kumiko.Components.ToneColors.Foreground.init -> void
+Kumiko.Components.ToneColors.Hover.get -> Kumiko.UI.Color
+Kumiko.Components.ToneColors.Hover.init -> void
+Kumiko.Components.ToneColors.Soft(float strength = 0.1) -> Kumiko.UI.Color
+Kumiko.Components.ToneColors.Text.get -> Kumiko.UI.Color
+Kumiko.Components.ToneColors.Text.init -> void
+Kumiko.Components.ToneColors.ToneColors(Kumiko.UI.Color Background, Kumiko.UI.Color Foreground, Kumiko.UI.Color Text) -> void
+override Kumiko.Components.RadioGroupProps.GetHashCode() -> int
+override Kumiko.Components.SidebarItemProps.GetHashCode() -> int
+override Kumiko.Components.SliderProps.GetHashCode() -> int
+override Kumiko.Components.SwitchProps.GetHashCode() -> int
+override Kumiko.Components.TabsProps.GetHashCode() -> int
+override Kumiko.Components.ToggleGroupProps.GetHashCode() -> int
+override Kumiko.Components.ToneColors.Equals(object? obj) -> bool
+override Kumiko.Components.ToneColors.GetHashCode() -> int
+override Kumiko.Components.ToneColors.ToString() -> string!
+static Kumiko.Components.RadioGroupProps.operator !=(Kumiko.Components.RadioGroupProps left, Kumiko.Components.RadioGroupProps right) -> bool
+static Kumiko.Components.RadioGroupProps.operator ==(Kumiko.Components.RadioGroupProps left, Kumiko.Components.RadioGroupProps right) -> bool
+static Kumiko.Components.SidebarItemProps.operator !=(Kumiko.Components.SidebarItemProps left, Kumiko.Components.SidebarItemProps right) -> bool
+static Kumiko.Components.SidebarItemProps.operator ==(Kumiko.Components.SidebarItemProps left, Kumiko.Components.SidebarItemProps right) -> bool
+static Kumiko.Components.SliderProps.operator !=(Kumiko.Components.SliderProps left, Kumiko.Components.SliderProps right) -> bool
+static Kumiko.Components.SliderProps.operator ==(Kumiko.Components.SliderProps left, Kumiko.Components.SliderProps right) -> bool
+static Kumiko.Components.SwitchProps.operator !=(Kumiko.Components.SwitchProps left, Kumiko.Components.SwitchProps right) -> bool
+static Kumiko.Components.SwitchProps.operator ==(Kumiko.Components.SwitchProps left, Kumiko.Components.SwitchProps right) -> bool
+static Kumiko.Components.TabsProps.operator !=(Kumiko.Components.TabsProps left, Kumiko.Components.TabsProps right) -> bool
+static Kumiko.Components.TabsProps.operator ==(Kumiko.Components.TabsProps left, Kumiko.Components.TabsProps right) -> bool
+static Kumiko.Components.ToggleGroupProps.operator !=(Kumiko.Components.ToggleGroupProps left, Kumiko.Components.ToggleGroupProps right) -> bool
+static Kumiko.Components.ToggleGroupProps.operator ==(Kumiko.Components.ToggleGroupProps left, Kumiko.Components.ToggleGroupProps right) -> bool
+static Kumiko.Components.ToneColors.operator !=(Kumiko.Components.ToneColors? left, Kumiko.Components.ToneColors? right) -> bool
+static Kumiko.Components.ToneColors.operator ==(Kumiko.Components.ToneColors? left, Kumiko.Components.ToneColors? right) -> bool
+~override Kumiko.Components.RadioGroupProps.Equals(object obj) -> bool
+~override Kumiko.Components.RadioGroupProps.ToString() -> string
+~override Kumiko.Components.SidebarItemProps.Equals(object obj) -> bool
+~override Kumiko.Components.SidebarItemProps.ToString() -> string
+~override Kumiko.Components.SliderProps.Equals(object obj) -> bool
+~override Kumiko.Components.SliderProps.ToString() -> string
+~override Kumiko.Components.SwitchProps.Equals(object obj) -> bool
+~override Kumiko.Components.SwitchProps.ToString() -> string
+~override Kumiko.Components.TabsProps.Equals(object obj) -> bool
+~override Kumiko.Components.TabsProps.ToString() -> string
+~override Kumiko.Components.ToggleGroupProps.Equals(object obj) -> bool
+~override Kumiko.Components.ToggleGroupProps.ToString() -> string

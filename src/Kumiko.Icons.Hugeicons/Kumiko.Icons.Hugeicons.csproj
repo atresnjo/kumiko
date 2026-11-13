@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsAotCompatible>true</IsAotCompatible>
+    <IsTrimmable>true</IsTrimmable>
+    <IsPackable>true</IsPackable>
+    <Description>Hugeicons free Stroke Rounded icons for Kumiko. MIT licensed, tintable SVGs for native and web views.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <NoWarn>$(NoWarn);RS0026;RS0027</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Kumiko/Kumiko.csproj" />
+    <EmbeddedResource Include="Assets/*.svg" LogicalName="Hugeicons.%(Filename).svg" />
+    <None Include="Assets/*.svg" Pack="true" PackagePath="assets/hugeicons/" />
+    <None Include="buildTransitive/Kumiko.Icons.Hugeicons.targets" Pack="true" PackagePath="buildTransitive/" />
+    <None Include="README.md;upstream.json" Pack="true" PackagePath="/" />
+    <None Include="../../third_party/licenses/Hugeicons-MIT.txt" Pack="true" PackagePath="third_party/licenses/" />
+    <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="5.6.0" PrivateAssets="all" />
+    <AdditionalFiles Include="PublicAPI/**/PublicAPI.*.txt" />
+  </ItemGroup>
+  <!--
+    Trimming and NativeAOT keep every manifest resource. When an app selects icons with KumikoHugeicon items,
+    buildTransitive sets the Subset feature switch and one switch per selected icon; this embedded file then
+    removes every other SVG. Without the Subset switch nothing is removed. ILC and ILLink strip the file itself.
+  -->
+  <Target Name="KumikoHugeiconsSubstitutions" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <_KumikoHugeiconsSubstitutions>$(IntermediateOutputPath)ILLink.Substitutions.xml</_KumikoHugeiconsSubstitutions>
+    </PropertyGroup>
+    <ItemGroup>
+      <_KumikoHugeiconsSvg Include="Assets/*.svg" />
+    </ItemGroup>
+    <WriteLinesToFile File="$(_KumikoHugeiconsSubstitutions)" Overwrite="true" WriteOnlyWhenDifferent="true"
+      Lines="&lt;linker&gt;;&lt;assembly fullname=&quot;$(AssemblyName)&quot; feature=&quot;Kumiko.Icons.Hugeicons.Subset&quot; featurevalue=&quot;true&quot;&gt;;@(_KumikoHugeiconsSvg->'&lt;resource name=&quot;Hugeicons.%(Filename).svg&quot; action=&quot;remove&quot; feature=&quot;Kumiko.Icons.Hugeicons.Icon.%(Filename)&quot; featurevalue=&quot;false&quot; featuredefault=&quot;true&quot; /&gt;');&lt;/assembly&gt;;&lt;/linker&gt;" />
+    <ItemGroup>
+      <EmbeddedResource Include="$(_KumikoHugeiconsSubstitutions)" LogicalName="ILLink.Substitutions.xml" />
+      <FileWrites Include="$(_KumikoHugeiconsSubstitutions)" />
+    </ItemGroup>
+  </Target>
+</Project>

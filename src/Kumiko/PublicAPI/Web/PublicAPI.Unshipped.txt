@@ -1,0 +1,3 @@
+#nullable enable
+Kumiko.Web.ServiceRegistry.BindStream<TArgument, TItem>(string! service, string! method, System.Func<Kumiko.Web.CallContext, TArgument, System.Collections.Generic.IAsyncEnumerable<TItem>!>! handler, System.Text.Json.Serialization.Metadata.JsonTypeInfo<TArgument>! arguments, System.Text.Json.Serialization.Metadata.JsonTypeInfo<TItem>! item, string! argumentType, string! itemType) -> void
+Kumiko.Web.ServiceRegistry.StreamAsync(string! method, System.Text.Json.JsonElement argument, Kumiko.Web.CallContext context) -> System.Collections.Generic.IAsyncEnumerable<string!>!

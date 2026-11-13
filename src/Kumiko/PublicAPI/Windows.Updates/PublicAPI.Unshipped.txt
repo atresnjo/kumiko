@@ -1,0 +1,10 @@
+#nullable enable
+Kumiko.Desktop.UpdateApplyMethod
+Kumiko.Desktop.UpdateApplyMethod.AppInstaller = 0 -> Kumiko.Desktop.UpdateApplyMethod
+Kumiko.Desktop.UpdateApplyMethod.PortableSwap = 1 -> Kumiko.Desktop.UpdateApplyMethod
+Kumiko.Desktop.UpdateInstallation
+Kumiko.Desktop.UpdateInstallation.Method.get -> Kumiko.Desktop.UpdateApplyMethod
+Kumiko.Desktop.UpdateInstallation.Path.get -> string!
+Kumiko.Desktop.UpdateInstallation.Restart() -> void
+Kumiko.Desktop.UpdateInstallation.Version.get -> string!
+static Kumiko.Desktop.UpdateFeed.InstallAsync(Kumiko.App! app, Kumiko.Desktop.StagedUpdate! update, System.Threading.CancellationToken token = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Kumiko.Desktop.UpdateInstallation!>!

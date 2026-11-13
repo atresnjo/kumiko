@@ -1,0 +1,35 @@
+<Project>
+  <!-- Embed only the Hugeicons Flint draws (Palette.cs Icons). Imported by the app and its E2E host. -->
+  <ItemGroup>
+    <KumikoHugeicon Include="add-01" />
+    <KumikoHugeicon Include="archive-02" />
+    <KumikoHugeicon Include="arrow-down-01" />
+    <KumikoHugeicon Include="arrow-down-02" />
+    <KumikoHugeicon Include="arrow-right-01" />
+    <KumikoHugeicon Include="arrow-up-02" />
+    <KumikoHugeicon Include="cancel-01" />
+    <KumikoHugeicon Include="cloud" />
+    <KumikoHugeicon Include="computer-terminal-01" />
+    <KumikoHugeicon Include="copy-01" />
+    <KumikoHugeicon Include="dashboard-square-01" />
+    <KumikoHugeicon Include="delete-02" />
+    <KumikoHugeicon Include="download-04" />
+    <KumikoHugeicon Include="file-01" />
+    <KumikoHugeicon Include="file-edit" />
+    <KumikoHugeicon Include="folder-01" />
+    <KumikoHugeicon Include="folder-open" />
+    <KumikoHugeicon Include="folder-search" />
+    <KumikoHugeicon Include="focus-point" />
+    <KumikoHugeicon Include="git-branch" />
+    <KumikoHugeicon Include="git-commit" />
+    <KumikoHugeicon Include="git-fork" />
+    <KumikoHugeicon Include="pencil-edit-01" />
+    <KumikoHugeicon Include="refresh" />
+    <KumikoHugeicon Include="search-01" />
+    <KumikoHugeicon Include="sidebar-left" />
+    <KumikoHugeicon Include="tag-01" />
+    <KumikoHugeicon Include="tick-02" />
+    <KumikoHugeicon Include="unfold-less" />
+    <KumikoHugeicon Include="user" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><KumikoStrict>false</KumikoStrict></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../../src/Kumiko/Kumiko.csproj" /></ItemGroup>
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('OSX'))">
+    <AlsaFixtureName>libkumiko-alsa-fixture.dylib</AlsaFixtureName>
+    <AlsaFixtureFlags>-dynamiclib -pthread</AlsaFixtureFlags>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Linux'))">
+    <AlsaFixtureName>libkumiko-alsa-fixture.so</AlsaFixtureName>
+    <AlsaFixtureFlags>-shared -fPIC -pthread</AlsaFixtureFlags>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(AlsaFixtureName)' != ''">
+    <None Include="obj/alsa-fixture/$(AlsaFixtureName)" Link="$(AlsaFixtureName)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+  <Target Name="BuildAlsaFixture" BeforeTargets="PrepareForBuild" Condition="'$(AlsaFixtureName)' != ''">
+    <MakeDir Directories="$(MSBuildProjectDirectory)/obj/alsa-fixture" />
+    <Exec Command="cc $(AlsaFixtureFlags) &quot;$(MSBuildProjectDirectory)/AlsaFixture.c&quot; -o &quot;$(MSBuildProjectDirectory)/obj/alsa-fixture/$(AlsaFixtureName)&quot;" />
+  </Target>
+</Project>

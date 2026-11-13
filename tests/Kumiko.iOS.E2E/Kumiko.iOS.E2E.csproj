@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-ios</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
+    <ApplicationId>dev.kumiko.buttonchecks</ApplicationId>
+    <KumikoStrict>false</KumikoStrict>
+    <IsAotCompatible>true</IsAotCompatible>
+    <EnableDefaultCompileItems Condition="'$(KumikoResponsiveOnly)' == 'true' Or '$(KumikoPresentationOnly)' == 'true'">false</EnableDefaultCompileItems>
+    <!-- Presentation checks read UIKit's own action blocks in-process; see PresentationFlow. -->
+    <AllowUnsafeBlocks Condition="'$(KumikoResponsiveOnly)' != 'true'">true</AllowUnsafeBlocks>
+    <!-- Match the example's app-local NativeAOT opt-in without applying it to build-time tools. -->
+    <PublishAot Condition="'$(KumikoiOSNativeAot)' != ''">$(KumikoiOSNativeAot)</PublishAot>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/Kumiko.iOS/Kumiko.iOS.csproj" />
+    <Compile Condition="'$(KumikoResponsiveOnly)' != 'true' And '$(KumikoPresentationOnly)' != 'true'" Include="../../examples/NativeButton/*.cs" Exclude="../../examples/NativeButton/Program.cs" Link="Shared/%(Filename)%(Extension)" />
+    <Compile Condition="'$(KumikoResponsiveOnly)' != 'true'" Include="../../examples/Components.iOS/*.cs" Exclude="../../examples/Components.iOS/Main.cs" Link="Components/%(Filename)%(Extension)" />
+    <Compile Condition="'$(KumikoResponsiveOnly)' != 'true' And '$(KumikoPresentationOnly)' != 'true'" Include="../../examples/Focus.iOS/*.cs" Exclude="../../examples/Focus.iOS/Main.cs" Link="Focus/%(Filename)%(Extension)" />
+    <Compile Condition="'$(KumikoResponsiveOnly)' != 'true' And '$(KumikoPresentationOnly)' != 'true'" Include="../../examples/Todo.iOS/*.cs" Exclude="../../examples/Todo.iOS/Main.cs" Link="Todo/%(Filename)%(Extension)" />
+    <ProjectReference Condition="'$(KumikoResponsiveOnly)' != 'true' And '$(KumikoPresentationOnly)' != 'true'" Include="../../examples/Todo.Components/Todo.Components.csproj" />
+    <None Include="../../examples/NativeButton.iOS/Info.plist" Link="Info.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Condition="'$(KumikoResponsiveOnly)' != 'true' And '$(KumikoPresentationOnly)' != 'true'" Include="../Shared/YogaFeaturesApp.cs" Link="Shared/YogaFeaturesApp.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(KumikoResponsiveOnly)' == 'true'">
+    <Compile Include="Responsive*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="../../examples/CRMLite/*.cs" Exclude="../../examples/CRMLite/Program.cs;../../examples/CRMLite/View*.cs;../../examples/CRMLite/Styles.cs;../../examples/CRMLite/Desktop.Host.cs;../../examples/CRMLite/Desktop.Native.cs" Link="CRM/%(Filename)%(Extension)" />
+    <Compile Include="../../examples/CRMLite.iOS/View*.cs;../../examples/CRMLite.iOS/Root.cs;../../examples/CRMLite.iOS/Harbor.cs" Link="CRM/%(Filename)%(Extension)" />
+    <ProjectReference Include="../../src/Kumiko.Icons.Hugeicons/Kumiko.Icons.Hugeicons.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(KumikoPresentationOnly)' == 'true'">
+    <Compile Include="Presentation*.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(KumikoResponsiveOnly)' != 'true'">
+    <Compile Remove="Responsive.Main.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(KumikoPresentationOnly)' != 'true'">
+    <Compile Remove="Presentation.Main.cs" />
+  </ItemGroup>
+</Project>

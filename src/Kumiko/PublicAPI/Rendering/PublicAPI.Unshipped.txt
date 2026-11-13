@@ -1,0 +1,4 @@
+#nullable enable
+Kumiko.Rendering.Instance.Turn -> System.Numerics.Vector4
+Kumiko.Rendering.SvgIcons
+static Kumiko.Rendering.SvgIcons.Register(string! prefix, System.Func<string!, string?>! resolve) -> void

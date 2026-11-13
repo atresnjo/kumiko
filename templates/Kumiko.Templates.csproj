@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Packs `dotnet new kumiko`; the template project itself is never compiled here. -->
+  <PropertyGroup>
+    <PackageId>Kumiko.Templates</PackageId>
+    <PackageType>Template</PackageType>
+    <Description>dotnet new templates for Kumiko desktop and iOS applications.</Description>
+    <IsPackable>true</IsPackable>
+    <IncludeSymbols>false</IncludeSymbols>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="kumiko/**/*" Exclude="kumiko/**/bin/**;kumiko/**/obj/**" />
+    <Content Include="kumiko-ios/**/*" Exclude="kumiko-ios/**/bin/**;kumiko-ios/**/obj/**" />
+    <None Include="../README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+</Project>

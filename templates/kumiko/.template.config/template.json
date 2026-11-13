@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Kumiko",
+  "classifications": ["Desktop", "Kumiko"],
+  "identity": "Kumiko.Runtime.CSharp",
+  "name": "Kumiko application",
+  "shortName": "kumiko",
+  "sourceName": "KumikoTemplate",
+  "preferNameDirectory": true,
+  "tags": { "language": "C#", "type": "project" }
+}

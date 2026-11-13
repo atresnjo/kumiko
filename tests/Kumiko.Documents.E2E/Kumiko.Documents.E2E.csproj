@@ -1,0 +1,4 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><KumikoStrict>false</KumikoStrict></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../../src/Kumiko/Kumiko.csproj" /><ProjectReference Include="../../examples/DocumentEditor/DocumentEditor.csproj" /><ProjectReference Include="../../examples/RichTextEditor/RichTextEditor.csproj" /></ItemGroup>
+</Project>

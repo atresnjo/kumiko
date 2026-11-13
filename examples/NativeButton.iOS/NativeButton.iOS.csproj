@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-ios</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
+    <ApplicationId>dev.kumiko.nativebutton</ApplicationId>
+    <ApplicationTitle>Kumiko Native Button</ApplicationTitle>
+    <IsAotCompatible>true</IsAotCompatible>
+    <!-- Keep PublishAot local to the app; a global value also reaches the net10.0 analyzer project. -->
+    <PublishAot Condition="'$(KumikoiOSNativeAot)' != ''">$(KumikoiOSNativeAot)</PublishAot>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <UseInterpreter>true</UseInterpreter>
+    <MtouchLink>None</MtouchLink>
+    <Registrar>dynamic</Registrar>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/Kumiko.iOS/Kumiko.iOS.csproj" />
+    <Compile Include="../NativeButton/*.cs" Exclude="../NativeButton/Program.cs" Link="Shared/%(Filename)%(Extension)" />
+  </ItemGroup>
+</Project>

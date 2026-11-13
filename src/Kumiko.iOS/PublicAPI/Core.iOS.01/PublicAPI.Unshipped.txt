@@ -1,0 +1,23 @@
+#nullable enable
+static Kumiko.iOS.NativePalette.operator !=(Kumiko.iOS.NativePalette? left, Kumiko.iOS.NativePalette? right) -> bool
+static Kumiko.iOS.NativePalette.operator ==(Kumiko.iOS.NativePalette? left, Kumiko.iOS.NativePalette? right) -> bool
+static Kumiko.iOS.NativePose.operator !=(Kumiko.iOS.NativePose left, Kumiko.iOS.NativePose right) -> bool
+static Kumiko.iOS.NativePose.operator ==(Kumiko.iOS.NativePose left, Kumiko.iOS.NativePose right) -> bool
+static Kumiko.iOS.NativeSpring.operator !=(Kumiko.iOS.NativeSpring left, Kumiko.iOS.NativeSpring right) -> bool
+static Kumiko.iOS.NativeSpring.operator ==(Kumiko.iOS.NativeSpring left, Kumiko.iOS.NativeSpring right) -> bool
+static Kumiko.iOS.NativeSurfaceOptions.operator !=(Kumiko.iOS.NativeSurfaceOptions left, Kumiko.iOS.NativeSurfaceOptions right) -> bool
+static Kumiko.iOS.NativeSurfaceOptions.operator ==(Kumiko.iOS.NativeSurfaceOptions left, Kumiko.iOS.NativeSurfaceOptions right) -> bool
+static Kumiko.iOS.NativeSwipeSelection.operator !=(Kumiko.iOS.NativeSwipeSelection? left, Kumiko.iOS.NativeSwipeSelection? right) -> bool
+static Kumiko.iOS.NativeSwipeSelection.operator ==(Kumiko.iOS.NativeSwipeSelection? left, Kumiko.iOS.NativeSwipeSelection? right) -> bool
+static Kumiko.iOS.NativeTabItem.operator !=(Kumiko.iOS.NativeTabItem? left, Kumiko.iOS.NativeTabItem? right) -> bool
+static Kumiko.iOS.NativeTabItem.operator ==(Kumiko.iOS.NativeTabItem? left, Kumiko.iOS.NativeTabItem? right) -> bool
+static Kumiko.iOS.NativeTimelineSegment.operator !=(Kumiko.iOS.NativeTimelineSegment? left, Kumiko.iOS.NativeTimelineSegment? right) -> bool
+static Kumiko.iOS.NativeTimelineSegment.operator ==(Kumiko.iOS.NativeTimelineSegment? left, Kumiko.iOS.NativeTimelineSegment? right) -> bool
+~override Kumiko.iOS.NativeActionOptions.Equals(object obj) -> bool
+~override Kumiko.iOS.NativeActionOptions.ToString() -> string
+~override Kumiko.iOS.NativePose.Equals(object obj) -> bool
+~override Kumiko.iOS.NativePose.ToString() -> string
+~override Kumiko.iOS.NativeSpring.Equals(object obj) -> bool
+~override Kumiko.iOS.NativeSpring.ToString() -> string
+~override Kumiko.iOS.NativeSurfaceOptions.Equals(object obj) -> bool
+~override Kumiko.iOS.NativeSurfaceOptions.ToString() -> string

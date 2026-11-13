@@ -1,0 +1,497 @@
+#nullable enable
+const Kumiko.Desktop.CredentialStore.MaximumSecretBytes = 2560 -> int
+const Kumiko.Desktop.TransferFormats.FileList = "application/x-kumiko-file-list" -> string!
+const Kumiko.Desktop.TransferFormats.HTML = "text/html" -> string!
+const Kumiko.Desktop.TransferFormats.PNG = "image/png" -> string!
+const Kumiko.Desktop.TransferFormats.Text = "text/plain;charset=utf-8" -> string!
+const Kumiko.Desktop.TransferFormats.URIList = "text/uri-list" -> string!
+Kumiko.Desktop.ApplicationCatalog
+Kumiko.Desktop.ApplicationCatalog.ApplicationCatalog(Kumiko.App! app) -> void
+Kumiko.Desktop.ApplicationCatalog.Dispose() -> void
+Kumiko.Desktop.ApplicationCatalog.EnumerateAsync(System.Threading.CancellationToken cancellation = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<Kumiko.Desktop.InstalledApplication!>!>!
+Kumiko.Desktop.ApplicationCatalog.LaunchAsync(Kumiko.Desktop.InstalledApplication! application) -> System.Threading.Tasks.Task!
+Kumiko.Desktop.Connectivity
+Kumiko.Desktop.Connectivity.CaptivePortal = 3 -> Kumiko.Desktop.Connectivity
+Kumiko.Desktop.Connectivity.Local = 2 -> Kumiko.Desktop.Connectivity
+Kumiko.Desktop.Connectivity.Offline = 1 -> Kumiko.Desktop.Connectivity
+Kumiko.Desktop.Connectivity.Online = 4 -> Kumiko.Desktop.Connectivity
+Kumiko.Desktop.Connectivity.Unknown = 0 -> Kumiko.Desktop.Connectivity
+Kumiko.Desktop.CredentialReadResult
+Kumiko.Desktop.CredentialReadResult.Dispose() -> void
+Kumiko.Desktop.CredentialReadResult.Secret.get -> Kumiko.Desktop.SecretBuffer?
+Kumiko.Desktop.CredentialReadResult.Status.get -> Kumiko.Desktop.CredentialStatus
+Kumiko.Desktop.CredentialScope
+Kumiko.Desktop.CredentialScope.<Clone>$() -> Kumiko.Desktop.CredentialScope!
+Kumiko.Desktop.CredentialScope.ApplicationId.get -> string!
+Kumiko.Desktop.CredentialScope.ApplicationId.init -> void
+Kumiko.Desktop.CredentialScope.CredentialScope(string! ApplicationId, string! Environment) -> void
+Kumiko.Desktop.CredentialScope.Deconstruct(out string! ApplicationId, out string! Environment) -> void
+Kumiko.Desktop.CredentialScope.Environment.get -> string!
+Kumiko.Desktop.CredentialScope.Environment.init -> void
+Kumiko.Desktop.CredentialScope.Equals(Kumiko.Desktop.CredentialScope? other) -> bool
+Kumiko.Desktop.CredentialStatus
+Kumiko.Desktop.CredentialStatus.Cancelled = 6 -> Kumiko.Desktop.CredentialStatus
+Kumiko.Desktop.CredentialStatus.Denied = 3 -> Kumiko.Desktop.CredentialStatus
+Kumiko.Desktop.CredentialStatus.Failed = 7 -> Kumiko.Desktop.CredentialStatus
+Kumiko.Desktop.CredentialStatus.Locked = 2 -> Kumiko.Desktop.CredentialStatus
+Kumiko.Desktop.CredentialStatus.Missing = 1 -> Kumiko.Desktop.CredentialStatus
+Kumiko.Desktop.CredentialStatus.Success = 0 -> Kumiko.Desktop.CredentialStatus
+Kumiko.Desktop.CredentialStatus.Unavailable = 4 -> Kumiko.Desktop.CredentialStatus
+Kumiko.Desktop.CredentialStatus.Unsupported = 5 -> Kumiko.Desktop.CredentialStatus
+Kumiko.Desktop.CredentialStore
+Kumiko.Desktop.CredentialStore.CredentialStore(Kumiko.App! app, Kumiko.Desktop.CredentialScope! scope) -> void
+Kumiko.Desktop.CredentialStore.DeleteAsync(string! key, System.Threading.CancellationToken cancellation = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Kumiko.Desktop.CredentialStatus>!
+Kumiko.Desktop.CredentialStore.Dispose() -> void
+Kumiko.Desktop.CredentialStore.PutAsync(string! key, System.ReadOnlySpan<byte> secret, System.Threading.CancellationToken cancellation = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Kumiko.Desktop.CredentialStatus>!
+Kumiko.Desktop.CredentialStore.ReadAsync(string! key, System.Threading.CancellationToken cancellation = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Kumiko.Desktop.CredentialReadResult!>!
+Kumiko.Desktop.CredentialStore.Scope.get -> Kumiko.Desktop.CredentialScope!
+Kumiko.Desktop.DesktopAction<TMessage>
+Kumiko.Desktop.DesktopAction<TMessage>.<Clone>$() -> Kumiko.Desktop.DesktopAction<TMessage>!
+Kumiko.Desktop.DesktopAction<TMessage>.Checked.get -> bool
+Kumiko.Desktop.DesktopAction<TMessage>.Checked.init -> void
+Kumiko.Desktop.DesktopAction<TMessage>.Deconstruct(out string! Id, out string! Label, out TMessage Message, out Kumiko.UI.Key Key, out Kumiko.UI.Modifiers Modifiers, out bool Enabled, out bool Checked, out Kumiko.Desktop.DesktopActionScope Scope) -> void
+Kumiko.Desktop.DesktopAction<TMessage>.DesktopAction(string! Id, string! Label, TMessage Message, Kumiko.UI.Key Key = Kumiko.UI.Key.None, Kumiko.UI.Modifiers Modifiers = Kumiko.UI.Modifiers.Primary, bool Enabled = true, bool Checked = false, Kumiko.Desktop.DesktopActionScope Scope = Kumiko.Desktop.DesktopActionScope.Window) -> void
+Kumiko.Desktop.DesktopAction<TMessage>.Enabled.get -> bool
+Kumiko.Desktop.DesktopAction<TMessage>.Enabled.init -> void
+Kumiko.Desktop.DesktopAction<TMessage>.Equals(Kumiko.Desktop.DesktopAction<TMessage>? other) -> bool
+Kumiko.Desktop.DesktopAction<TMessage>.Id.get -> string!
+Kumiko.Desktop.DesktopAction<TMessage>.Id.init -> void
+Kumiko.Desktop.DesktopAction<TMessage>.Key.get -> Kumiko.UI.Key
+Kumiko.Desktop.DesktopAction<TMessage>.Key.init -> void
+Kumiko.Desktop.DesktopAction<TMessage>.Label.get -> string!
+Kumiko.Desktop.DesktopAction<TMessage>.Label.init -> void
+Kumiko.Desktop.DesktopAction<TMessage>.Message.get -> TMessage
+Kumiko.Desktop.DesktopAction<TMessage>.Message.init -> void
+Kumiko.Desktop.DesktopAction<TMessage>.Modifiers.get -> Kumiko.UI.Modifiers
+Kumiko.Desktop.DesktopAction<TMessage>.Modifiers.init -> void
+Kumiko.Desktop.DesktopAction<TMessage>.Scope.get -> Kumiko.Desktop.DesktopActionScope
+Kumiko.Desktop.DesktopAction<TMessage>.Scope.init -> void
+Kumiko.Desktop.DesktopActionScope
+Kumiko.Desktop.DesktopActionScope.App = 0 -> Kumiko.Desktop.DesktopActionScope
+Kumiko.Desktop.DesktopActionScope.Focus = 2 -> Kumiko.Desktop.DesktopActionScope
+Kumiko.Desktop.DesktopActionScope.Window = 1 -> Kumiko.Desktop.DesktopActionScope
+Kumiko.Desktop.FileChange
+Kumiko.Desktop.FileChange.<Clone>$() -> Kumiko.Desktop.FileChange!
+Kumiko.Desktop.FileChange.Deconstruct(out Kumiko.Desktop.FileChangeKind Kind, out string! Path, out string? OldPath) -> void
+Kumiko.Desktop.FileChange.Equals(Kumiko.Desktop.FileChange? other) -> bool
+Kumiko.Desktop.FileChange.FileChange(Kumiko.Desktop.FileChangeKind Kind, string! Path, string? OldPath = null) -> void
+Kumiko.Desktop.FileChange.Kind.get -> Kumiko.Desktop.FileChangeKind
+Kumiko.Desktop.FileChange.Kind.init -> void
+Kumiko.Desktop.FileChange.OldPath.get -> string?
+Kumiko.Desktop.FileChange.OldPath.init -> void
+Kumiko.Desktop.FileChange.Path.get -> string!
+Kumiko.Desktop.FileChange.Path.init -> void
+Kumiko.Desktop.FileChangeKind
+Kumiko.Desktop.FileChangeKind.Changed = 1 -> Kumiko.Desktop.FileChangeKind
+Kumiko.Desktop.FileChangeKind.Created = 0 -> Kumiko.Desktop.FileChangeKind
+Kumiko.Desktop.FileChangeKind.Deleted = 2 -> Kumiko.Desktop.FileChangeKind
+Kumiko.Desktop.FileChangeKind.Hint = 4 -> Kumiko.Desktop.FileChangeKind
+Kumiko.Desktop.FileChangeKind.Renamed = 3 -> Kumiko.Desktop.FileChangeKind
+Kumiko.Desktop.FileIconCache
+Kumiko.Desktop.FileIconCache.Count.get -> int
+Kumiko.Desktop.FileIconCache.FileIconCache() -> void
+Kumiko.Desktop.FileIconCache.Get(string! path, int pixels = 64) -> Kumiko.Rendering.Image?
+Kumiko.Desktop.FileWatchBatch
+Kumiko.Desktop.FileWatchBatch.<Clone>$() -> Kumiko.Desktop.FileWatchBatch!
+Kumiko.Desktop.FileWatchBatch.Changes.get -> System.Collections.Generic.IReadOnlyList<Kumiko.Desktop.FileChange!>!
+Kumiko.Desktop.FileWatchBatch.Changes.init -> void
+Kumiko.Desktop.FileWatchBatch.Deconstruct(out System.Collections.Generic.IReadOnlyList<Kumiko.Desktop.FileChange!>! Changes, out bool Overflow, out string? Error) -> void
+Kumiko.Desktop.FileWatchBatch.Equals(Kumiko.Desktop.FileWatchBatch? other) -> bool
+Kumiko.Desktop.FileWatchBatch.Error.get -> string?
+Kumiko.Desktop.FileWatchBatch.Error.init -> void
+Kumiko.Desktop.FileWatchBatch.FileWatchBatch(System.Collections.Generic.IReadOnlyList<Kumiko.Desktop.FileChange!>! Changes, bool Overflow, string? Error = null) -> void
+Kumiko.Desktop.FileWatchBatch.Overflow.get -> bool
+Kumiko.Desktop.FileWatchBatch.Overflow.init -> void
+Kumiko.Desktop.FileWatcher
+Kumiko.Desktop.FileWatcher.Changed -> System.Action<Kumiko.Desktop.FileWatchBatch!>?
+Kumiko.Desktop.FileWatcher.Dispose() -> void
+Kumiko.Desktop.FileWatcher.FileWatcher(Kumiko.App! app, string! path, Kumiko.Desktop.FileWatcherOptions? options = null) -> void
+Kumiko.Desktop.FileWatcherOptions
+Kumiko.Desktop.FileWatcherOptions.<Clone>$() -> Kumiko.Desktop.FileWatcherOptions!
+Kumiko.Desktop.FileWatcherOptions.Debounce.get -> System.TimeSpan?
+Kumiko.Desktop.FileWatcherOptions.Debounce.init -> void
+Kumiko.Desktop.FileWatcherOptions.Deconstruct(out bool Recursive, out System.TimeSpan? Debounce, out System.Collections.Generic.IReadOnlyList<string!>? Ignore, out int EntryLimit, out bool HintsOnly) -> void
+Kumiko.Desktop.FileWatcherOptions.EntryLimit.get -> int
+Kumiko.Desktop.FileWatcherOptions.EntryLimit.init -> void
+Kumiko.Desktop.FileWatcherOptions.Equals(Kumiko.Desktop.FileWatcherOptions? other) -> bool
+Kumiko.Desktop.FileWatcherOptions.FileWatcherOptions(bool Recursive = false, System.TimeSpan? Debounce = null, System.Collections.Generic.IReadOnlyList<string!>? Ignore = null, int EntryLimit = 4096, bool HintsOnly = false) -> void
+Kumiko.Desktop.FileWatcherOptions.HintsOnly.get -> bool
+Kumiko.Desktop.FileWatcherOptions.HintsOnly.init -> void
+Kumiko.Desktop.FileWatcherOptions.Ignore.get -> System.Collections.Generic.IReadOnlyList<string!>?
+Kumiko.Desktop.FileWatcherOptions.Ignore.init -> void
+Kumiko.Desktop.FileWatcherOptions.Recursive.get -> bool
+Kumiko.Desktop.FileWatcherOptions.Recursive.init -> void
+Kumiko.Desktop.GlobalShortcut
+Kumiko.Desktop.GlobalShortcut.Dispose() -> void
+Kumiko.Desktop.GlobalShortcut.GlobalShortcut(Kumiko.App! app) -> void
+Kumiko.Desktop.GlobalShortcut.IsRegistered(string! accelerator) -> bool
+Kumiko.Desktop.GlobalShortcut.Register(string! accelerator, System.Action! callback) -> bool
+Kumiko.Desktop.GlobalShortcut.Unregister(string! accelerator) -> void
+Kumiko.Desktop.InstalledApplication
+Kumiko.Desktop.InstalledApplication.<Clone>$() -> Kumiko.Desktop.InstalledApplication!
+Kumiko.Desktop.InstalledApplication.Deconstruct(out string! Id, out string! Name, out string! Path) -> void
+Kumiko.Desktop.InstalledApplication.Equals(Kumiko.Desktop.InstalledApplication? other) -> bool
+Kumiko.Desktop.InstalledApplication.Id.get -> string!
+Kumiko.Desktop.InstalledApplication.Id.init -> void
+Kumiko.Desktop.InstalledApplication.InstalledApplication(string! Id, string! Name, string! Path) -> void
+Kumiko.Desktop.InstalledApplication.Name.get -> string!
+Kumiko.Desktop.InstalledApplication.Name.init -> void
+Kumiko.Desktop.InstalledApplication.Path.get -> string!
+Kumiko.Desktop.InstalledApplication.Path.init -> void
+Kumiko.Desktop.KeepAwakeKind
+Kumiko.Desktop.KeepAwakeKind.Display = 1 -> Kumiko.Desktop.KeepAwakeKind
+Kumiko.Desktop.KeepAwakeKind.System = 0 -> Kumiko.Desktop.KeepAwakeKind
+Kumiko.Desktop.LauncherPanel
+Kumiko.Desktop.LauncherPanel.Dismissed -> System.Action?
+Kumiko.Desktop.LauncherPanel.Dispose() -> void
+Kumiko.Desktop.LauncherPanel.Hide() -> void
+Kumiko.Desktop.LauncherPanel.IsVisible.get -> bool
+Kumiko.Desktop.LauncherPanel.LauncherPanel(Kumiko.App! app, Kumiko.Runtime.IProgram! program, Kumiko.WindowOptions? options = null) -> void
+Kumiko.Desktop.LauncherPanel.Show(Kumiko.Desktop.Screen? screen = null) -> void
+Kumiko.Desktop.LauncherPanel.Toggle() -> void
+Kumiko.Desktop.LauncherPanel.Window.get -> Kumiko.Window!
+Kumiko.Desktop.Menu.Append(Kumiko.Desktop.MenuItem! item) -> void
+Kumiko.Desktop.Menu.Insert(int index, Kumiko.Desktop.MenuItem! item) -> void
+Kumiko.Desktop.MenuItem.Radio.get -> bool
+Kumiko.Desktop.MenuItem.Radio.init -> void
+Kumiko.Desktop.MenuItem.SetAccelerator(string! value) -> void
+Kumiko.Desktop.MenuItem.SetChecked(bool value) -> void
+Kumiko.Desktop.MenuItem.SetEnabled(bool value) -> void
+Kumiko.Desktop.MenuItem.SetLabel(string! value) -> void
+Kumiko.Desktop.MenuItem.SetVisible(bool value) -> void
+Kumiko.Desktop.MenuItem.ToolTip.get -> string!
+Kumiko.Desktop.MenuItem.ToolTip.init -> void
+Kumiko.Desktop.MenuRole.AppMenu = 24 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.DesktopAction = 25 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.EditMenu = 20 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.FileMenu = 19 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.HelpMenu = 23 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.OpenRecent = 18 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.ViewMenu = 21 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.WindowMenu = 22 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.NetworkMonitor
+Kumiko.Desktop.NetworkMonitor.Changed -> System.Action<Kumiko.Desktop.NetworkStatus!>?
+Kumiko.Desktop.NetworkMonitor.Current.get -> Kumiko.Desktop.NetworkStatus!
+Kumiko.Desktop.NetworkMonitor.Dispose() -> void
+Kumiko.Desktop.NetworkMonitor.NetworkMonitor(Kumiko.App! app) -> void
+Kumiko.Desktop.NetworkStatus
+Kumiko.Desktop.NetworkStatus.<Clone>$() -> Kumiko.Desktop.NetworkStatus!
+Kumiko.Desktop.NetworkStatus.Connectivity.get -> Kumiko.Desktop.Connectivity
+Kumiko.Desktop.NetworkStatus.Connectivity.init -> void
+Kumiko.Desktop.NetworkStatus.Constrained.get -> bool?
+Kumiko.Desktop.NetworkStatus.Constrained.init -> void
+Kumiko.Desktop.NetworkStatus.Deconstruct(out Kumiko.Desktop.Connectivity Connectivity, out bool? Expensive, out bool? Constrained) -> void
+Kumiko.Desktop.NetworkStatus.Equals(Kumiko.Desktop.NetworkStatus? other) -> bool
+Kumiko.Desktop.NetworkStatus.Expensive.get -> bool?
+Kumiko.Desktop.NetworkStatus.Expensive.init -> void
+Kumiko.Desktop.NetworkStatus.NetworkStatus(Kumiko.Desktop.Connectivity Connectivity = Kumiko.Desktop.Connectivity.Unknown, bool? Expensive = null, bool? Constrained = null) -> void
+Kumiko.Desktop.Notification
+Kumiko.Desktop.Notification.ClearNotifications() -> void
+Kumiko.Desktop.Notification.Clicked -> System.Action<Kumiko.Desktop.NotificationClick!>?
+Kumiko.Desktop.Notification.Close(string! id, string! group = "") -> void
+Kumiko.Desktop.Notification.Dispose() -> void
+Kumiko.Desktop.Notification.Notification(Kumiko.App! app) -> void
+Kumiko.Desktop.Notification.Show(Kumiko.Desktop.NotificationOptions! options, System.Action? click = null) -> System.Threading.Tasks.Task!
+Kumiko.Desktop.NotificationClick
+Kumiko.Desktop.NotificationClick.<Clone>$() -> Kumiko.Desktop.NotificationClick!
+Kumiko.Desktop.NotificationClick.Deconstruct(out string! Id, out string! Group) -> void
+Kumiko.Desktop.NotificationClick.Equals(Kumiko.Desktop.NotificationClick? other) -> bool
+Kumiko.Desktop.NotificationClick.Group.get -> string!
+Kumiko.Desktop.NotificationClick.Group.init -> void
+Kumiko.Desktop.NotificationClick.Id.get -> string!
+Kumiko.Desktop.NotificationClick.Id.init -> void
+Kumiko.Desktop.NotificationClick.NotificationClick(string! Id, string! Group) -> void
+Kumiko.Desktop.NotificationOptions
+Kumiko.Desktop.NotificationOptions.<Clone>$() -> Kumiko.Desktop.NotificationOptions!
+Kumiko.Desktop.NotificationOptions.Body.get -> string!
+Kumiko.Desktop.NotificationOptions.Body.init -> void
+Kumiko.Desktop.NotificationOptions.Deconstruct(out string! Id, out string! Title, out string! Body, out string! Subtitle, out string! Group) -> void
+Kumiko.Desktop.NotificationOptions.Equals(Kumiko.Desktop.NotificationOptions? other) -> bool
+Kumiko.Desktop.NotificationOptions.Group.get -> string!
+Kumiko.Desktop.NotificationOptions.Group.init -> void
+Kumiko.Desktop.NotificationOptions.Id.get -> string!
+Kumiko.Desktop.NotificationOptions.Id.init -> void
+Kumiko.Desktop.NotificationOptions.NotificationOptions(string! Id, string! Title, string! Body = "", string! Subtitle = "", string! Group = "") -> void
+Kumiko.Desktop.NotificationOptions.Subtitle.get -> string!
+Kumiko.Desktop.NotificationOptions.Subtitle.init -> void
+Kumiko.Desktop.NotificationOptions.Title.get -> string!
+Kumiko.Desktop.NotificationOptions.Title.init -> void
+Kumiko.Desktop.PowerCapabilities
+Kumiko.Desktop.PowerCapabilities.Battery = 16 -> Kumiko.Desktop.PowerCapabilities
+Kumiko.Desktop.PowerCapabilities.DisplayKeepAwake = 2 -> Kumiko.Desktop.PowerCapabilities
+Kumiko.Desktop.PowerCapabilities.IdleTime = 32 -> Kumiko.Desktop.PowerCapabilities
+Kumiko.Desktop.PowerCapabilities.LockUnlock = 8 -> Kumiko.Desktop.PowerCapabilities
+Kumiko.Desktop.PowerCapabilities.None = 0 -> Kumiko.Desktop.PowerCapabilities
+Kumiko.Desktop.PowerCapabilities.SessionActivity = 64 -> Kumiko.Desktop.PowerCapabilities
+Kumiko.Desktop.PowerCapabilities.SuspendResume = 4 -> Kumiko.Desktop.PowerCapabilities
+Kumiko.Desktop.PowerCapabilities.SystemKeepAwake = 1 -> Kumiko.Desktop.PowerCapabilities
+Kumiko.Desktop.PowerSession
+Kumiko.Desktop.PowerSession.Capabilities.get -> Kumiko.Desktop.PowerCapabilities
+Kumiko.Desktop.PowerSession.CapabilitiesChanged -> System.Action<Kumiko.Desktop.PowerCapabilities>?
+Kumiko.Desktop.PowerSession.Changed -> System.Action<Kumiko.Desktop.PowerStatus!>?
+Kumiko.Desktop.PowerSession.Current.get -> Kumiko.Desktop.PowerStatus!
+Kumiko.Desktop.PowerSession.Dispose() -> void
+Kumiko.Desktop.PowerSession.IdleTime.get -> System.TimeSpan?
+Kumiko.Desktop.PowerSession.KeepAwake(Kumiko.Desktop.KeepAwakeKind kind, string! reason) -> System.IDisposable!
+Kumiko.Desktop.PowerSession.KeepAwakeAsync(Kumiko.Desktop.KeepAwakeKind kind, string! reason, System.Threading.CancellationToken cancellation = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<System.IDisposable!>!
+Kumiko.Desktop.PowerSession.PowerSession(Kumiko.App! app) -> void
+Kumiko.Desktop.PowerSession.SessionChanged -> System.Action<Kumiko.Desktop.SessionChange>?
+Kumiko.Desktop.PowerStatus
+Kumiko.Desktop.PowerStatus.<Clone>$() -> Kumiko.Desktop.PowerStatus!
+Kumiko.Desktop.PowerStatus.BatteryPercent.get -> double?
+Kumiko.Desktop.PowerStatus.BatteryPercent.init -> void
+Kumiko.Desktop.PowerStatus.BatteryPresent.get -> bool?
+Kumiko.Desktop.PowerStatus.BatteryPresent.init -> void
+Kumiko.Desktop.PowerStatus.Charging.get -> bool?
+Kumiko.Desktop.PowerStatus.Charging.init -> void
+Kumiko.Desktop.PowerStatus.Deconstruct(out bool? BatteryPresent, out bool? OnBattery, out double? BatteryPercent, out bool? Charging) -> void
+Kumiko.Desktop.PowerStatus.Equals(Kumiko.Desktop.PowerStatus? other) -> bool
+Kumiko.Desktop.PowerStatus.OnBattery.get -> bool?
+Kumiko.Desktop.PowerStatus.OnBattery.init -> void
+Kumiko.Desktop.PowerStatus.PowerStatus(bool? BatteryPresent = null, bool? OnBattery = null, double? BatteryPercent = null, bool? Charging = null) -> void
+Kumiko.Desktop.Screen
+Kumiko.Desktop.Screen.<Clone>$() -> Kumiko.Desktop.Screen!
+Kumiko.Desktop.Screen.Bounds.get -> Kumiko.UI.Rect
+Kumiko.Desktop.Screen.Bounds.init -> void
+Kumiko.Desktop.Screen.Deconstruct(out Kumiko.UI.Rect Bounds, out Kumiko.UI.Rect WorkArea, out float Scale, out bool Primary) -> void
+Kumiko.Desktop.Screen.Equals(Kumiko.Desktop.Screen? other) -> bool
+Kumiko.Desktop.Screen.Primary.get -> bool
+Kumiko.Desktop.Screen.Primary.init -> void
+Kumiko.Desktop.Screen.Scale.get -> float
+Kumiko.Desktop.Screen.Scale.init -> void
+Kumiko.Desktop.Screen.Screen(Kumiko.UI.Rect Bounds, Kumiko.UI.Rect WorkArea, float Scale, bool Primary) -> void
+Kumiko.Desktop.Screen.WorkArea.get -> Kumiko.UI.Rect
+Kumiko.Desktop.Screen.WorkArea.init -> void
+Kumiko.Desktop.Screens
+Kumiko.Desktop.SecretBuffer
+Kumiko.Desktop.SecretBuffer.Bytes.get -> System.ReadOnlySpan<byte>
+Kumiko.Desktop.SecretBuffer.Dispose() -> void
+Kumiko.Desktop.SemanticVersion
+Kumiko.Desktop.SemanticVersion.<Clone>$() -> Kumiko.Desktop.SemanticVersion!
+Kumiko.Desktop.SemanticVersion.CompareTo(Kumiko.Desktop.SemanticVersion? other) -> int
+Kumiko.Desktop.SemanticVersion.Equals(Kumiko.Desktop.SemanticVersion? other) -> bool
+Kumiko.Desktop.SemanticVersion.IsPrerelease.get -> bool
+Kumiko.Desktop.SemanticVersion.Value.get -> string!
+Kumiko.Desktop.SessionChange
+Kumiko.Desktop.SessionChange.Activated = 4 -> Kumiko.Desktop.SessionChange
+Kumiko.Desktop.SessionChange.Deactivated = 5 -> Kumiko.Desktop.SessionChange
+Kumiko.Desktop.SessionChange.Locked = 2 -> Kumiko.Desktop.SessionChange
+Kumiko.Desktop.SessionChange.Resumed = 1 -> Kumiko.Desktop.SessionChange
+Kumiko.Desktop.SessionChange.Suspending = 0 -> Kumiko.Desktop.SessionChange
+Kumiko.Desktop.SessionChange.Unlocked = 3 -> Kumiko.Desktop.SessionChange
+Kumiko.Desktop.StagedUpdate
+Kumiko.Desktop.StagedUpdate.<Clone>$() -> Kumiko.Desktop.StagedUpdate!
+Kumiko.Desktop.StagedUpdate.Deconstruct(out Kumiko.Desktop.UpdateRelease! Release, out string! Path, out Kumiko.Desktop.UpdateInstallStrategy Strategy) -> void
+Kumiko.Desktop.StagedUpdate.Equals(Kumiko.Desktop.StagedUpdate? other) -> bool
+Kumiko.Desktop.StagedUpdate.Path.get -> string!
+Kumiko.Desktop.StagedUpdate.Path.init -> void
+Kumiko.Desktop.StagedUpdate.Release.get -> Kumiko.Desktop.UpdateRelease!
+Kumiko.Desktop.StagedUpdate.Release.init -> void
+Kumiko.Desktop.StagedUpdate.StagedUpdate(Kumiko.Desktop.UpdateRelease! Release, string! Path, Kumiko.Desktop.UpdateInstallStrategy Strategy) -> void
+Kumiko.Desktop.StagedUpdate.Strategy.get -> Kumiko.Desktop.UpdateInstallStrategy
+Kumiko.Desktop.StagedUpdate.Strategy.init -> void
+Kumiko.Desktop.StartupItem
+Kumiko.Desktop.StartupItem.Dispose() -> void
+Kumiko.Desktop.StartupItem.GetLaunchAtLoginAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<bool>!
+Kumiko.Desktop.StartupItem.Read() -> Kumiko.Desktop.StartupStatus!
+Kumiko.Desktop.StartupItem.SetEnabled(bool enabled) -> Kumiko.Desktop.StartupStatus!
+Kumiko.Desktop.StartupItem.StartupItem(Kumiko.App! app, string! identity, string! name) -> void
+Kumiko.Desktop.StartupItem.WasLaunchedAtLogin.get -> bool
+Kumiko.Desktop.StartupState
+Kumiko.Desktop.StartupState.Disabled = 0 -> Kumiko.Desktop.StartupState
+Kumiko.Desktop.StartupState.Enabled = 1 -> Kumiko.Desktop.StartupState
+Kumiko.Desktop.StartupState.OwnedByAnother = 4 -> Kumiko.Desktop.StartupState
+Kumiko.Desktop.StartupState.RequiresApproval = 2 -> Kumiko.Desktop.StartupState
+Kumiko.Desktop.StartupState.Unsupported = 3 -> Kumiko.Desktop.StartupState
+Kumiko.Desktop.StartupStatus
+Kumiko.Desktop.StartupStatus.<Clone>$() -> Kumiko.Desktop.StartupStatus!
+Kumiko.Desktop.StartupStatus.Deconstruct(out Kumiko.Desktop.StartupState State, out string? Detail) -> void
+Kumiko.Desktop.StartupStatus.Detail.get -> string?
+Kumiko.Desktop.StartupStatus.Detail.init -> void
+Kumiko.Desktop.StartupStatus.Equals(Kumiko.Desktop.StartupStatus? other) -> bool
+Kumiko.Desktop.StartupStatus.StartupStatus(Kumiko.Desktop.StartupState State, string? Detail = null) -> void
+Kumiko.Desktop.StartupStatus.State.get -> Kumiko.Desktop.StartupState
+Kumiko.Desktop.StartupStatus.State.init -> void
+Kumiko.Desktop.TransferData
+Kumiko.Desktop.TransferData.<Clone>$() -> Kumiko.Desktop.TransferData!
+Kumiko.Desktop.TransferData.Equals(Kumiko.Desktop.TransferData? other) -> bool
+Kumiko.Desktop.TransferData.Formats.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Kumiko.Desktop.TransferData.Items.get -> System.Collections.Generic.IReadOnlyList<Kumiko.Desktop.TransferItem!>!
+Kumiko.Desktop.TransferData.TransferData(params Kumiko.Desktop.TransferItem![]! items) -> void
+Kumiko.Desktop.TransferFormats
+Kumiko.Desktop.TransferItem
+Kumiko.Desktop.TransferItem.<Clone>$() -> Kumiko.Desktop.TransferItem!
+Kumiko.Desktop.TransferItem.Equals(Kumiko.Desktop.TransferItem? other) -> bool
+Kumiko.Desktop.TransferItem.Formats.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Kumiko.Desktop.TransferItem.TransferItem(params Kumiko.Desktop.TransferRepresentation![]! representations) -> void
+Kumiko.Desktop.TransferRepresentation
+Kumiko.Desktop.TransferRepresentation.<Clone>$() -> Kumiko.Desktop.TransferRepresentation!
+Kumiko.Desktop.TransferRepresentation.Equals(Kumiko.Desktop.TransferRepresentation? other) -> bool
+Kumiko.Desktop.TransferRepresentation.Format.get -> string!
+Kumiko.Desktop.TransferRepresentation.TransferRepresentation(string! format, byte[]! bytes) -> void
+Kumiko.Desktop.TransferRepresentation.TransferRepresentation(string! format, System.Func<byte[]!>! provider) -> void
+Kumiko.Desktop.Tray.AppearanceChanged -> System.Action<bool>?
+Kumiko.Desktop.Tray.Bounds.get -> Kumiko.UI.Rect
+Kumiko.Desktop.Tray.Click -> System.Action?
+Kumiko.Desktop.Tray.Id.get -> string!
+Kumiko.Desktop.Tray.IsDark.get -> bool
+Kumiko.Desktop.Tray.PopUpMenu() -> void
+Kumiko.Desktop.Tray.RightClick -> System.Action?
+Kumiko.Desktop.Tray.SetIcon(byte[]! png, byte[]? png2x = null, bool template = false) -> void
+Kumiko.Desktop.Tray.SetMenu(Kumiko.Desktop.Menu? menu) -> void
+Kumiko.Desktop.Tray.SetToolTip(string! text) -> void
+Kumiko.Desktop.Tray.Tray(Kumiko.App! app, Kumiko.Desktop.TrayOptions! options) -> void
+Kumiko.Desktop.TrayOptions
+Kumiko.Desktop.TrayOptions.<Clone>$() -> Kumiko.Desktop.TrayOptions!
+Kumiko.Desktop.TrayOptions.Deconstruct(out string! Id, out byte[]? Icon, out byte[]? Icon2x, out bool Template, out string! ToolTip, out string! Title, out Kumiko.Desktop.Menu? Menu) -> void
+Kumiko.Desktop.TrayOptions.Equals(Kumiko.Desktop.TrayOptions? other) -> bool
+Kumiko.Desktop.TrayOptions.Icon.get -> byte[]?
+Kumiko.Desktop.TrayOptions.Icon.init -> void
+Kumiko.Desktop.TrayOptions.Icon2x.get -> byte[]?
+Kumiko.Desktop.TrayOptions.Icon2x.init -> void
+Kumiko.Desktop.TrayOptions.Id.get -> string!
+Kumiko.Desktop.TrayOptions.Id.init -> void
+Kumiko.Desktop.TrayOptions.Menu.get -> Kumiko.Desktop.Menu?
+Kumiko.Desktop.TrayOptions.Menu.init -> void
+Kumiko.Desktop.TrayOptions.Template.get -> bool
+Kumiko.Desktop.TrayOptions.Template.init -> void
+Kumiko.Desktop.TrayOptions.Title.get -> string!
+Kumiko.Desktop.TrayOptions.Title.init -> void
+Kumiko.Desktop.TrayOptions.ToolTip.get -> string!
+Kumiko.Desktop.TrayOptions.ToolTip.init -> void
+Kumiko.Desktop.TrayOptions.TrayOptions(string! Id, byte[]? Icon = null, byte[]? Icon2x = null, bool Template = false, string! ToolTip = "", string! Title = "", Kumiko.Desktop.Menu? Menu = null) -> void
+Kumiko.Desktop.UpdateFeed
+Kumiko.Desktop.UpdateFeed.ReadAsync(System.Threading.CancellationToken token = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<Kumiko.Desktop.UpdateRelease!>!>!
+Kumiko.Desktop.UpdateFeed.StageAsync(Kumiko.Desktop.UpdateRelease! release, string! directory, System.Threading.CancellationToken token = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Kumiko.Desktop.StagedUpdate!>!
+Kumiko.Desktop.UpdateFeed.UpdateFeed(System.Net.Http.HttpClient! http, System.Uri! address, string! publicKeyPem) -> void
+Kumiko.Desktop.UpdateInstallStrategy
+Kumiko.Desktop.UpdateInstallStrategy.ExternalWindowsInstaller = 1 -> Kumiko.Desktop.UpdateInstallStrategy
+Kumiko.Desktop.UpdateInstallStrategy.LinuxPackageManager = 2 -> Kumiko.Desktop.UpdateInstallStrategy
+Kumiko.Desktop.UpdateInstallStrategy.MacBundleInstaller = 0 -> Kumiko.Desktop.UpdateInstallStrategy
+Kumiko.Desktop.UpdateRelease
+Kumiko.Desktop.UpdateRelease.<Clone>$() -> Kumiko.Desktop.UpdateRelease!
+Kumiko.Desktop.UpdateRelease.Deconstruct(out string! Version, out string! Runtime, out System.Uri! Download, out string! Sha256) -> void
+Kumiko.Desktop.UpdateRelease.Download.get -> System.Uri!
+Kumiko.Desktop.UpdateRelease.Download.init -> void
+Kumiko.Desktop.UpdateRelease.Equals(Kumiko.Desktop.UpdateRelease? other) -> bool
+Kumiko.Desktop.UpdateRelease.Runtime.get -> string!
+Kumiko.Desktop.UpdateRelease.Runtime.init -> void
+Kumiko.Desktop.UpdateRelease.Sha256.get -> string!
+Kumiko.Desktop.UpdateRelease.Sha256.init -> void
+Kumiko.Desktop.UpdateRelease.UpdateRelease(string! Version, string! Runtime, System.Uri! Download, string! Sha256) -> void
+Kumiko.Desktop.UpdateRelease.Version.get -> string!
+Kumiko.Desktop.UpdateRelease.Version.init -> void
+override Kumiko.Desktop.CredentialReadResult.ToString() -> string!
+override Kumiko.Desktop.CredentialScope.Equals(object? obj) -> bool
+override Kumiko.Desktop.CredentialScope.GetHashCode() -> int
+override Kumiko.Desktop.CredentialScope.ToString() -> string!
+override Kumiko.Desktop.DesktopAction<TMessage>.Equals(object? obj) -> bool
+override Kumiko.Desktop.DesktopAction<TMessage>.GetHashCode() -> int
+override Kumiko.Desktop.DesktopAction<TMessage>.ToString() -> string!
+override Kumiko.Desktop.FileChange.Equals(object? obj) -> bool
+override Kumiko.Desktop.FileChange.GetHashCode() -> int
+override Kumiko.Desktop.FileChange.ToString() -> string!
+override Kumiko.Desktop.FileWatchBatch.Equals(object? obj) -> bool
+override Kumiko.Desktop.FileWatchBatch.GetHashCode() -> int
+override Kumiko.Desktop.FileWatchBatch.ToString() -> string!
+override Kumiko.Desktop.FileWatcherOptions.Equals(object? obj) -> bool
+override Kumiko.Desktop.FileWatcherOptions.GetHashCode() -> int
+override Kumiko.Desktop.FileWatcherOptions.ToString() -> string!
+override Kumiko.Desktop.InstalledApplication.Equals(object? obj) -> bool
+override Kumiko.Desktop.InstalledApplication.GetHashCode() -> int
+override Kumiko.Desktop.InstalledApplication.ToString() -> string!
+override Kumiko.Desktop.NetworkStatus.Equals(object? obj) -> bool
+override Kumiko.Desktop.NetworkStatus.GetHashCode() -> int
+override Kumiko.Desktop.NetworkStatus.ToString() -> string!
+override Kumiko.Desktop.NotificationClick.Equals(object? obj) -> bool
+override Kumiko.Desktop.NotificationClick.GetHashCode() -> int
+override Kumiko.Desktop.NotificationClick.ToString() -> string!
+override Kumiko.Desktop.NotificationOptions.Equals(object? obj) -> bool
+override Kumiko.Desktop.NotificationOptions.GetHashCode() -> int
+override Kumiko.Desktop.NotificationOptions.ToString() -> string!
+override Kumiko.Desktop.PowerStatus.Equals(object? obj) -> bool
+override Kumiko.Desktop.PowerStatus.GetHashCode() -> int
+override Kumiko.Desktop.PowerStatus.ToString() -> string!
+override Kumiko.Desktop.Screen.Equals(object? obj) -> bool
+override Kumiko.Desktop.Screen.GetHashCode() -> int
+override Kumiko.Desktop.Screen.ToString() -> string!
+override Kumiko.Desktop.SecretBuffer.ToString() -> string!
+override Kumiko.Desktop.SemanticVersion.Equals(object? obj) -> bool
+override Kumiko.Desktop.SemanticVersion.GetHashCode() -> int
+override Kumiko.Desktop.SemanticVersion.ToString() -> string!
+override Kumiko.Desktop.StagedUpdate.Equals(object? obj) -> bool
+override Kumiko.Desktop.StagedUpdate.GetHashCode() -> int
+override Kumiko.Desktop.StagedUpdate.ToString() -> string!
+override Kumiko.Desktop.StartupStatus.Equals(object? obj) -> bool
+override Kumiko.Desktop.StartupStatus.GetHashCode() -> int
+override Kumiko.Desktop.StartupStatus.ToString() -> string!
+override Kumiko.Desktop.TransferData.Equals(object? obj) -> bool
+override Kumiko.Desktop.TransferData.GetHashCode() -> int
+override Kumiko.Desktop.TransferData.ToString() -> string!
+override Kumiko.Desktop.TransferItem.Equals(object? obj) -> bool
+override Kumiko.Desktop.TransferItem.GetHashCode() -> int
+override Kumiko.Desktop.TransferItem.ToString() -> string!
+override Kumiko.Desktop.TransferRepresentation.Equals(object? obj) -> bool
+override Kumiko.Desktop.TransferRepresentation.GetHashCode() -> int
+override Kumiko.Desktop.TransferRepresentation.ToString() -> string!
+override Kumiko.Desktop.TrayOptions.Equals(object? obj) -> bool
+override Kumiko.Desktop.TrayOptions.GetHashCode() -> int
+override Kumiko.Desktop.TrayOptions.ToString() -> string!
+override Kumiko.Desktop.UpdateRelease.Equals(object? obj) -> bool
+override Kumiko.Desktop.UpdateRelease.GetHashCode() -> int
+override Kumiko.Desktop.UpdateRelease.ToString() -> string!
+static Kumiko.Desktop.Appearance.HighContrast.get -> bool
+static Kumiko.Desktop.Appearance.TextScale.get -> float
+static Kumiko.Desktop.ApplicationCatalog.Normalize(System.Collections.Generic.IEnumerable<Kumiko.Desktop.InstalledApplication!>! applications) -> System.Collections.Generic.IReadOnlyList<Kumiko.Desktop.InstalledApplication!>!
+static Kumiko.Desktop.Clipboard.Clear() -> void
+static Kumiko.Desktop.Clipboard.Flush() -> void
+static Kumiko.Desktop.Clipboard.Formats.get -> System.Collections.Generic.IReadOnlyList<string!>!
+static Kumiko.Desktop.Clipboard.Read(params string![]! formats) -> Kumiko.Desktop.TransferData!
+static Kumiko.Desktop.Clipboard.ReadFiles() -> System.Collections.Generic.IReadOnlyList<string!>!
+static Kumiko.Desktop.Clipboard.ReadFormat(string! format) -> byte[]!
+static Kumiko.Desktop.Clipboard.Write(Kumiko.Desktop.TransferData! data, System.Action? onRelease = null) -> void
+static Kumiko.Desktop.Clipboard.WriteFiles(params string![]! paths) -> void
+static Kumiko.Desktop.CredentialScope.operator !=(Kumiko.Desktop.CredentialScope? left, Kumiko.Desktop.CredentialScope? right) -> bool
+static Kumiko.Desktop.CredentialScope.operator ==(Kumiko.Desktop.CredentialScope? left, Kumiko.Desktop.CredentialScope? right) -> bool
+static Kumiko.Desktop.DesktopAction<TMessage>.operator !=(Kumiko.Desktop.DesktopAction<TMessage>? left, Kumiko.Desktop.DesktopAction<TMessage>? right) -> bool
+static Kumiko.Desktop.DesktopAction<TMessage>.operator ==(Kumiko.Desktop.DesktopAction<TMessage>? left, Kumiko.Desktop.DesktopAction<TMessage>? right) -> bool
+static Kumiko.Desktop.FileChange.operator !=(Kumiko.Desktop.FileChange? left, Kumiko.Desktop.FileChange? right) -> bool
+static Kumiko.Desktop.FileChange.operator ==(Kumiko.Desktop.FileChange? left, Kumiko.Desktop.FileChange? right) -> bool
+static Kumiko.Desktop.FileWatchBatch.operator !=(Kumiko.Desktop.FileWatchBatch? left, Kumiko.Desktop.FileWatchBatch? right) -> bool
+static Kumiko.Desktop.FileWatchBatch.operator ==(Kumiko.Desktop.FileWatchBatch? left, Kumiko.Desktop.FileWatchBatch? right) -> bool
+static Kumiko.Desktop.FileWatcherOptions.operator !=(Kumiko.Desktop.FileWatcherOptions? left, Kumiko.Desktop.FileWatcherOptions? right) -> bool
+static Kumiko.Desktop.FileWatcherOptions.operator ==(Kumiko.Desktop.FileWatcherOptions? left, Kumiko.Desktop.FileWatcherOptions? right) -> bool
+static Kumiko.Desktop.InstalledApplication.operator !=(Kumiko.Desktop.InstalledApplication? left, Kumiko.Desktop.InstalledApplication? right) -> bool
+static Kumiko.Desktop.InstalledApplication.operator ==(Kumiko.Desktop.InstalledApplication? left, Kumiko.Desktop.InstalledApplication? right) -> bool
+static Kumiko.Desktop.LauncherPanel.Placement(Kumiko.UI.Rect workArea, Kumiko.UI.Size requested) -> Kumiko.UI.Rect
+static Kumiko.Desktop.NetworkStatus.operator !=(Kumiko.Desktop.NetworkStatus? left, Kumiko.Desktop.NetworkStatus? right) -> bool
+static Kumiko.Desktop.NetworkStatus.operator ==(Kumiko.Desktop.NetworkStatus? left, Kumiko.Desktop.NetworkStatus? right) -> bool
+static Kumiko.Desktop.NotificationClick.operator !=(Kumiko.Desktop.NotificationClick? left, Kumiko.Desktop.NotificationClick? right) -> bool
+static Kumiko.Desktop.NotificationClick.operator ==(Kumiko.Desktop.NotificationClick? left, Kumiko.Desktop.NotificationClick? right) -> bool
+static Kumiko.Desktop.NotificationOptions.operator !=(Kumiko.Desktop.NotificationOptions? left, Kumiko.Desktop.NotificationOptions? right) -> bool
+static Kumiko.Desktop.NotificationOptions.operator ==(Kumiko.Desktop.NotificationOptions? left, Kumiko.Desktop.NotificationOptions? right) -> bool
+static Kumiko.Desktop.PowerStatus.operator !=(Kumiko.Desktop.PowerStatus? left, Kumiko.Desktop.PowerStatus? right) -> bool
+static Kumiko.Desktop.PowerStatus.operator ==(Kumiko.Desktop.PowerStatus? left, Kumiko.Desktop.PowerStatus? right) -> bool
+static Kumiko.Desktop.Screen.operator !=(Kumiko.Desktop.Screen? left, Kumiko.Desktop.Screen? right) -> bool
+static Kumiko.Desktop.Screen.operator ==(Kumiko.Desktop.Screen? left, Kumiko.Desktop.Screen? right) -> bool
+static Kumiko.Desktop.Screens.All.get -> System.Collections.Generic.IReadOnlyList<Kumiko.Desktop.Screen!>!
+static Kumiko.Desktop.SemanticVersion.operator !=(Kumiko.Desktop.SemanticVersion? left, Kumiko.Desktop.SemanticVersion? right) -> bool
+static Kumiko.Desktop.SemanticVersion.operator ==(Kumiko.Desktop.SemanticVersion? left, Kumiko.Desktop.SemanticVersion? right) -> bool
+static Kumiko.Desktop.SemanticVersion.Parse(string! value) -> Kumiko.Desktop.SemanticVersion!
+static Kumiko.Desktop.StagedUpdate.operator !=(Kumiko.Desktop.StagedUpdate? left, Kumiko.Desktop.StagedUpdate? right) -> bool
+static Kumiko.Desktop.StagedUpdate.operator ==(Kumiko.Desktop.StagedUpdate? left, Kumiko.Desktop.StagedUpdate? right) -> bool
+static Kumiko.Desktop.StartupStatus.operator !=(Kumiko.Desktop.StartupStatus? left, Kumiko.Desktop.StartupStatus? right) -> bool
+static Kumiko.Desktop.StartupStatus.operator ==(Kumiko.Desktop.StartupStatus? left, Kumiko.Desktop.StartupStatus? right) -> bool
+static Kumiko.Desktop.TransferData.Files(params string![]! paths) -> Kumiko.Desktop.TransferData!
+static Kumiko.Desktop.TransferData.operator !=(Kumiko.Desktop.TransferData? left, Kumiko.Desktop.TransferData? right) -> bool
+static Kumiko.Desktop.TransferData.operator ==(Kumiko.Desktop.TransferData? left, Kumiko.Desktop.TransferData? right) -> bool
+static Kumiko.Desktop.TransferData.Text(string! text) -> Kumiko.Desktop.TransferData!
+static Kumiko.Desktop.TransferItem.operator !=(Kumiko.Desktop.TransferItem? left, Kumiko.Desktop.TransferItem? right) -> bool
+static Kumiko.Desktop.TransferItem.operator ==(Kumiko.Desktop.TransferItem? left, Kumiko.Desktop.TransferItem? right) -> bool
+static Kumiko.Desktop.TransferRepresentation.operator !=(Kumiko.Desktop.TransferRepresentation? left, Kumiko.Desktop.TransferRepresentation? right) -> bool
+static Kumiko.Desktop.TransferRepresentation.operator ==(Kumiko.Desktop.TransferRepresentation? left, Kumiko.Desktop.TransferRepresentation? right) -> bool
+static Kumiko.Desktop.TrayOptions.operator !=(Kumiko.Desktop.TrayOptions? left, Kumiko.Desktop.TrayOptions? right) -> bool
+static Kumiko.Desktop.TrayOptions.operator ==(Kumiko.Desktop.TrayOptions? left, Kumiko.Desktop.TrayOptions? right) -> bool
+static Kumiko.Desktop.UpdateFeed.Select(System.Collections.Generic.IEnumerable<Kumiko.Desktop.UpdateRelease!>! releases, string! currentVersion, string! runtime, bool allowPrereleases) -> Kumiko.Desktop.UpdateRelease?
+static Kumiko.Desktop.UpdateRelease.operator !=(Kumiko.Desktop.UpdateRelease? left, Kumiko.Desktop.UpdateRelease? right) -> bool
+static Kumiko.Desktop.UpdateRelease.operator ==(Kumiko.Desktop.UpdateRelease? left, Kumiko.Desktop.UpdateRelease? right) -> bool

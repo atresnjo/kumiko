@@ -1,0 +1,141 @@
+:root,
+:root[data-theme="light"] {
+  color-scheme: light;
+  --surface: #ffffff;
+  --text: #1d1d1f;
+  --muted: #6e6e73;
+  --border: #d2d2d7;
+  --accent: #0a84ff;
+  --background: #f5f5f7;
+  --titlebar: #ececf0;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --surface: #1c1c1e;
+  --text: #f5f5f7;
+  --muted: #98989d;
+  --border: #3a3a3c;
+  --background: #000000;
+  --titlebar: #2c2c2e;
+}
+
+:root {
+  font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  user-select: none;
+}
+
+.app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.titlebar {
+  --app-region: drag;
+  height: 38px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 14px;
+  background: var(--titlebar);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Leave room for the macOS traffic lights, which stay over the page. */
+.titlebar.macos {
+  padding-left: 84px;
+}
+
+.title {
+  flex: 1;
+  font-weight: 600;
+}
+
+.window-buttons {
+  --app-region: no-drag;
+  display: flex;
+  align-self: stretch;
+}
+
+.window-buttons button {
+  width: 46px;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text);
+}
+
+.window-buttons button:hover {
+  background: var(--border);
+}
+
+.window-buttons .close:hover {
+  background: #e81123;
+  color: white;
+}
+
+.content {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 16px;
+}
+
+.toolbar {
+  display: flex;
+  gap: 8px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+button {
+  font: inherit;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--surface);
+  color: var(--text);
+  cursor: default;
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
+textarea {
+  flex: 1;
+  resize: none;
+  font: 14px/1.6 ui-monospace, "SF Mono", Consolas, monospace;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+  user-select: text;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.muted {
+  color: var(--muted);
+}

@@ -1,0 +1,101 @@
+#nullable enable
+Kumiko.Rendering.Atlas
+Kumiko.Rendering.Atlas.Atlas() -> void
+Kumiko.Rendering.Atlas.Bytes.get -> byte[]!
+Kumiko.Rendering.Atlas.Height.get -> int
+Kumiko.Rendering.Atlas.Insert(System.ReadOnlySpan<byte> rgba, int width, int height, float bearingX = 0, float bearingY = 0) -> Kumiko.Rendering.Sprite
+Kumiko.Rendering.Atlas.Version.get -> int
+Kumiko.Rendering.Atlas.Width.get -> int
+Kumiko.Rendering.CpuRenderer
+Kumiko.Rendering.Image
+Kumiko.Rendering.Image.Image(Kumiko.Rendering.Pixels! pixels) -> void
+Kumiko.Rendering.Image.Pixels.get -> Kumiko.Rendering.Pixels!
+Kumiko.Rendering.Instance
+Kumiko.Rendering.Instance.BorderColor -> System.Numerics.Vector4
+Kumiko.Rendering.Instance.BorderWidth -> float
+Kumiko.Rendering.Instance.Clip -> System.Numerics.Vector4
+Kumiko.Rendering.Instance.ClipRound -> float
+Kumiko.Rendering.Instance.Color -> System.Numerics.Vector4
+Kumiko.Rendering.Instance.Instance() -> void
+Kumiko.Rendering.Instance.Kind -> float
+Kumiko.Rendering.Instance.Radius -> float
+Kumiko.Rendering.Instance.Rect -> System.Numerics.Vector4
+Kumiko.Rendering.Instance.UV -> System.Numerics.Vector4
+Kumiko.Rendering.MetalRenderer
+Kumiko.Rendering.MetalRenderer.Dispose() -> void
+Kumiko.Rendering.MetalRenderer.MetalRenderer() -> void
+Kumiko.Rendering.MetalRenderer.Render(System.Collections.Generic.IReadOnlyList<Kumiko.Rendering.Instance>! instances, Kumiko.Rendering.Atlas! atlas, Kumiko.UI.Size size, float scale, Kumiko.UI.Color clear) -> Kumiko.Rendering.Pixels!
+Kumiko.Rendering.OffscreenGpu
+Kumiko.Rendering.OffscreenGpu.Capture(Kumiko.UI.Context! view) -> Kumiko.Rendering.Pixels!
+Kumiko.Rendering.OffscreenGpu.Dispose() -> void
+Kumiko.Rendering.OffscreenGpu.Driver.get -> string!
+Kumiko.Rendering.OffscreenGpu.OffscreenGpu() -> void
+Kumiko.Rendering.Pixels
+Kumiko.Rendering.Pixels.<Clone>$() -> Kumiko.Rendering.Pixels!
+Kumiko.Rendering.Pixels.Bytes.get -> byte[]!
+Kumiko.Rendering.Pixels.Bytes.init -> void
+Kumiko.Rendering.Pixels.Deconstruct(out byte[]! Bytes, out int Width, out int Height) -> void
+Kumiko.Rendering.Pixels.Equals(Kumiko.Rendering.Pixels? other) -> bool
+Kumiko.Rendering.Pixels.Height.get -> int
+Kumiko.Rendering.Pixels.Height.init -> void
+Kumiko.Rendering.Pixels.Pixels(byte[]! Bytes, int Width, int Height) -> void
+Kumiko.Rendering.Pixels.Width.get -> int
+Kumiko.Rendering.Pixels.Width.init -> void
+Kumiko.Rendering.Png
+Kumiko.Rendering.Sprite
+Kumiko.Rendering.Sprite.BearingX.get -> float
+Kumiko.Rendering.Sprite.BearingX.init -> void
+Kumiko.Rendering.Sprite.BearingY.get -> float
+Kumiko.Rendering.Sprite.BearingY.init -> void
+Kumiko.Rendering.Sprite.Deconstruct(out int X, out int Y, out int Width, out int Height, out float BearingX, out float BearingY) -> void
+Kumiko.Rendering.Sprite.Equals(Kumiko.Rendering.Sprite other) -> bool
+Kumiko.Rendering.Sprite.Height.get -> int
+Kumiko.Rendering.Sprite.Height.init -> void
+Kumiko.Rendering.Sprite.Sprite() -> void
+Kumiko.Rendering.Sprite.Sprite(int X, int Y, int Width, int Height, float BearingX, float BearingY) -> void
+Kumiko.Rendering.Sprite.Width.get -> int
+Kumiko.Rendering.Sprite.Width.init -> void
+Kumiko.Rendering.Sprite.X.get -> int
+Kumiko.Rendering.Sprite.X.init -> void
+Kumiko.Rendering.Sprite.Y.get -> int
+Kumiko.Rendering.Sprite.Y.init -> void
+Kumiko.Rendering.TextSystem
+Kumiko.Rendering.TextSystem.AsciiFastPathEnabled.get -> bool
+Kumiko.Rendering.TextSystem.AsciiFastPathEnabled.set -> void
+Kumiko.Rendering.TextSystem.Atlas.get -> Kumiko.Rendering.Atlas!
+Kumiko.Rendering.TextSystem.Backend.get -> string!
+Kumiko.Rendering.TextSystem.CaretPosition(string! text, Kumiko.UI.TextStyle style, int position) -> float
+Kumiko.Rendering.TextSystem.CaretRectangle(string! text, Kumiko.UI.TextStyle style, int position, float width) -> Kumiko.UI.Rect
+Kumiko.Rendering.TextSystem.Dispose() -> void
+Kumiko.Rendering.TextSystem.Family.get -> string?
+Kumiko.Rendering.TextSystem.Family.set -> void
+Kumiko.Rendering.TextSystem.HitTest(string! text, Kumiko.UI.TextStyle style, float x) -> int
+Kumiko.Rendering.TextSystem.HitTest(string! text, Kumiko.UI.TextStyle style, Kumiko.UI.Point point, float width) -> int
+Kumiko.Rendering.TextSystem.Measure(string! text, Kumiko.UI.TextStyle style, float width = Infinity) -> Kumiko.UI.Size
+Kumiko.Rendering.TextSystem.MonoFamily.get -> string?
+Kumiko.Rendering.TextSystem.MonoFamily.set -> void
+Kumiko.Rendering.TextSystem.Scale.get -> float
+Kumiko.Rendering.TextSystem.SelectionRectangles(string! text, Kumiko.UI.TextStyle style, int start, int end, float width) -> System.Collections.Generic.IEnumerable<Kumiko.UI.Rect>!
+Kumiko.Rendering.TextSystem.TextSystem() -> void
+override Kumiko.Rendering.Pixels.Equals(object? obj) -> bool
+override Kumiko.Rendering.Pixels.GetHashCode() -> int
+override Kumiko.Rendering.Pixels.ToString() -> string!
+override Kumiko.Rendering.Sprite.GetHashCode() -> int
+static Kumiko.Rendering.CpuRenderer.Draw(Kumiko.Rendering.Pixels! output, System.Collections.Generic.IReadOnlyList<Kumiko.Rendering.Instance>! instances, Kumiko.Rendering.Atlas! atlas, float scale, Kumiko.UI.Color clear) -> void
+static Kumiko.Rendering.CpuRenderer.Render(System.Collections.Generic.IReadOnlyList<Kumiko.Rendering.Instance>! instances, Kumiko.Rendering.Atlas! atlas, Kumiko.UI.Size size, float scale, Kumiko.UI.Color clear) -> Kumiko.Rendering.Pixels!
+static Kumiko.Rendering.Image.ApplicationIcon(string! bundle, float size = 32, float scale = 2) -> Kumiko.Rendering.Image?
+static Kumiko.Rendering.Image.Decode(System.ReadOnlySpan<byte> bytes) -> Kumiko.Rendering.Image!
+static Kumiko.Rendering.Image.Load(string! path) -> Kumiko.Rendering.Image!
+static Kumiko.Rendering.Image.LoadSvg(string! path, float width, float height, float scale = 2) -> Kumiko.Rendering.Image!
+static Kumiko.Rendering.Image.Svg(System.ReadOnlySpan<byte> bytes, float width, float height, float scale = 2) -> Kumiko.Rendering.Image!
+static Kumiko.Rendering.Instance.Quad(Kumiko.UI.Rect rect, Kumiko.UI.Color color, Kumiko.UI.Rect clip, float radius = 0) -> Kumiko.Rendering.Instance
+static Kumiko.Rendering.Pixels.Create(int width, int height) -> Kumiko.Rendering.Pixels!
+static Kumiko.Rendering.Pixels.operator !=(Kumiko.Rendering.Pixels? left, Kumiko.Rendering.Pixels? right) -> bool
+static Kumiko.Rendering.Pixels.operator ==(Kumiko.Rendering.Pixels? left, Kumiko.Rendering.Pixels? right) -> bool
+static Kumiko.Rendering.Png.Read(System.ReadOnlySpan<byte> bytes) -> Kumiko.Rendering.Pixels!
+static Kumiko.Rendering.Png.Write(string! path, Kumiko.Rendering.Pixels! pixels) -> void
+static Kumiko.Rendering.Png.Write(System.IO.Stream! stream, Kumiko.Rendering.Pixels! pixels) -> void
+static Kumiko.Rendering.Sprite.operator !=(Kumiko.Rendering.Sprite left, Kumiko.Rendering.Sprite right) -> bool
+static Kumiko.Rendering.Sprite.operator ==(Kumiko.Rendering.Sprite left, Kumiko.Rendering.Sprite right) -> bool
+~override Kumiko.Rendering.Sprite.Equals(object obj) -> bool
+~override Kumiko.Rendering.Sprite.ToString() -> string

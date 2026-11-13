@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-ios</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
+    <ApplicationId>dev.kumiko.navigationchecks</ApplicationId>
+    <KumikoStrict>false</KumikoStrict>
+    <IsAotCompatible>true</IsAotCompatible>
+    <PublishAot Condition="'$(KumikoiOSNativeAot)' != ''">$(KumikoiOSNativeAot)</PublishAot>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/Kumiko.iOS/Kumiko.iOS.csproj" />
+    <ProjectReference Include="../../src/Kumiko.Icons.Hugeicons/Kumiko.Icons.Hugeicons.csproj" />
+    <Compile Include="../../examples/CRMLite/*.cs" Exclude="../../examples/CRMLite/Program.cs;../../examples/CRMLite/View*.cs;../../examples/CRMLite/Styles.cs" Link="Shared/%(Filename)%(Extension)" />
+    <Compile Include="../../examples/CRMLite.iOS/View*.cs" Link="Shared/%(Filename)%(Extension)" />
+    <Compile Include="../../examples/CRMLite.iOS/Root.cs" Link="Shared/Root.cs" />
+    <Compile Include="../../examples/CRMLite.iOS/Harbor.cs" Link="Shared/Harbor.cs" />
+  </ItemGroup>
+</Project>

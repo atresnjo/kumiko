@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <WebRoot>$(MSBuildProjectDirectory)/web/</WebRoot>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/Kumiko/Kumiko.csproj" />
+    <Compile Remove="web/**" />
+    <None Remove="web/**" />
+    <Content Remove="web/**" />
+    <EmbeddedResource Remove="web/**" />
+    <!-- The checked-in generated client, compared with the C# contract in verify mode. -->
+    <EmbeddedResource Include="web/src/kumiko/client.js" LogicalName="client/client.js" />
+    <EmbeddedResource Include="web/src/kumiko/client.d.ts" LogicalName="client/client.d.ts" />
+    <ReactSource Include="web/src/**;web/public/**;web/index.html;web/vite.config.ts;web/package.json;web/tsconfig.json" />
+  </ItemGroup>
+
+  <!-- Rebuild dist/ when React sources change, once `npm install` has run.
+       Without node_modules (for example a .NET-only CI machine) the build skips
+       this step and the app shows a page explaining how to build the bundle. -->
+  <Target Name="BuildReactApp" BeforeTargets="EmbedReactApp" Condition="Exists('$(WebRoot)node_modules')"
+          Inputs="@(ReactSource)" Outputs="$(WebRoot)dist/index.html">
+    <Exec Command="npm run build" WorkingDirectory="$(WebRoot)" />
+  </Target>
+
+  <!-- dist/ is globbed inside a target so a bundle produced by this build is included. -->
+  <Target Name="EmbedReactApp" BeforeTargets="PrepareForBuild">
+    <ItemGroup>
+      <ReactBundle Include="$(WebRoot)dist/**" />
+      <EmbeddedResource Include="@(ReactBundle)" LogicalName="web/$([System.String]::Copy('%(ReactBundle.RecursiveDir)').Replace('\', '/'))%(ReactBundle.Filename)%(ReactBundle.Extension)" />
+    </ItemGroup>
+  </Target>
+</Project>

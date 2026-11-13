@@ -1,0 +1,98 @@
+name: C# native verification
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-dotnet@v6.0.0
+        with:
+          global-json-file: global.json
+      - if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libgtk-3-0t64 libgl1 libegl1 libgl1-mesa-dri librsvg2-2 fonts-dejavu-core fonts-noto-core fonts-noto-cjk xvfb clang zlib1g-dev
+      - run: dotnet build Kumiko.slnx -c Release
+      - run: dotnet format Kumiko.slnx --verify-no-changes --no-restore
+      - run: dotnet run --project tests/Kumiko.Analyzers.E2E -c Release -- artifacts/analyzers
+      - if: runner.os != 'Linux'
+        run: dotnet run --project tests/Kumiko.E2E -c Release -- artifacts/e2e
+      - if: runner.os == 'Linux'
+        run: xvfb-run -a dotnet run --project tests/Kumiko.E2E -c Release -- artifacts/e2e
+      - if: runner.os != 'Linux'
+        run: dotnet run --project tests/Kumiko.CRMLite.E2E -c Release -- artifacts/crmlite
+      - if: runner.os == 'Linux'
+        run: xvfb-run -a dotnet run --project tests/Kumiko.CRMLite.E2E -c Release -- artifacts/crmlite
+      - if: runner.os != 'Linux'
+        run: dotnet run --project tests/Kumiko.Flint.E2E -c Release -- artifacts/flint
+      - if: runner.os == 'Linux'
+        run: xvfb-run -a dotnet run --project tests/Kumiko.Flint.E2E -c Release -- artifacts/flint
+      - if: runner.os != 'Linux'
+        run: dotnet run --project tests/Kumiko.TraceWaterfall.E2E -c Release -- artifacts/tracewaterfall/e2e
+      - if: runner.os == 'Linux'
+        run: xvfb-run -a dotnet run --project tests/Kumiko.TraceWaterfall.E2E -c Release -- artifacts/tracewaterfall/e2e
+      - if: runner.os != 'Linux'
+        run: dotnet run --project tests/Kumiko.Desktop.E2E -c Release -- artifacts/desktop
+      - if: runner.os == 'Linux'
+        run: xvfb-run -a dotnet run --project tests/Kumiko.Desktop.E2E -c Release -- artifacts/desktop
+      - if: runner.os != 'Linux'
+        run: dotnet run --project tests/Kumiko.Agent.E2E -c Release -- artifacts/agent-readiness/implementation
+      - if: runner.os == 'Linux'
+        run: xvfb-run -a dotnet run --project tests/Kumiko.Agent.E2E -c Release -- artifacts/agent-readiness/implementation
+      - run: dotnet publish tests/Kumiko.E2E -c Release -p:PublishAot=true -p:StripSymbols=true -o artifacts/native
+      - run: dotnet publish tests/Kumiko.Flint.E2E -c Release -p:PublishAot=true -p:StripSymbols=true -o artifacts/flint-native
+      - run: dotnet publish tests/Kumiko.Desktop.E2E -c Release -p:PublishAot=true -p:StripSymbols=true -o artifacts/desktop-native
+      - if: runner.os == 'macOS'
+        run: |
+          artifacts/native/Kumiko.E2E artifacts/e2e-aot
+          artifacts/flint-native/Kumiko.Flint.E2E artifacts/flint-aot
+          artifacts/desktop-native/Kumiko.Desktop.E2E artifacts/desktop-aot
+      - if: runner.os == 'Linux'
+        run: |
+          xvfb-run -a artifacts/native/Kumiko.E2E artifacts/e2e-aot
+          xvfb-run -a artifacts/flint-native/Kumiko.Flint.E2E artifacts/flint-aot
+          xvfb-run -a artifacts/desktop-native/Kumiko.Desktop.E2E artifacts/desktop-aot
+      - if: runner.os == 'Windows'
+        run: |
+          artifacts/native/Kumiko.E2E.exe artifacts/e2e-aot
+          artifacts/flint-native/Kumiko.Flint.E2E.exe artifacts/flint-aot
+          artifacts/desktop-native/Kumiko.Desktop.E2E.exe artifacts/desktop-aot
+      - uses: actions/upload-artifact@v7.0.2
+        if: always()
+        with:
+          name: verification-${{ runner.os }}
+          path: |
+            artifacts/analyzers/
+            artifacts/agent-readiness/
+            artifacts/e2e/
+            artifacts/crmlite/
+            artifacts/flint/
+            artifacts/flint-aot/
+            artifacts/tracewaterfall/e2e/
+            artifacts/e2e-aot/
+            artifacts/desktop/
+            artifacts/desktop-aot/
+  ios:
+    # Builds and format-checks the UIKit host and iOS packages; nothing is signed, installed or uploaded.
+    runs-on: macos-26
+    timeout-minutes: 90
+    env:
+      XCODE_APP: /Applications/Xcode_26.4.app
+      IOS_WORKLOAD: 10.0.203.1
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-dotnet@v6.0.0
+        with:
+          global-json-file: global.json
+      # Fail rather than skip when the pinned toolchain is unavailable on the image.
+      - run: |
+          test -d "$XCODE_APP" || { echo "::error::$XCODE_APP is not installed on this runner"; exit 1; }
+          sudo xcode-select -s "$XCODE_APP/Contents/Developer"
+          xcodebuild -version
+      - run: dotnet workload install ios --version "$IOS_WORKLOAD"
+      - run: dotnet build Kumiko.iOS.slnx -c Release -p:KumikoCompileMetal=false
+      - run: dotnet format Kumiko.iOS.slnx --verify-no-changes --no-restore

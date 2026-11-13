@@ -1,0 +1,24 @@
+<Project>
+  <!--
+    Optional icon subset. Each KumikoHugeicon item is a kebab-case local name, for example
+    <KumikoHugeicon Include="star;arrow-up-right-01" />. With at least one item, Hugeicons.Names,
+    Get, GetSvg and drawing accept only the listed icons, in every configuration, and trimmed or
+    NativeAOT publishing removes the other SVG resources. Without items the full catalogue ships.
+  -->
+  <PropertyGroup>
+    <KumikoHugeiconsAssets Condition="'$(KumikoHugeiconsAssets)' == ''">$(MSBuildThisFileDirectory)../assets/hugeicons/</KumikoHugeiconsAssets>
+  </PropertyGroup>
+  <ItemGroup Condition="'@(KumikoHugeicon)' != ''">
+    <_KumikoHugeiconSelected Include="@(KumikoHugeicon->Distinct())" />
+    <RuntimeHostConfigurationOption Include="Kumiko.Icons.Hugeicons.Subset" Value="true" Trim="true" />
+    <RuntimeHostConfigurationOption Include="@(_KumikoHugeiconSelected->'Kumiko.Icons.Hugeicons.Icon.%(Identity)')" Value="true" Trim="true" />
+  </ItemGroup>
+  <Target Name="KumikoValidateHugeicons" BeforeTargets="CoreCompile" Condition="'@(KumikoHugeicon)' != ''">
+    <ItemGroup>
+      <_KumikoHugeiconUnknown Include="@(_KumikoHugeiconSelected)"
+        Condition="!$([System.Text.RegularExpressions.Regex]::IsMatch('%(Identity)', '^[a-z0-9]+(-[a-z0-9]+)*$')) or !Exists('$(KumikoHugeiconsAssets)%(Identity).svg')" />
+    </ItemGroup>
+    <Error Condition="'@(_KumikoHugeiconUnknown)' != ''"
+      Text="Unknown Hugeicons free icons in KumikoHugeicon: @(_KumikoHugeiconUnknown, ', '). Use kebab-case local names from $(KumikoHugeiconsAssets), for example arrow-up-right-01 for Hugeicons.ArrowUpRight01." />
+  </Target>
+</Project>

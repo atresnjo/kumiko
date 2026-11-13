@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <KumikoStrict Condition="'$(KumikoStrict)' == ''">true</KumikoStrict>
+    <WarningsAsErrors>$(WarningsAsErrors);KUM005;KUM006;KUM007;KUM008;KUM009;KUM010</WarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <CompilerVisibleProperty Include="KumikoStrict" />
+  </ItemGroup>
+</Project>

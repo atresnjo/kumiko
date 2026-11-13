@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-ios</TargetFramework>
+    <SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
+    <IsAotCompatible>true</IsAotCompatible>
+    <IsTrimmable>true</IsTrimmable>
+    <IsPackable>true</IsPackable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>ios;vision;ocr;text-recognition;on-device;nativeaot</PackageTags>
+    <Description>Experimental on-device Apple Vision text recognition for Kumiko iOS apps. No external model, network, or JavaScript.</Description>
+  </PropertyGroup>
+  <!-- Depends only on Apple frameworks, so apps can use it with or without the UIKit adapter. -->
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="/" />
+    <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="5.6.0" PrivateAssets="all" />
+    <AdditionalFiles Include="PublicAPI/**/PublicAPI.*.txt" />
+  </ItemGroup>
+</Project>

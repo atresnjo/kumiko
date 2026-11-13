@@ -1,0 +1,282 @@
+#nullable enable
+Kumiko.UI.Style
+Kumiko.UI.Style.Absolute -> bool
+Kumiko.UI.Style.AlignItems -> Kumiko.UI.Align
+Kumiko.UI.Style.Background -> Kumiko.UI.Color?
+Kumiko.UI.Style.Border -> Kumiko.UI.Color?
+Kumiko.UI.Style.BorderWidth -> float
+Kumiko.UI.Style.Clip -> bool
+Kumiko.UI.Style.Control -> bool
+Kumiko.UI.Style.Direction -> Kumiko.UI.Direction
+Kumiko.UI.Style.FollowEnd -> bool
+Kumiko.UI.Style.Gap -> float
+Kumiko.UI.Style.Glass -> Kumiko.UI.GlassStyle?
+Kumiko.UI.Style.Grow -> float
+Kumiko.UI.Style.Height -> Kumiko.UI.Length
+Kumiko.UI.Style.Justify -> Kumiko.UI.Justify
+Kumiko.UI.Style.MaxHeight -> float
+Kumiko.UI.Style.MaxWidth -> float
+Kumiko.UI.Style.MinHeight -> float
+Kumiko.UI.Style.MinWidth -> float
+Kumiko.UI.Style.Offset -> Kumiko.UI.Point
+Kumiko.UI.Style.Opacity -> float
+Kumiko.UI.Style.Padding -> Kumiko.UI.Edges
+Kumiko.UI.Style.Radius -> float
+Kumiko.UI.Style.Scroll -> bool
+Kumiko.UI.Style.ScrollHorizontal -> bool
+Kumiko.UI.Style.Selectable -> bool
+Kumiko.UI.Style.Shadow -> Kumiko.UI.Shadow?
+Kumiko.UI.Style.SkipTab -> bool
+Kumiko.UI.Style.Style() -> void
+Kumiko.UI.Style.Width -> Kumiko.UI.Length
+Kumiko.UI.Tester
+Kumiko.UI.Tester.Advance(float seconds) -> void
+Kumiko.UI.Tester.Click(float x, float y) -> void
+Kumiko.UI.Tester.ClickText(string! text) -> void
+Kumiko.UI.Tester.Clipboard.get -> string!
+Kumiko.UI.Tester.Clipboard.set -> void
+Kumiko.UI.Tester.Compose(string! text, bool commit) -> void
+Kumiko.UI.Tester.ContainsText(string! text) -> bool
+Kumiko.UI.Tester.Context.get -> Kumiko.UI.Context!
+Kumiko.UI.Tester.Dispose() -> void
+Kumiko.UI.Tester.Dump() -> string!
+Kumiko.UI.Tester.FindText(string! text) -> Kumiko.UI.Rect?
+Kumiko.UI.Tester.Frame(float dt = 0.016666668) -> void
+Kumiko.UI.Tester.Get(Kumiko.UI.Role role, string! name) -> Kumiko.UI.Tester.Locator!
+Kumiko.UI.Tester.HasText(string! text) -> bool
+Kumiko.UI.Tester.Key(Kumiko.UI.Key key, Kumiko.UI.Modifiers modifiers = Kumiko.UI.Modifiers.None) -> void
+Kumiko.UI.Tester.Locator
+Kumiko.UI.Tester.Locator.Click() -> void
+Kumiko.UI.Tester.Locator.Enabled.get -> bool
+Kumiko.UI.Tester.Locator.Id.get -> ulong
+Kumiko.UI.Tester.Locator.Rect.get -> Kumiko.UI.Rect
+Kumiko.UI.Tester.MoveTo(float x, float y) -> void
+Kumiko.UI.Tester.Press(float x, float y) -> void
+Kumiko.UI.Tester.Release(float x, float y) -> void
+Kumiko.UI.Tester.Render() -> Kumiko.Rendering.Pixels!
+Kumiko.UI.Tester.Replay(string! path) -> void
+Kumiko.UI.Tester.Resize(float width, float height) -> void
+Kumiko.UI.Tester.RightClick(float x, float y) -> void
+Kumiko.UI.Tester.RunScript(string! script) -> void
+Kumiko.UI.Tester.Screenshot(string! path) -> void
+Kumiko.UI.Tester.Scroll(float dy) -> void
+Kumiko.UI.Tester.Settle(int frames = 2) -> void
+Kumiko.UI.Tester.Step(int step) -> void
+Kumiko.UI.Tester.Tester(Kumiko.Runtime.IProgram! program, Kumiko.UI.TesterOptions options = default(Kumiko.UI.TesterOptions)) -> void
+Kumiko.UI.Tester.TypeText(string! text) -> void
+Kumiko.UI.Tester.WriteWarnings(string! path) -> void
+Kumiko.UI.TesterOptions
+Kumiko.UI.TesterOptions.Deconstruct(out float Width, out float Height, out float Scale, out Kumiko.UI.Theme? Theme, out bool DevMode, out Kumiko.UI.ApplicationIconCache? Icons) -> void
+Kumiko.UI.TesterOptions.DevMode.get -> bool
+Kumiko.UI.TesterOptions.DevMode.init -> void
+Kumiko.UI.TesterOptions.Equals(Kumiko.UI.TesterOptions other) -> bool
+Kumiko.UI.TesterOptions.Height.get -> float
+Kumiko.UI.TesterOptions.Height.init -> void
+Kumiko.UI.TesterOptions.Icons.get -> Kumiko.UI.ApplicationIconCache?
+Kumiko.UI.TesterOptions.Icons.init -> void
+Kumiko.UI.TesterOptions.Scale.get -> float
+Kumiko.UI.TesterOptions.Scale.init -> void
+Kumiko.UI.TesterOptions.TesterOptions() -> void
+Kumiko.UI.TesterOptions.TesterOptions(float Width = 800, float Height = 600, float Scale = 1, Kumiko.UI.Theme? Theme = null, bool DevMode = false, Kumiko.UI.ApplicationIconCache? Icons = null) -> void
+Kumiko.UI.TesterOptions.Theme.get -> Kumiko.UI.Theme?
+Kumiko.UI.TesterOptions.Theme.init -> void
+Kumiko.UI.TesterOptions.Width.get -> float
+Kumiko.UI.TesterOptions.Width.init -> void
+Kumiko.UI.TextBuffer
+Kumiko.UI.TextBuffer.Length.get -> int
+Kumiko.UI.TextBuffer.Text.get -> string!
+Kumiko.UI.TextBuffer.Text.set -> void
+Kumiko.UI.TextBuffer.TextBuffer(string! text = "") -> void
+Kumiko.UI.TextFieldOptions
+Kumiko.UI.TextFieldOptions.Deconstruct(out string! Placeholder, out float Width, out bool Password, out bool Multiline, out bool Disabled, out string? Name, out bool ReadOnly, out string? Error, out float? Height) -> void
+Kumiko.UI.TextFieldOptions.Disabled.get -> bool
+Kumiko.UI.TextFieldOptions.Disabled.init -> void
+Kumiko.UI.TextFieldOptions.Equals(Kumiko.UI.TextFieldOptions other) -> bool
+Kumiko.UI.TextFieldOptions.Error.get -> string?
+Kumiko.UI.TextFieldOptions.Error.init -> void
+Kumiko.UI.TextFieldOptions.Height.get -> float?
+Kumiko.UI.TextFieldOptions.Height.init -> void
+Kumiko.UI.TextFieldOptions.Multiline.get -> bool
+Kumiko.UI.TextFieldOptions.Multiline.init -> void
+Kumiko.UI.TextFieldOptions.Name.get -> string?
+Kumiko.UI.TextFieldOptions.Name.init -> void
+Kumiko.UI.TextFieldOptions.Password.get -> bool
+Kumiko.UI.TextFieldOptions.Password.init -> void
+Kumiko.UI.TextFieldOptions.Placeholder.get -> string!
+Kumiko.UI.TextFieldOptions.Placeholder.init -> void
+Kumiko.UI.TextFieldOptions.ReadOnly.get -> bool
+Kumiko.UI.TextFieldOptions.ReadOnly.init -> void
+Kumiko.UI.TextFieldOptions.TextFieldOptions() -> void
+Kumiko.UI.TextFieldOptions.TextFieldOptions(string! Placeholder = "", float Width = 240, bool Password = false, bool Multiline = false, bool Disabled = false, string? Name = null, bool ReadOnly = false, string? Error = null, float? Height = null) -> void
+Kumiko.UI.TextFieldOptions.Width.get -> float
+Kumiko.UI.TextFieldOptions.Width.init -> void
+Kumiko.UI.TextSpan
+Kumiko.UI.TextSpan.Background.get -> Kumiko.UI.Color?
+Kumiko.UI.TextSpan.Background.init -> void
+Kumiko.UI.TextSpan.Color.get -> Kumiko.UI.Color?
+Kumiko.UI.TextSpan.Color.init -> void
+Kumiko.UI.TextSpan.Deconstruct(out int Start, out int End, out Kumiko.UI.Color? Color, out Kumiko.UI.Weight? Weight, out bool Italic, out bool Mono, out Kumiko.UI.Color? Background, out bool Underline, out bool Strike) -> void
+Kumiko.UI.TextSpan.End.get -> int
+Kumiko.UI.TextSpan.End.init -> void
+Kumiko.UI.TextSpan.Equals(Kumiko.UI.TextSpan other) -> bool
+Kumiko.UI.TextSpan.Italic.get -> bool
+Kumiko.UI.TextSpan.Italic.init -> void
+Kumiko.UI.TextSpan.Mono.get -> bool
+Kumiko.UI.TextSpan.Mono.init -> void
+Kumiko.UI.TextSpan.Start.get -> int
+Kumiko.UI.TextSpan.Start.init -> void
+Kumiko.UI.TextSpan.Strike.get -> bool
+Kumiko.UI.TextSpan.Strike.init -> void
+Kumiko.UI.TextSpan.TextSpan() -> void
+Kumiko.UI.TextSpan.TextSpan(int Start, int End, Kumiko.UI.Color? Color = null, Kumiko.UI.Weight? Weight = null, bool Italic = false, bool Mono = false, Kumiko.UI.Color? Background = null, bool Underline = false, bool Strike = false) -> void
+Kumiko.UI.TextSpan.Underline.get -> bool
+Kumiko.UI.TextSpan.Underline.init -> void
+Kumiko.UI.TextSpan.Weight.get -> Kumiko.UI.Weight?
+Kumiko.UI.TextSpan.Weight.init -> void
+Kumiko.UI.TextStyle
+Kumiko.UI.TextStyle.Color.get -> Kumiko.UI.Color?
+Kumiko.UI.TextStyle.Color.init -> void
+Kumiko.UI.TextStyle.Deconstruct(out float Size, out Kumiko.UI.Weight Weight, out Kumiko.UI.Color? Color, out bool Wrap, out bool Mono, out bool Italic, out float Leading) -> void
+Kumiko.UI.TextStyle.Equals(Kumiko.UI.TextStyle other) -> bool
+Kumiko.UI.TextStyle.Italic.get -> bool
+Kumiko.UI.TextStyle.Italic.init -> void
+Kumiko.UI.TextStyle.Leading.get -> float
+Kumiko.UI.TextStyle.Leading.init -> void
+Kumiko.UI.TextStyle.Mono.get -> bool
+Kumiko.UI.TextStyle.Mono.init -> void
+Kumiko.UI.TextStyle.Size.get -> float
+Kumiko.UI.TextStyle.Size.init -> void
+Kumiko.UI.TextStyle.TextStyle() -> void
+Kumiko.UI.TextStyle.TextStyle(float Size = 14, Kumiko.UI.Weight Weight = Kumiko.UI.Weight.Regular, Kumiko.UI.Color? Color = null, bool Wrap = false, bool Mono = false, bool Italic = false, float Leading = 1) -> void
+Kumiko.UI.TextStyle.Weight.get -> Kumiko.UI.Weight
+Kumiko.UI.TextStyle.Weight.init -> void
+Kumiko.UI.TextStyle.Wrap.get -> bool
+Kumiko.UI.TextStyle.Wrap.init -> void
+Kumiko.UI.Theme
+Kumiko.UI.Theme.<Clone>$() -> Kumiko.UI.Theme!
+Kumiko.UI.Theme.Accent.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.Accent.init -> void
+Kumiko.UI.Theme.AccentHover.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.AccentHover.init -> void
+Kumiko.UI.Theme.AccentText.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.AccentText.init -> void
+Kumiko.UI.Theme.Background.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.Background.init -> void
+Kumiko.UI.Theme.Border.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.Border.init -> void
+Kumiko.UI.Theme.Controls.get -> Kumiko.UI.ControlMetrics!
+Kumiko.UI.Theme.Controls.init -> void
+Kumiko.UI.Theme.Danger.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.Danger.init -> void
+Kumiko.UI.Theme.DangerText.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.DangerText.init -> void
+Kumiko.UI.Theme.Dark.get -> bool
+Kumiko.UI.Theme.Dark.init -> void
+Kumiko.UI.Theme.Equals(Kumiko.UI.Theme? other) -> bool
+Kumiko.UI.Theme.ErrorSurface.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.ErrorSurface.init -> void
+Kumiko.UI.Theme.FocusRing.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.FocusRing.init -> void
+Kumiko.UI.Theme.Font.get -> string?
+Kumiko.UI.Theme.Font.init -> void
+Kumiko.UI.Theme.InputBorder.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.InputBorder.init -> void
+Kumiko.UI.Theme.Knob.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.Knob.init -> void
+Kumiko.UI.Theme.MonoFont.get -> string?
+Kumiko.UI.Theme.MonoFont.init -> void
+Kumiko.UI.Theme.Muted.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.Muted.init -> void
+Kumiko.UI.Theme.Popover.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.Popover.init -> void
+Kumiko.UI.Theme.PopoverText.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.PopoverText.init -> void
+Kumiko.UI.Theme.Radius.get -> Kumiko.UI.RadiusScale!
+Kumiko.UI.Theme.Radius.init -> void
+Kumiko.UI.Theme.Secondary.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.Secondary.init -> void
+Kumiko.UI.Theme.SecondaryText.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.SecondaryText.init -> void
+Kumiko.UI.Theme.Selection.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.Selection.init -> void
+Kumiko.UI.Theme.SelectionText.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.SelectionText.init -> void
+Kumiko.UI.Theme.Space.get -> Kumiko.UI.SpaceScale!
+Kumiko.UI.Theme.Space.init -> void
+Kumiko.UI.Theme.Success.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.Success.init -> void
+Kumiko.UI.Theme.Surface.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.Surface.init -> void
+Kumiko.UI.Theme.SurfaceHover.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.SurfaceHover.init -> void
+Kumiko.UI.Theme.Text.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.Text.init -> void
+Kumiko.UI.Theme.Theme() -> void
+Kumiko.UI.Theme.Track.get -> Kumiko.UI.Color
+Kumiko.UI.Theme.Track.init -> void
+Kumiko.UI.Theme.Typography.get -> Kumiko.UI.TypographyScale!
+Kumiko.UI.Theme.Typography.init -> void
+Kumiko.UI.Typography
+Kumiko.UI.TypographyScale
+Kumiko.UI.TypographyScale.<Clone>$() -> Kumiko.UI.TypographyScale!
+Kumiko.UI.TypographyScale.Badge.get -> Kumiko.UI.TextStyle
+Kumiko.UI.TypographyScale.Badge.init -> void
+Kumiko.UI.TypographyScale.Body.get -> Kumiko.UI.TextStyle
+Kumiko.UI.TypographyScale.Body.init -> void
+Kumiko.UI.TypographyScale.Caption.get -> Kumiko.UI.TextStyle
+Kumiko.UI.TypographyScale.Caption.init -> void
+Kumiko.UI.TypographyScale.Equals(Kumiko.UI.TypographyScale? other) -> bool
+Kumiko.UI.TypographyScale.Heading.get -> Kumiko.UI.TextStyle
+Kumiko.UI.TypographyScale.Heading.init -> void
+Kumiko.UI.TypographyScale.Keyboard.get -> Kumiko.UI.TextStyle
+Kumiko.UI.TypographyScale.Keyboard.init -> void
+Kumiko.UI.TypographyScale.Label.get -> Kumiko.UI.TextStyle
+Kumiko.UI.TypographyScale.Label.init -> void
+Kumiko.UI.TypographyScale.Title.get -> Kumiko.UI.TextStyle
+Kumiko.UI.TypographyScale.Title.init -> void
+Kumiko.UI.TypographyScale.TypographyScale() -> void
+Kumiko.UI.Weight
+Kumiko.UI.Weight.Bold = 3 -> Kumiko.UI.Weight
+Kumiko.UI.Weight.Medium = 1 -> Kumiko.UI.Weight
+Kumiko.UI.Weight.Regular = 0 -> Kumiko.UI.Weight
+Kumiko.UI.Weight.Semibold = 2 -> Kumiko.UI.Weight
+override Kumiko.UI.TesterOptions.GetHashCode() -> int
+override Kumiko.UI.TextBuffer.ToString() -> string!
+override Kumiko.UI.TextFieldOptions.GetHashCode() -> int
+override Kumiko.UI.TextSpan.GetHashCode() -> int
+override Kumiko.UI.TextStyle.GetHashCode() -> int
+override Kumiko.UI.Theme.Equals(object? obj) -> bool
+override Kumiko.UI.Theme.GetHashCode() -> int
+override Kumiko.UI.Theme.ToString() -> string!
+override Kumiko.UI.TypographyScale.Equals(object? obj) -> bool
+override Kumiko.UI.TypographyScale.GetHashCode() -> int
+override Kumiko.UI.TypographyScale.ToString() -> string!
+static Kumiko.UI.TesterOptions.operator !=(Kumiko.UI.TesterOptions left, Kumiko.UI.TesterOptions right) -> bool
+static Kumiko.UI.TesterOptions.operator ==(Kumiko.UI.TesterOptions left, Kumiko.UI.TesterOptions right) -> bool
+static Kumiko.UI.TextFieldOptions.operator !=(Kumiko.UI.TextFieldOptions left, Kumiko.UI.TextFieldOptions right) -> bool
+static Kumiko.UI.TextFieldOptions.operator ==(Kumiko.UI.TextFieldOptions left, Kumiko.UI.TextFieldOptions right) -> bool
+static Kumiko.UI.TextSpan.operator !=(Kumiko.UI.TextSpan left, Kumiko.UI.TextSpan right) -> bool
+static Kumiko.UI.TextSpan.operator ==(Kumiko.UI.TextSpan left, Kumiko.UI.TextSpan right) -> bool
+static Kumiko.UI.TextStyle.operator !=(Kumiko.UI.TextStyle left, Kumiko.UI.TextStyle right) -> bool
+static Kumiko.UI.TextStyle.operator ==(Kumiko.UI.TextStyle left, Kumiko.UI.TextStyle right) -> bool
+static Kumiko.UI.Theme.DarkTheme.get -> Kumiko.UI.Theme!
+static Kumiko.UI.Theme.Light.get -> Kumiko.UI.Theme!
+static Kumiko.UI.Theme.operator !=(Kumiko.UI.Theme? left, Kumiko.UI.Theme? right) -> bool
+static Kumiko.UI.Theme.operator ==(Kumiko.UI.Theme? left, Kumiko.UI.Theme? right) -> bool
+static Kumiko.UI.Theme.ShadcnDark.get -> Kumiko.UI.Theme!
+static Kumiko.UI.Theme.ShadcnLight.get -> Kumiko.UI.Theme!
+static Kumiko.UI.Typography.Body.get -> Kumiko.UI.TextStyle
+static Kumiko.UI.Typography.Caption.get -> Kumiko.UI.TextStyle
+static Kumiko.UI.Typography.Heading.get -> Kumiko.UI.TextStyle
+static Kumiko.UI.Typography.Label.get -> Kumiko.UI.TextStyle
+static Kumiko.UI.Typography.Title.get -> Kumiko.UI.TextStyle
+static Kumiko.UI.TypographyScale.operator !=(Kumiko.UI.TypographyScale? left, Kumiko.UI.TypographyScale? right) -> bool
+static Kumiko.UI.TypographyScale.operator ==(Kumiko.UI.TypographyScale? left, Kumiko.UI.TypographyScale? right) -> bool
+~override Kumiko.UI.TesterOptions.Equals(object obj) -> bool
+~override Kumiko.UI.TesterOptions.ToString() -> string
+~override Kumiko.UI.TextFieldOptions.Equals(object obj) -> bool
+~override Kumiko.UI.TextFieldOptions.ToString() -> string
+~override Kumiko.UI.TextSpan.Equals(object obj) -> bool
+~override Kumiko.UI.TextSpan.ToString() -> string
+~override Kumiko.UI.TextStyle.Equals(object obj) -> bool
+~override Kumiko.UI.TextStyle.ToString() -> string

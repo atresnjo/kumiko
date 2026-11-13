@@ -1,0 +1,218 @@
+#nullable enable
+Kumiko.Documents.CloseDecision
+Kumiko.Documents.CloseDecision.Cancel = 0 -> Kumiko.Documents.CloseDecision
+Kumiko.Documents.CloseDecision.Discard = 1 -> Kumiko.Documents.CloseDecision
+Kumiko.Documents.CloseDecision.Saved = 2 -> Kumiko.Documents.CloseDecision
+Kumiko.Documents.Document<T>
+Kumiko.Documents.Document<T>.<Clone>$() -> Kumiko.Documents.Document<T>!
+Kumiko.Documents.Document<T>.BeginRevert() -> Kumiko.Documents.DocumentStart<T>!
+Kumiko.Documents.Document<T>.BeginSave(string? path = null, Kumiko.Documents.FileVersion? expected = null) -> Kumiko.Documents.DocumentStart<T>!
+Kumiko.Documents.Document<T>.CanClose.get -> bool
+Kumiko.Documents.Document<T>.Conflict.get -> bool
+Kumiko.Documents.Document<T>.Conflict.init -> void
+Kumiko.Documents.Document<T>.Dirty.get -> bool
+Kumiko.Documents.Document<T>.Document() -> void
+Kumiko.Documents.Document<T>.Duplicate(string! id, string! title) -> Kumiko.Documents.Document<T>!
+Kumiko.Documents.Document<T>.Edit(T value) -> Kumiko.Documents.Document<T>!
+Kumiko.Documents.Document<T>.Equals(Kumiko.Documents.Document<T>? other) -> bool
+Kumiko.Documents.Document<T>.Error.get -> string?
+Kumiko.Documents.Document<T>.Error.init -> void
+Kumiko.Documents.Document<T>.Failed(Kumiko.Documents.DocumentRequest<T>! request, string! error, bool conflict = false) -> Kumiko.Documents.Document<T>!
+Kumiko.Documents.Document<T>.HasSaved.get -> bool
+Kumiko.Documents.Document<T>.HasSaved.init -> void
+Kumiko.Documents.Document<T>.Id.get -> string!
+Kumiko.Documents.Document<T>.Id.init -> void
+Kumiko.Documents.Document<T>.Moved(string! oldPath, string! newPath, Kumiko.Documents.FileVersion! version) -> Kumiko.Documents.Document<T>!
+Kumiko.Documents.Document<T>.Observe(Kumiko.Documents.FileVersion! version) -> Kumiko.Documents.Document<T>!
+Kumiko.Documents.Document<T>.Path.get -> string?
+Kumiko.Documents.Document<T>.Path.init -> void
+Kumiko.Documents.Document<T>.Pending.get -> Kumiko.Documents.DocumentRequest<T>?
+Kumiko.Documents.Document<T>.Pending.init -> void
+Kumiko.Documents.Document<T>.Reload(Kumiko.Documents.DocumentRead<T>! read) -> Kumiko.Documents.Document<T>!
+Kumiko.Documents.Document<T>.Reverted(Kumiko.Documents.DocumentRequest<T>! request, Kumiko.Documents.DocumentRead<T>! read) -> Kumiko.Documents.Document<T>!
+Kumiko.Documents.Document<T>.Revision.get -> long
+Kumiko.Documents.Document<T>.Revision.init -> void
+Kumiko.Documents.Document<T>.Saved(Kumiko.Documents.DocumentSaved<T>! result) -> Kumiko.Documents.Document<T>!
+Kumiko.Documents.Document<T>.SavedValue.get -> T
+Kumiko.Documents.Document<T>.SavedValue.init -> void
+Kumiko.Documents.Document<T>.Sequence.get -> long
+Kumiko.Documents.Document<T>.Sequence.init -> void
+Kumiko.Documents.Document<T>.Title.get -> string!
+Kumiko.Documents.Document<T>.Title.init -> void
+Kumiko.Documents.Document<T>.Value.get -> T
+Kumiko.Documents.Document<T>.Value.init -> void
+Kumiko.Documents.Document<T>.Version.get -> Kumiko.Documents.FileVersion!
+Kumiko.Documents.Document<T>.Version.init -> void
+Kumiko.Documents.DocumentActions
+Kumiko.Documents.DocumentClose
+Kumiko.Documents.DocumentClose.<Clone>$() -> Kumiko.Documents.DocumentClose!
+Kumiko.Documents.DocumentClose.Accepted.get -> System.Collections.Immutable.ImmutableDictionary<string!, long>!
+Kumiko.Documents.DocumentClose.Accepted.init -> void
+Kumiko.Documents.DocumentClose.Deconstruct(out System.Collections.Immutable.ImmutableList<string!>! Ids, out System.Collections.Immutable.ImmutableDictionary<string!, long>! Accepted, out string? PendingId) -> void
+Kumiko.Documents.DocumentClose.DocumentClose(System.Collections.Immutable.ImmutableList<string!>! Ids, System.Collections.Immutable.ImmutableDictionary<string!, long>! Accepted, string? PendingId) -> void
+Kumiko.Documents.DocumentClose.Equals(Kumiko.Documents.DocumentClose? other) -> bool
+Kumiko.Documents.DocumentClose.Ids.get -> System.Collections.Immutable.ImmutableList<string!>!
+Kumiko.Documents.DocumentClose.Ids.init -> void
+Kumiko.Documents.DocumentClose.PendingId.get -> string?
+Kumiko.Documents.DocumentClose.PendingId.init -> void
+Kumiko.Documents.DocumentConflictException
+Kumiko.Documents.DocumentConflictException.DocumentConflictException(string! path) -> void
+Kumiko.Documents.DocumentConflictException.Path.get -> string!
+Kumiko.Documents.DocumentHost
+Kumiko.Documents.DocumentOperation
+Kumiko.Documents.DocumentOperation.Revert = 1 -> Kumiko.Documents.DocumentOperation
+Kumiko.Documents.DocumentOperation.Save = 0 -> Kumiko.Documents.DocumentOperation
+Kumiko.Documents.DocumentRead<T>
+Kumiko.Documents.DocumentRead<T>.<Clone>$() -> Kumiko.Documents.DocumentRead<T>!
+Kumiko.Documents.DocumentRead<T>.Deconstruct(out string! Path, out T Value, out Kumiko.Documents.FileVersion! Version) -> void
+Kumiko.Documents.DocumentRead<T>.DocumentRead(string! Path, T Value, Kumiko.Documents.FileVersion! Version) -> void
+Kumiko.Documents.DocumentRead<T>.Equals(Kumiko.Documents.DocumentRead<T>? other) -> bool
+Kumiko.Documents.DocumentRead<T>.Path.get -> string!
+Kumiko.Documents.DocumentRead<T>.Path.init -> void
+Kumiko.Documents.DocumentRead<T>.Value.get -> T
+Kumiko.Documents.DocumentRead<T>.Value.init -> void
+Kumiko.Documents.DocumentRead<T>.Version.get -> Kumiko.Documents.FileVersion!
+Kumiko.Documents.DocumentRead<T>.Version.init -> void
+Kumiko.Documents.DocumentRecovery
+Kumiko.Documents.DocumentRecovery.Dispose() -> void
+Kumiko.Documents.DocumentRecovery.DisposeAsync() -> System.Threading.Tasks.ValueTask
+Kumiko.Documents.DocumentRecovery.DocumentRecovery(string! directory, string! session) -> void
+Kumiko.Documents.DocumentRecovery.ReadAllAsync<T>(Kumiko.Documents.IDocumentCodec<T>! codec, System.Threading.CancellationToken token = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<Kumiko.Documents.Document<T>!>!>!
+Kumiko.Documents.DocumentRecovery.ReadAsync<T>(string! id, Kumiko.Documents.IDocumentCodec<T>! codec, System.Threading.CancellationToken token) -> System.Threading.Tasks.Task<Kumiko.Documents.Document<T>?>!
+Kumiko.Documents.DocumentRecovery.Remove(string! id) -> void
+Kumiko.Documents.DocumentRecovery.RemoveAsync(string! id, System.Threading.CancellationToken token = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+Kumiko.Documents.DocumentRecovery.WriteAsync<T>(Kumiko.Documents.Document<T>! document, Kumiko.Documents.IDocumentCodec<T>! codec, System.Threading.CancellationToken token) -> System.Threading.Tasks.Task!
+Kumiko.Documents.DocumentRequest<T>
+Kumiko.Documents.DocumentRequest<T>.<Clone>$() -> Kumiko.Documents.DocumentRequest<T>!
+Kumiko.Documents.DocumentRequest<T>.Deconstruct(out string! Id, out long Sequence, out long Revision, out Kumiko.Documents.DocumentOperation Operation, out string! Path, out T Value, out Kumiko.Documents.FileVersion! Expected) -> void
+Kumiko.Documents.DocumentRequest<T>.DocumentRequest(string! Id, long Sequence, long Revision, Kumiko.Documents.DocumentOperation Operation, string! Path, T Value, Kumiko.Documents.FileVersion! Expected) -> void
+Kumiko.Documents.DocumentRequest<T>.Equals(Kumiko.Documents.DocumentRequest<T>? other) -> bool
+Kumiko.Documents.DocumentRequest<T>.Expected.get -> Kumiko.Documents.FileVersion!
+Kumiko.Documents.DocumentRequest<T>.Expected.init -> void
+Kumiko.Documents.DocumentRequest<T>.Id.get -> string!
+Kumiko.Documents.DocumentRequest<T>.Id.init -> void
+Kumiko.Documents.DocumentRequest<T>.Operation.get -> Kumiko.Documents.DocumentOperation
+Kumiko.Documents.DocumentRequest<T>.Operation.init -> void
+Kumiko.Documents.DocumentRequest<T>.Path.get -> string!
+Kumiko.Documents.DocumentRequest<T>.Path.init -> void
+Kumiko.Documents.DocumentRequest<T>.Revision.get -> long
+Kumiko.Documents.DocumentRequest<T>.Revision.init -> void
+Kumiko.Documents.DocumentRequest<T>.Sequence.get -> long
+Kumiko.Documents.DocumentRequest<T>.Sequence.init -> void
+Kumiko.Documents.DocumentRequest<T>.Value.get -> T
+Kumiko.Documents.DocumentRequest<T>.Value.init -> void
+Kumiko.Documents.DocumentSaved<T>
+Kumiko.Documents.DocumentSaved<T>.<Clone>$() -> Kumiko.Documents.DocumentSaved<T>!
+Kumiko.Documents.DocumentSaved<T>.Deconstruct(out Kumiko.Documents.DocumentRequest<T>! Request, out Kumiko.Documents.FileVersion! Version) -> void
+Kumiko.Documents.DocumentSaved<T>.DocumentSaved(Kumiko.Documents.DocumentRequest<T>! Request, Kumiko.Documents.FileVersion! Version) -> void
+Kumiko.Documents.DocumentSaved<T>.Equals(Kumiko.Documents.DocumentSaved<T>? other) -> bool
+Kumiko.Documents.DocumentSaved<T>.Request.get -> Kumiko.Documents.DocumentRequest<T>!
+Kumiko.Documents.DocumentSaved<T>.Request.init -> void
+Kumiko.Documents.DocumentSaved<T>.Version.get -> Kumiko.Documents.FileVersion!
+Kumiko.Documents.DocumentSaved<T>.Version.init -> void
+Kumiko.Documents.DocumentStart<T>
+Kumiko.Documents.DocumentStart<T>.<Clone>$() -> Kumiko.Documents.DocumentStart<T>!
+Kumiko.Documents.DocumentStart<T>.Deconstruct(out Kumiko.Documents.Document<T>! Document, out Kumiko.Documents.DocumentRequest<T>! Request) -> void
+Kumiko.Documents.DocumentStart<T>.Document.get -> Kumiko.Documents.Document<T>!
+Kumiko.Documents.DocumentStart<T>.Document.init -> void
+Kumiko.Documents.DocumentStart<T>.DocumentStart(Kumiko.Documents.Document<T>! Document, Kumiko.Documents.DocumentRequest<T>! Request) -> void
+Kumiko.Documents.DocumentStart<T>.Equals(Kumiko.Documents.DocumentStart<T>? other) -> bool
+Kumiko.Documents.DocumentStart<T>.Request.get -> Kumiko.Documents.DocumentRequest<T>!
+Kumiko.Documents.DocumentStart<T>.Request.init -> void
+Kumiko.Documents.DocumentWorkspace<T>
+Kumiko.Documents.DocumentWorkspace<T>.<Clone>$() -> Kumiko.Documents.DocumentWorkspace<T>!
+Kumiko.Documents.DocumentWorkspace<T>.Close.get -> Kumiko.Documents.DocumentClose?
+Kumiko.Documents.DocumentWorkspace<T>.Close.init -> void
+Kumiko.Documents.DocumentWorkspace<T>.Deconstruct(out System.Collections.Immutable.ImmutableList<Kumiko.Documents.Document<T>!>! Documents) -> void
+Kumiko.Documents.DocumentWorkspace<T>.Documents.get -> System.Collections.Immutable.ImmutableList<Kumiko.Documents.Document<T>!>!
+Kumiko.Documents.DocumentWorkspace<T>.Documents.init -> void
+Kumiko.Documents.DocumentWorkspace<T>.DocumentWorkspace(System.Collections.Immutable.ImmutableList<Kumiko.Documents.Document<T>!>! Documents) -> void
+Kumiko.Documents.DocumentWorkspace<T>.Equals(Kumiko.Documents.DocumentWorkspace<T>? other) -> bool
+Kumiko.Documents.DocumentWorkspace<T>.Put(Kumiko.Documents.Document<T>! document) -> Kumiko.Documents.DocumentWorkspace<T>!
+Kumiko.Documents.DocumentWorkspace<T>.RecentFiles.get -> System.Collections.Immutable.ImmutableList<string!>!
+Kumiko.Documents.DocumentWorkspace<T>.RecentFiles.init -> void
+Kumiko.Documents.DocumentWorkspace<T>.Remember(string! path, int limit = 10) -> Kumiko.Documents.DocumentWorkspace<T>!
+Kumiko.Documents.DocumentWorkspace<T>.RequestClose(string! id) -> Kumiko.Documents.DocumentWorkspace<T>!
+Kumiko.Documents.DocumentWorkspace<T>.RequestQuit() -> Kumiko.Documents.DocumentWorkspace<T>!
+Kumiko.Documents.DocumentWorkspace<T>.ResolveClose(string! id, Kumiko.Documents.CloseDecision decision) -> Kumiko.Documents.DocumentWorkspace<T>!
+Kumiko.Documents.FileDocumentStore
+Kumiko.Documents.FileDocumentStore.Dispose() -> void
+Kumiko.Documents.FileDocumentStore.FileDocumentStore(int maximumBytes = 67108864) -> void
+Kumiko.Documents.FileDocumentStore.MaximumBytes.get -> int
+Kumiko.Documents.FileDocumentStore.MoveAsync(string! source, string! destination, Kumiko.Documents.FileVersion! expected, System.Threading.CancellationToken token) -> System.Threading.Tasks.Task!
+Kumiko.Documents.FileDocumentStore.ReadAsync<T>(string! path, Kumiko.Documents.IDocumentCodec<T>! codec, System.Threading.CancellationToken token) -> System.Threading.Tasks.Task<Kumiko.Documents.DocumentRead<T>!>!
+Kumiko.Documents.FileDocumentStore.SaveAsync<T>(Kumiko.Documents.DocumentRequest<T>! request, Kumiko.Documents.IDocumentCodec<T>! codec, System.Threading.CancellationToken token) -> System.Threading.Tasks.Task<Kumiko.Documents.DocumentSaved<T>!>!
+Kumiko.Documents.FileDocumentStore.VersionAsync(string! path, System.Threading.CancellationToken token) -> System.Threading.Tasks.Task<Kumiko.Documents.FileVersion!>!
+Kumiko.Documents.FileVersion
+Kumiko.Documents.FileVersion.<Clone>$() -> Kumiko.Documents.FileVersion!
+Kumiko.Documents.FileVersion.Deconstruct(out bool Exists, out string! Digest) -> void
+Kumiko.Documents.FileVersion.Digest.get -> string!
+Kumiko.Documents.FileVersion.Digest.init -> void
+Kumiko.Documents.FileVersion.Equals(Kumiko.Documents.FileVersion? other) -> bool
+Kumiko.Documents.FileVersion.Exists.get -> bool
+Kumiko.Documents.FileVersion.Exists.init -> void
+Kumiko.Documents.FileVersion.FileVersion(bool Exists, string! Digest) -> void
+Kumiko.Documents.IDocumentCodec<T>
+Kumiko.Documents.IDocumentCodec<T>.Decode(System.ReadOnlyMemory<byte> bytes) -> T
+Kumiko.Documents.IDocumentCodec<T>.Encode(T value) -> System.ReadOnlyMemory<byte>
+Kumiko.Documents.IDocumentStore
+Kumiko.Documents.IDocumentStore.MoveAsync(string! source, string! destination, Kumiko.Documents.FileVersion! expected, System.Threading.CancellationToken token) -> System.Threading.Tasks.Task!
+Kumiko.Documents.IDocumentStore.ReadAsync<T>(string! path, Kumiko.Documents.IDocumentCodec<T>! codec, System.Threading.CancellationToken token) -> System.Threading.Tasks.Task<Kumiko.Documents.DocumentRead<T>!>!
+Kumiko.Documents.IDocumentStore.SaveAsync<T>(Kumiko.Documents.DocumentRequest<T>! request, Kumiko.Documents.IDocumentCodec<T>! codec, System.Threading.CancellationToken token) -> System.Threading.Tasks.Task<Kumiko.Documents.DocumentSaved<T>!>!
+Kumiko.Documents.IDocumentStore.VersionAsync(string! path, System.Threading.CancellationToken token) -> System.Threading.Tasks.Task<Kumiko.Documents.FileVersion!>!
+Kumiko.Documents.Utf8DocumentCodec
+Kumiko.Documents.Utf8DocumentCodec.<Clone>$() -> Kumiko.Documents.Utf8DocumentCodec!
+Kumiko.Documents.Utf8DocumentCodec.Decode(System.ReadOnlyMemory<byte> bytes) -> string!
+Kumiko.Documents.Utf8DocumentCodec.Encode(string! value) -> System.ReadOnlyMemory<byte>
+Kumiko.Documents.Utf8DocumentCodec.Equals(Kumiko.Documents.Utf8DocumentCodec? other) -> bool
+Kumiko.Documents.Utf8DocumentCodec.Utf8DocumentCodec() -> void
+override Kumiko.Documents.Document<T>.Equals(object? obj) -> bool
+override Kumiko.Documents.Document<T>.GetHashCode() -> int
+override Kumiko.Documents.Document<T>.ToString() -> string!
+override Kumiko.Documents.DocumentClose.Equals(object? obj) -> bool
+override Kumiko.Documents.DocumentClose.GetHashCode() -> int
+override Kumiko.Documents.DocumentClose.ToString() -> string!
+override Kumiko.Documents.DocumentRead<T>.Equals(object? obj) -> bool
+override Kumiko.Documents.DocumentRead<T>.GetHashCode() -> int
+override Kumiko.Documents.DocumentRead<T>.ToString() -> string!
+override Kumiko.Documents.DocumentRequest<T>.Equals(object? obj) -> bool
+override Kumiko.Documents.DocumentRequest<T>.GetHashCode() -> int
+override Kumiko.Documents.DocumentRequest<T>.ToString() -> string!
+override Kumiko.Documents.DocumentSaved<T>.Equals(object? obj) -> bool
+override Kumiko.Documents.DocumentSaved<T>.GetHashCode() -> int
+override Kumiko.Documents.DocumentSaved<T>.ToString() -> string!
+override Kumiko.Documents.DocumentStart<T>.Equals(object? obj) -> bool
+override Kumiko.Documents.DocumentStart<T>.GetHashCode() -> int
+override Kumiko.Documents.DocumentStart<T>.ToString() -> string!
+override Kumiko.Documents.DocumentWorkspace<T>.Equals(object? obj) -> bool
+override Kumiko.Documents.DocumentWorkspace<T>.GetHashCode() -> int
+override Kumiko.Documents.DocumentWorkspace<T>.ToString() -> string!
+override Kumiko.Documents.FileVersion.Equals(object? obj) -> bool
+override Kumiko.Documents.FileVersion.GetHashCode() -> int
+override Kumiko.Documents.FileVersion.ToString() -> string!
+override Kumiko.Documents.Utf8DocumentCodec.Equals(object? obj) -> bool
+override Kumiko.Documents.Utf8DocumentCodec.GetHashCode() -> int
+override Kumiko.Documents.Utf8DocumentCodec.ToString() -> string!
+static Kumiko.Documents.Document<T>.Create(string! id, string! title, T value) -> Kumiko.Documents.Document<T>!
+static Kumiko.Documents.Document<T>.Open(string! id, Kumiko.Documents.DocumentRead<T>! read) -> Kumiko.Documents.Document<T>!
+static Kumiko.Documents.Document<T>.operator !=(Kumiko.Documents.Document<T>? left, Kumiko.Documents.Document<T>? right) -> bool
+static Kumiko.Documents.Document<T>.operator ==(Kumiko.Documents.Document<T>? left, Kumiko.Documents.Document<T>? right) -> bool
+static Kumiko.Documents.DocumentActions.For<T, TMessage>(Kumiko.Documents.Document<T>! document, TMessage save, TMessage saveAs, TMessage revert, TMessage close) -> System.Collections.Generic.IEnumerable<Kumiko.Desktop.DesktopAction<TMessage>!>!
+static Kumiko.Documents.DocumentClose.operator !=(Kumiko.Documents.DocumentClose? left, Kumiko.Documents.DocumentClose? right) -> bool
+static Kumiko.Documents.DocumentClose.operator ==(Kumiko.Documents.DocumentClose? left, Kumiko.Documents.DocumentClose? right) -> bool
+static Kumiko.Documents.DocumentHost.BindQuit<TModel, TMessage, T>(Kumiko.App! app, Kumiko.Runtime.Program<TModel, TMessage>! program, System.Func<TModel, Kumiko.Documents.DocumentWorkspace<T>!>! workspace, TMessage requestQuit) -> System.IDisposable!
+static Kumiko.Documents.DocumentRead<T>.operator !=(Kumiko.Documents.DocumentRead<T>? left, Kumiko.Documents.DocumentRead<T>? right) -> bool
+static Kumiko.Documents.DocumentRead<T>.operator ==(Kumiko.Documents.DocumentRead<T>? left, Kumiko.Documents.DocumentRead<T>? right) -> bool
+static Kumiko.Documents.DocumentRequest<T>.operator !=(Kumiko.Documents.DocumentRequest<T>? left, Kumiko.Documents.DocumentRequest<T>? right) -> bool
+static Kumiko.Documents.DocumentRequest<T>.operator ==(Kumiko.Documents.DocumentRequest<T>? left, Kumiko.Documents.DocumentRequest<T>? right) -> bool
+static Kumiko.Documents.DocumentSaved<T>.operator !=(Kumiko.Documents.DocumentSaved<T>? left, Kumiko.Documents.DocumentSaved<T>? right) -> bool
+static Kumiko.Documents.DocumentSaved<T>.operator ==(Kumiko.Documents.DocumentSaved<T>? left, Kumiko.Documents.DocumentSaved<T>? right) -> bool
+static Kumiko.Documents.DocumentStart<T>.operator !=(Kumiko.Documents.DocumentStart<T>? left, Kumiko.Documents.DocumentStart<T>? right) -> bool
+static Kumiko.Documents.DocumentStart<T>.operator ==(Kumiko.Documents.DocumentStart<T>? left, Kumiko.Documents.DocumentStart<T>? right) -> bool
+static Kumiko.Documents.DocumentWorkspace<T>.operator !=(Kumiko.Documents.DocumentWorkspace<T>? left, Kumiko.Documents.DocumentWorkspace<T>? right) -> bool
+static Kumiko.Documents.DocumentWorkspace<T>.operator ==(Kumiko.Documents.DocumentWorkspace<T>? left, Kumiko.Documents.DocumentWorkspace<T>? right) -> bool
+static Kumiko.Documents.FileVersion.Missing.get -> Kumiko.Documents.FileVersion!
+static Kumiko.Documents.FileVersion.operator !=(Kumiko.Documents.FileVersion? left, Kumiko.Documents.FileVersion? right) -> bool
+static Kumiko.Documents.FileVersion.operator ==(Kumiko.Documents.FileVersion? left, Kumiko.Documents.FileVersion? right) -> bool
+static Kumiko.Documents.Utf8DocumentCodec.operator !=(Kumiko.Documents.Utf8DocumentCodec? left, Kumiko.Documents.Utf8DocumentCodec? right) -> bool
+static Kumiko.Documents.Utf8DocumentCodec.operator ==(Kumiko.Documents.Utf8DocumentCodec? left, Kumiko.Documents.Utf8DocumentCodec? right) -> bool

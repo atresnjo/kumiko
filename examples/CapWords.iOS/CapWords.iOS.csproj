@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-ios</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
+    <ApplicationId>dev.kumiko.capwords</ApplicationId>
+    <ApplicationTitle>Motion Studies</ApplicationTitle>
+    <IsAotCompatible>true</IsAotCompatible>
+    <PublishAot Condition="'$(KumikoiOSNativeAot)' != ''">$(KumikoiOSNativeAot)</PublishAot>
+    <CapWordsAssetRoot Condition="'$(CapWordsAssetRoot)' == ''">$(HOME)/projects/personal/rn-makeitanimated/assets/images/apps/cap-words</CapWordsAssetRoot>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <UseInterpreter>true</UseInterpreter>
+    <MtouchLink>None</MtouchLink>
+    <Registrar>dynamic</Registrar>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/Kumiko.iOS/Kumiko.iOS.csproj" />
+    <!-- Licensed reference artwork stays in the user's original checkout. -->
+    <EmbeddedResource Include="$(CapWordsAssetRoot)/mouse.png" LogicalName="CapWords.mouse.png" />
+    <EmbeddedResource Include="$(CapWordsAssetRoot)/ice-cream.png" LogicalName="CapWords.ice-cream.png" />
+  </ItemGroup>
+  <Target Name="CheckReferenceArtwork" BeforeTargets="PrepareForBuild">
+    <Error Condition="!Exists('$(CapWordsAssetRoot)/mouse.png') Or !Exists('$(CapWordsAssetRoot)/ice-cream.png')" Text="Set CapWordsAssetRoot to the cap-words artwork directory in your licensed Make It Animated checkout." />
+  </Target>
+</Project>

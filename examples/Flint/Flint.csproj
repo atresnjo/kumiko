@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <Import Project="Hugeicons.props" />
+  <ItemGroup>
+    <ProjectReference Include="../../src/Kumiko.Hosting/Kumiko.Hosting.csproj" />
+    <ProjectReference Include="../../src/Kumiko.Icons.Hugeicons/Kumiko.Icons.Hugeicons.csproj" />
+  </ItemGroup>
+</Project>

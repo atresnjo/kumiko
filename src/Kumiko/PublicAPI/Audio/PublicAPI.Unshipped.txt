@@ -1,0 +1,142 @@
+#nullable enable
+Kumiko.Audio.AudioFormat
+Kumiko.Audio.AudioFormat.AudioFormat() -> void
+Kumiko.Audio.AudioFormat.AudioFormat(int SampleRate, int Channels) -> void
+Kumiko.Audio.AudioFormat.Channels.get -> int
+Kumiko.Audio.AudioFormat.Channels.init -> void
+Kumiko.Audio.AudioFormat.Deconstruct(out int SampleRate, out int Channels) -> void
+Kumiko.Audio.AudioFormat.Equals(Kumiko.Audio.AudioFormat other) -> bool
+Kumiko.Audio.AudioFormat.SampleRate.get -> int
+Kumiko.Audio.AudioFormat.SampleRate.init -> void
+Kumiko.Audio.AudioFormat.Validate() -> void
+Kumiko.Audio.AudioOutput
+Kumiko.Audio.AudioPlayer
+Kumiko.Audio.AudioPlayer.AudioPlayer(Kumiko.Audio.IAudioDecoder! decoder, Kumiko.Audio.IAudioOutput! output) -> void
+Kumiko.Audio.AudioPlayer.Changed -> System.Action<Kumiko.Audio.PlaybackState!>?
+Kumiko.Audio.AudioPlayer.Completion.get -> System.Threading.Tasks.Task!
+Kumiko.Audio.AudioPlayer.DisposeAsync() -> System.Threading.Tasks.ValueTask
+Kumiko.Audio.AudioPlayer.PauseAsync(System.Threading.CancellationToken token = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+Kumiko.Audio.AudioPlayer.PlayAsync(System.Threading.CancellationToken token = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+Kumiko.Audio.AudioPlayer.SeekAsync(System.TimeSpan position, System.Threading.CancellationToken token = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+Kumiko.Audio.AudioPlayer.SetLoopAsync(bool loop, System.Threading.CancellationToken token = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+Kumiko.Audio.AudioPlayer.SetVolumeAsync(float volume, System.Threading.CancellationToken token = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+Kumiko.Audio.AudioPlayer.State.get -> Kumiko.Audio.PlaybackState!
+Kumiko.Audio.AudioPlayer.StopAsync(System.Threading.CancellationToken token = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+Kumiko.Audio.IAudioDecoder
+Kumiko.Audio.IAudioDecoder.CanSeek.get -> bool
+Kumiko.Audio.IAudioDecoder.Format.get -> Kumiko.Audio.AudioFormat
+Kumiko.Audio.IAudioDecoder.LengthFrames.get -> long?
+Kumiko.Audio.IAudioDecoder.PositionFrames.get -> long
+Kumiko.Audio.IAudioDecoder.Read(System.Span<float> samples) -> int
+Kumiko.Audio.IAudioDecoder.ReadAsync(System.Memory<float> samples, System.Threading.CancellationToken token) -> System.Threading.Tasks.ValueTask<int>
+Kumiko.Audio.IAudioDecoder.Seek(long frame) -> void
+Kumiko.Audio.IAudioOutput
+Kumiko.Audio.IAudioOutput.DrainAsync(System.Threading.CancellationToken token) -> System.Threading.Tasks.ValueTask
+Kumiko.Audio.IAudioOutput.Open(Kumiko.Audio.AudioFormat format) -> void
+Kumiko.Audio.IAudioOutput.Reset() -> void
+Kumiko.Audio.IAudioOutput.WriteAsync(System.ReadOnlyMemory<float> samples, System.Threading.CancellationToken token) -> System.Threading.Tasks.ValueTask
+Kumiko.Audio.IMediaSessionBackend
+Kumiko.Audio.IMediaSessionBackend.Publish(Kumiko.Audio.MediaMetadata! metadata, Kumiko.Audio.PlaybackState! state) -> void
+Kumiko.Audio.IMediaSessionBackend.Start(System.Action<Kumiko.Audio.MediaRequest!>! requested) -> void
+Kumiko.Audio.MediaCommand
+Kumiko.Audio.MediaCommand.Next = 4 -> Kumiko.Audio.MediaCommand
+Kumiko.Audio.MediaCommand.Pause = 1 -> Kumiko.Audio.MediaCommand
+Kumiko.Audio.MediaCommand.Play = 0 -> Kumiko.Audio.MediaCommand
+Kumiko.Audio.MediaCommand.Previous = 5 -> Kumiko.Audio.MediaCommand
+Kumiko.Audio.MediaCommand.Seek = 6 -> Kumiko.Audio.MediaCommand
+Kumiko.Audio.MediaCommand.SetLoop = 8 -> Kumiko.Audio.MediaCommand
+Kumiko.Audio.MediaCommand.SetVolume = 7 -> Kumiko.Audio.MediaCommand
+Kumiko.Audio.MediaCommand.Stop = 3 -> Kumiko.Audio.MediaCommand
+Kumiko.Audio.MediaCommand.Toggle = 2 -> Kumiko.Audio.MediaCommand
+Kumiko.Audio.MediaMetadata
+Kumiko.Audio.MediaMetadata.<Clone>$() -> Kumiko.Audio.MediaMetadata!
+Kumiko.Audio.MediaMetadata.Album.get -> string!
+Kumiko.Audio.MediaMetadata.Album.init -> void
+Kumiko.Audio.MediaMetadata.Artist.get -> string!
+Kumiko.Audio.MediaMetadata.Artist.init -> void
+Kumiko.Audio.MediaMetadata.CanNext.get -> bool
+Kumiko.Audio.MediaMetadata.CanNext.init -> void
+Kumiko.Audio.MediaMetadata.CanPrevious.get -> bool
+Kumiko.Audio.MediaMetadata.CanPrevious.init -> void
+Kumiko.Audio.MediaMetadata.CanSeek.get -> bool
+Kumiko.Audio.MediaMetadata.CanSeek.init -> void
+Kumiko.Audio.MediaMetadata.Deconstruct(out string! Id, out string! Title, out string! Artist, out string! Album, out bool CanNext, out bool CanPrevious, out bool CanSeek) -> void
+Kumiko.Audio.MediaMetadata.Equals(Kumiko.Audio.MediaMetadata? other) -> bool
+Kumiko.Audio.MediaMetadata.Id.get -> string!
+Kumiko.Audio.MediaMetadata.Id.init -> void
+Kumiko.Audio.MediaMetadata.MediaMetadata(string! Id, string! Title, string! Artist = "", string! Album = "", bool CanNext = false, bool CanPrevious = false, bool CanSeek = true) -> void
+Kumiko.Audio.MediaMetadata.Title.get -> string!
+Kumiko.Audio.MediaMetadata.Title.init -> void
+Kumiko.Audio.MediaRequest
+Kumiko.Audio.MediaRequest.<Clone>$() -> Kumiko.Audio.MediaRequest!
+Kumiko.Audio.MediaRequest.Command.get -> Kumiko.Audio.MediaCommand
+Kumiko.Audio.MediaRequest.Command.init -> void
+Kumiko.Audio.MediaRequest.Deconstruct(out Kumiko.Audio.MediaCommand Command, out System.TimeSpan? Position) -> void
+Kumiko.Audio.MediaRequest.Equals(Kumiko.Audio.MediaRequest? other) -> bool
+Kumiko.Audio.MediaRequest.Loop.get -> bool?
+Kumiko.Audio.MediaRequest.Loop.init -> void
+Kumiko.Audio.MediaRequest.MediaRequest(Kumiko.Audio.MediaCommand Command, System.TimeSpan? Position = null) -> void
+Kumiko.Audio.MediaRequest.Position.get -> System.TimeSpan?
+Kumiko.Audio.MediaRequest.Position.init -> void
+Kumiko.Audio.MediaRequest.Volume.get -> float?
+Kumiko.Audio.MediaRequest.Volume.init -> void
+Kumiko.Audio.MediaSession
+Kumiko.Audio.MediaSession.Dispose() -> void
+Kumiko.Audio.MediaSession.MediaSession(Kumiko.Audio.IMediaSessionBackend! backend) -> void
+Kumiko.Audio.MediaSession.Publish(Kumiko.Audio.MediaMetadata! metadata, Kumiko.Audio.PlaybackState! state) -> void
+Kumiko.Audio.MediaSession.Requested -> System.Action<Kumiko.Audio.MediaRequest!>?
+Kumiko.Audio.PlaybackPhase
+Kumiko.Audio.PlaybackPhase.Disposed = 5 -> Kumiko.Audio.PlaybackPhase
+Kumiko.Audio.PlaybackPhase.Ended = 3 -> Kumiko.Audio.PlaybackPhase
+Kumiko.Audio.PlaybackPhase.Failed = 4 -> Kumiko.Audio.PlaybackPhase
+Kumiko.Audio.PlaybackPhase.Paused = 2 -> Kumiko.Audio.PlaybackPhase
+Kumiko.Audio.PlaybackPhase.Playing = 1 -> Kumiko.Audio.PlaybackPhase
+Kumiko.Audio.PlaybackPhase.Stopped = 0 -> Kumiko.Audio.PlaybackPhase
+Kumiko.Audio.PlaybackState
+Kumiko.Audio.PlaybackState.<Clone>$() -> Kumiko.Audio.PlaybackState!
+Kumiko.Audio.PlaybackState.Deconstruct(out Kumiko.Audio.PlaybackPhase Phase, out System.TimeSpan Position, out System.TimeSpan? Duration, out float Volume, out bool Loop, out string? Error) -> void
+Kumiko.Audio.PlaybackState.Duration.get -> System.TimeSpan?
+Kumiko.Audio.PlaybackState.Duration.init -> void
+Kumiko.Audio.PlaybackState.Equals(Kumiko.Audio.PlaybackState? other) -> bool
+Kumiko.Audio.PlaybackState.Error.get -> string?
+Kumiko.Audio.PlaybackState.Error.init -> void
+Kumiko.Audio.PlaybackState.Loop.get -> bool
+Kumiko.Audio.PlaybackState.Loop.init -> void
+Kumiko.Audio.PlaybackState.Phase.get -> Kumiko.Audio.PlaybackPhase
+Kumiko.Audio.PlaybackState.Phase.init -> void
+Kumiko.Audio.PlaybackState.PlaybackState(Kumiko.Audio.PlaybackPhase Phase, System.TimeSpan Position, System.TimeSpan? Duration, float Volume, bool Loop, string? Error = null) -> void
+Kumiko.Audio.PlaybackState.Position.get -> System.TimeSpan
+Kumiko.Audio.PlaybackState.Position.init -> void
+Kumiko.Audio.PlaybackState.Volume.get -> float
+Kumiko.Audio.PlaybackState.Volume.init -> void
+Kumiko.Audio.WaveDecoder
+Kumiko.Audio.WaveDecoder.CanSeek.get -> bool
+Kumiko.Audio.WaveDecoder.Dispose() -> void
+Kumiko.Audio.WaveDecoder.Format.get -> Kumiko.Audio.AudioFormat
+Kumiko.Audio.WaveDecoder.LengthFrames.get -> long?
+Kumiko.Audio.WaveDecoder.PositionFrames.get -> long
+Kumiko.Audio.WaveDecoder.Read(System.Span<float> samples) -> int
+Kumiko.Audio.WaveDecoder.Seek(long frame) -> void
+Kumiko.Audio.WaveDecoder.WaveDecoder(System.IO.Stream! input, bool leaveOpen = false) -> void
+override Kumiko.Audio.AudioFormat.GetHashCode() -> int
+override Kumiko.Audio.MediaMetadata.Equals(object? obj) -> bool
+override Kumiko.Audio.MediaMetadata.GetHashCode() -> int
+override Kumiko.Audio.MediaMetadata.ToString() -> string!
+override Kumiko.Audio.MediaRequest.Equals(object? obj) -> bool
+override Kumiko.Audio.MediaRequest.GetHashCode() -> int
+override Kumiko.Audio.MediaRequest.ToString() -> string!
+override Kumiko.Audio.PlaybackState.Equals(object? obj) -> bool
+override Kumiko.Audio.PlaybackState.GetHashCode() -> int
+override Kumiko.Audio.PlaybackState.ToString() -> string!
+static Kumiko.Audio.AudioFormat.operator !=(Kumiko.Audio.AudioFormat left, Kumiko.Audio.AudioFormat right) -> bool
+static Kumiko.Audio.AudioFormat.operator ==(Kumiko.Audio.AudioFormat left, Kumiko.Audio.AudioFormat right) -> bool
+static Kumiko.Audio.AudioOutput.SystemDefault() -> Kumiko.Audio.IAudioOutput!
+static Kumiko.Audio.MediaMetadata.operator !=(Kumiko.Audio.MediaMetadata? left, Kumiko.Audio.MediaMetadata? right) -> bool
+static Kumiko.Audio.MediaMetadata.operator ==(Kumiko.Audio.MediaMetadata? left, Kumiko.Audio.MediaMetadata? right) -> bool
+static Kumiko.Audio.MediaRequest.operator !=(Kumiko.Audio.MediaRequest? left, Kumiko.Audio.MediaRequest? right) -> bool
+static Kumiko.Audio.MediaRequest.operator ==(Kumiko.Audio.MediaRequest? left, Kumiko.Audio.MediaRequest? right) -> bool
+static Kumiko.Audio.MediaSession.System(Kumiko.App! app, Kumiko.Window? window = null, string! identity = "kumiko") -> Kumiko.Audio.MediaSession!
+static Kumiko.Audio.PlaybackState.operator !=(Kumiko.Audio.PlaybackState? left, Kumiko.Audio.PlaybackState? right) -> bool
+static Kumiko.Audio.PlaybackState.operator ==(Kumiko.Audio.PlaybackState? left, Kumiko.Audio.PlaybackState? right) -> bool
+~override Kumiko.Audio.AudioFormat.Equals(object obj) -> bool
+~override Kumiko.Audio.AudioFormat.ToString() -> string

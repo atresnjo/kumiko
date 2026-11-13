@@ -1,0 +1,385 @@
+#nullable enable
+Kumiko.Components.CalendarProps
+Kumiko.Components.CalendarProps.CalendarProps() -> void
+Kumiko.Components.CalendarProps.CalendarProps(System.DateOnly? Min = null, System.DateOnly? Max = null, System.Func<System.DateOnly, bool>? IsDisabled = null, System.DateOnly? Today = null) -> void
+Kumiko.Components.CalendarProps.Deconstruct(out System.DateOnly? Min, out System.DateOnly? Max, out System.Func<System.DateOnly, bool>? IsDisabled, out System.DateOnly? Today) -> void
+Kumiko.Components.CalendarProps.Equals(Kumiko.Components.CalendarProps other) -> bool
+Kumiko.Components.CalendarProps.IsDisabled.get -> System.Func<System.DateOnly, bool>?
+Kumiko.Components.CalendarProps.IsDisabled.init -> void
+Kumiko.Components.CalendarProps.Max.get -> System.DateOnly?
+Kumiko.Components.CalendarProps.Max.init -> void
+Kumiko.Components.CalendarProps.Min.get -> System.DateOnly?
+Kumiko.Components.CalendarProps.Min.init -> void
+Kumiko.Components.CalendarProps.Today.get -> System.DateOnly?
+Kumiko.Components.CalendarProps.Today.init -> void
+Kumiko.Components.CommandItem.Checked.get -> bool
+Kumiko.Components.CommandItem.Checked.init -> void
+Kumiko.Components.CommandItem.Description.get -> string?
+Kumiko.Components.CommandItem.Description.init -> void
+Kumiko.Components.CommandItem.Disabled.get -> bool
+Kumiko.Components.CommandItem.Disabled.init -> void
+Kumiko.Components.CommandItemState
+Kumiko.Components.CommandItemState.Checked.get -> bool
+Kumiko.Components.CommandItemState.Checked.init -> void
+Kumiko.Components.CommandItemState.CommandItemState() -> void
+Kumiko.Components.CommandItemState.CommandItemState(bool Checked, bool Hovered, bool Highlighted, bool Focused, bool Disabled, Kumiko.UI.Color Foreground) -> void
+Kumiko.Components.CommandItemState.Deconstruct(out bool Checked, out bool Hovered, out bool Highlighted, out bool Focused, out bool Disabled, out Kumiko.UI.Color Foreground) -> void
+Kumiko.Components.CommandItemState.Disabled.get -> bool
+Kumiko.Components.CommandItemState.Disabled.init -> void
+Kumiko.Components.CommandItemState.Equals(Kumiko.Components.CommandItemState other) -> bool
+Kumiko.Components.CommandItemState.Focused.get -> bool
+Kumiko.Components.CommandItemState.Focused.init -> void
+Kumiko.Components.CommandItemState.Foreground.get -> Kumiko.UI.Color
+Kumiko.Components.CommandItemState.Foreground.init -> void
+Kumiko.Components.CommandItemState.Highlighted.get -> bool
+Kumiko.Components.CommandItemState.Highlighted.init -> void
+Kumiko.Components.CommandItemState.Hovered.get -> bool
+Kumiko.Components.CommandItemState.Hovered.init -> void
+Kumiko.Components.CommandProps.Embedded.get -> bool
+Kumiko.Components.CommandProps.Embedded.init -> void
+Kumiko.Components.CommandProps.RenderEmpty.get -> System.Action<Kumiko.UI.Context!>?
+Kumiko.Components.CommandProps.RenderEmpty.init -> void
+Kumiko.Components.CommandProps.RenderGroup.get -> System.Action<Kumiko.UI.Context!, string!>?
+Kumiko.Components.CommandProps.RenderGroup.init -> void
+Kumiko.Components.CommandProps.RenderItem.get -> System.Action<Kumiko.UI.Context!, Kumiko.Components.CommandItem!, Kumiko.Components.CommandItemState>?
+Kumiko.Components.CommandProps.RenderItem.init -> void
+Kumiko.Components.CommandProps.RenderSearch.get -> System.Action<Kumiko.UI.Context!>?
+Kumiko.Components.CommandProps.RenderSearch.init -> void
+Kumiko.Components.CommandProps.ResultsGap.get -> float
+Kumiko.Components.CommandProps.ResultsGap.init -> void
+Kumiko.Components.CommandProps.ResultsPadding.get -> float
+Kumiko.Components.CommandProps.ResultsPadding.init -> void
+Kumiko.Components.DatePickerProps
+Kumiko.Components.DatePickerProps.Calendar.get -> Kumiko.Components.CalendarProps
+Kumiko.Components.DatePickerProps.Calendar.init -> void
+Kumiko.Components.DatePickerProps.Clearable.get -> bool
+Kumiko.Components.DatePickerProps.Clearable.init -> void
+Kumiko.Components.DatePickerProps.DatePickerProps() -> void
+Kumiko.Components.DatePickerProps.DatePickerProps(Kumiko.Components.CalendarProps Calendar = default(Kumiko.Components.CalendarProps), string? Placeholder = null, string? Format = null, float? Width = null, bool Disabled = false, bool Clearable = false) -> void
+Kumiko.Components.DatePickerProps.Deconstruct(out Kumiko.Components.CalendarProps Calendar, out string? Placeholder, out string? Format, out float? Width, out bool Disabled, out bool Clearable) -> void
+Kumiko.Components.DatePickerProps.Disabled.get -> bool
+Kumiko.Components.DatePickerProps.Disabled.init -> void
+Kumiko.Components.DatePickerProps.Equals(Kumiko.Components.DatePickerProps other) -> bool
+Kumiko.Components.DatePickerProps.Format.get -> string?
+Kumiko.Components.DatePickerProps.Format.init -> void
+Kumiko.Components.DatePickerProps.Placeholder.get -> string?
+Kumiko.Components.DatePickerProps.Placeholder.init -> void
+Kumiko.Components.DatePickerProps.Width.get -> float?
+Kumiko.Components.DatePickerProps.Width.init -> void
+Kumiko.Components.DrawerProps
+Kumiko.Components.DrawerProps.CloseOnBackdrop.get -> bool
+Kumiko.Components.DrawerProps.CloseOnBackdrop.init -> void
+Kumiko.Components.DrawerProps.Deconstruct(out Kumiko.Components.Side Side, out float? Size, out string? Description, out bool CloseOnBackdrop, out bool ShowClose, out float Inset) -> void
+Kumiko.Components.DrawerProps.Description.get -> string?
+Kumiko.Components.DrawerProps.Description.init -> void
+Kumiko.Components.DrawerProps.DrawerProps() -> void
+Kumiko.Components.DrawerProps.DrawerProps(Kumiko.Components.Side Side = Kumiko.Components.Side.Right, float? Size = null, string? Description = null, bool CloseOnBackdrop = true, bool ShowClose = true, float Inset = 8) -> void
+Kumiko.Components.DrawerProps.Equals(Kumiko.Components.DrawerProps other) -> bool
+Kumiko.Components.DrawerProps.Inset.get -> float
+Kumiko.Components.DrawerProps.Inset.init -> void
+Kumiko.Components.DrawerProps.ShowClose.get -> bool
+Kumiko.Components.DrawerProps.ShowClose.init -> void
+Kumiko.Components.DrawerProps.Side.get -> Kumiko.Components.Side
+Kumiko.Components.DrawerProps.Side.init -> void
+Kumiko.Components.DrawerProps.Size.get -> float?
+Kumiko.Components.DrawerProps.Size.init -> void
+Kumiko.Components.Kit.Calendar(string! name, System.DateOnly? value, System.Action<System.DateOnly>! changed, Kumiko.Components.CalendarProps props = default(Kumiko.Components.CalendarProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> bool
+Kumiko.Components.Kit.DatePicker(string! label, System.DateOnly? value, bool open, System.Action<System.DateOnly?>! changed, System.Action<bool>! openChanged, Kumiko.Components.DatePickerProps props = default(Kumiko.Components.DatePickerProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> bool
+Kumiko.Components.Kit.Drawer(string! title, System.Action! onClose, Kumiko.Components.DrawerProps props = default(Kumiko.Components.DrawerProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> Kumiko.Components.KitScope
+Kumiko.Components.Kit.Highlighted(Kumiko.UI.Interaction item) -> bool
+Kumiko.Components.Kit.NumberInput(string! label, double? value, System.Action<double?>! changed, Kumiko.Components.NumberInputProps props = default(Kumiko.Components.NumberInputProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> bool
+Kumiko.Components.Kit.ResizeHandle(string! name, float size, System.Action<float>! changed, Kumiko.Components.ResizeHandleProps props = default(Kumiko.Components.ResizeHandleProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> bool
+Kumiko.Components.Kit.TimePicker(string! label, System.TimeOnly? value, bool open, System.Action<System.TimeOnly?>! changed, System.Action<bool>! openChanged, Kumiko.Components.TimePickerProps props = default(Kumiko.Components.TimePickerProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> bool
+Kumiko.Components.Kit.Toaster(System.Collections.Generic.IReadOnlyList<Kumiko.Components.Toast!>! toasts, Kumiko.Components.ToasterProps props = default(Kumiko.Components.ToasterProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> System.Collections.Generic.IReadOnlyList<Kumiko.Components.ToastEvent>!
+Kumiko.Components.Kit.Tooltip(Kumiko.UI.Interaction trigger, string! text, Kumiko.Components.TooltipProps props = default(Kumiko.Components.TooltipProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> void
+Kumiko.Components.Kit.Tree(string! name, System.Collections.Generic.IReadOnlyList<Kumiko.Components.TreeNode!>! roots, System.Collections.Generic.IReadOnlySet<string!>! expanded, string? selected, System.Action<string!, bool>! expandedChanged, System.Action<string!>! selectedChanged, Kumiko.Components.TreeProps props = default(Kumiko.Components.TreeProps), Kumiko.UI.NodeKey key = default(Kumiko.UI.NodeKey), string! source = "", int line = 0) -> bool
+Kumiko.Components.NumberInputProps
+Kumiko.Components.NumberInputProps.Decimals.get -> int
+Kumiko.Components.NumberInputProps.Decimals.init -> void
+Kumiko.Components.NumberInputProps.Deconstruct(out double? Min, out double? Max, out double Step, out int Decimals, out float? Width, out bool Disabled, out bool Required, out string? Description, out string! Placeholder, out bool Grouping) -> void
+Kumiko.Components.NumberInputProps.Description.get -> string?
+Kumiko.Components.NumberInputProps.Description.init -> void
+Kumiko.Components.NumberInputProps.Disabled.get -> bool
+Kumiko.Components.NumberInputProps.Disabled.init -> void
+Kumiko.Components.NumberInputProps.Equals(Kumiko.Components.NumberInputProps other) -> bool
+Kumiko.Components.NumberInputProps.Grouping.get -> bool
+Kumiko.Components.NumberInputProps.Grouping.init -> void
+Kumiko.Components.NumberInputProps.Max.get -> double?
+Kumiko.Components.NumberInputProps.Max.init -> void
+Kumiko.Components.NumberInputProps.Min.get -> double?
+Kumiko.Components.NumberInputProps.Min.init -> void
+Kumiko.Components.NumberInputProps.NumberInputProps() -> void
+Kumiko.Components.NumberInputProps.NumberInputProps(double? Min = null, double? Max = null, double Step = 1, int Decimals = 0, float? Width = null, bool Disabled = false, bool Required = false, string? Description = null, string! Placeholder = "", bool Grouping = false) -> void
+Kumiko.Components.NumberInputProps.Placeholder.get -> string!
+Kumiko.Components.NumberInputProps.Placeholder.init -> void
+Kumiko.Components.NumberInputProps.Required.get -> bool
+Kumiko.Components.NumberInputProps.Required.init -> void
+Kumiko.Components.NumberInputProps.Step.get -> double
+Kumiko.Components.NumberInputProps.Step.init -> void
+Kumiko.Components.NumberInputProps.Width.get -> float?
+Kumiko.Components.NumberInputProps.Width.init -> void
+Kumiko.Components.ResizeHandleProps
+Kumiko.Components.ResizeHandleProps.Deconstruct(out Kumiko.Components.Orientation Orientation, out float? Min, out float? Max, out float Step, out bool Reverse) -> void
+Kumiko.Components.ResizeHandleProps.Equals(Kumiko.Components.ResizeHandleProps other) -> bool
+Kumiko.Components.ResizeHandleProps.Max.get -> float?
+Kumiko.Components.ResizeHandleProps.Max.init -> void
+Kumiko.Components.ResizeHandleProps.Min.get -> float?
+Kumiko.Components.ResizeHandleProps.Min.init -> void
+Kumiko.Components.ResizeHandleProps.Orientation.get -> Kumiko.Components.Orientation
+Kumiko.Components.ResizeHandleProps.Orientation.init -> void
+Kumiko.Components.ResizeHandleProps.ResizeHandleProps() -> void
+Kumiko.Components.ResizeHandleProps.ResizeHandleProps(Kumiko.Components.Orientation Orientation = Kumiko.Components.Orientation.Vertical, float? Min = null, float? Max = null, float Step = 0, bool Reverse = false) -> void
+Kumiko.Components.ResizeHandleProps.Reverse.get -> bool
+Kumiko.Components.ResizeHandleProps.Reverse.init -> void
+Kumiko.Components.ResizeHandleProps.Step.get -> float
+Kumiko.Components.ResizeHandleProps.Step.init -> void
+Kumiko.Components.TabItemState
+Kumiko.Components.TabItemState.Deconstruct(out bool Selected, out bool Hovered, out bool Highlighted, out bool Focused, out bool Disabled, out Kumiko.UI.Color Foreground) -> void
+Kumiko.Components.TabItemState.Disabled.get -> bool
+Kumiko.Components.TabItemState.Disabled.init -> void
+Kumiko.Components.TabItemState.Equals(Kumiko.Components.TabItemState other) -> bool
+Kumiko.Components.TabItemState.Focused.get -> bool
+Kumiko.Components.TabItemState.Focused.init -> void
+Kumiko.Components.TabItemState.Foreground.get -> Kumiko.UI.Color
+Kumiko.Components.TabItemState.Foreground.init -> void
+Kumiko.Components.TabItemState.Highlighted.get -> bool
+Kumiko.Components.TabItemState.Highlighted.init -> void
+Kumiko.Components.TabItemState.Hovered.get -> bool
+Kumiko.Components.TabItemState.Hovered.init -> void
+Kumiko.Components.TabItemState.Selected.get -> bool
+Kumiko.Components.TabItemState.Selected.init -> void
+Kumiko.Components.TabItemState.TabItemState() -> void
+Kumiko.Components.TabItemState.TabItemState(bool Selected, bool Hovered, bool Highlighted, bool Focused, bool Disabled, Kumiko.UI.Color Foreground) -> void
+Kumiko.Components.TabsProps.RenderItem.get -> System.Action<Kumiko.UI.Context!, Kumiko.UI.Choice!, Kumiko.Components.TabItemState>?
+Kumiko.Components.TabsProps.RenderItem.init -> void
+Kumiko.Components.TimePickerProps
+Kumiko.Components.TimePickerProps.Deconstruct(out int StepMinutes, out System.TimeOnly? Min, out System.TimeOnly? Max, out string? Placeholder, out float? Width, out bool Disabled) -> void
+Kumiko.Components.TimePickerProps.Disabled.get -> bool
+Kumiko.Components.TimePickerProps.Disabled.init -> void
+Kumiko.Components.TimePickerProps.Equals(Kumiko.Components.TimePickerProps other) -> bool
+Kumiko.Components.TimePickerProps.Max.get -> System.TimeOnly?
+Kumiko.Components.TimePickerProps.Max.init -> void
+Kumiko.Components.TimePickerProps.Min.get -> System.TimeOnly?
+Kumiko.Components.TimePickerProps.Min.init -> void
+Kumiko.Components.TimePickerProps.Placeholder.get -> string?
+Kumiko.Components.TimePickerProps.Placeholder.init -> void
+Kumiko.Components.TimePickerProps.StepMinutes.get -> int
+Kumiko.Components.TimePickerProps.StepMinutes.init -> void
+Kumiko.Components.TimePickerProps.TimePickerProps() -> void
+Kumiko.Components.TimePickerProps.TimePickerProps(int StepMinutes = 30, System.TimeOnly? Min = null, System.TimeOnly? Max = null, string? Placeholder = null, float? Width = null, bool Disabled = false) -> void
+Kumiko.Components.TimePickerProps.Width.get -> float?
+Kumiko.Components.TimePickerProps.Width.init -> void
+Kumiko.Components.Toast
+Kumiko.Components.Toast.<Clone>$() -> Kumiko.Components.Toast!
+Kumiko.Components.Toast.Deconstruct(out string! Id, out string! Title, out Kumiko.Components.ToastProps Props) -> void
+Kumiko.Components.Toast.Equals(Kumiko.Components.Toast? other) -> bool
+Kumiko.Components.Toast.Id.get -> string!
+Kumiko.Components.Toast.Id.init -> void
+Kumiko.Components.Toast.Props.get -> Kumiko.Components.ToastProps
+Kumiko.Components.Toast.Props.init -> void
+Kumiko.Components.Toast.Title.get -> string!
+Kumiko.Components.Toast.Title.init -> void
+Kumiko.Components.Toast.Toast(string! Id, string! Title, Kumiko.Components.ToastProps Props = default(Kumiko.Components.ToastProps)) -> void
+Kumiko.Components.ToasterProps
+Kumiko.Components.ToasterProps.Deconstruct(out Kumiko.Components.ToastPlacement Placement, out float? Width, out float? Inset, out float? Gap, out int? Visible, out bool Expanded) -> void
+Kumiko.Components.ToasterProps.Equals(Kumiko.Components.ToasterProps other) -> bool
+Kumiko.Components.ToasterProps.Expanded.get -> bool
+Kumiko.Components.ToasterProps.Expanded.init -> void
+Kumiko.Components.ToasterProps.Gap.get -> float?
+Kumiko.Components.ToasterProps.Gap.init -> void
+Kumiko.Components.ToasterProps.Inset.get -> float?
+Kumiko.Components.ToasterProps.Inset.init -> void
+Kumiko.Components.ToasterProps.Placement.get -> Kumiko.Components.ToastPlacement
+Kumiko.Components.ToasterProps.Placement.init -> void
+Kumiko.Components.ToasterProps.ToasterProps() -> void
+Kumiko.Components.ToasterProps.ToasterProps(Kumiko.Components.ToastPlacement Placement = Kumiko.Components.ToastPlacement.BottomRight, float? Width = null, float? Inset = null, float? Gap = null, int? Visible = null, bool Expanded = false) -> void
+Kumiko.Components.ToasterProps.Visible.get -> int?
+Kumiko.Components.ToasterProps.Visible.init -> void
+Kumiko.Components.ToasterProps.Width.get -> float?
+Kumiko.Components.ToasterProps.Width.init -> void
+Kumiko.Components.ToastEvent
+Kumiko.Components.ToastEvent.Deconstruct(out string! Id, out Kumiko.Components.ToastEventKind Kind) -> void
+Kumiko.Components.ToastEvent.Equals(Kumiko.Components.ToastEvent other) -> bool
+Kumiko.Components.ToastEvent.Id.get -> string!
+Kumiko.Components.ToastEvent.Id.init -> void
+Kumiko.Components.ToastEvent.Kind.get -> Kumiko.Components.ToastEventKind
+Kumiko.Components.ToastEvent.Kind.init -> void
+Kumiko.Components.ToastEvent.ToastEvent() -> void
+Kumiko.Components.ToastEvent.ToastEvent(string! Id, Kumiko.Components.ToastEventKind Kind) -> void
+Kumiko.Components.ToastEventKind
+Kumiko.Components.ToastEventKind.Action = 1 -> Kumiko.Components.ToastEventKind
+Kumiko.Components.ToastEventKind.Clicked = 0 -> Kumiko.Components.ToastEventKind
+Kumiko.Components.ToastEventKind.Dismissed = 2 -> Kumiko.Components.ToastEventKind
+Kumiko.Components.ToastEventKind.Expired = 3 -> Kumiko.Components.ToastEventKind
+Kumiko.Components.ToastPlacement
+Kumiko.Components.ToastPlacement.BottomCenter = 2 -> Kumiko.Components.ToastPlacement
+Kumiko.Components.ToastPlacement.BottomLeft = 1 -> Kumiko.Components.ToastPlacement
+Kumiko.Components.ToastPlacement.BottomRight = 0 -> Kumiko.Components.ToastPlacement
+Kumiko.Components.ToastPlacement.TopCenter = 5 -> Kumiko.Components.ToastPlacement
+Kumiko.Components.ToastPlacement.TopLeft = 4 -> Kumiko.Components.ToastPlacement
+Kumiko.Components.ToastPlacement.TopRight = 3 -> Kumiko.Components.ToastPlacement
+Kumiko.Components.ToastProps
+Kumiko.Components.ToastProps.Action.get -> string?
+Kumiko.Components.ToastProps.Action.init -> void
+Kumiko.Components.ToastProps.Busy.get -> bool
+Kumiko.Components.ToastProps.Busy.init -> void
+Kumiko.Components.ToastProps.Clickable.get -> bool
+Kumiko.Components.ToastProps.Clickable.init -> void
+Kumiko.Components.ToastProps.Deconstruct(out string? Description, out Kumiko.Components.Tone Tone, out string? Icon, out bool Busy, out float? Progress, out string? Action, out bool Clickable, out bool Dismissible, out System.TimeSpan? Duration) -> void
+Kumiko.Components.ToastProps.Description.get -> string?
+Kumiko.Components.ToastProps.Description.init -> void
+Kumiko.Components.ToastProps.Dismissible.get -> bool
+Kumiko.Components.ToastProps.Dismissible.init -> void
+Kumiko.Components.ToastProps.Duration.get -> System.TimeSpan?
+Kumiko.Components.ToastProps.Duration.init -> void
+Kumiko.Components.ToastProps.Equals(Kumiko.Components.ToastProps other) -> bool
+Kumiko.Components.ToastProps.Icon.get -> string?
+Kumiko.Components.ToastProps.Icon.init -> void
+Kumiko.Components.ToastProps.Progress.get -> float?
+Kumiko.Components.ToastProps.Progress.init -> void
+Kumiko.Components.ToastProps.ToastProps() -> void
+Kumiko.Components.ToastProps.ToastProps(string? Description = null, Kumiko.Components.Tone Tone = Kumiko.Components.Tone.Default, string? Icon = null, bool Busy = false, float? Progress = null, string? Action = null, bool Clickable = false, bool Dismissible = true, System.TimeSpan? Duration = null) -> void
+Kumiko.Components.ToastProps.Tone.get -> Kumiko.Components.Tone
+Kumiko.Components.ToastProps.Tone.init -> void
+Kumiko.Components.TooltipProps
+Kumiko.Components.TooltipProps.Deconstruct(out Kumiko.Components.Side? Side, out System.TimeSpan? Delay, out float? MaxWidth) -> void
+Kumiko.Components.TooltipProps.Delay.get -> System.TimeSpan?
+Kumiko.Components.TooltipProps.Delay.init -> void
+Kumiko.Components.TooltipProps.Equals(Kumiko.Components.TooltipProps other) -> bool
+Kumiko.Components.TooltipProps.MaxWidth.get -> float?
+Kumiko.Components.TooltipProps.MaxWidth.init -> void
+Kumiko.Components.TooltipProps.Side.get -> Kumiko.Components.Side?
+Kumiko.Components.TooltipProps.Side.init -> void
+Kumiko.Components.TooltipProps.TooltipProps() -> void
+Kumiko.Components.TooltipProps.TooltipProps(Kumiko.Components.Side? Side = null, System.TimeSpan? Delay = null, float? MaxWidth = null) -> void
+Kumiko.Components.TreeItemState
+Kumiko.Components.TreeItemState.Deconstruct(out bool Selected, out bool Hovered, out bool Highlighted, out bool Focused, out bool Disabled, out Kumiko.UI.Color Foreground, out bool Expanded, out int Depth, out bool HasChildren) -> void
+Kumiko.Components.TreeItemState.Depth.get -> int
+Kumiko.Components.TreeItemState.Depth.init -> void
+Kumiko.Components.TreeItemState.Disabled.get -> bool
+Kumiko.Components.TreeItemState.Disabled.init -> void
+Kumiko.Components.TreeItemState.Equals(Kumiko.Components.TreeItemState other) -> bool
+Kumiko.Components.TreeItemState.Expanded.get -> bool
+Kumiko.Components.TreeItemState.Expanded.init -> void
+Kumiko.Components.TreeItemState.Focused.get -> bool
+Kumiko.Components.TreeItemState.Focused.init -> void
+Kumiko.Components.TreeItemState.Foreground.get -> Kumiko.UI.Color
+Kumiko.Components.TreeItemState.Foreground.init -> void
+Kumiko.Components.TreeItemState.HasChildren.get -> bool
+Kumiko.Components.TreeItemState.HasChildren.init -> void
+Kumiko.Components.TreeItemState.Highlighted.get -> bool
+Kumiko.Components.TreeItemState.Highlighted.init -> void
+Kumiko.Components.TreeItemState.Hovered.get -> bool
+Kumiko.Components.TreeItemState.Hovered.init -> void
+Kumiko.Components.TreeItemState.Selected.get -> bool
+Kumiko.Components.TreeItemState.Selected.init -> void
+Kumiko.Components.TreeItemState.TreeItemState() -> void
+Kumiko.Components.TreeItemState.TreeItemState(bool Selected, bool Hovered, bool Highlighted, bool Focused, bool Disabled, Kumiko.UI.Color Foreground, bool Expanded, int Depth, bool HasChildren) -> void
+Kumiko.Components.TreeNode
+Kumiko.Components.TreeNode.<Clone>$() -> Kumiko.Components.TreeNode!
+Kumiko.Components.TreeNode.Children.get -> System.Collections.Immutable.ImmutableArray<Kumiko.Components.TreeNode!>
+Kumiko.Components.TreeNode.Children.init -> void
+Kumiko.Components.TreeNode.Deconstruct(out string! Id, out string! Label, out System.Collections.Immutable.ImmutableArray<Kumiko.Components.TreeNode!> Children, out string? Icon, out bool Disabled) -> void
+Kumiko.Components.TreeNode.Disabled.get -> bool
+Kumiko.Components.TreeNode.Disabled.init -> void
+Kumiko.Components.TreeNode.Equals(Kumiko.Components.TreeNode? other) -> bool
+Kumiko.Components.TreeNode.Icon.get -> string?
+Kumiko.Components.TreeNode.Icon.init -> void
+Kumiko.Components.TreeNode.Id.get -> string!
+Kumiko.Components.TreeNode.Id.init -> void
+Kumiko.Components.TreeNode.Label.get -> string!
+Kumiko.Components.TreeNode.Label.init -> void
+Kumiko.Components.TreeNode.TreeNode(string! Id, string! Label, System.Collections.Immutable.ImmutableArray<Kumiko.Components.TreeNode!> Children = default(System.Collections.Immutable.ImmutableArray<Kumiko.Components.TreeNode!>), string? Icon = null, bool Disabled = false) -> void
+Kumiko.Components.TreeProps
+Kumiko.Components.TreeProps.Activated.get -> System.Action<string!>?
+Kumiko.Components.TreeProps.Activated.init -> void
+Kumiko.Components.TreeProps.Deconstruct(out float? Height, out System.Action<string!>? Activated) -> void
+Kumiko.Components.TreeProps.Equals(Kumiko.Components.TreeProps other) -> bool
+Kumiko.Components.TreeProps.Height.get -> float?
+Kumiko.Components.TreeProps.Height.init -> void
+Kumiko.Components.TreeProps.RenderItem.get -> System.Action<Kumiko.UI.Context!, Kumiko.Components.TreeNode!, Kumiko.Components.TreeItemState>?
+Kumiko.Components.TreeProps.RenderItem.init -> void
+Kumiko.Components.TreeProps.TreeProps() -> void
+Kumiko.Components.TreeProps.TreeProps(float? Height = null, System.Action<string!>? Activated = null) -> void
+override Kumiko.Components.CalendarProps.GetHashCode() -> int
+override Kumiko.Components.CommandItemState.GetHashCode() -> int
+override Kumiko.Components.DatePickerProps.GetHashCode() -> int
+override Kumiko.Components.DrawerProps.GetHashCode() -> int
+override Kumiko.Components.NumberInputProps.GetHashCode() -> int
+override Kumiko.Components.ResizeHandleProps.GetHashCode() -> int
+override Kumiko.Components.TabItemState.GetHashCode() -> int
+override Kumiko.Components.TimePickerProps.GetHashCode() -> int
+override Kumiko.Components.Toast.Equals(object? obj) -> bool
+override Kumiko.Components.Toast.GetHashCode() -> int
+override Kumiko.Components.Toast.ToString() -> string!
+override Kumiko.Components.ToasterProps.GetHashCode() -> int
+override Kumiko.Components.ToastEvent.GetHashCode() -> int
+override Kumiko.Components.ToastProps.GetHashCode() -> int
+override Kumiko.Components.TooltipProps.GetHashCode() -> int
+override Kumiko.Components.TreeItemState.GetHashCode() -> int
+override Kumiko.Components.TreeNode.Equals(object? obj) -> bool
+override Kumiko.Components.TreeNode.GetHashCode() -> int
+override Kumiko.Components.TreeNode.ToString() -> string!
+override Kumiko.Components.TreeProps.GetHashCode() -> int
+static Kumiko.Components.CalendarProps.operator !=(Kumiko.Components.CalendarProps left, Kumiko.Components.CalendarProps right) -> bool
+static Kumiko.Components.CalendarProps.operator ==(Kumiko.Components.CalendarProps left, Kumiko.Components.CalendarProps right) -> bool
+static Kumiko.Components.CommandItemState.operator !=(Kumiko.Components.CommandItemState left, Kumiko.Components.CommandItemState right) -> bool
+static Kumiko.Components.CommandItemState.operator ==(Kumiko.Components.CommandItemState left, Kumiko.Components.CommandItemState right) -> bool
+static Kumiko.Components.DatePickerProps.operator !=(Kumiko.Components.DatePickerProps left, Kumiko.Components.DatePickerProps right) -> bool
+static Kumiko.Components.DatePickerProps.operator ==(Kumiko.Components.DatePickerProps left, Kumiko.Components.DatePickerProps right) -> bool
+static Kumiko.Components.DrawerProps.operator !=(Kumiko.Components.DrawerProps left, Kumiko.Components.DrawerProps right) -> bool
+static Kumiko.Components.DrawerProps.operator ==(Kumiko.Components.DrawerProps left, Kumiko.Components.DrawerProps right) -> bool
+static Kumiko.Components.KitTheme.HighContrast.get -> Kumiko.Components.KitTheme!
+static Kumiko.Components.KitTheme.HighContrastDark.get -> Kumiko.Components.KitTheme!
+static Kumiko.Components.NumberInputProps.operator !=(Kumiko.Components.NumberInputProps left, Kumiko.Components.NumberInputProps right) -> bool
+static Kumiko.Components.NumberInputProps.operator ==(Kumiko.Components.NumberInputProps left, Kumiko.Components.NumberInputProps right) -> bool
+static Kumiko.Components.ResizeHandleProps.operator !=(Kumiko.Components.ResizeHandleProps left, Kumiko.Components.ResizeHandleProps right) -> bool
+static Kumiko.Components.ResizeHandleProps.operator ==(Kumiko.Components.ResizeHandleProps left, Kumiko.Components.ResizeHandleProps right) -> bool
+static Kumiko.Components.TabItemState.operator !=(Kumiko.Components.TabItemState left, Kumiko.Components.TabItemState right) -> bool
+static Kumiko.Components.TabItemState.operator ==(Kumiko.Components.TabItemState left, Kumiko.Components.TabItemState right) -> bool
+static Kumiko.Components.TimePickerProps.operator !=(Kumiko.Components.TimePickerProps left, Kumiko.Components.TimePickerProps right) -> bool
+static Kumiko.Components.TimePickerProps.operator ==(Kumiko.Components.TimePickerProps left, Kumiko.Components.TimePickerProps right) -> bool
+static Kumiko.Components.Toast.operator !=(Kumiko.Components.Toast? left, Kumiko.Components.Toast? right) -> bool
+static Kumiko.Components.Toast.operator ==(Kumiko.Components.Toast? left, Kumiko.Components.Toast? right) -> bool
+static Kumiko.Components.ToasterProps.operator !=(Kumiko.Components.ToasterProps left, Kumiko.Components.ToasterProps right) -> bool
+static Kumiko.Components.ToasterProps.operator ==(Kumiko.Components.ToasterProps left, Kumiko.Components.ToasterProps right) -> bool
+static Kumiko.Components.ToastEvent.operator !=(Kumiko.Components.ToastEvent left, Kumiko.Components.ToastEvent right) -> bool
+static Kumiko.Components.ToastEvent.operator ==(Kumiko.Components.ToastEvent left, Kumiko.Components.ToastEvent right) -> bool
+static Kumiko.Components.ToastProps.operator !=(Kumiko.Components.ToastProps left, Kumiko.Components.ToastProps right) -> bool
+static Kumiko.Components.ToastProps.operator ==(Kumiko.Components.ToastProps left, Kumiko.Components.ToastProps right) -> bool
+static Kumiko.Components.TooltipProps.operator !=(Kumiko.Components.TooltipProps left, Kumiko.Components.TooltipProps right) -> bool
+static Kumiko.Components.TooltipProps.operator ==(Kumiko.Components.TooltipProps left, Kumiko.Components.TooltipProps right) -> bool
+static Kumiko.Components.TreeItemState.operator !=(Kumiko.Components.TreeItemState left, Kumiko.Components.TreeItemState right) -> bool
+static Kumiko.Components.TreeItemState.operator ==(Kumiko.Components.TreeItemState left, Kumiko.Components.TreeItemState right) -> bool
+static Kumiko.Components.TreeNode.operator !=(Kumiko.Components.TreeNode? left, Kumiko.Components.TreeNode? right) -> bool
+static Kumiko.Components.TreeNode.operator ==(Kumiko.Components.TreeNode? left, Kumiko.Components.TreeNode? right) -> bool
+static Kumiko.Components.TreeProps.operator !=(Kumiko.Components.TreeProps left, Kumiko.Components.TreeProps right) -> bool
+static Kumiko.Components.TreeProps.operator ==(Kumiko.Components.TreeProps left, Kumiko.Components.TreeProps right) -> bool
+~override Kumiko.Components.CalendarProps.Equals(object obj) -> bool
+~override Kumiko.Components.CalendarProps.ToString() -> string
+~override Kumiko.Components.CommandItemState.Equals(object obj) -> bool
+~override Kumiko.Components.CommandItemState.ToString() -> string
+~override Kumiko.Components.DatePickerProps.Equals(object obj) -> bool
+~override Kumiko.Components.DatePickerProps.ToString() -> string
+~override Kumiko.Components.DrawerProps.Equals(object obj) -> bool
+~override Kumiko.Components.DrawerProps.ToString() -> string
+~override Kumiko.Components.NumberInputProps.Equals(object obj) -> bool
+~override Kumiko.Components.NumberInputProps.ToString() -> string
+~override Kumiko.Components.ResizeHandleProps.Equals(object obj) -> bool
+~override Kumiko.Components.ResizeHandleProps.ToString() -> string
+~override Kumiko.Components.TabItemState.Equals(object obj) -> bool
+~override Kumiko.Components.TabItemState.ToString() -> string
+~override Kumiko.Components.TimePickerProps.Equals(object obj) -> bool
+~override Kumiko.Components.TimePickerProps.ToString() -> string
+~override Kumiko.Components.ToasterProps.Equals(object obj) -> bool
+~override Kumiko.Components.ToasterProps.ToString() -> string
+~override Kumiko.Components.ToastEvent.Equals(object obj) -> bool
+~override Kumiko.Components.ToastEvent.ToString() -> string
+~override Kumiko.Components.ToastProps.Equals(object obj) -> bool
+~override Kumiko.Components.ToastProps.ToString() -> string
+~override Kumiko.Components.TooltipProps.Equals(object obj) -> bool
+~override Kumiko.Components.TooltipProps.ToString() -> string
+~override Kumiko.Components.TreeItemState.Equals(object obj) -> bool
+~override Kumiko.Components.TreeItemState.ToString() -> string
+~override Kumiko.Components.TreeProps.Equals(object obj) -> bool
+~override Kumiko.Components.TreeProps.ToString() -> string

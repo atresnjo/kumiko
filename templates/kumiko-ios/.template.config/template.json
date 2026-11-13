@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Kumiko",
+  "classifications": ["iOS", "Mobile", "Kumiko"],
+  "identity": "Kumiko.iOS.CSharp",
+  "name": "Kumiko iOS application",
+  "shortName": "kumiko-ios",
+  "sourceName": "KumikoiOSTemplate",
+  "preferNameDirectory": true,
+  "symbols": {
+    "bundleId": {
+      "type": "parameter",
+      "datatype": "text",
+      "description": "The app's bundle identifier.",
+      "defaultValue": "com.example.kumikoiostemplate",
+      "replaces": "com.example.kumikoiostemplate"
+    }
+  },
+  "tags": { "language": "C#", "type": "project" }
+}

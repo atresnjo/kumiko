@@ -1,0 +1,14 @@
+{
+  "purpose": "Test CRMLite through accessibility alone before proposing framework changes.",
+  "failures": [
+    "A named action reports success without changing the observable tree.",
+    "Native accessibility cannot navigate, edit a form, choose an option, validate and submit.",
+    "A modal leaves background actions enabled or allows them to change the app.",
+    "A control exposes expanded state but cannot execute Expand or Collapse.",
+    "A retained reference to a removed control can act on a later frame.",
+    "A new record is not observable after returning to the list and searching.",
+    "Controls outside a scroll viewport cannot be discovered or revealed semantically.",
+    "An external AX client cannot discover the owned hidden app even when in-process provider calls work."
+  ],
+  "constraints": ["Hidden/offscreen only", "No system input", "No system clipboard", "No direct model dispatch for navigation or editing"]
+}

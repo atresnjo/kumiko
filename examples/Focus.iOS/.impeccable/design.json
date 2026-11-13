@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-21T10:58:44Z",
+  "title": "Design System: Kumiko Focus for iOS",
+  "extensions": {
+    "platform": "UIKit; logical points; no HTML/CSS previews.",
+    "visualAuthority": "User-supplied portrait focus-session reference (image0).",
+    "motion": [
+      {
+        "name": "drawer-transition",
+        "value": "UISheetPresentationController system presentation, detents and interactive dismissal; respects Reduce Motion"
+      },
+      {
+        "name": "press-feedback",
+        "value": "highlighted alpha 0.72; disabled alpha 0.4"
+      }
+    ],
+    "layoutConstraints": {
+      "sessionWidth": "min(420pt, width - 44pt)",
+      "navigationWidth": "maximum 600pt",
+      "drawerWidth": "System-controlled presented width; detached preview min(600pt, width - 16pt)",
+      "standaloneHitTarget": "minimum 44x44pt"
+    },
+    "elevation": {
+      "pageGlow": "mint alpha 0.07",
+      "startGlow": "mint alpha 0.9; radius width x 0.62; vertical scale 0.38",
+      "outline": "0.75pt",
+      "backdrop": "black alpha 0.35"
+    },
+    "verification": {
+      "report": "artifacts/ios-focus/focus-report.json",
+      "result": "Native offscreen controller, delegate, model and replay checks; artifacts regenerated for system sheets and tabs.",
+      "limits": "Physical touch trajectories and VoiceOver traversal are not simulated."
+    }
+  },
+  "components": [
+    {
+      "name": "NativeAction",
+      "kind": "button",
+      "description": "SF Symbol action; compact selector, tonal and illuminated variants."
+    },
+    {
+      "name": "NativeTabBar",
+      "kind": "nav",
+      "description": "UITabBar and stable UITabBarItems with mint tint and native selection/accessibility."
+    },
+    {
+      "name": "NativeTimerDial / NativeTimeline",
+      "kind": "custom",
+      "description": "Ticked countdown and sample day activity strip."
+    },
+    {
+      "name": "NativeBottomDrawer / NativeCheckList",
+      "kind": "native",
+      "description": "UISheetPresentationController with native detents, scroll handoff and drag dismissal; UITableView multiple selection."
+    }
+  ]
+}

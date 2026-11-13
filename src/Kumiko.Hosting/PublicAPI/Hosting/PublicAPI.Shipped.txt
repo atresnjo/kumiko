@@ -1,0 +1,12 @@
+#nullable enable
+Kumiko.Hosting.NativeApplication
+Kumiko.Hosting.NativeApplication.App.get -> Kumiko.App!
+Kumiko.Hosting.NativeApplication.CreateWindow(Kumiko.WindowOptions! options, Kumiko.Runtime.IProgram! program) -> Kumiko.Window!
+Kumiko.Hosting.NativeApplication.Dispatch(System.Action! action) -> void
+Kumiko.Hosting.NativeApplication.Dispose() -> void
+Kumiko.Hosting.NativeApplication.Invalidate() -> void
+Kumiko.Hosting.NativeApplication.NativeApplication(Kumiko.AppOptions! options) -> void
+Kumiko.Hosting.NativeApplication.Window.get -> Kumiko.Window?
+Kumiko.Hosting.NativeHost
+static Kumiko.Hosting.NativeHost.AddKumiko(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services, Kumiko.AppOptions! options) -> Microsoft.Extensions.DependencyInjection.IServiceCollection!
+static Kumiko.Hosting.NativeHost.RunKumiko(this Microsoft.Extensions.Hosting.IHost! host, Kumiko.Hosting.NativeApplication! application) -> void

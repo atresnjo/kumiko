@@ -1,0 +1,558 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-22T09:43:34Z",
+  "title": "Design System: Motion Studies for iOS",
+  "extensions": {
+    "platform": "Native C# / UIKit; all layout dimensions are logical points.",
+    "visualAuthority": "Explicit preservation brief, source-authoritative PRODUCT.md, retained CapWords/Alma design, built Gallery.*, Alma.*, Slack.*, NativeCircularCarouselView*.cs, NativeSwipe*.cs and NativeMotionSurfaces.cs; supplied finish reviews and existing local artifacts. Local Slack reference: /Users/backo/projects/personal/rn-makeitanimated/src/apps/(s-t)/slack. No private reference source/artwork opened or copied in this documentation pass. Opal extension: artifacts/opal/direction.md and finish-review.md; built Opal.*, NativePresentationView and NativeRubberSliderView*.cs. Preserve the approved reference composition.",
+    "componentRepresentation": "Native component descriptors preserve this repository sidecar convention. They describe UIKit controls; no HTML/CSS stand-in, browser validation or invented web hover/focus treatment is implied.",
+    "colorMeta": {
+      "paper": {"role": "neutral", "displayName": "Light Paper", "tonalRamp": ["oklch(15.00% 0.00000 0.00)", "oklch(26.43% 0.00000 0.00)", "oklch(37.86% 0.00000 0.00)", "oklch(49.29% 0.00000 0.00)", "oklch(60.71% 0.00000 0.00)", "oklch(72.14% 0.00000 0.00)", "oklch(83.57% 0.00000 0.00)", "oklch(95.00% 0.00000 0.00)"]},
+      "detail": {"role": "neutral", "displayName": "Detail Paper", "tonalRamp": ["oklch(15.00% 0.00133 106.42)", "oklch(26.43% 0.00133 106.42)", "oklch(37.86% 0.00133 106.42)", "oklch(49.29% 0.00133 106.42)", "oklch(60.71% 0.00133 106.42)", "oklch(72.14% 0.00133 106.42)", "oklch(83.57% 0.00133 106.42)", "oklch(95.00% 0.00133 106.42)"]},
+      "ink": {"role": "neutral", "displayName": "Charcoal Ink", "tonalRamp": ["oklch(15.00% 0.00000 0.00)", "oklch(26.43% 0.00000 0.00)", "oklch(37.86% 0.00000 0.00)", "oklch(49.29% 0.00000 0.00)", "oklch(60.71% 0.00000 0.00)", "oklch(72.14% 0.00000 0.00)", "oklch(83.57% 0.00000 0.00)", "oklch(95.00% 0.00000 0.00)"]},
+      "muted": {"role": "neutral", "displayName": "Quiet Gray", "tonalRamp": ["oklch(15.00% 0.02336 264.36)", "oklch(26.43% 0.02336 264.36)", "oklch(37.86% 0.02336 264.36)", "oklch(49.29% 0.02336 264.36)", "oklch(60.71% 0.02336 264.36)", "oklch(72.14% 0.02336 264.36)", "oklch(83.57% 0.02336 264.36)", "oklch(95.00% 0.02336 264.36)"]},
+      "count": {"role": "neutral", "displayName": "Count Slate", "tonalRamp": ["oklch(15.00% 0.02631 256.80)", "oklch(26.43% 0.02631 256.80)", "oklch(37.86% 0.02631 256.80)", "oklch(49.29% 0.02631 256.80)", "oklch(60.71% 0.02631 256.80)", "oklch(72.14% 0.02631 256.80)", "oklch(83.57% 0.02631 256.80)", "oklch(95.00% 0.02631 256.80)"]},
+      "dot": {"role": "neutral", "displayName": "Grid Gray", "tonalRamp": ["oklch(15.00% 0.00000 0.00)", "oklch(26.43% 0.00000 0.00)", "oklch(37.86% 0.00000 0.00)", "oklch(49.29% 0.00000 0.00)", "oklch(60.71% 0.00000 0.00)", "oklch(72.14% 0.00000 0.00)", "oklch(83.57% 0.00000 0.00)", "oklch(95.00% 0.00000 0.00)"]},
+      "orange": {"role": "primary", "displayName": "Locked-example Orange", "tonalRamp": ["oklch(15.00% 0.15904 55.93)", "oklch(26.43% 0.15904 55.93)", "oklch(37.86% 0.15904 55.93)", "oklch(49.29% 0.15904 55.93)", "oklch(60.71% 0.15904 55.93)", "oklch(72.14% 0.15904 55.93)", "oklch(83.57% 0.15904 55.93)", "oklch(95.00% 0.15904 55.93)"]},
+      "warm": {"role": "secondary", "displayName": "Warm Offer Tan", "tonalRamp": ["oklch(15.00% 0.06041 64.11)", "oklch(26.43% 0.06041 64.11)", "oklch(37.86% 0.06041 64.11)", "oklch(49.29% 0.06041 64.11)", "oklch(60.71% 0.06041 64.11)", "oklch(72.14% 0.06041 64.11)", "oklch(83.57% 0.06041 64.11)", "oklch(95.00% 0.06041 64.11)"]},
+      "white": {"role": "neutral", "displayName": "Sticker White", "tonalRamp": ["oklch(15.00% 0.00000 0.00)", "oklch(26.43% 0.00000 0.00)", "oklch(37.86% 0.00000 0.00)", "oklch(49.29% 0.00000 0.00)", "oklch(60.71% 0.00000 0.00)", "oklch(72.14% 0.00000 0.00)", "oklch(83.57% 0.00000 0.00)", "oklch(95.00% 0.00000 0.00)"]},
+      "aperture-yellow": {"role": "secondary", "displayName": "Aperture Yellow", "tonalRamp": ["oklch(15.00% 0.17311 91.94)", "oklch(26.43% 0.17311 91.94)", "oklch(37.86% 0.17311 91.94)", "oklch(49.29% 0.17311 91.94)", "oklch(60.71% 0.17311 91.94)", "oklch(72.14% 0.17311 91.94)", "oklch(83.57% 0.17311 91.94)", "oklch(95.00% 0.17311 91.94)"]},
+      "aperture-pink": {"role": "secondary", "displayName": "Aperture Pink", "tonalRamp": ["oklch(15.00% 0.10950 346.02)", "oklch(26.43% 0.10950 346.02)", "oklch(37.86% 0.10950 346.02)", "oklch(49.29% 0.10950 346.02)", "oklch(60.71% 0.10950 346.02)", "oklch(72.14% 0.10950 346.02)", "oklch(83.57% 0.10950 346.02)", "oklch(95.00% 0.10950 346.02)"]},
+      "aperture-blue": {"role": "secondary", "displayName": "Aperture Blue", "tonalRamp": ["oklch(15.00% 0.09560 251.81)", "oklch(26.43% 0.09560 251.81)", "oklch(37.86% 0.09560 251.81)", "oklch(49.29% 0.09560 251.81)", "oklch(60.71% 0.09560 251.81)", "oklch(72.14% 0.09560 251.81)", "oklch(83.57% 0.09560 251.81)", "oklch(95.00% 0.09560 251.81)"]},
+      "aperture-green": {"role": "secondary", "displayName": "Aperture Green", "tonalRamp": ["oklch(15.00% 0.13627 154.45)", "oklch(26.43% 0.13627 154.45)", "oklch(37.86% 0.13627 154.45)", "oklch(49.29% 0.13627 154.45)", "oklch(60.71% 0.13627 154.45)", "oklch(72.14% 0.13627 154.45)", "oklch(83.57% 0.13627 154.45)", "oklch(95.00% 0.13627 154.45)"]},
+      "aperture-purple": {"role": "secondary", "displayName": "Aperture Purple", "tonalRamp": ["oklch(15.00% 0.10823 306.38)", "oklch(26.43% 0.10823 306.38)", "oklch(37.86% 0.10823 306.38)", "oklch(49.29% 0.10823 306.38)", "oklch(60.71% 0.10823 306.38)", "oklch(72.14% 0.10823 306.38)", "oklch(83.57% 0.10823 306.38)", "oklch(95.00% 0.10823 306.38)"]},
+      "gallery-paper": {"role": "neutral", "displayName": "Gallery Paper", "tonalRamp": ["oklch(15.00% 0.00796 106.55)", "oklch(26.43% 0.00796 106.55)", "oklch(37.86% 0.00796 106.55)", "oklch(49.29% 0.00796 106.55)", "oklch(60.71% 0.00796 106.55)", "oklch(72.14% 0.00796 106.55)", "oklch(83.57% 0.00796 106.55)", "oklch(95.00% 0.00796 106.55)"]},
+      "gallery-ink": {"role": "neutral", "displayName": "Gallery Ink", "tonalRamp": ["oklch(15.00% 0.01520 141.16)", "oklch(26.43% 0.01520 141.16)", "oklch(37.86% 0.01520 141.16)", "oklch(49.29% 0.01520 141.16)", "oklch(60.71% 0.01520 141.16)", "oklch(72.14% 0.01520 141.16)", "oklch(83.57% 0.01520 141.16)", "oklch(95.00% 0.01520 141.16)"]},
+      "gallery-muted": {"role": "neutral", "displayName": "Gallery Muted", "tonalRamp": ["oklch(15.00% 0.02077 135.02)", "oklch(26.43% 0.02077 135.02)", "oklch(37.86% 0.02077 135.02)", "oklch(49.29% 0.02077 135.02)", "oklch(60.71% 0.02077 135.02)", "oklch(72.14% 0.02077 135.02)", "oklch(83.57% 0.02077 135.02)", "oklch(95.00% 0.02077 135.02)"]},
+      "gallery-spark": {"role": "secondary", "displayName": "Gallery Olive Spark", "tonalRamp": ["oklch(15.00% 0.08190 120.97)", "oklch(26.43% 0.08190 120.97)", "oklch(37.86% 0.08190 120.97)", "oklch(49.29% 0.08190 120.97)", "oklch(60.71% 0.08190 120.97)", "oklch(72.14% 0.08190 120.97)", "oklch(83.57% 0.08190 120.97)", "oklch(95.00% 0.08190 120.97)"]},
+      "gallery-word-surface": {"role": "neutral", "displayName": "Word Card Paper", "tonalRamp": ["oklch(15.00% 0.00818 91.48)", "oklch(26.43% 0.00818 91.48)", "oklch(37.86% 0.00818 91.48)", "oklch(49.29% 0.00818 91.48)", "oklch(60.71% 0.00818 91.48)", "oklch(72.14% 0.00818 91.48)", "oklch(83.57% 0.00818 91.48)", "oklch(95.00% 0.00818 91.48)"]},
+      "gallery-word-preview": {"role": "neutral", "displayName": "Word Preview Paper", "tonalRamp": ["oklch(15.00% 0.01392 88.68)", "oklch(26.43% 0.01392 88.68)", "oklch(37.86% 0.01392 88.68)", "oklch(49.29% 0.01392 88.68)", "oklch(60.71% 0.01392 88.68)", "oklch(72.14% 0.01392 88.68)", "oklch(83.57% 0.01392 88.68)", "oklch(95.00% 0.01392 88.68)"]},
+      "gallery-alma-surface": {"role": "secondary", "displayName": "Gallery Forest", "tonalRamp": ["oklch(15.00% 0.06330 139.96)", "oklch(26.43% 0.06330 139.96)", "oklch(37.86% 0.06330 139.96)", "oklch(49.29% 0.06330 139.96)", "oklch(60.71% 0.06330 139.96)", "oklch(72.14% 0.06330 139.96)", "oklch(83.57% 0.06330 139.96)", "oklch(95.00% 0.06330 139.96)"]},
+      "gallery-alma-preview": {"role": "secondary", "displayName": "Gallery Leaf", "tonalRamp": ["oklch(15.00% 0.04512 121.01)", "oklch(26.43% 0.04512 121.01)", "oklch(37.86% 0.04512 121.01)", "oklch(49.29% 0.04512 121.01)", "oklch(60.71% 0.04512 121.01)", "oklch(72.14% 0.04512 121.01)", "oklch(83.57% 0.04512 121.01)", "oklch(95.00% 0.04512 121.01)"]},
+      "gallery-alma-copy": {"role": "neutral", "displayName": "Gallery Pale Copy", "tonalRamp": ["oklch(15.00% 0.01744 117.29)", "oklch(26.43% 0.01744 117.29)", "oklch(37.86% 0.01744 117.29)", "oklch(49.29% 0.01744 117.29)", "oklch(60.71% 0.01744 117.29)", "oklch(72.14% 0.01744 117.29)", "oklch(83.57% 0.01744 117.29)", "oklch(95.00% 0.01744 117.29)"]},
+      "alma-paper": {"role": "neutral", "displayName": "Alma Cream", "tonalRamp": ["oklch(15.00% 0.01080 95.16)", "oklch(26.43% 0.01080 95.16)", "oklch(37.86% 0.01080 95.16)", "oklch(49.29% 0.01080 95.16)", "oklch(60.71% 0.01080 95.16)", "oklch(72.14% 0.01080 95.16)", "oklch(83.57% 0.01080 95.16)", "oklch(95.00% 0.01080 95.16)"]},
+      "alma-forest": {"role": "primary", "displayName": "Alma Forest", "tonalRamp": ["oklch(15.00% 0.07844 132.73)", "oklch(26.43% 0.07844 132.73)", "oklch(37.86% 0.07844 132.73)", "oklch(49.29% 0.07844 132.73)", "oklch(60.71% 0.07844 132.73)", "oklch(72.14% 0.07844 132.73)", "oklch(83.57% 0.07844 132.73)", "oklch(95.00% 0.07844 132.73)"]},
+      "alma-ink": {"role": "neutral", "displayName": "Alma Ink", "tonalRamp": ["oklch(15.00% 0.01878 125.36)", "oklch(26.43% 0.01878 125.36)", "oklch(37.86% 0.01878 125.36)", "oklch(49.29% 0.01878 125.36)", "oklch(60.71% 0.01878 125.36)", "oklch(72.14% 0.01878 125.36)", "oklch(83.57% 0.01878 125.36)", "oklch(95.00% 0.01878 125.36)"]},
+      "alma-card-ink": {"role": "neutral", "displayName": "Alma Card Ink", "tonalRamp": ["oklch(15.00% 0.01893 135.25)", "oklch(26.43% 0.01893 135.25)", "oklch(37.86% 0.01893 135.25)", "oklch(49.29% 0.01893 135.25)", "oklch(60.71% 0.01893 135.25)", "oklch(72.14% 0.01893 135.25)", "oklch(83.57% 0.01893 135.25)", "oklch(95.00% 0.01893 135.25)"]},
+      "gallery-slack-surface": {"role": "secondary", "displayName": "Gallery Plum", "tonalRamp": ["oklch(15.00% 0.07053 328.72)", "oklch(26.43% 0.07053 328.72)", "oklch(37.86% 0.07053 328.72)", "oklch(49.29% 0.07053 328.72)", "oklch(60.71% 0.07053 328.72)", "oklch(72.14% 0.07053 328.72)", "oklch(83.57% 0.07053 328.72)", "oklch(95.00% 0.07053 328.72)"]},
+      "gallery-slack-preview": {"role": "secondary", "displayName": "Gallery Plum Preview", "tonalRamp": ["oklch(15.00% 0.10281 329.83)", "oklch(26.43% 0.10281 329.83)", "oklch(37.86% 0.10281 329.83)", "oklch(49.29% 0.10281 329.83)", "oklch(60.71% 0.10281 329.83)", "oklch(72.14% 0.10281 329.83)", "oklch(83.57% 0.10281 329.83)", "oklch(95.00% 0.10281 329.83)"]},
+      "gallery-slack-copy": {"role": "neutral", "displayName": "Gallery Pale Plum Copy", "tonalRamp": ["oklch(15.00% 0.01943 328.28)", "oklch(26.43% 0.01943 328.28)", "oklch(37.86% 0.01943 328.28)", "oklch(49.29% 0.01943 328.28)", "oklch(60.71% 0.01943 328.28)", "oklch(72.14% 0.01943 328.28)", "oklch(83.57% 0.01943 328.28)", "oklch(95.00% 0.01943 328.28)"]},
+      "slack-plum": {"role": "secondary", "displayName": "Slack Plum Gradient Start", "tonalRamp": ["oklch(15.00% 0.10456 322.23)", "oklch(26.43% 0.10456 322.23)", "oklch(37.86% 0.10456 322.23)", "oklch(49.29% 0.10456 322.23)", "oklch(60.71% 0.10456 322.23)", "oklch(72.14% 0.10456 322.23)", "oklch(83.57% 0.10456 322.23)", "oklch(95.00% 0.10456 322.23)"]},
+      "slack-background": {"role": "neutral", "displayName": "Slack Deep Plum", "tonalRamp": ["oklch(15.00% 0.06874 329.40)", "oklch(26.43% 0.06874 329.40)", "oklch(37.86% 0.06874 329.40)", "oklch(49.29% 0.06874 329.40)", "oklch(60.71% 0.06874 329.40)", "oklch(72.14% 0.06874 329.40)", "oklch(83.57% 0.06874 329.40)", "oklch(95.00% 0.06874 329.40)"]},
+      "slack-card": {"role": "neutral", "displayName": "Slack Channel Charcoal", "tonalRamp": ["oklch(15.00% 0.00000 0.00)", "oklch(26.43% 0.00000 0.00)", "oklch(37.86% 0.00000 0.00)", "oklch(49.29% 0.00000 0.00)", "oklch(60.71% 0.00000 0.00)", "oklch(72.14% 0.00000 0.00)", "oklch(83.57% 0.00000 0.00)", "oklch(95.00% 0.00000 0.00)"]},
+      "slack-raised": {"role": "neutral", "displayName": "Slack Raised Skeleton", "tonalRamp": ["oklch(15.00% 0.00000 0.00)", "oklch(26.43% 0.00000 0.00)", "oklch(37.86% 0.00000 0.00)", "oklch(49.29% 0.00000 0.00)", "oklch(60.71% 0.00000 0.00)", "oklch(72.14% 0.00000 0.00)", "oklch(83.57% 0.00000 0.00)", "oklch(95.00% 0.00000 0.00)"]},
+      "slack-border": {"role": "neutral", "displayName": "Slack Quiet Border", "tonalRamp": ["oklch(15.00% 0.00000 0.00)", "oklch(26.43% 0.00000 0.00)", "oklch(37.86% 0.00000 0.00)", "oklch(49.29% 0.00000 0.00)", "oklch(60.71% 0.00000 0.00)", "oklch(72.14% 0.00000 0.00)", "oklch(83.57% 0.00000 0.00)", "oklch(95.00% 0.00000 0.00)"]},
+      "slack-text": {"role": "neutral", "displayName": "Slack Light Copy", "tonalRamp": ["oklch(15.00% 0.00000 0.00)", "oklch(26.43% 0.00000 0.00)", "oklch(37.86% 0.00000 0.00)", "oklch(49.29% 0.00000 0.00)", "oklch(60.71% 0.00000 0.00)", "oklch(72.14% 0.00000 0.00)", "oklch(83.57% 0.00000 0.00)", "oklch(95.00% 0.00000 0.00)"]},
+      "slack-muted": {"role": "neutral", "displayName": "Slack Muted Copy", "tonalRamp": ["oklch(15.00% 0.00000 0.00)", "oklch(26.43% 0.00000 0.00)", "oklch(37.86% 0.00000 0.00)", "oklch(49.29% 0.00000 0.00)", "oklch(60.71% 0.00000 0.00)", "oklch(72.14% 0.00000 0.00)", "oklch(83.57% 0.00000 0.00)", "oklch(95.00% 0.00000 0.00)"]},
+      "slack-read": {"role": "primary", "displayName": "Read Emerald", "tonalRamp": ["oklch(15.00% 0.15349 163.22)", "oklch(26.43% 0.15349 163.22)", "oklch(37.86% 0.15349 163.22)", "oklch(49.29% 0.15349 163.22)", "oklch(60.71% 0.15349 163.22)", "oklch(72.14% 0.15349 163.22)", "oklch(83.57% 0.15349 163.22)", "oklch(95.00% 0.15349 163.22)"]},
+      "slack-unread": {"role": "primary", "displayName": "Keep Unread Sky", "tonalRamp": ["oklch(15.00% 0.13899 232.66)", "oklch(26.43% 0.13899 232.66)", "oklch(37.86% 0.13899 232.66)", "oklch(49.29% 0.13899 232.66)", "oklch(60.71% 0.13899 232.66)", "oklch(72.14% 0.13899 232.66)", "oklch(83.57% 0.13899 232.66)", "oklch(95.00% 0.13899 232.66)"]},
+      "slack-action": {"role": "secondary", "displayName": "Slack Action Green", "tonalRamp": ["oklch(15.00% 0.07303 168.94)", "oklch(26.43% 0.07303 168.94)", "oklch(37.86% 0.07303 168.94)", "oklch(49.29% 0.07303 168.94)", "oklch(60.71% 0.07303 168.94)", "oklch(72.14% 0.07303 168.94)", "oklch(83.57% 0.07303 168.94)", "oklch(95.00% 0.07303 168.94)"]},
+      "slack-action-border": {"role": "secondary", "displayName": "Slack Action Border", "tonalRamp": ["oklch(15.00% 0.08647 166.91)", "oklch(26.43% 0.08647 166.91)", "oklch(37.86% 0.08647 166.91)", "oklch(49.29% 0.08647 166.91)", "oklch(60.71% 0.08647 166.91)", "oklch(72.14% 0.08647 166.91)", "oklch(83.57% 0.08647 166.91)", "oklch(95.00% 0.08647 166.91)"]},
+      "slack-channel-text": {"role": "neutral", "displayName": "Slack Channel Copy", "tonalRamp": ["oklch(15.00% 0.00000 0.00)", "oklch(26.43% 0.00000 0.00)", "oklch(37.86% 0.00000 0.00)", "oklch(49.29% 0.00000 0.00)", "oklch(60.71% 0.00000 0.00)", "oklch(72.14% 0.00000 0.00)", "oklch(83.57% 0.00000 0.00)", "oklch(95.00% 0.00000 0.00)"]},
+      "slack-placeholder-icon": {"role": "neutral", "displayName": "Slack Composer Symbol", "tonalRamp": ["oklch(15.00% 0.00000 0.00)", "oklch(26.43% 0.00000 0.00)", "oklch(37.86% 0.00000 0.00)", "oklch(49.29% 0.00000 0.00)", "oklch(60.71% 0.00000 0.00)", "oklch(72.14% 0.00000 0.00)", "oklch(83.57% 0.00000 0.00)", "oklch(95.00% 0.00000 0.00)"]},
+      "opal-black": {"role": "neutral", "displayName": "Opal Black", "tonalRamp": ["oklch(15.00% 0.00000 0.00)", "oklch(26.43% 0.00000 0.00)", "oklch(37.86% 0.00000 0.00)", "oklch(49.29% 0.00000 0.00)", "oklch(60.71% 0.00000 0.00)", "oklch(72.14% 0.00000 0.00)", "oklch(83.57% 0.00000 0.00)", "oklch(95.00% 0.00000 0.00)"]},
+      "opal-control": {"role": "neutral", "displayName": "Opal Control Charcoal", "tonalRamp": ["oklch(15.00% 0.00000 0.00)", "oklch(26.43% 0.00000 0.00)", "oklch(37.86% 0.00000 0.00)", "oklch(49.29% 0.00000 0.00)", "oklch(60.71% 0.00000 0.00)", "oklch(72.14% 0.00000 0.00)", "oklch(83.57% 0.00000 0.00)", "oklch(95.00% 0.00000 0.00)"]},
+      "opal-border": {"role": "neutral", "displayName": "Opal Border and Ticks", "tonalRamp": ["oklch(15.00% 0.00000 0.00)", "oklch(26.43% 0.00000 0.00)", "oklch(37.86% 0.00000 0.00)", "oklch(49.29% 0.00000 0.00)", "oklch(60.71% 0.00000 0.00)", "oklch(72.14% 0.00000 0.00)", "oklch(83.57% 0.00000 0.00)", "oklch(95.00% 0.00000 0.00)"]},
+      "opal-muted": {"role": "neutral", "displayName": "Opal Quiet Icons", "tonalRamp": ["oklch(15.00% 0.00000 0.00)", "oklch(26.43% 0.00000 0.00)", "oklch(37.86% 0.00000 0.00)", "oklch(49.29% 0.00000 0.00)", "oklch(60.71% 0.00000 0.00)", "oklch(72.14% 0.00000 0.00)", "oklch(83.57% 0.00000 0.00)", "oklch(95.00% 0.00000 0.00)"]},
+      "opal-mint": {"role": "secondary", "displayName": "Opal Mint", "tonalRamp": ["oklch(15.00% 0.09270 180.43)", "oklch(26.43% 0.09270 180.43)", "oklch(37.86% 0.09270 180.43)", "oklch(49.29% 0.09270 180.43)", "oklch(60.71% 0.09270 180.43)", "oklch(72.14% 0.09270 180.43)", "oklch(83.57% 0.09270 180.43)", "oklch(95.00% 0.09270 180.43)"]},
+      "opal-action": {"role": "secondary", "displayName": "Opal Action Green", "tonalRamp": ["oklch(15.00% 0.07954 179.54)", "oklch(26.43% 0.07954 179.54)", "oklch(37.86% 0.07954 179.54)", "oklch(49.29% 0.07954 179.54)", "oklch(60.71% 0.07954 179.54)", "oklch(72.14% 0.07954 179.54)", "oklch(83.57% 0.07954 179.54)", "oklch(95.00% 0.07954 179.54)"]},
+      "gallery-opal-surface": {"role": "secondary", "displayName": "Gallery Deep Green", "tonalRamp": ["oklch(15.00% 0.03423 176.45)", "oklch(26.43% 0.03423 176.45)", "oklch(37.86% 0.03423 176.45)", "oklch(49.29% 0.03423 176.45)", "oklch(60.71% 0.03423 176.45)", "oklch(72.14% 0.03423 176.45)", "oklch(83.57% 0.03423 176.45)", "oklch(95.00% 0.03423 176.45)"]},
+      "gallery-opal-copy": {"role": "neutral", "displayName": "Gallery Pale Mint Copy", "tonalRamp": ["oklch(15.00% 0.02776 171.22)", "oklch(26.43% 0.02776 171.22)", "oklch(37.86% 0.02776 171.22)", "oklch(49.29% 0.02776 171.22)", "oklch(60.71% 0.02776 171.22)", "oklch(72.14% 0.02776 171.22)", "oklch(83.57% 0.02776 171.22)", "oklch(95.00% 0.02776 171.22)"]}
+    },
+    "tonalRampPolicy": "Synthesized eight-step OKLCH preview ramps only, retaining each source color hue/chroma while stepping lightness from 15% to 95%. These swatches are not implemented UIKit tokens or approved extra UI colors; frontmatter hex values remain normative.",
+    "typographyMeta": {
+      "date": {"displayName": "Date", "purpose": "Shared CapWords date header; medium native system serif via NativeFontDesign.Serif. The design-selector gap is closed."},
+      "count": {"displayName": "Word Count", "purpose": "Shared count header with Count Slate ink."},
+      "detail": {"displayName": "Word Detail", "purpose": "Muted name and phonetic labels below the sticker."},
+      "offer": {"displayName": "Offer Caption", "purpose": "Semibold white caption inside the tan demo offer."},
+      "action": {"displayName": "Examples Action", "purpose": "Semibold orange caption inside the white locked-examples pill."},
+      "notice": {"displayName": "Loading and Notice", "purpose": "Native loading/error and placeholder drawer copy."},
+      "gallery-title": {"displayName": "Gallery Heading", "purpose": "Semibold system serif; narrow role applies below 360pt host width."},
+      "gallery-title-narrow": {"displayName": "Narrow Gallery Heading", "purpose": "Smaller system serif heading for narrow hosts."},
+      "gallery-subtitle": {"displayName": "Gallery Introduction", "purpose": "Muted native sans supporting copy."},
+      "gallery-card-title": {"displayName": "Study Title", "purpose": "Semibold system serif identifying the preview artifact."},
+      "gallery-card-caption": {"displayName": "Study Caption", "purpose": "Native sans caption below the study title."},
+      "gallery-credit": {"displayName": "Gallery Credit", "purpose": "Muted native footer credit."},
+      "alma-wordmark": {"displayName": "Alma Wordmark", "purpose": "Forest semibold native system serif."},
+      "alma-heading": {"displayName": "Alma Heading", "purpose": "Regular native system serif substitutes for Libre Baskerville; custom family unsupported."},
+      "alma-card-title": {"displayName": "Nutrient Title", "purpose": "Two-line native medium sans, native fit-to-width with minimum scale 0.7."},
+      "alma-preview-title": {"displayName": "Preview Nutrient Title", "purpose": "Smaller native medium sans within inert gallery preview."},
+      "alma-position": {"displayName": "Carousel Position", "purpose": "Quiet native sans selected-position label."},
+      "alma-action": {"displayName": "Continue Label", "purpose": "Native medium sans on forest filled action."},
+      "slack-counter": {"displayName": "Slack Remaining Count", "purpose": "Bold native number with direction-aware flip; Left suffix stays steady."},
+      "slack-channel": {"displayName": "Slack Channel", "purpose": "Semibold native channel header."},
+      "slack-action": {"displayName": "Slack Footer Action", "purpose": "Semibold Read, Keep Unread and Done labels."},
+      "slack-completion": {"displayName": "Slack Completion", "purpose": "Bold two-line completion copy; native emoji at 58pt."},
+      "opal-wordmark": {"displayName": "Opal Wordmark", "purpose": "Restrained medium system sans in the balanced native header."},
+      "opal-duration": {"displayName": "Opal Duration", "purpose": "Medium system sans on the white compact/expanded duration button."}
+    },
+    "motion": [
+      {
+        "name": "shared-gentle",
+        "value": "550ms native position/scale spring",
+        "purpose": "Image, date and count wrappers preserve shared identity between collection and detail."
+      },
+      {
+        "name": "spring-settling",
+        "value": "mass=1; base stiffness=180; base damping=22; initial velocity=0; speed=0.84/durationSeconds; stiffness*=speed^2; damping*=speed",
+        "purpose": "Landed normalization preserves damping ratio while scaling the spring envelope to the advertised preset duration."
+      },
+      {
+        "name": "detail-arrivals",
+        "value": "Y=50pt; scale=0.8; opacity=0; 300ms ease-out; delays 100/200/300ms",
+        "purpose": "Name, pronunciation row and examples control enter in that order; these arrivals use CABasicAnimation, not a shared spring."
+      },
+      {
+        "name": "press-feedback",
+        "value": "rest alpha=1; highlighted alpha=0.65; disabled alpha=0.4",
+        "purpose": "Composed UIButton dims all contained artwork, text and symbols without changing shared-layout transforms."
+      },
+      {
+        "name": "selection-haptics",
+        "value": "optional UISelectionFeedbackGenerator; card selection and detail Back; visible host only",
+        "purpose": "Native callback is wired. Physical tactile delivery has not been verified."
+      },
+      {
+        "name": "interruption-and-reduced-motion",
+        "value": "rapid reversal samples presentation geometry; resize cancels obsolete motion; Reduce Motion and hidden/detached hosts apply final geometry immediately",
+        "purpose": "Native compositor owns motion without a polling render loop; final layout owns hit targets."
+      },
+      {
+        "name": "alma-autoplay",
+        "value": "2500ms subscription interval",
+        "purpose": "Active Alma only, while playing and without notice; pause/notice/exit removes timer. Child state is retained on gallery return."
+      },
+      {
+        "name": "alma-orbit-spring",
+        "value": "mass=5.5; stiffness=300; damping=54; duration=1.9s; 115 native keyframe samples",
+        "purpose": "One circular pose drives native position, rotation, scale, opacity and selected decoration; compositor-owned, no polling render loop."
+      },
+      {
+        "name": "alma-direct-pan",
+        "value": "horizontal velocity must exceed vertical; drag distance=max(80pt, orbitHeight/2 * 2π/9.5); translation clamped to ±2 positions",
+        "purpose": "Actual presentation position seeds the drag; competing animations clear and native poses follow the finger directly."
+      },
+      {
+        "name": "alma-release-and-cancel",
+        "value": "release velocity=clamp(-velocityX/dragDistance,-4,4); target=round(dragPosition+releaseVelocity*0.18)",
+        "purpose": "Velocity-aware native spring; new drag interrupts actual presentation. Cancellation returns to committed selection without selection callback; completed swipe pauses autoplay."
+      },
+      {
+        "name": "alma-motion-accessibility",
+        "value": "final-pose settling for Reduce Motion or hidden/detached host; no preview animation",
+        "purpose": "Preserve selection without compositor motion; native alternate controls remain available. VoiceOver and physical feel unverified."
+      },
+      {
+        "name": "slack-direct-pan",
+        "value": "horizontal velocity > vertical; two-axis translation; threshold=windowWidth/4 (deck fallback); tilt=4deg * x/threshold * top/bottom sign",
+        "purpose": "Right Read / left Keep Unread; native vertical-scroll arbitration, ring/gradient progress and undercard parallax. Short/cancel returns; fling carries vertical release velocity."
+      },
+      {
+        "name": "slack-dismiss",
+        "value": "footer 500ms; gesture 300ms; cubic ease-out",
+        "purpose": "Compositor-owned exit; Ui messages persist dispositions; busy/revision guard rejects duplicates and stale completions."
+      },
+      {
+        "name": "slack-short-return",
+        "value": "mass=1; stiffness=900; damping=60; critically damped; 650ms; 61 native samples",
+        "purpose": "Return to stack from actual pose; release velocity contributes to spring path."
+      },
+      {
+        "name": "slack-undo",
+        "value": "mass=1; stiffness=1000; damping=90; 650ms; 61 native samples",
+        "purpose": "Reverse an in-flight dismissal from actual presentation; Undo remains available at completion."
+      },
+      {
+        "name": "slack-counter",
+        "value": "mass=1; stiffness=1000; damping=90; 0.8s; direction-aware X rotation ±π/4; Y offset ±7pt; scale .6; opacity .5→1",
+        "purpose": "Native 3D remaining-number flip, suffix steady. Reduce Motion/hidden hosts settle immediately."
+      },
+      {
+        "name": "slack-stack",
+        "value": "active scale=1; two undercards scale=.95; Y offsets=.07/.01 * deckWidth; five bounded cards",
+        "purpose": "Progress interpolates stack poses. Resize/hidden/Reduce Motion settles immediately; inert gallery preview does not intercept gestures or poll."
+      },
+      {
+        "name": "opal-presentation",
+        "value": "value X=-46pt; spring 1400/90; other poses 1200/90; unit mass; retained duration 650ms; fade 180ms, slider delay 144ms then 36ms fade",
+        "purpose": "NativePresentation retargets from shown transform/opacity; resize and Reduce Motion settle. Reusable pose-spring subset, no arbitrary velocity handoff or general gesture graph."
+      },
+      {
+        "name": "opal-timed-press",
+        "value": "duration scale .95; press-in toggle; suppress duplicate release; three +/- native timestamps with consecutive gaps <=300ms expand, slow gap resets",
+        "purpose": "Immutable messages own expansion and rapid-tap state; native controls supply monotonic time and feedback."
+      },
+      {
+        "name": "opal-contact-and-fill",
+        "value": "36 source markers: 0..60m by 5, then 2..24h; selectable indices 1..35; zero-duration long press; fill stiffness/damping 1600/140",
+        "purpose": "Immediate discrete contact, bounded model selection, last touched value retained on cancel; native accessibility increment/decrement."
+      },
+      {
+        "name": "opal-elastic-layers",
+        "value": "active scale 1.03 separate from stretch; overdrag domain 625pt; horizontal max 2.5x, vertical min .9; opposite-edge anchor; edge return 900/60; active-scale release 100/6",
+        "purpose": "Separate transforms preserve anchored deformation through release; recontact samples shown pose. No polling render loop."
+      }
+    ],
+    "layoutConstraints": {
+      "contentWidth": "Gallery and child content: min(host width, 600pt), centered. Alma orbit separately spans host canvas.",
+      "host": "UIViewController safe-area layout frame",
+      "collectionCells": "two half-content-width square cells",
+      "collectionSticker": "content width * 0.35",
+      "detailSticker": "content width * 0.5; maximum 300pt",
+      "collectionNavigationHeight": "56pt",
+      "detailNavigationHeight": "76pt",
+      "minimumTarget": "44x44pt",
+      "paperGrid": "2x2pt dots at 20pt spacing; spans host",
+      "aperture": "64pt clipped circle; 40pt white center; five overlapping colored segments",
+      "landscape": "No alternate composition established by the reviewed evidence.",
+      "gallery": "Vertical scroll; padding top/right/bottom/left 24/20/28/20pt; gap 18pt; heading bottom padding 10pt.",
+      "galleryCards": "252pt tall; preview 156pt; flexible footer with padding 14/20/16/20pt and gap 12pt.",
+      "galleryNarrowTitle": "Host width <360pt chooses narrow title role; this is the only observed title threshold, not a layout breakpoint.",
+      "almaContent": "Padding 12/24/12/24pt; header 48pt; heading top padding 26pt; control gap and bottom margin 16pt; position width 90pt.",
+      "almaCard": "Width min(360pt,0.6*orbitWidth); preview min(200pt,0.52*orbitWidth); height=0.7*width.",
+      "almaOrbit": "Radius=orbitHeight/2; angular step=2π/9.5; delta clamped ±2 for arc; scale=1-min(1,abs(delta))*0.25; hidden beyond abs(delta)>=2.5.",
+      "almaHitRegion": "Only central 26–81% of orbit height accepts input; header/footer native controls pass hit testing. Preview is inert.",
+      "boundedViews": "Eight native CarouselCard views; repeated wraps do not allocate additional cards.",
+      "slackContent": "Centered max 600pt; padding 12/20/8/20pt; gap 12pt; header 44pt; deck grows with 12pt bottom margin; footer 52pt, action gap 20pt.",
+      "slackChannel": "48pt header; native vertical scroll with 20 skeleton rows, padding 20pt, gap 16pt, avatar 48pt; inert composer 70pt.",
+      "slackPreview": "Offset 32/20pt; width min(hostWidth-104pt,320pt); height 190pt; clipped internally by 156pt native gradient preview.",
+      "slackShapes": "24pt continuous channel corners and composer; 16pt footer actions; quiet 1pt border.",
+      "opal": "Black safe-area canvas; centered max 600pt; padding 8/12/0/12pt; header 48pt; empty middle; timer row 44pt; value width 22% of capped host, slider up to 71%; Start Timer 58pt; tabs 56pt; 44pt targets.",
+      "opalShapes": "White 40pt duration surface and charcoal track with 16pt corners; compact step/Block surfaces 40pt high, 20pt radius; gallery card 252pt, black preview 156pt and deep green/mint footer."
+    },
+    "elevation": {
+      "page": "CapWords has no added shadow/blur; gallery cards separate preview/footer through tone and clipping.",
+      "notice": "Native bottom drawer system treatment.",
+      "alma": "White card faces have a restrained native shadow; translucent motifs sit behind selected cards, scaling/fading with focus.",
+      "slack": "Tonal charcoal/raised layering and native stack scale/parallax; no added shadow. Gradient clips children internally.",
+      "opal": "Charcoal track with light native blur at alpha .25, white fill and static native ambient green Start Timer glow; separate breathing/shimmer animation is not ported."
+    },
+    "artwork": {
+      "source": "External licensed local checkout, selected by CapWordsAssetRoot.",
+      "buildBehavior": "CapWords.iOS.csproj embeds mouse.png and ice-cream.png from that external root at build time.",
+      "boundary": "No original reference source/artwork opened, copied or distributed in this documentation pass. Gallery preview uses the same external embedded CapWords resources; Alma uses native emoji and geometry."
+    },
+    "verification": {
+      "method": "Documentation-only built-source/report inspection. No builds, browser, delegation, application test reruns, hardware input or native design detector in this pass. Capture validity and finish disposition are supplied review evidence.",
+      "finishReview": {
+        "id": "slack-finish-review-1",
+        "disposition": "SHIP",
+        "validCaptures": 8,
+        "materialFindings": 0,
+        "scope": "Historical checkpoint. Scoped Slack and three-study gallery visual/behavior finish. Preserve TYPE/MATERIAL; intentionally scrolled gallery exposes the third card. Prior CapWords/Alma approvals retained."
+      },
+      "screenshots": [
+        "examples/CapWords.iOS/.impeccable/review/slack/slack-phone.png",
+        "examples/CapWords.iOS/.impeccable/review/slack/slack-narrow.png",
+        "examples/CapWords.iOS/.impeccable/review/slack/slack-tablet.png",
+        "examples/CapWords.iOS/.impeccable/review/slack/slack-complete.png",
+        "examples/CapWords.iOS/.impeccable/review/slack/slack-drag-right.png",
+        "examples/CapWords.iOS/.impeccable/review/slack/gallery-phone.png",
+        "examples/CapWords.iOS/.impeccable/review/slack/gallery-slack-phone.png",
+        "examples/CapWords.iOS/.impeccable/review/slack/gallery-tablet.png"
+      ],
+      "capwordsScreenshots": [
+        "examples/CapWords.iOS/.impeccable/review/phone.png",
+        "examples/CapWords.iOS/.impeccable/review/phone-detail.png",
+        "examples/CapWords.iOS/.impeccable/review/narrow.png",
+        "examples/CapWords.iOS/.impeccable/review/tablet.png",
+        "examples/CapWords.iOS/.impeccable/review/tablet-detail.png"
+      ],
+      "passingReports": [
+        {
+          "path": "artifacts/capwords/report.json",
+          "scope": "Detached UIKit; both words; three host sizes; Back/model/pixel replay."
+        },
+        {
+          "path": "artifacts/capwords/live-report.json",
+          "scope": "Shared image/header compositor; 550ms; 100/200/300ms arrivals; intermediate presentation; rapid Back; resize cancellation; second word."
+        },
+        {
+          "path": "artifacts/capwords/quick-report.json",
+          "scope": "Quick 200ms endpoint probe: 0.0431pt error at 162.77ms."
+        },
+        {
+          "path": "artifacts/capwords/gallery-report.json",
+          "scope": "Both routes; card hit testing; bounded wrapping; timer exit; retained selection; three host sizes; pixel replay."
+        },
+        {
+          "path": "artifacts/capwords/gallery-live-report.json",
+          "scope": "Child timer wake; circular compositor; rotation; pause; gallery return."
+        },
+        {
+          "path": "artifacts/capwords/swipe-report.json",
+          "scope": "Native pan; finger hit testing; direct tracking; velocity snap; interruption; cancellation; autoplay pause."
+        },
+        {
+          "path": "artifacts/capwords/slack-report.json",
+          "scope": "PASS: gallery hit testing, five bounded cards, read/duplicate guard, Undo, completion, retained state, phone/narrow/tablet and pixel replay."
+        },
+        {
+          "path": "artifacts/capwords/slack-live-report.json",
+          "scope": "PASS: native pan/scroll arbitration, two-axis tracking, anchor rotation, stack progress, cancel, spring interruption, right Read/left Unread, vertical momentum, counter flip, in-flight Undo, short return, resize and gallery."
+        }
+      ],
+      "pressFeedback": "Existing artifacts/capwords/detached.log and pressed.png/released.png record visible highlight and exact restoration; no separate summary field.",
+      "nativeHitTesting": "Final rerun passed Back, pause/play, Previous, Next and Continue assertions in tests/Kumiko.CapWords.iOS.E2E/CarouselSwipeFlow.cs. No separate JSON key exists for these assertions.",
+      "controlledPan": "Controlled UIPanGestureRecognizer subclass drives actual exported native handlers, including kumikoHandleDeckPan:. Native callback behavior evidence, not hardware input or physical touch feel.",
+      "finalHandoff": "Earlier three-study checkpoint: Slack and prior CapWords/Alma reports PASS. Final solution build zero warnings/errors; concurrent intermediate-artifact race passed serialized retry. API check --ios and changed-source whitespace checks pass. No reruns in this documentation pass.",
+      "phoneNativeAot": "Historical Slack build: Final signed Release NativeAOT Slack build: zero warnings; total bundle 5,514,316 bytes; installed on iPhone Adnan. Launch blocked by locked device awaiting user unlock; Slack is not confirmed currently running. Earlier Alma launch evidence predates this build.",
+      "desktopLatest": "Prior desktop E2E hidden-host App.Dispatch worker-wake assertion failure remains known; not rerun for this iOS-only slice. Historical 6779-check pass is not current evidence.",
+      "broaderUIKit": "Known unrelated SheetFlow.HiddenPresentation hidden-controller dismissal timeout; not rerun for this iOS-only slice; no all-suite pass claimed.",
+      "formatting": "Prior repository-wide formatting reported unrelated import-order issues; not rerun here.",
+      "staleAggregates": "Existing verification.json, phone-nativeaot-report.json and phone launch/process files contain earlier success claims; latest supplied handoff takes precedence for desktop and updated-device launch state.",
+      "limits": [
+        "Physical touch unverified",
+        "Tactile haptics unverified",
+        "VoiceOver traversal unverified",
+        "Dark appearance unverified",
+        "Enlarged Dynamic Type unverified",
+        "No alternate landscape composition established"
+      ],
+      "outOfScope": "Legacy PRODUCT.md schema refresh.",
+      "previousFinishReview": {
+        "id": "alma-gallery-finish-2",
+        "disposition": "SHIP",
+        "validCaptures": 8,
+        "materialFindings": 0,
+        "scope": "Gallery, CapWords and Alma scoped visual/behavior finish; preserve user-approved styling. Review verdict supplied in task handoff."
+      },
+      "previousScreenshots": [
+        "examples/CapWords.iOS/.impeccable/review/gallery-phone.png",
+        "examples/CapWords.iOS/.impeccable/review/gallery-narrow.png",
+        "examples/CapWords.iOS/.impeccable/review/gallery-tablet.png",
+        "examples/CapWords.iOS/.impeccable/review/alma-phone.png",
+        "examples/CapWords.iOS/.impeccable/review/alma-narrow.png",
+        "examples/CapWords.iOS/.impeccable/review/alma-tablet.png",
+        "examples/CapWords.iOS/.impeccable/review/alma-finger-drag.png",
+        "examples/CapWords.iOS/.impeccable/review/alma-swipe-settled.png"
+      ],
+      "simulator": "Final Opal launch target: 3BF2ABBE-0D3B-44B8-A033-E53751FDE410; --study opal --launch selects Opal. No application input in this documentation pass.",
+      "opalFinishReview": {
+        "path": "artifacts/opal/finish-review.md",
+        "disposition": "FIX",
+        "scope": "Documentation persistence only; all ten native view-layer captures valid; no material UI defects. Empty black middle, scrolled gallery and transient overdrag occlusion are intentional. Earlier reviews remain historical."
+      },
+      "opalScreenshots": [
+        "examples/CapWords.iOS/.impeccable/review/opal/opal-phone.png",
+        "examples/CapWords.iOS/.impeccable/review/opal/opal-expanded-phone.png",
+        "examples/CapWords.iOS/.impeccable/review/opal/opal-expanded-narrow.png",
+        "examples/CapWords.iOS/.impeccable/review/opal/opal-expanded-tablet.png",
+        "examples/CapWords.iOS/.impeccable/review/opal/gallery-opal-phone.png",
+        "examples/CapWords.iOS/.impeccable/review/opal/gallery-opal-narrow.png",
+        "examples/CapWords.iOS/.impeccable/review/opal/gallery-opal-tablet.png",
+        "examples/CapWords.iOS/.impeccable/review/opal/opal-stretch-left.png",
+        "examples/CapWords.iOS/.impeccable/review/opal/opal-stretch-right.png",
+        "examples/CapWords.iOS/.impeccable/review/opal/opal-reduced-motion.png"
+      ],
+      "currentPassingReports": [
+        "artifacts/opal/verified/report.json",
+        "artifacts/opal/verified/live-report.json",
+        "artifacts/opal/verified/quick-report.json",
+        "artifacts/opal/verified/gallery-report.json",
+        "artifacts/opal/verified/gallery-live-report.json",
+        "artifacts/opal/verified/swipe-report.json",
+        "artifacts/opal/verified/slack-report.json",
+        "artifacts/opal/verified/slack-live-report.json",
+        "artifacts/opal/verified/opal-report.json",
+        "artifacts/opal/verified/opal-live-report.json",
+        "artifacts/opal/verified/opal-reduced-motion-report.json"
+      ],
+      "opalBehavior": "Existing reports, not rerun here: all four studies; Opal rapid/slow taps, bounded duration, press-in/release deduplication, native contact, reversal, anchors/compression, release/interruption/cancel, resize, accessibility adjustment, reachable controls, retained state, replay and Reduce Motion. Controlled native recognizer callbacks, not physical touch.",
+      "opalPreservation": "artifacts/opal/preservation.json: 17 previous-study PNGs byte-identical to the original checkpoint.",
+      "opalNativeAot": "artifacts/opal/nativeaot-report.json: current unsigned Release ios-arm64 NativeAOT passed; zero warnings, no managed DLLs; bundle 5,733,619 bytes; not installed on phone. Local validation only. Supplied latest solution build passed with zero warnings. No builds rerun by this documentation pass.",
+      "opalFramePacing": {
+        "path": "artifacts/opal/performance/opal-frame-pacing.json",
+        "result": "Existing native Release 60Hz CADisplayLink report: approximately 60 callbacks/s in all six phases, p95/max intervals 16.67ms, zero missed 60Hz slots and zero arrival gaps over 50ms.",
+        "scope": "Compact idle, presentation toggles, continuous drag, alternating edge stretch, release/cancel, idle after interactions. Raw CSV retained; screenshots after measurement. Simulator callback pacing, not GPU presentation FPS; device performance unmeasured."
+      }
+    },
+    "acceptedGaps": [
+      "Custom bundled font-family selection remains unsupported, including exact Libre Baskerville. NativeFontDesign.Serif now renders CapWords date and gallery/Alma serif roles.",
+      "Model-driven navigation has no native stack, interactive edge-swipe, progress/cancellation or automatic route restoration.",
+      "No whole-destination 200ms crossfade, retained departing screen or general UIKit Exit.",
+      "NativePresentation with NativePose/NativeSpring exposes configurable subtree transform springs, fades and pose interruption. Arbitrary velocity handoff, general gesture-value graph, keyframe builder and progress binding remain absent.",
+      "Shared motion stays in the destination hierarchy; no general cross-clipping transition overlay.",
+      "Dotted paper uses a native box per dot; no reusable tiled-background primitive.",
+      "Camera, offer, More, pronunciation and locked examples disclose placeholder behavior; no connected camera/audio/billing flow.",
+      "Example is iOS only; desktop eased motion does not establish UIKit spring parity.",
+      "Alma Continue discloses no connected account setup or nutrition tracking.",
+      "Slack account data and message composer are disconnected, matching upstream synthetic-channel placeholders; physical feel/accessibility appearance checks remain unverified.",
+      "UIKit-origin actions accept native scrolling/transformed geometry while preserving identity, enabled, hidden and modal checks. Public agent actions retain desktop semantic visibility checks; desktop semantic scroll-offset synchronization remains a gap.",
+      "Opal uses SF Symbols instead of source font icons and static ambient Start Timer glow instead of separate breathing/shimmer. Blocking, sessions, schedules, screen-time data, accounts and tab destinations disclose demo scope. Simulator-only; physical touch, haptics and VoiceOver traversal unverified."
+    ],
+    "shadows": [
+      {
+        "name": "alma-card",
+        "value": "CALayer: black; opacity=0.06; radius=14pt; offset=(0pt,8pt)",
+        "purpose": "Restrained lift under white emoji card faces; not applied to gallery or CapWords stickers."
+      }
+    ],
+    "almaDecoration": {
+      "square": "Rounded 14pt; full card bounds, rotated +0.78rad for motif 1, otherwise -0.78rad.",
+      "circle": "Diameter 65% of card width; position varies by motif.",
+      "capsule": "55% card width by 120% card height; rotation 0.44rad.",
+      "squareColors": [
+        "UIColor.FromRGBA(0.98,0.64,0.55,0.38) for motif 1",
+        "UIColor.FromRGBA(1,0.78,0.55,0.38) otherwise"
+      ],
+      "circleColors": [
+        "UIColor.FromRGBA(0.98,0.72,0.16,0.38) for motif 2",
+        "UIColor.FromRGBA(0.76,0.38,0.16,0.38) otherwise"
+      ],
+      "capsuleColor": "UIColor RGBA normalized channels (0.24,0.6,0.25,0.4)",
+      "purpose": "Selected-card halo behind the white surface; native emoji at 40pt, preview 28pt. Not a general extra color scale."
+    },
+    "referenceSources": {
+      "slack": "/Users/backo/projects/personal/rn-makeitanimated/src/apps/(s-t)/slack",
+      "policy": "Preserve local reference and placeholder scope; document built source as current ground truth.",
+      "opal": "Public Make It Animated Opal Set Timer Slider demo and licensed local checkout; no private TSX/assets copied. New captures/reference media are ignored artifacts."
+    },
+    "slackState": "Five synthetic channels, channel-5 first. App owns dispositions, Busy/Revision/Undoing guards and retained state via Ui messages; native GPU compositor owns transient motion. Undo after completion; Done/Back returns to gallery; no connected account or composer."
+  },
+  "components": [
+    {
+      "name": "Icon Control",
+      "kind": "button",
+      "refersTo": "icon-control",
+      "description": "NativePressable with explicitly charcoal-tinted SF Symbol; Back, More and pronunciation. Detail Back opts into selection haptics."
+    },
+    {
+      "name": "Welcome Offer",
+      "kind": "button",
+      "refersTo": "offer",
+      "description": "Tan pill with white gift/caption/chevron; composed highlight alpha; opens a demo-scope notice."
+    },
+    {
+      "name": "Word Sticker",
+      "kind": "card",
+      "description": "Transparent external licensed image inside an accessible native pressable; no card fill/border/shadow. Selects matching detail with shared identity, composed highlight feedback and optional selection haptics."
+    },
+    {
+      "name": "Shared Date and Count",
+      "kind": "custom",
+      "description": "Separate shared native text wrappers move from collection heading to detail navigation. Date now uses NativeFontDesign.Serif; count remains native sans."
+    },
+    {
+      "name": "Capture Aperture",
+      "kind": "button",
+      "refersTo": "capture",
+      "description": "White circle enclosing a clipped five-color aperture with white center. Camera is a disclosed placeholder."
+    },
+    {
+      "name": "Locked Examples",
+      "kind": "button",
+      "refersTo": "examples",
+      "description": "White pill with orange SF Symbol lock and semibold caption; third staggered detail arrival. No connected purchase flow."
+    },
+    {
+      "name": "CapWords Gallery Card",
+      "kind": "card",
+      "refersTo": "gallery-word-card",
+      "description": "One native Open CapWords pressable; real licensed stickers on warm preview paper, serif title, caption and opening arrow; composed highlight and optional haptics."
+    },
+    {
+      "name": "Alma Gallery Card",
+      "kind": "card",
+      "refersTo": "gallery-alma-card",
+      "description": "One native Open Alma pressable; inert emoji orbit on leaf preview above forest footer, pale serif title/caption/arrow. Preview does not capture touches or run autoplay. Retained alongside CapWords, Slack and Opal in the four-card gallery."
+    },
+    {
+      "name": "Alma Circular Carousel",
+      "kind": "custom",
+      "refersTo": "alma-carousel-card",
+      "description": "Eight retained native emoji cards, white continuous corners, selected geometric halo and native shadow. Circular position/rotation/scale; finger-following pan, velocity-aware spring, actual-presentation interruption and cancellation. Completed swipe pauses autoplay; native Previous/Next remain alternatives."
+    },
+    {
+      "name": "Alma Continue",
+      "kind": "button",
+      "refersTo": "alma-continue",
+      "description": "Forest native pressable with white medium label; opens demo-scope drawer and suspends autoplay while notice is open. No connected nutrition service."
+    },
+    {
+      "name": "Slack Gallery Card",
+      "kind": "card",
+      "refersTo": "gallery-slack-card",
+      "description": "Open Slack Catch Up native pressable; inert charcoal skeleton stack in clipped plum gradient; pale serif Slack title, A little swipe. A clear head. caption and opening arrow."
+    },
+    {
+      "name": "Slack Channel Deck",
+      "kind": "custom",
+      "refersTo": "slack-channel-card",
+      "description": "Compositional NativeSwipeDeck/NativeSwipeCard hosts ordinary Kumiko UI and native vertical scroll; five bounded synthetic channels, last first; two-axis pan, top/bottom tilt, directional feedback and reversible native motion."
+    },
+    {
+      "name": "Slack Read Action",
+      "kind": "button",
+      "refersTo": "slack-read-action",
+      "description": "Green native Mark as Read footer action dismisses right; same green action becomes Done at completion and returns to gallery."
+    },
+    {
+      "name": "Slack Unread Action",
+      "kind": "button",
+      "refersTo": "slack-unread-action",
+      "description": "Charcoal native Keep Unread footer action dismisses left with sky feedback; disabled during guarded commit."
+    },
+    {
+      "name": "Slack Remaining Count and Undo",
+      "kind": "custom",
+      "description": "Native bold number flips in direction-aware 3D with opacity; Undo reverses from presentation, including after completion. State retained on gallery return."
+    },
+    {
+      "name": "Opal Gallery Card",
+      "kind": "card",
+      "refersTo": "gallery-opal-card",
+      "description": "One Open Opal native pressable; inert black timer preview, deep green footer, pale mint serif title/caption/arrow. Caption: A little time. Room to focus. Preserves incumbent card proportions."
+    },
+    {
+      "name": "Opal Duration and Rubber Slider",
+      "kind": "custom",
+      "refersTo": "opal-duration",
+      "description": "White duration press-in toggle shifts left into charcoal alternating-tick track; timed +/- taps expand; discrete native contact, spring fill, separate active-scale and anchored edge-stretch layers. Immutable selection/expansion retained on gallery return and replay."
+    }
+  ],
+  "narrative": {
+    "northStar": "Motion Studies on warm paper",
+    "overview": "One native example app presents four recognizable motion artifacts. The gallery's\nwarm paper, serif heading and generous preview cards frame the work; inside,\nCapWords keeps its dotted paper and two word stickers, while Alma uses cream,\nforest controls and white emoji cards moving around a circle. Slack Catch Up adds\na plum gradient and charcoal channel stack with emerald/sky swipe feedback. Opal\nadds a black timer canvas, elastic track with white fill and mint/green action. The\nsupplied Experience direction, PRODUCT.md and built C# sources are authoritative.\n\nPreserve the styling the user said looks good. This record expands the existing\nCapWords system to include the built gallery, Alma, Slack and Opal; each retains its\nstudy identity. Licensed Computer Mouse and Ice Cream Cone artwork remains an\nexternal build input through `CapWordsAssetRoot`. Slack preserves the local reference\n`/Users/backo/projects/personal/rn-makeitanimated/src/apps/(s-t)/slack`. Private reference source and\noriginal artwork were not opened or copied by this documentation pass.",
+    "keyCharacteristics": [
+      "Warm paper and serif headings frame four artifact-led gallery cards.",
+      "CapWords preserves transparent stickers, dotted paper and shared date/count identity.",
+      "Alma combines cream, forest, native emoji and translucent geometric decoration.",
+      "Circular position, rotation and scale express selection; dragging follows the finger.",
+      "Slack layers scrollable channel cards, directional feedback and reversible native motion.",
+      "Opal preserves the empty black middle and bottom timer hierarchy with anchored elastic contact.",
+      "Native controls remain reachable; child state survives returning to the gallery.",
+      "Centered content uses a continuous width cap across phone, narrow and tablet hosts."
+    ],
+    "rules": [
+      {
+        "name": "The Explicit Tint Rule",
+        "body": "Set SF Symbol tints at their call sites: charcoal for\nCapWords navigation and pronunciation, white for its offer, orange for its lock,\nforest for Alma controls, and the matching gallery footer ink for opening arrows.",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "**Do** preserve the approved warm gallery, CapWords, Alma cream/forest, Slack plum and Opal black/mint styling.",
+      "**Do** let each gallery card show its study's actual artifact before its caption.",
+      "**Do** retain the 550ms shared spring and 100/200/300ms CapWords arrival delays.",
+      "**Do** keep system serif headings/date and document the custom-family limitation accurately.",
+      "**Do** keep Alma dragging direct, release velocity intact and interruption at the shown pose.",
+      "**Do** pause autoplay after a completed swipe and remove Alma's timer on exit.",
+      "**Do** retain child state, eight bounded Alma cards, native alternate controls and 44pt targets.",
+      "**Do** preserve Slack TYPE/MATERIAL, directional colors, scroll content and reversible motion.",
+      "**Do** preserve composed-button feedback, explicit symbol tints and optional haptics.",
+      "**Do** keep licensed artwork external to the repository and reference it at build time.",
+      "**Do** distinguish scoped simulator/offscreen evidence from physical and broader-suite verification."
+    ],
+    "donts": [
+      "**Don't** restyle the accepted gallery, Alma, Slack or Opal as part of documenting it.",
+      "**Don't** claim Libre Baskerville, interactive navigation pop or whole-screen crossfade is built.",
+      "**Don't** generalize specialized velocity springs or the new subtree pose subset into arbitrary velocity handoff or a gesture graph.",
+      "**Don't** promise connected camera, pronunciation, purchases, nutrition tracking, Slack accounts or composing.",
+      "**Don't** copy or distribute private reference source or original artwork in this handoff.",
+      "**Don't** infer hardware touch, tactile haptics, VoiceOver, dark or enlarged-text checks from captures.",
+      "**Don't** infer a current Opal phone installation from historical device evidence; this extension is simulator-only.",
+      "**Don't** report the historical desktop pass or stale aggregate status as the latest rerun result."
+    ]
+  }
+}

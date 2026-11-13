@@ -1,0 +1,15 @@
+<Project>
+  <Target Name="KumikoGenerateRuntime" BeforeTargets="CoreCompile" DependsOnTargets="ResolveReferences"
+          Condition="'$(MSBuildProjectName)' != 'Kumiko' and '$(MSBuildProjectName)' != 'Kumiko.Analyzers' and '$(MSBuildProjectName)' != 'Kumiko.Analyzers.E2E'">
+    <PropertyGroup>
+      <KumikoRuntimeOutput>$(IntermediateOutputPath)Kumiko.Runtime.g.cs</KumikoRuntimeOutput>
+      <KumikoGenerator Condition="'$(KumikoGenerator)' == ''">$(MSBuildThisFileDirectory)../tools/net10.0/Kumiko.Analyzers.dll</KumikoGenerator>
+    </PropertyGroup>
+    <WriteLinesToFile File="$(IntermediateOutputPath)kumiko-sources.txt" Lines="@(Compile->'%(FullPath)')" Overwrite="true" WriteOnlyWhenDifferent="true" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)kumiko-references.txt" Lines="@(ReferencePath->'%(FullPath)')" Overwrite="true" WriteOnlyWhenDifferent="true" />
+    <Exec Command="&quot;$(NetCoreRoot)dotnet&quot; &quot;$(KumikoGenerator)&quot; &quot;$(IntermediateOutputPath)kumiko-sources.txt&quot; &quot;$(IntermediateOutputPath)kumiko-references.txt&quot; &quot;$(KumikoRuntimeOutput)&quot;" />
+    <ItemGroup>
+      <Compile Include="$(KumikoRuntimeOutput)" />
+    </ItemGroup>
+  </Target>
+</Project>

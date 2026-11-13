@@ -1,0 +1,188 @@
+#nullable enable
+Kumiko.Desktop.Appearance
+Kumiko.Desktop.Clipboard
+Kumiko.Desktop.Dialogs
+Kumiko.Desktop.DirectoryKind
+Kumiko.Desktop.DirectoryKind.AppData = 4 -> Kumiko.Desktop.DirectoryKind
+Kumiko.Desktop.DirectoryKind.Cache = 5 -> Kumiko.Desktop.DirectoryKind
+Kumiko.Desktop.DirectoryKind.Desktop = 3 -> Kumiko.Desktop.DirectoryKind
+Kumiko.Desktop.DirectoryKind.Documents = 1 -> Kumiko.Desktop.DirectoryKind
+Kumiko.Desktop.DirectoryKind.Downloads = 2 -> Kumiko.Desktop.DirectoryKind
+Kumiko.Desktop.DirectoryKind.Home = 0 -> Kumiko.Desktop.DirectoryKind
+Kumiko.Desktop.DirectoryKind.Temporary = 6 -> Kumiko.Desktop.DirectoryKind
+Kumiko.Desktop.Menu
+Kumiko.Desktop.Menu.Dispose() -> void
+Kumiko.Desktop.Menu.Find(string! id) -> Kumiko.Desktop.MenuItem?
+Kumiko.Desktop.Menu.Menu(Kumiko.App! app, params Kumiko.Desktop.MenuItem![]! items) -> void
+Kumiko.Desktop.Menu.Refresh() -> void
+Kumiko.Desktop.MenuItem
+Kumiko.Desktop.MenuItem.<Clone>$() -> Kumiko.Desktop.MenuItem!
+Kumiko.Desktop.MenuItem.Accelerator.get -> string!
+Kumiko.Desktop.MenuItem.Accelerator.init -> void
+Kumiko.Desktop.MenuItem.Checked.get -> bool
+Kumiko.Desktop.MenuItem.Checked.set -> void
+Kumiko.Desktop.MenuItem.Click.get -> System.Action<Kumiko.Desktop.MenuItem!>?
+Kumiko.Desktop.MenuItem.Click.init -> void
+Kumiko.Desktop.MenuItem.Deconstruct(out string! Label, out string! Accelerator, out System.Action<Kumiko.Desktop.MenuItem!>? Click, out Kumiko.Desktop.MenuItem![]? Submenu, out string! Id, out Kumiko.Desktop.MenuRole Role, out bool Separator) -> void
+Kumiko.Desktop.MenuItem.Disabled.get -> bool
+Kumiko.Desktop.MenuItem.Disabled.set -> void
+Kumiko.Desktop.MenuItem.Equals(Kumiko.Desktop.MenuItem? other) -> bool
+Kumiko.Desktop.MenuItem.Hidden.get -> bool
+Kumiko.Desktop.MenuItem.Hidden.set -> void
+Kumiko.Desktop.MenuItem.Id.get -> string!
+Kumiko.Desktop.MenuItem.Id.init -> void
+Kumiko.Desktop.MenuItem.Label.get -> string!
+Kumiko.Desktop.MenuItem.Label.init -> void
+Kumiko.Desktop.MenuItem.MenuItem(string! Label = "", string! Accelerator = "", System.Action<Kumiko.Desktop.MenuItem!>? Click = null, Kumiko.Desktop.MenuItem![]? Submenu = null, string! Id = "", Kumiko.Desktop.MenuRole Role = Kumiko.Desktop.MenuRole.None, bool Separator = false) -> void
+Kumiko.Desktop.MenuItem.Role.get -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuItem.Role.init -> void
+Kumiko.Desktop.MenuItem.Separator.get -> bool
+Kumiko.Desktop.MenuItem.Separator.init -> void
+Kumiko.Desktop.MenuItem.Submenu.get -> Kumiko.Desktop.MenuItem![]?
+Kumiko.Desktop.MenuItem.Submenu.init -> void
+Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.About = 1 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.Close = 15 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.Copy = 9 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.Cut = 8 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.Delete = 11 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.Front = 17 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.Hide = 2 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.HideOthers = 3 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.Minimize = 13 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.None = 0 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.Paste = 10 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.Quit = 5 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.Redo = 7 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.SelectAll = 12 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.ToggleFullScreen = 16 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.Undo = 6 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.Unhide = 4 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MenuRole.Zoom = 14 -> Kumiko.Desktop.MenuRole
+Kumiko.Desktop.MessageOptions
+Kumiko.Desktop.MessageOptions.<Clone>$() -> Kumiko.Desktop.MessageOptions!
+Kumiko.Desktop.MessageOptions.Buttons.get -> string![]?
+Kumiko.Desktop.MessageOptions.Buttons.init -> void
+Kumiko.Desktop.MessageOptions.Deconstruct(out string! Title, out string! Detail, out string![]? Buttons, out bool Warning) -> void
+Kumiko.Desktop.MessageOptions.Detail.get -> string!
+Kumiko.Desktop.MessageOptions.Detail.init -> void
+Kumiko.Desktop.MessageOptions.Equals(Kumiko.Desktop.MessageOptions? other) -> bool
+Kumiko.Desktop.MessageOptions.MessageOptions(string! Title, string! Detail = "", string![]? Buttons = null, bool Warning = false) -> void
+Kumiko.Desktop.MessageOptions.Title.get -> string!
+Kumiko.Desktop.MessageOptions.Title.init -> void
+Kumiko.Desktop.MessageOptions.Warning.get -> bool
+Kumiko.Desktop.MessageOptions.Warning.init -> void
+Kumiko.Desktop.OpenDialogOptions
+Kumiko.Desktop.OpenDialogOptions.<Clone>$() -> Kumiko.Desktop.OpenDialogOptions!
+Kumiko.Desktop.OpenDialogOptions.Deconstruct(out string! Title, out string! Directory, out bool Files, out bool Directories, out bool Multiple, out string![]? Extensions, out bool ShowHidden) -> void
+Kumiko.Desktop.OpenDialogOptions.Directories.get -> bool
+Kumiko.Desktop.OpenDialogOptions.Directories.init -> void
+Kumiko.Desktop.OpenDialogOptions.Directory.get -> string!
+Kumiko.Desktop.OpenDialogOptions.Directory.init -> void
+Kumiko.Desktop.OpenDialogOptions.Equals(Kumiko.Desktop.OpenDialogOptions? other) -> bool
+Kumiko.Desktop.OpenDialogOptions.Extensions.get -> string![]?
+Kumiko.Desktop.OpenDialogOptions.Extensions.init -> void
+Kumiko.Desktop.OpenDialogOptions.Files.get -> bool
+Kumiko.Desktop.OpenDialogOptions.Files.init -> void
+Kumiko.Desktop.OpenDialogOptions.Multiple.get -> bool
+Kumiko.Desktop.OpenDialogOptions.Multiple.init -> void
+Kumiko.Desktop.OpenDialogOptions.OpenDialogOptions(string! Title = "Open", string! Directory = "", bool Files = true, bool Directories = false, bool Multiple = false, string![]? Extensions = null, bool ShowHidden = false) -> void
+Kumiko.Desktop.OpenDialogOptions.ShowHidden.get -> bool
+Kumiko.Desktop.OpenDialogOptions.ShowHidden.init -> void
+Kumiko.Desktop.OpenDialogOptions.Title.get -> string!
+Kumiko.Desktop.OpenDialogOptions.Title.init -> void
+Kumiko.Desktop.Paths
+Kumiko.Desktop.SaveDialogOptions
+Kumiko.Desktop.SaveDialogOptions.<Clone>$() -> Kumiko.Desktop.SaveDialogOptions!
+Kumiko.Desktop.SaveDialogOptions.Deconstruct(out string! Title, out string! Directory, out string! Name, out string![]? Extensions, out bool ShowHidden) -> void
+Kumiko.Desktop.SaveDialogOptions.Directory.get -> string!
+Kumiko.Desktop.SaveDialogOptions.Directory.init -> void
+Kumiko.Desktop.SaveDialogOptions.Equals(Kumiko.Desktop.SaveDialogOptions? other) -> bool
+Kumiko.Desktop.SaveDialogOptions.Extensions.get -> string![]?
+Kumiko.Desktop.SaveDialogOptions.Extensions.init -> void
+Kumiko.Desktop.SaveDialogOptions.Name.get -> string!
+Kumiko.Desktop.SaveDialogOptions.Name.init -> void
+Kumiko.Desktop.SaveDialogOptions.SaveDialogOptions(string! Title = "Save", string! Directory = "", string! Name = "", string![]? Extensions = null, bool ShowHidden = false) -> void
+Kumiko.Desktop.SaveDialogOptions.ShowHidden.get -> bool
+Kumiko.Desktop.SaveDialogOptions.ShowHidden.init -> void
+Kumiko.Desktop.SaveDialogOptions.Title.get -> string!
+Kumiko.Desktop.SaveDialogOptions.Title.init -> void
+Kumiko.Desktop.Shell
+Kumiko.Desktop.Tray
+Kumiko.Desktop.Tray.Dispose() -> void
+Kumiko.Desktop.Tray.SetTitle(string! title) -> void
+Kumiko.Desktop.Tray.Tray(string! title, Kumiko.Desktop.Menu? menu = null, string! tooltip = "") -> void
+Kumiko.Desktop.UpdateOptions
+Kumiko.Desktop.UpdateOptions.<Clone>$() -> Kumiko.Desktop.UpdateOptions!
+Kumiko.Desktop.UpdateOptions.Asset.get -> string!
+Kumiko.Desktop.UpdateOptions.Asset.init -> void
+Kumiko.Desktop.UpdateOptions.Deconstruct(out string! Repository, out string! Asset, out string! Name, out System.TimeSpan? FirstCheck, out System.TimeSpan? Interval) -> void
+Kumiko.Desktop.UpdateOptions.Equals(Kumiko.Desktop.UpdateOptions? other) -> bool
+Kumiko.Desktop.UpdateOptions.FirstCheck.get -> System.TimeSpan?
+Kumiko.Desktop.UpdateOptions.FirstCheck.init -> void
+Kumiko.Desktop.UpdateOptions.Interval.get -> System.TimeSpan?
+Kumiko.Desktop.UpdateOptions.Interval.init -> void
+Kumiko.Desktop.UpdateOptions.Name.get -> string!
+Kumiko.Desktop.UpdateOptions.Name.init -> void
+Kumiko.Desktop.UpdateOptions.Repository.get -> string!
+Kumiko.Desktop.UpdateOptions.Repository.init -> void
+Kumiko.Desktop.UpdateOptions.UpdateOptions(string! Repository, string! Asset, string! Name, System.TimeSpan? FirstCheck = null, System.TimeSpan? Interval = null) -> void
+Kumiko.Desktop.UpdatePhase
+Kumiko.Desktop.UpdatePhase.Busy = 2 -> Kumiko.Desktop.UpdatePhase
+Kumiko.Desktop.UpdatePhase.Idle = 1 -> Kumiko.Desktop.UpdatePhase
+Kumiko.Desktop.UpdatePhase.Installed = 4 -> Kumiko.Desktop.UpdatePhase
+Kumiko.Desktop.UpdatePhase.Off = 0 -> Kumiko.Desktop.UpdatePhase
+Kumiko.Desktop.UpdatePhase.Ready = 3 -> Kumiko.Desktop.UpdatePhase
+Kumiko.Desktop.Updater
+Kumiko.Desktop.Updater.Changed -> System.Action?
+Kumiko.Desktop.Updater.CheckAsync() -> System.Threading.Tasks.Task!
+Kumiko.Desktop.Updater.Dispose() -> void
+Kumiko.Desktop.Updater.Failed -> System.Action<System.Exception!>?
+Kumiko.Desktop.Updater.InstallAsync() -> System.Threading.Tasks.Task!
+Kumiko.Desktop.Updater.Phase.get -> Kumiko.Desktop.UpdatePhase
+Kumiko.Desktop.Updater.ReadyVersion.get -> string?
+Kumiko.Desktop.Updater.Restart() -> void
+Kumiko.Desktop.Updater.Updater(Kumiko.App! app, Kumiko.Desktop.UpdateOptions! options) -> void
+Kumiko.Desktop.Watch
+Kumiko.Desktop.Watch.Dispose() -> void
+override Kumiko.Desktop.MenuItem.Equals(object? obj) -> bool
+override Kumiko.Desktop.MenuItem.GetHashCode() -> int
+override Kumiko.Desktop.MenuItem.ToString() -> string!
+override Kumiko.Desktop.MessageOptions.Equals(object? obj) -> bool
+override Kumiko.Desktop.MessageOptions.GetHashCode() -> int
+override Kumiko.Desktop.MessageOptions.ToString() -> string!
+override Kumiko.Desktop.OpenDialogOptions.Equals(object? obj) -> bool
+override Kumiko.Desktop.OpenDialogOptions.GetHashCode() -> int
+override Kumiko.Desktop.OpenDialogOptions.ToString() -> string!
+override Kumiko.Desktop.SaveDialogOptions.Equals(object? obj) -> bool
+override Kumiko.Desktop.SaveDialogOptions.GetHashCode() -> int
+override Kumiko.Desktop.SaveDialogOptions.ToString() -> string!
+override Kumiko.Desktop.UpdateOptions.Equals(object? obj) -> bool
+override Kumiko.Desktop.UpdateOptions.GetHashCode() -> int
+override Kumiko.Desktop.UpdateOptions.ToString() -> string!
+static Kumiko.Desktop.Appearance.Changed -> System.Action<bool>?
+static Kumiko.Desktop.Appearance.IsDark.get -> bool
+static Kumiko.Desktop.Appearance.ReduceMotion.get -> bool
+static Kumiko.Desktop.Appearance.Theme.get -> Kumiko.UI.Theme!
+static Kumiko.Desktop.Appearance.ThermalState.get -> int?
+static Kumiko.Desktop.Clipboard.ReadText() -> string!
+static Kumiko.Desktop.Clipboard.WriteText(string! text) -> void
+static Kumiko.Desktop.Dialogs.Message(Kumiko.Desktop.MessageOptions! options) -> int
+static Kumiko.Desktop.Dialogs.Open(Kumiko.Desktop.OpenDialogOptions? options = null) -> string![]!
+static Kumiko.Desktop.Dialogs.Save(Kumiko.Desktop.SaveDialogOptions? options = null) -> string?
+static Kumiko.Desktop.MenuItem.operator !=(Kumiko.Desktop.MenuItem? left, Kumiko.Desktop.MenuItem? right) -> bool
+static Kumiko.Desktop.MenuItem.operator ==(Kumiko.Desktop.MenuItem? left, Kumiko.Desktop.MenuItem? right) -> bool
+static Kumiko.Desktop.MessageOptions.operator !=(Kumiko.Desktop.MessageOptions? left, Kumiko.Desktop.MessageOptions? right) -> bool
+static Kumiko.Desktop.MessageOptions.operator ==(Kumiko.Desktop.MessageOptions? left, Kumiko.Desktop.MessageOptions? right) -> bool
+static Kumiko.Desktop.OpenDialogOptions.operator !=(Kumiko.Desktop.OpenDialogOptions? left, Kumiko.Desktop.OpenDialogOptions? right) -> bool
+static Kumiko.Desktop.OpenDialogOptions.operator ==(Kumiko.Desktop.OpenDialogOptions? left, Kumiko.Desktop.OpenDialogOptions? right) -> bool
+static Kumiko.Desktop.Paths.Get(Kumiko.Desktop.DirectoryKind kind) -> string!
+static Kumiko.Desktop.SaveDialogOptions.operator !=(Kumiko.Desktop.SaveDialogOptions? left, Kumiko.Desktop.SaveDialogOptions? right) -> bool
+static Kumiko.Desktop.SaveDialogOptions.operator ==(Kumiko.Desktop.SaveDialogOptions? left, Kumiko.Desktop.SaveDialogOptions? right) -> bool
+static Kumiko.Desktop.Shell.Open(string! pathOrUrl) -> void
+static Kumiko.Desktop.Shell.Reveal(string! path) -> void
+static Kumiko.Desktop.Shell.Trash(string! path) -> void
+static Kumiko.Desktop.UpdateOptions.operator !=(Kumiko.Desktop.UpdateOptions? left, Kumiko.Desktop.UpdateOptions? right) -> bool
+static Kumiko.Desktop.UpdateOptions.operator ==(Kumiko.Desktop.UpdateOptions? left, Kumiko.Desktop.UpdateOptions? right) -> bool
+static Kumiko.Desktop.Watch.Exited(Kumiko.App! app, int processId, System.Action! handler) -> Kumiko.Desktop.Watch!
+static Kumiko.Desktop.Watch.Readable(Kumiko.App! app, int descriptor, System.Action! handler) -> Kumiko.Desktop.Watch!

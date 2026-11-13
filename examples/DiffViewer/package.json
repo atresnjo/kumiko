@@ -1,0 +1,24 @@
+{
+  "name": "Diff",
+  "displayName": "Diff",
+  "identifier": "dev.kumiko.diff",
+  "version": "1.0.0",
+  "publisher": "Kumiko Examples",
+  "description": "A native 120 Hz Git diff viewer with a project and worktree palette.",
+  "license": "MIT",
+  "project": "DiffViewer.csproj",
+  "executable": "DiffViewer",
+  "icons": { "png": "packaging/AppIcon.png" },
+  "minimumOS": { "macos": "13.0", "windows": "10.0.17763.0" },
+  "macos": {
+    "bundleName": "Diff",
+    "category": "public.app-category.developer-tools"
+  },
+  "windows": { "publisher": "CN=Kumiko Examples", "applicationId": "Diff" },
+  "linux": {
+    "packageName": "kumiko-diff",
+    "maintainer": "Kumiko Examples <packages@example.invalid>",
+    "categories": ["Development"],
+    "section": "devel"
+  }
+}

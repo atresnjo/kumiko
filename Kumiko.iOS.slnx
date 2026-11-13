@@ -1,0 +1,23 @@
+<Solution>
+  <Project Path="src/Kumiko/Kumiko.csproj" />
+  <Project Path="src/Kumiko.Analyzers/Kumiko.Analyzers.csproj" />
+  <Project Path="src/Kumiko.iOS/Kumiko.iOS.csproj" />
+  <Project Path="src/Kumiko.iOS.ML/Kumiko.iOS.ML.csproj" />
+  <Project Path="examples/NativeButton.iOS/NativeButton.iOS.csproj" />
+  <Folder Name="/examples/">
+    <Project Path="examples/CapWords.iOS/CapWords.iOS.csproj" />
+    <Project Path="examples/CRMLite.iOS/CRMLite.iOS.csproj" />
+    <Project Path="examples/Todo.iOS/Todo.iOS.csproj" />
+  </Folder>
+  <Folder Name="/src/" />
+  <Folder Name="/tests/">
+    <Project Path="tests/Kumiko.CapWords.iOS.E2E/Kumiko.CapWords.iOS.E2E.csproj" />
+    <Project Path="tests/Kumiko.Host.iOS.E2E/Kumiko.Host.iOS.E2E.csproj" />
+    <Project Path="tests/Kumiko.Navigation.iOS.E2E/Kumiko.Navigation.iOS.E2E.csproj" />
+  </Folder>
+  <Project Path="examples/Components.iOS/Components.iOS.csproj" />
+  <Project Path="examples/Focus.iOS/Focus.iOS.csproj" />
+  <Project Path="tests/Kumiko.iOS.E2E/Kumiko.iOS.E2E.csproj" />
+  <Project Path="examples/ML.iOS/ML.iOS.csproj" />
+  <Project Path="tests/Kumiko.ML.iOS.E2E/Kumiko.ML.iOS.E2E.csproj" />
+</Solution>

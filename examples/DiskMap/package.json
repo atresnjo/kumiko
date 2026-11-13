@@ -1,0 +1,23 @@
+{
+  "name": "DiskMap",
+  "displayName": "DiskMap",
+  "identifier": "dev.kumiko.diskmap",
+  "version": "1.0.0",
+  "publisher": "Kumiko Examples",
+  "description": "A native 120 Hz disk usage treemap with a parallel scanner.",
+  "license": "MIT",
+  "project": "DiskMap.csproj",
+  "executable": "DiskMap",
+  "minimumOS": { "macos": "13.0", "windows": "10.0.17763.0" },
+  "macos": {
+    "bundleName": "DiskMap",
+    "category": "public.app-category.utilities"
+  },
+  "windows": { "publisher": "CN=Kumiko Examples", "applicationId": "DiskMap" },
+  "linux": {
+    "packageName": "kumiko-diskmap",
+    "maintainer": "Kumiko Examples <packages@example.invalid>",
+    "categories": ["Utility"],
+    "section": "utils"
+  }
+}

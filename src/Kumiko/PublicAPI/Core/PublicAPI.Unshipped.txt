@@ -1,0 +1,190 @@
+#nullable enable
+Kumiko.ActivationPolicy
+Kumiko.ActivationPolicy.Accessory = 1 -> Kumiko.ActivationPolicy
+Kumiko.ActivationPolicy.Background = 2 -> Kumiko.ActivationPolicy
+Kumiko.ActivationPolicy.Regular = 0 -> Kumiko.ActivationPolicy
+Kumiko.App.Activate() -> void
+Kumiko.App.Activated -> System.Action<bool>?
+Kumiko.App.AddRecentDocument(string! path) -> void
+Kumiko.App.BeforeQuit -> System.Action<Kumiko.CancelableEvent!>?
+Kumiko.App.ClearRecentDocuments() -> void
+Kumiko.App.DidBecomeActive -> System.Action?
+Kumiko.App.DidQuit -> System.Action?
+Kumiko.App.DidResignActive -> System.Action?
+Kumiko.App.Exit(int code = 0) -> void
+Kumiko.App.ExitCode.get -> int
+Kumiko.App.IsURLSchemeRegistered(string! scheme) -> bool
+Kumiko.App.NewPage(Kumiko.WindowOptions! options, Kumiko.Web.PageOptions! page) -> Kumiko.Window!
+Kumiko.App.NewWindows(Kumiko.Runtime.IProgram! program, Kumiko.WindowOptions? defaults = null) -> void
+Kumiko.App.OpenFile -> System.Action<string!>!
+Kumiko.App.OpenURL -> System.Action<string!>!
+Kumiko.App.RecentDocuments.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Kumiko.App.RegisterURLScheme(string! scheme) -> void
+Kumiko.App.Relaunch() -> void
+Kumiko.App.ReleaseSingleInstanceLock() -> void
+Kumiko.App.RequestSingleInstanceLock(string? identity = null) -> bool
+Kumiko.App.SecondInstance -> System.Action<Kumiko.SecondInstanceEvent!>!
+Kumiko.App.UnregisterURLScheme(string! scheme) -> void
+Kumiko.App.WillQuit -> System.Action<Kumiko.CancelableEvent!>?
+Kumiko.App.WindowAllClosed -> System.Action?
+Kumiko.App.WindowCreated -> System.Action<Kumiko.Window!>?
+Kumiko.App.WindowStates.get -> Kumiko.WindowStateStore!
+Kumiko.App.WindowStates.set -> void
+Kumiko.AppOptions.ActivationPolicy.get -> Kumiko.ActivationPolicy
+Kumiko.AppOptions.ActivationPolicy.init -> void
+Kumiko.CancelableEvent
+Kumiko.CancelableEvent.CancelableEvent() -> void
+Kumiko.CancelableEvent.DefaultPrevented.get -> bool
+Kumiko.CancelableEvent.PreventDefault() -> void
+Kumiko.SecondInstanceEvent
+Kumiko.SecondInstanceEvent.<Clone>$() -> Kumiko.SecondInstanceEvent!
+Kumiko.SecondInstanceEvent.Arguments.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Kumiko.SecondInstanceEvent.Arguments.init -> void
+Kumiko.SecondInstanceEvent.Deconstruct(out System.Collections.Generic.IReadOnlyList<string!>! Arguments, out string! WorkingDirectory) -> void
+Kumiko.SecondInstanceEvent.Equals(Kumiko.SecondInstanceEvent? other) -> bool
+Kumiko.SecondInstanceEvent.SecondInstanceEvent(System.Collections.Generic.IReadOnlyList<string!>! Arguments, string! WorkingDirectory) -> void
+Kumiko.SecondInstanceEvent.WorkingDirectory.get -> string!
+Kumiko.SecondInstanceEvent.WorkingDirectory.init -> void
+Kumiko.Window.Blur() -> void
+Kumiko.Window.Blurred -> System.Action?
+Kumiko.Window.Bounds.get -> Kumiko.UI.Rect
+Kumiko.Window.Center() -> void
+Kumiko.Window.Closing -> System.Action<Kumiko.CancelableEvent!>?
+Kumiko.Window.ContentSize.get -> Kumiko.UI.Size
+Kumiko.Window.EnteredFullScreen -> System.Action?
+Kumiko.Window.EnterFullScreen() -> void
+Kumiko.Window.FlashFrame(bool enabled = true) -> void
+Kumiko.Window.Focus() -> void
+Kumiko.Window.Focused -> System.Action?
+Kumiko.Window.FrameSize.get -> Kumiko.UI.Size
+Kumiko.Window.Hidden -> System.Action?
+Kumiko.Window.IsFocused.get -> bool
+Kumiko.Window.IsFullScreen.get -> bool
+Kumiko.Window.IsMaximized.get -> bool
+Kumiko.Window.IsMinimized.get -> bool
+Kumiko.Window.LeaveFullScreen() -> void
+Kumiko.Window.LeftFullScreen -> System.Action?
+Kumiko.Window.Maximize() -> void
+Kumiko.Window.Maximized -> System.Action?
+Kumiko.Window.Menu.get -> Kumiko.Desktop.Menu?
+Kumiko.Window.Minimized -> System.Action?
+Kumiko.Window.Moved -> System.Action?
+Kumiko.Window.NewWebView(string! id, Kumiko.Web.PageOptions! options) -> Kumiko.Web.Page!
+Kumiko.Window.Opacity.get -> float
+Kumiko.Window.Position.get -> Kumiko.UI.Point
+Kumiko.Window.ReadyToShow -> System.Action?
+Kumiko.Window.Resized -> System.Action?
+Kumiko.Window.Restore() -> void
+Kumiko.Window.Restore(Kumiko.WindowState! state) -> void
+Kumiko.Window.Restored -> System.Action?
+Kumiko.Window.SetBounds(Kumiko.UI.Rect bounds) -> void
+Kumiko.Window.SetClosable(bool value) -> void
+Kumiko.Window.SetContentProtection(bool value) -> void
+Kumiko.Window.SetHasShadow(bool value) -> void
+Kumiko.Window.SetIgnoreMouseEvents(bool value) -> void
+Kumiko.Window.SetMaximizable(bool value) -> void
+Kumiko.Window.SetMaximumSize(Kumiko.UI.Size size) -> void
+Kumiko.Window.SetMenu(Kumiko.Desktop.Menu! menu) -> void
+Kumiko.Window.SetMinimizable(bool value) -> void
+Kumiko.Window.SetMinimumSize(Kumiko.UI.Size size) -> void
+Kumiko.Window.SetMovable(bool value) -> void
+Kumiko.Window.SetOpacity(float opacity) -> void
+Kumiko.Window.SetPosition(Kumiko.UI.Point point) -> void
+Kumiko.Window.SetProgressBar(double? value) -> void
+Kumiko.Window.SetSkipTaskbar(bool value) -> void
+Kumiko.Window.SetVisibleOnAllWorkspaces(bool value) -> void
+Kumiko.Window.Shown -> System.Action?
+Kumiko.Window.State.get -> Kumiko.WindowState?
+Kumiko.Window.ToggleFullScreen() -> void
+Kumiko.Window.Unmaximize() -> void
+Kumiko.Window.Unmaximized -> System.Action?
+Kumiko.WindowMaterial
+Kumiko.WindowMaterial.Acrylic = 4 -> Kumiko.WindowMaterial
+Kumiko.WindowMaterial.Mica = 3 -> Kumiko.WindowMaterial
+Kumiko.WindowMaterial.None = 0 -> Kumiko.WindowMaterial
+Kumiko.WindowMaterial.Sidebar = 1 -> Kumiko.WindowMaterial
+Kumiko.WindowMaterial.UnderWindow = 2 -> Kumiko.WindowMaterial
+Kumiko.WindowOptions.AutoHideMenuBar.get -> bool
+Kumiko.WindowOptions.AutoHideMenuBar.init -> void
+Kumiko.WindowOptions.Closable.get -> bool
+Kumiko.WindowOptions.Closable.init -> void
+Kumiko.WindowOptions.ContentProtection.get -> bool
+Kumiko.WindowOptions.ContentProtection.init -> void
+Kumiko.WindowOptions.Frameless.get -> bool
+Kumiko.WindowOptions.Frameless.init -> void
+Kumiko.WindowOptions.FullScreen.get -> bool
+Kumiko.WindowOptions.FullScreen.init -> void
+Kumiko.WindowOptions.HasShadow.get -> bool
+Kumiko.WindowOptions.HasShadow.init -> void
+Kumiko.WindowOptions.IgnoreMouseEvents.get -> bool
+Kumiko.WindowOptions.IgnoreMouseEvents.init -> void
+Kumiko.WindowOptions.Material.get -> Kumiko.WindowMaterial
+Kumiko.WindowOptions.Material.init -> void
+Kumiko.WindowOptions.MaxHeight.get -> float
+Kumiko.WindowOptions.MaxHeight.init -> void
+Kumiko.WindowOptions.Maximizable.get -> bool
+Kumiko.WindowOptions.Maximizable.init -> void
+Kumiko.WindowOptions.Maximized.get -> bool
+Kumiko.WindowOptions.Maximized.init -> void
+Kumiko.WindowOptions.MaxWidth.get -> float
+Kumiko.WindowOptions.MaxWidth.init -> void
+Kumiko.WindowOptions.Minimizable.get -> bool
+Kumiko.WindowOptions.Minimizable.init -> void
+Kumiko.WindowOptions.Modal.get -> bool
+Kumiko.WindowOptions.Modal.init -> void
+Kumiko.WindowOptions.Movable.get -> bool
+Kumiko.WindowOptions.Movable.init -> void
+Kumiko.WindowOptions.Opacity.get -> float
+Kumiko.WindowOptions.Opacity.init -> void
+Kumiko.WindowOptions.Panel.get -> bool
+Kumiko.WindowOptions.Panel.init -> void
+Kumiko.WindowOptions.Parent.get -> Kumiko.Window?
+Kumiko.WindowOptions.Parent.init -> void
+Kumiko.WindowOptions.RememberAs.get -> string?
+Kumiko.WindowOptions.RememberAs.init -> void
+Kumiko.WindowOptions.SkipTaskbar.get -> bool
+Kumiko.WindowOptions.SkipTaskbar.init -> void
+Kumiko.WindowOptions.TrafficLightPosition.get -> Kumiko.UI.Point?
+Kumiko.WindowOptions.TrafficLightPosition.init -> void
+Kumiko.WindowOptions.Transparent.get -> bool
+Kumiko.WindowOptions.Transparent.init -> void
+Kumiko.WindowOptions.VisibleOnAllWorkspaces.get -> bool
+Kumiko.WindowOptions.VisibleOnAllWorkspaces.init -> void
+Kumiko.WindowState
+Kumiko.WindowState.<Clone>$() -> Kumiko.WindowState!
+Kumiko.WindowState.Bottom.get -> float
+Kumiko.WindowState.Deconstruct(out float X, out float Y, out float Width, out float Height, out bool Maximized) -> void
+Kumiko.WindowState.Deconstruct(out float X, out float Y, out float Width, out float Height, out bool Maximized, out bool FullScreen) -> void
+Kumiko.WindowState.Equals(Kumiko.WindowState? other) -> bool
+Kumiko.WindowState.Fit(System.Collections.Generic.IReadOnlyList<Kumiko.Desktop.Screen!>! screens) -> Kumiko.WindowState!
+Kumiko.WindowState.FullScreen.get -> bool
+Kumiko.WindowState.FullScreen.init -> void
+Kumiko.WindowState.Height.get -> float
+Kumiko.WindowState.Height.init -> void
+Kumiko.WindowState.Maximized.get -> bool
+Kumiko.WindowState.Maximized.init -> void
+Kumiko.WindowState.Right.get -> float
+Kumiko.WindowState.Width.get -> float
+Kumiko.WindowState.Width.init -> void
+Kumiko.WindowState.WindowState(float X, float Y, float Width, float Height, bool Maximized = false) -> void
+Kumiko.WindowState.WindowState(float X, float Y, float Width, float Height, bool Maximized, bool FullScreen) -> void
+Kumiko.WindowState.X.get -> float
+Kumiko.WindowState.X.init -> void
+Kumiko.WindowState.Y.get -> float
+Kumiko.WindowState.Y.init -> void
+Kumiko.WindowStateStore
+Kumiko.WindowStateStore.Directory.get -> string!
+Kumiko.WindowStateStore.Load(string! name) -> Kumiko.WindowState?
+Kumiko.WindowStateStore.Save(string! name, Kumiko.WindowState! state) -> void
+Kumiko.WindowStateStore.WindowStateStore(string! directory) -> void
+override Kumiko.SecondInstanceEvent.Equals(object? obj) -> bool
+override Kumiko.SecondInstanceEvent.GetHashCode() -> int
+override Kumiko.SecondInstanceEvent.ToString() -> string!
+override Kumiko.WindowState.Equals(object? obj) -> bool
+override Kumiko.WindowState.GetHashCode() -> int
+override Kumiko.WindowState.ToString() -> string!
+static Kumiko.HotReload.Persist(Kumiko.Runtime.IProgram! program, Kumiko.App! app, string! path) -> bool
+static Kumiko.SecondInstanceEvent.operator !=(Kumiko.SecondInstanceEvent? left, Kumiko.SecondInstanceEvent? right) -> bool
+static Kumiko.SecondInstanceEvent.operator ==(Kumiko.SecondInstanceEvent? left, Kumiko.SecondInstanceEvent? right) -> bool
+static Kumiko.WindowState.operator !=(Kumiko.WindowState? left, Kumiko.WindowState? right) -> bool
+static Kumiko.WindowState.operator ==(Kumiko.WindowState? left, Kumiko.WindowState? right) -> bool

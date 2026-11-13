@@ -1,0 +1,71 @@
+#nullable enable
+Kumiko.Web.Asset
+Kumiko.Web.Asset.<Clone>$() -> Kumiko.Web.Asset!
+Kumiko.Web.Asset.Asset(string! Path, byte[]! Data, string? Mime = null) -> void
+Kumiko.Web.Asset.Data.get -> byte[]!
+Kumiko.Web.Asset.Data.init -> void
+Kumiko.Web.Asset.Deconstruct(out string! Path, out byte[]! Data, out string? Mime) -> void
+Kumiko.Web.Asset.Equals(Kumiko.Web.Asset? other) -> bool
+Kumiko.Web.Asset.Mime.get -> string?
+Kumiko.Web.Asset.Mime.init -> void
+Kumiko.Web.Asset.Path.get -> string!
+Kumiko.Web.Asset.Path.init -> void
+Kumiko.Web.CallContext
+Kumiko.Web.CallContext.CallContext() -> void
+Kumiko.Web.CallContext.CallContext(Kumiko.Window? Window, System.Threading.CancellationToken CancellationToken = default(System.Threading.CancellationToken)) -> void
+Kumiko.Web.CallContext.CancellationToken.get -> System.Threading.CancellationToken
+Kumiko.Web.CallContext.CancellationToken.init -> void
+Kumiko.Web.CallContext.Deconstruct(out Kumiko.Window? Window, out System.Threading.CancellationToken CancellationToken) -> void
+Kumiko.Web.CallContext.Equals(Kumiko.Web.CallContext other) -> bool
+Kumiko.Web.CallContext.Window.get -> Kumiko.Window?
+Kumiko.Web.CallContext.Window.init -> void
+Kumiko.Web.NanoEvent<T>
+Kumiko.Web.NanoEvent<T>.Broadcast(Kumiko.App! app, T payload) -> void
+Kumiko.Web.NanoEvent<T>.ClientName.get -> string!
+Kumiko.Web.NanoEvent<T>.Emit(Kumiko.Window! window, T payload) -> void
+Kumiko.Web.NanoEvent<T>.Name.get -> string!
+Kumiko.Web.NanoEvent<T>.NanoEvent(string! name, System.Text.Json.Serialization.Metadata.JsonTypeInfo<T>! typeInfo, string! typeScriptType) -> void
+Kumiko.Web.NanoEvent<T>.TypeScriptType.get -> string!
+Kumiko.Web.Page
+Kumiko.Web.Page.Dispose() -> void
+Kumiko.Web.Page.Evaluate(string! script) -> void
+Kumiko.Web.Page.IsReady.get -> bool
+Kumiko.Web.Page.Load(string! url) -> void
+Kumiko.Web.Page.Logged -> System.Action<string!>?
+Kumiko.Web.Page.Ready -> System.Action?
+Kumiko.Web.PageOptions
+Kumiko.Web.PageOptions.<Clone>$() -> Kumiko.Web.PageOptions!
+Kumiko.Web.PageOptions.Assets.get -> Kumiko.Web.Asset![]?
+Kumiko.Web.PageOptions.Assets.init -> void
+Kumiko.Web.PageOptions.Deconstruct(out string! Url, out Kumiko.Web.Asset![]? Assets, out bool Inspectable) -> void
+Kumiko.Web.PageOptions.Equals(Kumiko.Web.PageOptions? other) -> bool
+Kumiko.Web.PageOptions.Inspectable.get -> bool
+Kumiko.Web.PageOptions.Inspectable.init -> void
+Kumiko.Web.PageOptions.PageOptions(string! Url = "/", Kumiko.Web.Asset![]? Assets = null, bool Inspectable = true) -> void
+Kumiko.Web.PageOptions.Url.get -> string!
+Kumiko.Web.PageOptions.Url.init -> void
+Kumiko.Web.ServiceRegistry
+Kumiko.Web.ServiceRegistry.Bind<TArgument, TResult>(string! service, string! method, System.Func<TArgument, TResult>! handler, System.Text.Json.Serialization.Metadata.JsonTypeInfo<TArgument>! arguments, System.Text.Json.Serialization.Metadata.JsonTypeInfo<TResult>! result, string! argumentType, string! resultType) -> void
+Kumiko.Web.ServiceRegistry.BindAsync<TArgument, TResult>(string! service, string! method, System.Func<Kumiko.Web.CallContext, TArgument, System.Threading.Tasks.ValueTask<TResult>>! handler, System.Text.Json.Serialization.Metadata.JsonTypeInfo<TArgument>! arguments, System.Text.Json.Serialization.Metadata.JsonTypeInfo<TResult>! result, string! argumentType, string! resultType) -> void
+Kumiko.Web.ServiceRegistry.Invoke(string! method, System.Text.Json.JsonElement argument) -> string!
+Kumiko.Web.ServiceRegistry.InvokeAsync(string! method, System.Text.Json.JsonElement argument, Kumiko.Web.CallContext context) -> System.Threading.Tasks.ValueTask<string!>
+Kumiko.Web.ServiceRegistry.JavaScript() -> string!
+Kumiko.Web.ServiceRegistry.RegisterEvent<T>(Kumiko.Web.NanoEvent<T>! definition) -> void
+Kumiko.Web.ServiceRegistry.ServiceRegistry() -> void
+Kumiko.Web.ServiceRegistry.TypeScript() -> string!
+override Kumiko.Web.Asset.Equals(object? obj) -> bool
+override Kumiko.Web.Asset.GetHashCode() -> int
+override Kumiko.Web.Asset.ToString() -> string!
+override Kumiko.Web.CallContext.GetHashCode() -> int
+override Kumiko.Web.PageOptions.Equals(object? obj) -> bool
+override Kumiko.Web.PageOptions.GetHashCode() -> int
+override Kumiko.Web.PageOptions.ToString() -> string!
+static Kumiko.Web.Asset.operator !=(Kumiko.Web.Asset? left, Kumiko.Web.Asset? right) -> bool
+static Kumiko.Web.Asset.operator ==(Kumiko.Web.Asset? left, Kumiko.Web.Asset? right) -> bool
+static Kumiko.Web.Asset.Text(string! path, string! text, string? mime = null) -> Kumiko.Web.Asset!
+static Kumiko.Web.CallContext.operator !=(Kumiko.Web.CallContext left, Kumiko.Web.CallContext right) -> bool
+static Kumiko.Web.CallContext.operator ==(Kumiko.Web.CallContext left, Kumiko.Web.CallContext right) -> bool
+static Kumiko.Web.PageOptions.operator !=(Kumiko.Web.PageOptions? left, Kumiko.Web.PageOptions? right) -> bool
+static Kumiko.Web.PageOptions.operator ==(Kumiko.Web.PageOptions? left, Kumiko.Web.PageOptions? right) -> bool
+~override Kumiko.Web.CallContext.Equals(object obj) -> bool
+~override Kumiko.Web.CallContext.ToString() -> string
