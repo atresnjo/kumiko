@@ -173,7 +173,7 @@ internal static class HistoryChecks
     }
 
     /// <summary>The GitHub REST API for one pull request, and a gh script that names two accounts.</summary>
-    sealed class FakeGitHub : IDisposable
+    internal sealed class FakeGitHub : IDisposable
     {
         readonly HttpListener listener = new();
         readonly string folder = Path.Combine(Path.GetTempPath(), "kumiko-diff-e2e", "github-" + Environment.ProcessId);
@@ -182,6 +182,8 @@ internal static class HistoryChecks
         public ManualResetEventSlim Hold { get; } = new(true);
         public string Updated { get; set; } = "2026-11-07T12:00:00Z";
         public ConcurrentQueue<(string Token, string Path)> Fetches { get; } = new();
+        /// <summary>Lists of a repository's open pull requests, by path.</summary>
+        public ConcurrentQueue<string> Listings { get; } = new();
         public string Api
         {
             get;
@@ -258,6 +260,11 @@ internal static class HistoryChecks
                 var widgets = Issue("acme/widgets", 7, "Add widget sorting", "alice", false, Updated);
                 return (200, token == "token-alice" ? $$"""{"items":[{{widgets}}]}""" : $$"""{"items":[{{widgets}},{{Issue("acme/gears", 3, "Fix gear ratio", "carol", true, "2026-11-07T12:00:00Z")}}]}""");
             }
+            if (path.StartsWith("/repos/acme/widgets/pulls?", StringComparison.Ordinal))
+            {
+                Listings.Enqueue(path);
+                return (200, $"[{Pull(7, "Add widget sorting", "alice", false)},{Pull(9, "Document the widget API", "dave", true)}]");
+            }
             Fetches.Enqueue((token, path));
             Hold.Wait(TimeSpan.FromSeconds(20));
             return path switch
@@ -278,6 +285,11 @@ internal static class HistoryChecks
                 _ => (404, """{"message":"Not Found"}""")
             };
         }
+
+        /// <summary>A pull request as a repository's list of them describes it.</summary>
+        string Pull(int number, string title, string author, bool draft) =>
+            $"{{\"number\":{number},\"title\":\"{title}\",\"draft\":{(draft ? "true" : "false")},\"user\":{{\"login\":\"{author}\"}}," +
+            $"\"html_url\":\"https://github.com/acme/widgets/pull/{number}\",\"updated_at\":\"{Updated}\"}}";
 
         static string Issue(string repository, int number, string title, string author, bool draft, string updated) =>
             $"{{\"number\":{number},\"title\":\"{title}\",\"draft\":{(draft ? "true" : "false")},\"user\":{{\"login\":\"{author}\"}}," +

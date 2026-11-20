@@ -25,6 +25,8 @@ if (all || Only("projects"))
     QuickOpenChecks.Run(h);
 if (all || Only("history"))
     HistoryChecks.Run(h);
+if (all || Only("context"))
+    RepoContextChecks.Run(h);
 if (all || Only("perf"))
     PerfChecks.Run(h);
 

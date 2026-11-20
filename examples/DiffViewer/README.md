@@ -72,6 +72,15 @@ launch while a fresh scan runs the first time it opens (or on "Rescan Projects")
 State lives in `~/.kumiko-diff/` (`DIFF_HOME` or `--state-dir=PATH`); add scan roots
 with `DIFF_ROOTS` (platform path separator).
 
+## The open repository
+
+The palette starts with the open repository: its worktrees as Git lists them (also on an
+SSH host), the current one marked, then its open pull requests on GitHub, before recent
+projects and other pull requests. The repository is found from its `origin` remote
+(`git@host:owner/repo.git`, `https://host/owner/repo`, `ssh://…`); an SSH alias such as
+`git@github-work:owner/repo.git` resolves through `~/.ssh/config`. Its pull requests are read
+with the gh account of that host and open like any other, so `#` lists them first too.
+
 ## Pull requests and commits
 
 With [gh](https://cli.github.com) installed, the palette also lists the open pull

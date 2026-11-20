@@ -175,6 +175,19 @@ Pull requests and commits
   unchanged; an updated one keeps its earlier load.
 - Tests use the user's gh accounts, tokens or the network.
 
+Open repository
+
+- The palette does not start with the open repository's worktrees (local or
+  on an SSH host, from Git, the current one marked) and then its open pull
+  requests from GitHub, before recent projects and other pull requests; or a
+  pull request of the open repository is listed twice.
+- The repository is not found from its remote: `git@host:owner/repo.git`,
+  `https://host/owner/repo`, `ssh://git@host:22/owner/repo.git`, or an SSH
+  alias whose HostName is the GitHub host (`git@github-work:owner/repo.git`).
+  Local paths and `file://` remotes are taken for GitHub repositories.
+- A repository on a host without a gh account shows an error, or one GitHub
+  refuses shows none.
+
 Text selection
 
 - Dragging over characters of a line does not select exactly them, or selects

@@ -57,6 +57,15 @@ public static class SshConfig
         return hosts.ToImmutable();
     }
 
+    /// <summary>The HostName the config gives an alias, such as github.com for a second GitHub account's alias; null when none.</summary>
+    public static string? HostName(string home, string alias)
+    {
+        var blocks = new List<Block>();
+        Read(Path.Combine(home, ".ssh", "config"), home, blocks, 0);
+        return blocks.Where(b => b.Aliases.Contains(alias, StringComparer.OrdinalIgnoreCase)).Select(b => b.HostName)
+            .FirstOrDefault(v => v is not null)?.Replace("%h", alias, StringComparison.Ordinal);
+    }
+
     static void Read(string file, string home, List<Block> blocks, int depth)
     {
         string[] lines;

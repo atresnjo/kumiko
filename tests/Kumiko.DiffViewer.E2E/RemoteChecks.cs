@@ -134,6 +134,10 @@ internal static class RemoteChecks
         var staged = Load(remote with { Kind = SourceKind.Staged });
         h.Check(Same(staged, Load(new(SourceKind.Staged, repo.Root, "HEAD"))) && staged.Files.Length == 2, "remote staged changes match local ones");
         repo.Commit("second");
+        repo.Git("remote", "add", "origin", "https://github.com/acme/billing.git");
+        var (worktrees, url) = RepoInfo.Read(new Place(remotePath, "box"), CancellationToken.None).GetAwaiter().GetResult();
+        h.Check(worktrees is [{ Main: true, Branch: "main" } main] && main.Path == repo.Root && url == "https://github.com/acme/billing.git",
+            "a remote checkout's worktrees and remote are read over SSH");
         var commits = Commits.Log(new Place(remotePath, "box"), CancellationToken.None).GetAwaiter().GetResult();
         h.Check(commits.Select(c => c.Subject).SequenceEqual(["second", "initial"]), "commits are read from the remote repository");
         var range = Load(new(SourceKind.Revisions, remotePath, commits[1].Sha, commits[0].Sha) { Host = "box" });

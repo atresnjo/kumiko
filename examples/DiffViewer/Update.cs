@@ -86,6 +86,10 @@ internal sealed partial class DiffApp : IKumiko<Model, Msg>
         Msg.CloseOverlay => model with { Finder = null, Search = null, Help = false, Quick = null },
         Msg.CommitsFound commits => CommitsFound(model, commits),
         Msg.HostsFound hosts => Requery(model with { SshHosts = hosts.Hosts }),
+        Msg.ContextFound found when found.Project == model.ProjectId => Requery(model with
+        {
+            Context = new(found.Project, found.Worktrees, found.Remote, found.Pulls, found.Error, false)
+        }),
         // Results move the highlight to the first row: a repository, not the bare path typed so far.
         Msg.HostReposFound found when model.Quick is { } quick => Quick(model with
         {
@@ -110,7 +114,7 @@ internal sealed partial class DiffApp : IKumiko<Model, Msg>
             Loading = true
         },
         Msg.FinderStep or Msg.FinderAccept or Msg.SearchStep or Msg.SelectionStep or Msg.TextDrag or Msg.TextRelease => model,
-        Msg.QuickQuery or Msg.QuickStep or Msg.QuickAccept or Msg.OpenProject or Msg.Saved or Msg.PickHost or Msg.SearchHost or Msg.HostReposFound => model,
+        Msg.QuickQuery or Msg.QuickStep or Msg.QuickAccept or Msg.OpenProject or Msg.Saved or Msg.PickHost or Msg.SearchHost or Msg.HostReposFound or Msg.ContextFound => model,
         Msg.OpenQuick or Msg.RefreshPulls or Msg.PullsFound or Msg.PullsExpired => model,
         Msg.Navigate navigate => model with { Navigation = model.Navigation.Move(navigate.Request, "app") },
         _ => model

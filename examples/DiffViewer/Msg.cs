@@ -72,6 +72,8 @@ internal abstract partial record Msg
     public sealed record PullPrefetched(string Key, DiffDocument? Document) : Msg;
     public sealed record CommitsFound(string Project, ImmutableArray<Commit> Commits) : Msg;
     public sealed record HostsFound(ImmutableArray<SshHost> Hosts) : Msg;
+    /// <summary>The open repository's worktrees, remote and pull requests were read; Project names the repository.</summary>
+    public sealed record ContextFound(string Project, ImmutableArray<Worktree> Worktrees, GitRemote? Remote, ImmutableArray<PullRequest> Pulls, string? Error) : Msg;
     /// <summary>Fills the palette's query with <c>host:~/</c>, keeping it open for the path.</summary>
     public sealed record PickHost(string Alias) : Msg;
     /// <summary>A search for repositories on a host finished; an error says why it failed.</summary>

@@ -97,6 +97,13 @@ internal sealed record PullPrefetch(DiffDocument? Document, bool Failed);
 /// <summary>Zen mode's file, by path so it survives reloads, and the view mode to return to.</summary>
 internal sealed record ZenView(string Path, ViewMode Return);
 
+/// <summary>
+/// The open repository as the palette shows it on top: its worktrees and remote from Git, and that remote's open pull
+/// requests from GitHub. Project is the ProjectId it describes; a reload keeps the previous one listed until it arrives.
+/// </summary>
+internal sealed record RepoContext(string Project, ImmutableArray<Worktree> Worktrees, GitRemote? Remote, ImmutableArray<PullRequest> Pulls,
+    string? Error, bool Loading);
+
 /// <summary>The Git checkouts found on a host while the palette shows it: searching, found, or the reason it failed.</summary>
 internal sealed record RemoteRepos(ImmutableArray<string> Paths, bool Loading, string? Error);
 
@@ -194,6 +201,11 @@ internal sealed record Model
     }
     /// <summary>The SSH hosts, read again each time the palette opens.</summary>
     public ImmutableArray<SshHost> SshHosts { get; init; } = [];
+    /// <summary>The open repository's worktrees and pull requests, read each time the palette opens.</summary>
+    public RepoContext? Context
+    {
+        get; init;
+    }
     /// <summary>Repositories found on each host typed in the palette, searched once each time the palette opens.</summary>
     public ImmutableDictionary<string, RemoteRepos> HostRepos { get; init; } = ImmutableDictionary<string, RemoteRepos>.Empty.WithComparers(StringComparer.Ordinal);
     /// <summary>Where projects are cached and recent ones saved; null keeps the palette to the open project.</summary>

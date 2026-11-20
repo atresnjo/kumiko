@@ -78,6 +78,36 @@ public static class GitHub
         return ([.. pulls], errors.Length == 0 ? null : string.Join("; ", errors));
     }
 
+    /// <summary>
+    /// The open pull requests of one repository, newest first, read with the first account of its host that may.
+    /// A host without a gh account gives none and no error; an alias without a dot is taken for github.com.
+    /// </summary>
+    public static async Task<(ImmutableArray<PullRequest> Pulls, string? Error)> RepositoryPulls(GitHubConfig config, GitRemote remote, CancellationToken token)
+    {
+        var accounts = await Accounts(config, token).ConfigureAwait(false);
+        var usable = accounts.Where(a => a.Host.Equals(remote.Host, StringComparison.OrdinalIgnoreCase)).ToArray();
+        if (usable.Length == 0 && !remote.Host.Contains('.', StringComparison.Ordinal))
+            usable = [.. accounts.Where(a => a.Host == "github.com")];
+        string? failure = null;
+        foreach (var account in usable)
+        {
+            try
+            {
+                using var json = await Get(account, await Token(account, token).ConfigureAwait(false),
+                    $"repos/{remote.Repository}/pulls?state=open&sort=updated&direction=desc&per_page=50", token).ConfigureAwait(false);
+                return ([.. json.RootElement.EnumerateArray().Select(item => new PullRequest(account, remote.Repository, item.GetProperty("number").GetInt32(),
+                    item.GetProperty("title").GetString() ?? "", item.GetProperty("user").GetProperty("login").GetString() ?? "",
+                    item.TryGetProperty("draft", out var draft) && draft.ValueKind == JsonValueKind.True, item.GetProperty("updated_at").GetDateTimeOffset(),
+                    item.GetProperty("html_url").GetString() ?? ""))], null);
+            }
+            catch (Exception error) when (error is IOException or HttpRequestException or JsonException or KeyNotFoundException or InvalidOperationException)
+            {
+                failure = $"{remote.Repository}: {error.Message}";
+            }
+        }
+        return ([], failure);
+    }
+
     static PullRequest Pull(GitHubAccount account, JsonElement item)
     {
         var repository = item.GetProperty("repository_url").GetString()!;

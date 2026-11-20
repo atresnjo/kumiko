@@ -39,12 +39,14 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
         IEnumerable<QuickItem> pool = scope switch
         {
             '>' => Commands(model),
-            '#' => PullItems(model),
+            '#' => [.. RepoPullItems(model), .. PullItems(model)],
             '@' => CommitItems(model),
-            _ when text.Length == 0 => [.. ProjectItems(model, true), .. PullItems(model), .. CommitItems(model).Take(RecentCommits),
+            // The open repository first: its worktrees, then its pull requests, then recent projects and the rest.
+            _ when text.Length == 0 => [.. ProjectItems(model, true).Where(i => i.Group == Worktrees), .. RepoPullItems(model),
+                .. ProjectItems(model, true).Where(i => i.Group != Worktrees), .. PullItems(model), .. CommitItems(model).Take(RecentCommits),
                 .. HostItems(model), .. ProjectItems(model, false), .. Commands(model)],
-            _ => [.. PathItem(model, text), .. ProjectItems(model, true), .. HostItems(model), .. ProjectItems(model, false), .. PullItems(model),
-                .. CommitItems(model), .. Commands(model)]
+            _ => [.. PathItem(model, text), .. ProjectItems(model, true), .. RepoPullItems(model), .. HostItems(model), .. ProjectItems(model, false),
+                .. PullItems(model), .. CommitItems(model), .. Commands(model)]
         };
         if (text.Length == 0)
             return [.. pool.Take(Limit)];
@@ -94,13 +96,42 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
         var current = model.ProjectId;
         var family = model.Projects.FirstOrDefault(p => p.Path == current)?.Family ?? current;
         var siblings = model.Projects.Where(p => p.Family == family).ToImmutableArray();
-        var worktrees = siblings.Length > 1 ? siblings.Select(p => Item(model, p, "Worktrees")) : [];
+        // Git's own list once read (it covers remote checkouts too), else the worktrees discovery found.
+        var listed = ContextWorktrees(model);
+        var worktrees = listed.Length > 1 ? listed.Select(p => Item(model, p, Worktrees))
+            : siblings.Length > 1 ? siblings.Select(p => Item(model, p, Worktrees)) : [];
         var recent = model.Recent.Select(path => Item(model, model.Projects.FirstOrDefault(p => p.Path == path) ?? new(path, Path.GetFileName(path), ""), "Recent"));
         var shown = worktrees.Concat(recent).DistinctBy(item => item.Id, StringComparer.Ordinal).ToImmutableArray();
         if (near)
             return shown;
-        var listed = shown.Select(item => item.Id).ToImmutableHashSet(StringComparer.Ordinal);
-        return model.Projects.Select(p => Item(model, p, "Projects")).Where(item => !listed.Contains(item.Id));
+        var ids = shown.Select(item => item.Id).ToImmutableHashSet(StringComparer.Ordinal);
+        return model.Projects.Select(p => Item(model, p, "Projects")).Where(item => !ids.Contains(item.Id));
+    }
+
+    const string Worktrees = "Worktrees";
+
+    /// <summary>The open repository's worktrees as Git lists them, main first, named as discovery names them.</summary>
+    static ImmutableArray<Project> ContextWorktrees(Model model)
+    {
+        if (model.Context is not { } context || context.Project != model.ProjectId || context.Worktrees.IsEmpty)
+            return [];
+        var host = model.Request.Host;
+        string Id(string path) => host is null ? path : Remote.Format(host, path);
+        var main = context.Worktrees[0];
+        var name = Path.GetFileName(main.Path);
+        return [.. context.Worktrees.OrderBy(w => !w.Main).ThenBy(w => Path.GetFileName(w.Path), StringComparer.OrdinalIgnoreCase)
+            .Select(w => new Project(Id(w.Path), w.Main ? name : name + "/" + Path.GetFileName(w.Path), w.Branch, w.Main ? null : Id(main.Path)))];
+    }
+
+    /// <summary>The open repository's pull requests on GitHub; a failed read shows its reason.</summary>
+    static IEnumerable<QuickItem> RepoPullItems(Model model)
+    {
+        if (model.Context is not { Remote: { } remote } context || context.Project != model.ProjectId)
+            return [];
+        var group = "Pull requests · " + remote.Name;
+        var error = context.Error is { } reason ? [new QuickItem("repo-pulls:error", "Pull requests of " + remote.Repository + " unavailable", reason, group,
+            Hugeicons.Alert02, new Msg.OpenQuick("#"))] : Array.Empty<QuickItem>();
+        return error.Concat(context.Pulls.Select(pull => PullItem(model, pull, group, false)));
     }
 
     /// <summary>Open pull requests of the gh accounts; a failed search shows its reason as a row that retries.</summary>
@@ -109,14 +140,20 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
         const string group = "Pull requests";
         if (model.Pulls.Error is { } error)
             yield return new("pulls:error", "Pull requests unavailable", error, group, Hugeicons.Alert02, new Msg.RefreshPulls());
+        // The open repository's pull requests are listed above, on their own.
+        var above = RepoPullItems(model).Select(item => item.Id).ToImmutableHashSet(StringComparer.Ordinal);
         foreach (var pull in model.Pulls.Items)
-        {
-            var current = model.Request.Pull?.Url == pull.Url;
-            var icon = current ? Hugeicons.Tick02 : pull.Draft ? Hugeicons.GitPullRequestDraft : Hugeicons.GitPullRequest;
-            var detail = $"{pull.Repository} · {pull.Author}{(pull.Draft ? " · draft" : "")}";
-            yield return new("pull:" + pull.Url, pull.Title, current ? "current · " + detail : detail, group, icon, new Msg.OpenPull(pull),
-                "#" + pull.Number.ToString(System.Globalization.CultureInfo.InvariantCulture));
-        }
+            if (!above.Contains("pull:" + pull.Url))
+                yield return PullItem(model, pull, group, true);
+    }
+
+    static QuickItem PullItem(Model model, PullRequest pull, string group, bool repository)
+    {
+        var current = model.Request.Pull?.Url == pull.Url;
+        var icon = current ? Hugeicons.Tick02 : pull.Draft ? Hugeicons.GitPullRequestDraft : Hugeicons.GitPullRequest;
+        var detail = $"{(repository ? pull.Repository + " · " : "")}{pull.Author}{(pull.Draft ? " · draft" : "")}";
+        return new("pull:" + pull.Url, pull.Title, current ? "current · " + detail : detail, group, icon, new Msg.OpenPull(pull),
+            "#" + pull.Number.ToString(System.Globalization.CultureInfo.InvariantCulture));
     }
 
     /// <summary>The SSH hosts of ~/.ssh/config; choosing one fills in <c>host:~/</c> for the path.</summary>
