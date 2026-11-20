@@ -42,8 +42,10 @@ public static class Loader
 
     static async Task<(string, string, string, List<FilePair>)> GitPairs(DiffRequest request, CancellationToken token)
     {
-        var root = (await Git.Text(request.Path, token, "rev-parse", "--show-toplevel").ConfigureAwait(false)).Trim();
-        var hasHead = await Exists(root, "HEAD", token).ConfigureAwait(false);
+        var host = request.Host;
+        var root = (await Git.Text(new Place(request.Path, host), token, "rev-parse", "--show-toplevel").ConfigureAwait(false)).Trim();
+        var at = new Place(root, host);
+        var hasHead = await Exists(at, "HEAD", token).ConfigureAwait(false);
         var from = request.Base ?? "HEAD";
         if (from == "HEAD" && !hasHead)
             from = EmptyTree;
@@ -65,7 +67,7 @@ public static class Loader
                 break;
         }
         arguments.Add("--");
-        var fields = Git.Fields(await Git.Run(root, token, [.. arguments]).ConfigureAwait(false));
+        var fields = Git.Fields(await Git.Run(at, token, [.. arguments]).ConfigureAwait(false));
         var changes = new List<(FileStatus Status, string Path, string? OldPath)>();
         for (int i = 0; i < fields.Length; i++)
         {
@@ -87,13 +89,18 @@ public static class Loader
         }
         if (request.Kind == SourceKind.WorkingTree)
         {
-            var untracked = Git.Fields(await Git.Run(root, token, "ls-files", "--others", "--exclude-standard", "-z").ConfigureAwait(false));
+            var untracked = Git.Fields(await Git.Run(at, token, "ls-files", "--others", "--exclude-standard", "-z").ConfigureAwait(false));
             foreach (var path in untracked)
                 changes.Add((FileStatus.Added, path, null));
         }
 
+        // A remote working tree's files arrive in one stream, read while the old blobs are.
+        var remoteFiles = host is not null && request.Kind == SourceKind.WorkingTree
+            ? Ssh.ReadFiles(at, [.. changes.Where(c => c.Status != FileStatus.Deleted).Select(c => c.Path).Distinct(StringComparer.Ordinal)], token)
+            : null;
         var pairs = new List<FilePair>(changes.Count);
-        await using (var blobs = new BlobReader(root))
+        Dictionary<string, byte[]>? working = null;
+        await using (var blobs = new BlobReader(at))
         {
             foreach (var (status, path, oldPath) in changes)
             {
@@ -107,6 +114,11 @@ public static class Loader
                     next = TextFile.Decode(await blobs.Read(":" + path, token).ConfigureAwait(false) ?? []);
                 else if (to is not null)
                     next = TextFile.Decode(await blobs.Read($"{to}:{path}", token).ConfigureAwait(false) ?? []);
+                else if (remoteFiles is not null)
+                {
+                    working ??= await remoteFiles.ConfigureAwait(false);
+                    next = working.TryGetValue(path, out var bytes) ? TextFile.Decode(bytes) : TextFile.Empty;
+                }
                 else
                     next = ReadWorking(Path.Combine(root, path));
                 pairs.Add(new(path, oldPath, status, old, next));
@@ -120,14 +132,16 @@ public static class Loader
             SourceKind.Revisions => $"{request.Base} → {request.Target}",
             _ => from == "HEAD" || from == EmptyTree ? "Working tree" : $"Working tree against {from}"
         };
+        if (host is not null)
+            detail += " on " + Remote.Name(host);
         return (name, detail, root, pairs);
     }
 
-    static async Task<bool> Exists(string root, string revision, CancellationToken token)
+    static async Task<bool> Exists(Place at, string revision, CancellationToken token)
     {
         try
         {
-            await Git.Run(root, token, "rev-parse", "--verify", "--quiet", revision + "^{commit}").ConfigureAwait(false);
+            await Git.Run(at, token, "rev-parse", "--verify", "--quiet", revision + "^{commit}").ConfigureAwait(false);
             return true;
         }
         catch (IOException)

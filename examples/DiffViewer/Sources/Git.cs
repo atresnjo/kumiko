@@ -3,7 +3,10 @@ using System.Text;
 
 namespace DiffViewer.Sources;
 
-/// <summary>Runs Git with an argument list (never a shell), without prompts, pagers or optional locks.</summary>
+/// <summary>
+/// Runs Git with an argument list, without prompts, pagers or optional locks. Locally no shell is involved; on a remote
+/// host every argument is quoted for its shell.
+/// </summary>
 public static class Git
 {
     static readonly string[] Fallbacks = ["/opt/homebrew/bin/git", "/usr/local/bin/git", "/usr/bin/git"];
@@ -24,11 +27,19 @@ public static class Git
         return Fallbacks.FirstOrDefault(File.Exists) ?? "git";
     }
 
-    public static ProcessStartInfo Start(string directory, IEnumerable<string> arguments)
+    /// <summary>Git in a local folder, or on a remote host through ssh with the same environment.</summary>
+    public static ProcessStartInfo Start(Place at, IEnumerable<string> arguments)
     {
+        if (at.Host is { } host)
+        {
+            // A non-interactive login may lack Homebrew's folders in PATH.
+            var script = "PATH=\"$PATH:/usr/local/bin:/opt/homebrew/bin\"; export PATH GIT_TERMINAL_PROMPT=0 GIT_PAGER=cat GIT_OPTIONAL_LOCKS=0 LC_ALL=C; " +
+                "exec git -C " + Remote.QuotePath(at.Path) + string.Concat(arguments.Select(argument => " " + Remote.Quote(argument)));
+            return Ssh.Start(host, script);
+        }
         var start = new ProcessStartInfo(Executable)
         {
-            WorkingDirectory = directory,
+            WorkingDirectory = at.Path,
             UseShellExecute = false,
             RedirectStandardInput = true,
             RedirectStandardOutput = true,
@@ -45,9 +56,9 @@ public static class Git
     }
 
     /// <summary>Runs Git to completion and returns standard output as bytes; a failure throws its stderr.</summary>
-    public static async Task<byte[]> Run(string directory, CancellationToken token, params string[] arguments)
+    public static async Task<byte[]> Run(Place at, CancellationToken token, params string[] arguments)
     {
-        using var process = Process.Start(Start(directory, arguments)) ?? throw new IOException("Could not start git.");
+        using var process = Process.Start(Start(at, arguments)) ?? throw new IOException(at.Host is null ? "Could not start git." : "Could not start ssh.");
         process.StandardInput.Close();
         using var cancel = token.Register(() => Kill(process));
         using var output = new MemoryStream();
@@ -55,14 +66,17 @@ public static class Git
         var error = process.StandardError.ReadToEndAsync(token);
         await process.WaitForExitAsync(token).ConfigureAwait(false);
         await copy.ConfigureAwait(false);
-        var message = await error.ConfigureAwait(false);
+        // Over ssh, standard error is only read for a failure: a shared connection may hold it open.
+        if (at.Host is not null && process.ExitCode == 0)
+            return output.ToArray();
+        var message = at.Host is null ? await error.ConfigureAwait(false) : await Ssh.Errors(error).ConfigureAwait(false);
         if (process.ExitCode != 0)
             throw new IOException(message.Trim().Length > 0 ? message.Trim() : $"git {arguments.FirstOrDefault()} exited with {process.ExitCode}.");
         return output.ToArray();
     }
 
-    public static async Task<string> Text(string directory, CancellationToken token, params string[] arguments) =>
-        Encoding.UTF8.GetString(await Run(directory, token, arguments).ConfigureAwait(false));
+    public static async Task<string> Text(Place at, CancellationToken token, params string[] arguments) =>
+        Encoding.UTF8.GetString(await Run(at, token, arguments).ConfigureAwait(false));
 
     internal static void Kill(Process process)
     {
@@ -95,9 +109,9 @@ public sealed class BlobReader : IAsyncDisposable
     readonly StreamWriter input;
     readonly byte[] header = new byte[512];
 
-    public BlobReader(string directory)
+    public BlobReader(Place at)
     {
-        var start = Git.Start(directory, ["cat-file", "--batch"]);
+        var start = Git.Start(at, ["cat-file", "--batch"]);
         process = Process.Start(start) ?? throw new IOException("Could not start git cat-file.");
         input = process.StandardInput;
         input.AutoFlush = false;

@@ -207,6 +207,10 @@ internal sealed record Model
     }
     /// <summary>The open repository's top folder once loaded, otherwise the requested path.</summary>
     public string ProjectPath => Document.Root.Length > 0 && Request.Kind is not (SourceKind.Paths or SourceKind.Demo or SourceKind.PullRequest) ? Document.Root : Request.Path;
+    /// <summary>The open project where it is: ProjectPath on Request.Host, if any.</summary>
+    public Place ProjectPlace => new(ProjectPath, Request.Host);
+    /// <summary>How the palette and the recent list name the open project: its path, or host:path for a remote one.</summary>
+    public string ProjectId => ProjectPlace.Id;
 
     public FileDiff? CursorFile => Cursor >= 0 && Cursor < Layout.Count ? Document.Files[Layout.Rows[Cursor].File] : null;
     public int CursorFileIndex => Cursor >= 0 && Cursor < Layout.Count ? Layout.Rows[Cursor].File : -1;

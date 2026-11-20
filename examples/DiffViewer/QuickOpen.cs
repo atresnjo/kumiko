@@ -43,7 +43,7 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
         };
         if (text.Length == 0)
             return [.. pool.Take(Limit)];
-        if (text.StartsWith('/') || text.StartsWith('~'))
+        if (text.StartsWith('/') || text.StartsWith('~') || Remote.TryParse(text, out _, out _))
             return [.. pool.Take(1)];
         return [.. pool.Select(item => (Item: item, Score: Score(text, item)))
             .Where(r => r.Score >= 0).OrderByDescending(r => r.Score).Take(Limit).Select(r => r.Item)];
@@ -59,9 +59,14 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
         return score < 0 ? score : score + (item.Group == "Recent" ? 25 : 0);
     }
 
-    /// <summary>A typed absolute or home-relative path opens as a project.</summary>
+    /// <summary>A typed absolute or home-relative path, or a remote host:path, opens as a project.</summary>
     static IEnumerable<QuickItem> PathItem(Model model, string text)
     {
+        if (Remote.TryParse(text, out _, out _))
+        {
+            yield return new("path:" + text, "Open " + text, "over SSH", "Open", Hugeicons.CloudServer, new Msg.OpenProject(text));
+            yield break;
+        }
         if (!(text.StartsWith('/') || text.StartsWith('~')))
             yield break;
         var path = text.StartsWith('~') && model.Store is { } store ? store.Home + text[1..] : text;
@@ -74,7 +79,7 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
     /// </summary>
     static IEnumerable<QuickItem> ProjectItems(Model model, bool near)
     {
-        var current = model.ProjectPath;
+        var current = model.ProjectId;
         var family = model.Projects.FirstOrDefault(p => p.Path == current)?.Family ?? current;
         var siblings = model.Projects.Where(p => p.Family == family).ToImmutableArray();
         var worktrees = siblings.Length > 1 ? siblings.Select(p => Item(model, p, "Worktrees")) : [];
@@ -105,7 +110,7 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
     /// <summary>The open project's newest commits; the one being shown is marked.</summary>
     static IEnumerable<QuickItem> CommitItems(Model model)
     {
-        if (model.CommitsOf != model.ProjectPath)
+        if (model.CommitsOf != model.ProjectId)
             yield break;
         foreach (var commit in model.Commits)
         {
@@ -117,9 +122,10 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
 
     static QuickItem Item(Model model, Project project, string group)
     {
-        var current = project.Path == model.ProjectPath;
+        var current = project.Path == model.ProjectId;
         var path = model.Store?.Tilde(project.Path) ?? project.Path;
-        var icon = current ? Hugeicons.Tick02 : project.Worktree ? Hugeicons.GitFork : Hugeicons.FolderGit;
+        var remote = Remote.TryParse(project.Path, out _, out _);
+        var icon = current ? Hugeicons.Tick02 : remote ? Hugeicons.CloudServer : project.Worktree ? Hugeicons.GitFork : Hugeicons.FolderGit;
         return new("project:" + project.Path, project.Name, current ? "current · " + path : path, group, icon, new Msg.OpenProject(project.Path), project.Branch);
     }
 

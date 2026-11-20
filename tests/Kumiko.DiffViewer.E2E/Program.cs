@@ -13,6 +13,8 @@ if (all || Only("lexer"))
     LexerChecks.Run(h.Check, h.Timing);
 if (all || Only("sources"))
     SourceChecks.Run(h);
+if (all || Only("remote"))
+    RemoteChecks.Run(h);
 if (all || Only("view"))
     ViewChecks.Run(h);
 if (all || Only("selection"))

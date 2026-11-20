@@ -56,6 +56,25 @@ Sources
   line's text, number or colour (a block comment opened above a hunk must still
   colour the hunk's lines as comment).
 
+Remote checkouts (SSH)
+
+- `host:/path`, `host:~/path`, `ssh://user@host:port/path` or `--ssh=HOST` with
+  `--repo=` / a path do not select a remote checkout, or a revision argument such
+  as `main..feature` or `HEAD~1` is taken for a host.
+- A remote working tree, staged change or commit range differs from the same
+  checkout loaded locally: staged, unstaged, untracked, deleted, renamed, binary
+  or non-UTF-8 files, or paths with spaces and Unicode, go missing or change.
+- Any Git call for a remote checkout runs locally, a path is not quoted for the
+  remote shell, `~` is not the remote home, or each working-tree file starts its
+  own SSH session.
+- An unreachable host or missing folder hangs, prompts, or fails without the
+  SSH or Git message. A remote checkout starts a local file watcher.
+- The palette lists a remote checkout's commits from a local repository, marks a
+  local project with the same path as current, or reopens a recent remote
+  checkout as a local folder. Switching to staged changes, a commit or a pull
+  request and back loses the host.
+- Tests reach a real host or the user's SSH configuration.
+
 Viewing and keyboard
 
 - Scrolling builds rows for the whole diff instead of the viewport; a 100k-line

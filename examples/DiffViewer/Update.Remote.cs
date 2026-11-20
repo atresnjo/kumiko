@@ -22,9 +22,10 @@ internal sealed partial class DiffApp
             Help = false,
             Scanning = model.Scanning || !model.Scanned && model.Store is not null
         }, query, 0);
-        var project = next.ProjectPath;
+        var project = next.ProjectId;
+        var place = next.ProjectPlace;
         var commits = next.Request.Kind is SourceKind.Paths or SourceKind.Demo ? Cmd<Msg>.None
-            : Cmd<Msg>.Run("commits", async token => (Msg)new Msg.CommitsFound(project, await Commits.Log(project, token).ConfigureAwait(false)),
+            : Cmd<Msg>.Run("commits", async token => (Msg)new Msg.CommitsFound(project, await Commits.Log(place, token).ConfigureAwait(false)),
                 _ => new Msg.CommitsFound(project, []));
         var (searched, pulls) = next.Pulls is { Loading: false } list && (!list.Loaded || list.Stale) ? FetchPulls(next) : (next, Cmd<Msg>.None);
         return (searched, Cmd<Msg>.Batch(commits, pulls));
@@ -96,7 +97,7 @@ internal sealed partial class DiffApp
         return next.Quick is null ? (next, Cmd<Msg>.None) : FetchPulls(next);
     }
 
-    static Model CommitsFound(Model model, Msg.CommitsFound found) => found.Project != model.ProjectPath ? model : Requery(model with
+    static Model CommitsFound(Model model, Msg.CommitsFound found) => found.Project != model.ProjectId ? model : Requery(model with
     {
         Commits = found.Commits,
         CommitsOf = found.Project
@@ -110,7 +111,8 @@ internal sealed partial class DiffApp
     {
         var opened = Open(model, new(SourceKind.PullRequest, model.ProjectPath)
         {
-            Pull = pull
+            Pull = pull,
+            Host = model.Request.Host
         });
         return opened.Zen is null && model.Prefetched.GetValueOrDefault(PrefetchKey(pull, model.IgnoreWhitespace))?.Document is { } document
             ? Loaded(opened, document) : opened;
@@ -132,6 +134,7 @@ internal sealed partial class DiffApp
             return (model, Cmd<Msg>.None);
         var whitespace = model.IgnoreWhitespace;
         var path = model.ProjectPath;
+        var host = model.Request.Host;
         var wanted = quick.Items.Skip(QuickOpen.FirstVisible(quick.Selected, quick.Items.Length)).Take(QuickOpen.Rows)
             .Select(item => item.Message).OfType<Msg.OpenPull>().Take(PrefetchCount).Select(open => open.Pull)
             .Where(pull => !model.Prefetched.ContainsKey(PrefetchKey(pull, whitespace))).ToImmutableArray();
@@ -142,7 +145,8 @@ internal sealed partial class DiffApp
             var key = PrefetchKey(pull, whitespace);
             var request = new DiffRequest(SourceKind.PullRequest, path)
             {
-                Pull = pull
+                Pull = pull,
+                Host = host
             };
             return Cmd<Msg>.Run("prefetch", async token => (Msg)new Msg.PullPrefetched(key, await Loader.Load(request, whitespace, token).ConfigureAwait(false)),
                 _ => new Msg.PullPrefetched(key, null));
@@ -170,7 +174,8 @@ internal sealed partial class DiffApp
     static Model OpenCommit(Model model, Commit commit) => Open(model, new(SourceKind.Revisions, model.ProjectPath,
         commit.Parent.Length > 0 ? commit.Parent : Loader.EmptyTree, commit.Sha)
     {
-        Title = commit.Subject
+        Title = commit.Subject,
+        Host = model.Request.Host
     });
 
     /// <summary>Rebuilds an open palette's rows after its sources change, keeping the highlighted row.</summary>

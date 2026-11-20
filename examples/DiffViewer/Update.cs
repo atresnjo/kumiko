@@ -98,7 +98,7 @@ internal sealed partial class DiffApp : IKumiko<Model, Msg>
         Msg.Rescan => model with { Scanning = model.Store is not null, Scanned = false },
         Msg.SetSource source => model with
         {
-            Request = new(source.Kind, model.ProjectPath, "HEAD"),
+            Request = new(source.Kind, model.ProjectPath, "HEAD") { Host = model.Request.Host },
             Generation = model.Generation + 1,
             Loading = true
         },

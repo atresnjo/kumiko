@@ -24,6 +24,30 @@ artifacts/aot/diff/DiffViewer --repo=/path/to/repo
 
 A first argument naming an existing folder is the repository (`-- ~/code/app main`).
 
+## Remote checkouts over SSH
+
+A checkout on another machine opens the same way, read with your `ssh` client: Git runs
+on the host, so nothing is cloned or mounted locally.
+
+```sh
+dotnet run --project examples/DiffViewer -c Release -- devbox:~/code/app            # working tree on devbox
+dotnet run --project examples/DiffViewer -c Release -- me@devbox:/srv/app main..feature
+dotnet run --project examples/DiffViewer -c Release -- ssh://me@devbox:2222/srv/app --staged
+dotnet run --project examples/DiffViewer -c Release -- --ssh=devbox --repo=code/app  # relative to the remote home
+```
+
+The host is anything `ssh` accepts, including aliases from `~/.ssh/config`. It must log
+in without prompts (a key or an agent; the host already in `known_hosts`), and needs Git,
+`sh` and `tar`. Each Git call is one quoted `sh -c` script; the changed working-tree files
+arrive in one `tar` stream. A load's calls share one connection, kept for a minute in
+`/tmp/kumiko-diff-$USER` (or `$XDG_RUNTIME_DIR`), so reloading opens no new login.
+`DIFF_SSH` names another client, such as a wrapper adding `-i` or `-J` options.
+
+Remote checkouts are remembered with their host in the palette's recent list, and typing
+`host:/path` or `host:~/path` in `⌘K` opens one. Staged changes, commits, pull requests
+and "Show Working Tree Changes" stay on that host. The disk is not watched remotely:
+press `r` to reload.
+
 ## Projects and worktrees
 
 `⌘K` (or `⌘O`, or the folder button) opens a palette of projects, after
@@ -123,7 +147,7 @@ cursor, a file header to fold it, or a sidebar entry to jump to its file.
   Myers fallback, slider/indent heuristics and a hard work budget, plus word-level
   emphasis for paired lines. 100k lines with 1000 edits diff in about 11 ms; two
   unrelated 200k-line files in about 45 ms.
-- **Loading** (`Sources/`): Git runs with argument lists, never a shell; every old
+- **Loading** (`Sources/`): Git runs with argument lists, never a local shell; every old
   blob comes through one `git cat-file --batch` process. Files are diffed and
   highlighted in parallel on worker threads. Whole files feed the diff and the
   highlighter, then only shown lines keep their text and colours, so memory follows

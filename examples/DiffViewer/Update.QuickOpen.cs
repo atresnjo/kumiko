@@ -50,8 +50,9 @@ internal sealed partial class DiffApp
     /// Replaces the diff with a repository's working tree. The new generation cancels the previous load and its
     /// result is ignored; folds, search and the cursor belong to the old project and are dropped.
     /// </summary>
-    static Model OpenProject(Model model, string path) =>
-        Open(model, new(SourceKind.WorkingTree, Path.TrimEndingDirectorySeparator(Path.GetFullPath(path)), "HEAD"));
+    static Model OpenProject(Model model, string path) => Remote.TryParse(path, out var host, out var remote)
+        ? Open(model, new(SourceKind.WorkingTree, remote.Length > 1 ? remote.TrimEnd('/') : remote, "HEAD") { Host = host })
+        : Open(model, new(SourceKind.WorkingTree, Path.TrimEndingDirectorySeparator(Path.GetFullPath(path)), "HEAD"));
 
     /// <summary>Replaces the diff with another request, as opening a project, pull request or commit does.</summary>
     static Model Open(Model model, DiffRequest request)
@@ -79,7 +80,7 @@ internal sealed partial class DiffApp
     {
         if (model.Request.Kind is SourceKind.Paths or SourceKind.Demo || model.Document.Root.Length == 0 || model.Store is not { } store)
             return (model, Cmd<Msg>.None);
-        var root = model.Document.Root;
+        var root = new Place(model.Document.Root, model.Request.Host).Id;
         if (model.Recent.FirstOrDefault() == root)
             return (model, Cmd<Msg>.None);
         ImmutableArray<string> recent = [root, .. model.Recent.Where(p => p != root).Take(ProjectStore.RecentLimit - 1)];

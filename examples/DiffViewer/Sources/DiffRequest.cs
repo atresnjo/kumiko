@@ -16,10 +16,19 @@ public enum SourceKind : byte
     PullRequest
 }
 
-/// <summary>What to compare. Path is the repository (or left path); Target is the right path for Paths.</summary>
+/// <summary>
+/// What to compare. Path is the repository (or left path); Target is the right path for Paths. With a Host, Path is
+/// a checkout on that machine, read over ssh.
+/// </summary>
 public sealed record DiffRequest(SourceKind Kind, string Path, string? Base = null, string? Target = null)
 {
-    public bool Watches => Kind is SourceKind.WorkingTree or SourceKind.Staged or SourceKind.Paths;
+    /// <summary>The ssh destination of a remote checkout: an alias, user@host or ssh://user@host:port.</summary>
+    public string? Host
+    {
+        get; init;
+    }
+    /// <summary>Local working trees and folders are watched; a remote checkout reloads on request.</summary>
+    public bool Watches => Host is null && Kind is SourceKind.WorkingTree or SourceKind.Staged or SourceKind.Paths;
     /// <summary>The pull request a PullRequest request shows.</summary>
     public PullRequest? Pull
     {
