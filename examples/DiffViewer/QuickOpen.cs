@@ -53,8 +53,12 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
             return [.. HostRecents(model, host, path, text), .. HostRepositories(model, host, path, text), .. pool.Take(1)];
         if (text.StartsWith('/') || text.StartsWith('~'))
             return [.. pool.Take(1)];
-        return [.. pool.Select(item => (Item: item, Score: Score(text, item)))
-            .Where(r => r.Score >= 0).OrderByDescending(r => r.Score).Take(Limit).Select(r => r.Item)];
+        // Matches stay in their groups, so each shows under its heading: groups by their best match, rows by score.
+        // The best match overall stays first, for Enter.
+        return [.. pool.Select(item => (Item: item, Score: Score(text, item))).Where(r => r.Score >= 0)
+            .GroupBy(r => r.Item.Group, StringComparer.Ordinal)
+            .Select((group, order) => (Best: group.Max(r => r.Score), Order: order, Rows: group.OrderByDescending(r => r.Score)))
+            .OrderByDescending(g => g.Best).ThenBy(g => g.Order).SelectMany(g => g.Rows).Take(Limit).Select(r => r.Item)];
     }
 
     static double Score(string query, QuickItem item)
@@ -72,7 +76,7 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
     {
         if (Remote.TryParse(text, out _, out _))
         {
-            yield return new("path:" + text, "Open " + text, "over SSH", "Open", Hugeicons.CloudServer, new Msg.OpenProject(text));
+            yield return new("path:" + text, "Open " + text, "over SSH", "Open", Hugeicons.FolderCloud, new Msg.OpenProject(text));
             yield break;
         }
         if (!(text.StartsWith('/') || text.StartsWith('~')))
@@ -117,7 +121,7 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
 
     /// <summary>The SSH hosts of ~/.ssh/config; choosing one fills in <c>host:~/</c> for the path.</summary>
     static IEnumerable<QuickItem> HostItems(Model model) => model.SshHosts.Select(host =>
-        new QuickItem("host:" + host.Alias, host.Alias, host.Address, "SSH hosts", Hugeicons.CloudServer, new Msg.PickHost(host.Alias), "SSH"));
+        new QuickItem("host:" + host.Alias, host.Alias, host.Address, "SSH hosts", Hugeicons.ComputerTerminal01, new Msg.PickHost(host.Alias), "SSH"));
 
     /// <summary>
     /// Recent checkouts on the host of a typed <c>host:path</c> whose path matches what is typed after the home or
@@ -167,7 +171,8 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
         var current = project.Path == model.ProjectId;
         var path = model.Store?.Tilde(project.Path) ?? project.Path;
         var remote = Remote.TryParse(project.Path, out _, out _);
-        var icon = current ? Hugeicons.Tick02 : remote ? Hugeicons.CloudServer : project.Worktree ? Hugeicons.GitFork : Hugeicons.FolderGit;
+        // A folder is always a repository (a cloud folder one on a host); a terminal is an SSH host.
+        var icon = current ? Hugeicons.Tick02 : remote ? Hugeicons.FolderCloud : project.Worktree ? Hugeicons.GitFork : Hugeicons.FolderGit;
         return new("project:" + project.Path, project.Name, current ? "current · " + path : path, group, icon, new Msg.OpenProject(project.Path), project.Branch);
     }
 

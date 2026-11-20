@@ -84,6 +84,10 @@ Remote checkouts (SSH)
   the typed path, or come after the bare path row, so Enter right after
   choosing a host opens the home folder. The host is searched more than once
   per palette session, or a failed search shows no reason.
+- With a query, the palette mixes projects, hosts, commits, pull requests and
+  commands in one ranked list without headings: a group's rows are not
+  together under its heading, groups are not ordered by their best match (the
+  best match is not first), or a host and a remote repository share an icon.
 - Opening a remote folder that is not a repository shows only Git's message,
   without naming the folder and how to choose a repository.
 - Tests reach a real host or the user's SSH configuration; offscreen runs list

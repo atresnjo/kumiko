@@ -65,14 +65,19 @@ internal static class SshHostChecks
         }
         var rows = M().Quick!.Items.Where(i => i.Group == "SSH hosts").ToArray();
         h.Check(rows.Select(r => r.Label).SequenceEqual(["staging", "devbox", "build-1", "build-2"]) && rows[1].Detail == "me@203.0.113.10" &&
-            rows.All(r => r.Icon == Hugeicons.CloudServer), "Command+K lists the SSH hosts with their address");
+            rows.All(r => r.Icon == Hugeicons.ComputerTerminal01), "Command+K lists the SSH hosts with their address and a terminal icon");
         h.Artifact(t, "ssh-hosts");
         // The host's repositories: two to find, three a search must not report.
         foreach (var folder in new[] { "code/api/.git", "code/node_modules/dep/.git", ".cache/tool/.git", "a/b/c/d/too-deep/.git" })
             Directory.CreateDirectory(Path.Combine(remoteHome, folder));
         t.TypeText("devb");
         t.Settle();
-        h.Check(M().Quick!.Items[0].Id == "host:devbox", "typing a host's name ranks it first");
+        var query = M().Quick!.Items;
+        var groups = query.Select(i => i.Group).Distinct().ToArray();
+        h.Check(query[0].Id == "host:devbox" && groups.Length > 1 && groups.All(g => query.SkipWhile(i => i.Group != g).TakeWhile(i => i.Group == g).Count() == query.Count(i => i.Group == g)),
+            $"typing a host's name ranks it first, with each group's rows together ({string.Join(", ", groups)})");
+        h.Check(t.HasText("SSH HOSTS") && t.HasText("RECENT"), "a query keeps the group headings");
+        h.Artifact(t, "ssh-hosts-query");
         t.Key(Key.Enter);
         t.Settle();
         h.Check(M().Quick is { Query: "devbox:~/" }, "choosing a host keeps the palette open with host:~/ filled in");

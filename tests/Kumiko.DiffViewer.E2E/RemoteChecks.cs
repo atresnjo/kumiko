@@ -103,12 +103,12 @@ internal static class RemoteChecks
         t.Keystroke('k', Modifiers.Primary);
         t.Settle();
         var recent = program.Model.Quick!.Items.Where(i => i.Group == "Recent").ToArray();
-        h.Check(recent.Length == 2 && recent.All(i => i.Icon == Hugeicons.CloudServer) && recent[0].Detail == "box:/srv/billing",
-            "recent remote checkouts are listed with their host and a server icon");
+        h.Check(recent.Length == 2 && recent.All(i => i.Icon == Hugeicons.FolderCloud) && recent[0].Detail == "box:/srv/billing",
+            "recent remote checkouts are listed with their host and a remote folder icon");
         h.Artifact(t, "remote-palette");
         t.TypeText("me@devbox:~/code/api");
         t.Settle();
-        h.Check(program.Model.Quick!.Items is [{ Icon: var icon }] && icon == Hugeicons.CloudServer, "a typed host:path is offered as the only row");
+        h.Check(program.Model.Quick!.Items is [{ Icon: var icon }] && icon == Hugeicons.FolderCloud, "a typed host:path is offered as the only row");
         h.Artifact(t, "remote-palette-path");
         t.Key(Key.Enter);
         h.Check(program.Model.Request is { Kind: SourceKind.WorkingTree, Host: "me@devbox", Path: "~/code/api" }, "Enter opens the typed checkout over SSH");

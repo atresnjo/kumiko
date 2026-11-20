@@ -53,11 +53,10 @@ internal sealed partial class DiffScreen
                 }, key: "text");
         }
         int first = QuickOpen.FirstVisible(selected, items.Length);
-        var grouped = quick.Query.Length == 0;
         for (int i = first; i < Math.Min(items.Length, first + QuickRows); i++)
         {
             var item = items[i];
-            if (grouped && (i == first || items[i - 1].Group != item.Group))
+            if (i == first || items[i - 1].Group != item.Group)
                 using (C.Div(key: "group:" + item.Group + i.ToString(C.Culture)).FillWidth().Height(22).Row().Items(Align.End).Px(Space.S2))
                     C.Text(item.Group.ToUpperInvariant(), new(10.5f, Weight.Semibold, p.Muted), key: "text");
             QuickRow(p, item, i, i == selected);
