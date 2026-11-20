@@ -263,13 +263,16 @@ internal static class HistoryChecks
             if (path.StartsWith("/repos/acme/widgets/pulls?", StringComparison.Ordinal))
             {
                 Listings.Enqueue(path);
-                return (200, $"[{Pull(7, "Add widget sorting", "alice", false)},{Pull(9, "Document the widget API", "dave", true)}]");
+                return (200, $"[{Pull(7, "Add widget sorting", "alice", false, "sorting")},{Pull(9, "Document the widget API", "dave", true, "feature")}]");
             }
             Fetches.Enqueue((token, path));
             Hold.Wait(TimeSpan.FromSeconds(20));
             return path switch
             {
-                "/repos/acme/widgets/pulls/7" => (200, """{"number":7,"title":"Add widget sorting","base":{"sha":"tip-sha"},"head":{"sha":"head-sha"}}"""),
+                "/repos/acme/widgets/pulls/7" => (200, $$"""
+                    {"number":7,"title":"Add widget sorting","base":{"sha":"tip-sha"},"head":{"sha":"head-sha","ref":"sorting"},"draft":false,
+                     "user":{"login":"alice"},"html_url":"https://github.com/acme/widgets/pull/7","updated_at":"{{Updated}}"}
+                    """),
                 "/repos/acme/widgets/compare/tip-sha...head-sha?per_page=1" => (200, """{"merge_base_commit":{"sha":"base-sha"}}"""),
                 "/repos/acme/widgets/pulls/7/files?per_page=100&page=1" => (200, """
                     [{"filename":"src/sort.ts","status":"modified"},{"filename":"src/added.ts","status":"added"},
@@ -287,9 +290,9 @@ internal static class HistoryChecks
         }
 
         /// <summary>A pull request as a repository's list of them describes it.</summary>
-        string Pull(int number, string title, string author, bool draft) =>
+        string Pull(int number, string title, string author, bool draft, string head) =>
             $"{{\"number\":{number},\"title\":\"{title}\",\"draft\":{(draft ? "true" : "false")},\"user\":{{\"login\":\"{author}\"}}," +
-            $"\"html_url\":\"https://github.com/acme/widgets/pull/{number}\",\"updated_at\":\"{Updated}\"}}";
+            $"\"html_url\":\"https://github.com/acme/widgets/pull/{number}\",\"updated_at\":\"{Updated}\",\"head\":{{\"ref\":\"{head}\"}}}}";
 
         static string Issue(string repository, int number, string title, string author, bool draft, string updated) =>
             $"{{\"number\":{number},\"title\":\"{title}\",\"draft\":{(draft ? "true" : "false")},\"user\":{{\"login\":\"{author}\"}}," +

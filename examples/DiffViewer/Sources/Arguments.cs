@@ -4,7 +4,8 @@ namespace DiffViewer.Sources;
 public static class Arguments
 {
     /// <summary>
-    /// Parses command-line arguments: <c>[--repo=PATH] [--staged] [BASE [TARGET]]</c>, <c>BASE..TARGET</c>, or
+    /// Parses command-line arguments: <c>[--repo=PATH] [--staged] [BASE [TARGET]]</c>, <c>BASE..TARGET</c>,
+    /// <c>--pr[=NUMBER|URL]</c> for the pull request of the checkout's branch (or that one), or
     /// <c>--compare LEFT RIGHT</c> for folders and files. A first argument naming an existing folder is the
     /// repository. A remote checkout is <c>host:/path</c>, <c>host:~/path</c> or <c>ssh://user@host:port/path</c>
     /// (first or in --repo), or <c>--ssh=HOST</c> with --repo or a first argument starting with / or ~.
@@ -17,6 +18,7 @@ public static class Arguments
         var staged = false;
         var compare = false;
         var demo = false;
+        string? pull = null;
         var positional = System.Collections.Immutable.ImmutableArray.CreateBuilder<string>();
         foreach (var arg in args)
         {
@@ -30,6 +32,10 @@ public static class Arguments
                 compare = true;
             else if (arg == "--demo")
                 demo = true;
+            else if (arg == "--pr")
+                pull = "";
+            else if (arg.StartsWith("--pr=", StringComparison.Ordinal))
+                pull = arg["--pr=".Length..];
             else if (!arg.StartsWith('-'))
                 positional.Add(arg);
         }
@@ -65,7 +71,9 @@ public static class Arguments
             return new DiffRequest(SourceKind.Paths, Path.GetFullPath(positional[0], directory), null, Path.GetFullPath(positional[1], directory));
         }
         DiffRequest request;
-        if (staged)
+        if (pull is not null)
+            request = new DiffRequest(SourceKind.PullRequest, path) { PullQuery = pull };
+        else if (staged)
             request = new DiffRequest(SourceKind.Staged, path, "HEAD");
         else if (positional.Count == 1 && positional[0].Split("..", 2) is [{ Length: > 0 } from, { Length: > 0 } to])
             request = new DiffRequest(SourceKind.Revisions, path, from, to);

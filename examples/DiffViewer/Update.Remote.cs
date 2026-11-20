@@ -132,15 +132,34 @@ internal sealed partial class DiffApp
     /// A pull request replaces the diff; the local project stays the palette's current project. One loaded in the
     /// background shows at once. Zen mode reads its file whole, so it always loads.
     /// </summary>
-    static Model OpenPull(Model model, PullRequest pull)
+    static Model OpenPull(Model model, PullRequest pull, string? query = null)
     {
         var opened = Open(model, new(SourceKind.PullRequest, model.ProjectPath)
         {
             Pull = pull,
-            Host = model.Request.Host
+            Host = model.Request.Host,
+            PullQuery = query
         });
         return opened.Zen is null && model.Prefetched.GetValueOrDefault(PrefetchKey(pull, model.IgnoreWhitespace))?.Document is { } document
             ? Loaded(opened, document) : opened;
+    }
+
+    /// <summary>
+    /// Looks up the pull request of a --pr launch in the checkout's GitHub repository; nothing loads meanwhile, and a
+    /// failure shows why. SSH aliases in the remote resolve through the local SSH configuration.
+    /// </summary>
+    static (Model, Cmd<Msg>) FindPull(Model model)
+    {
+        if (model.Request is not { Kind: SourceKind.PullRequest, Pull: null, PullQuery: { } query } request)
+            return (model, Cmd<Msg>.None);
+        var generation = model.Generation;
+        if (model.GitHub is not { } config)
+            return (model with { Loading = false, Error = "Opening a pull request needs gh: brew install gh, then gh auth login." }, Cmd<Msg>.None);
+        var home = model.SshHome;
+        var place = new Place(request.Path, request.Host);
+        return (model with { Loading = true, Error = null }, Cmd<Msg>.Run("find-pull", async token => (Msg)new Msg.PullFound(generation,
+            await GitHub.FindPull(config, place, query, home is null ? null : alias => SshConfig.HostName(home, alias) ?? alias, token).ConfigureAwait(false)),
+            error => new Msg.Failed(generation, error.Message)));
     }
 
     const int PrefetchCount = 5;

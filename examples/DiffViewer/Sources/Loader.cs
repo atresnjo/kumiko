@@ -19,7 +19,7 @@ public static class Loader
         {
             SourceKind.Paths => Folders.Pairs(request.Path, request.Target!, token),
             SourceKind.Demo => Demo.Pairs(),
-            SourceKind.PullRequest => await GitHub.Pairs(request.Pull!, token).ConfigureAwait(false),
+            SourceKind.PullRequest => await GitHub.Pairs(request.Pull ?? throw new IOException("The pull request has not been found yet."), token).ConfigureAwait(false),
             _ => await GitPairs(request, token).ConfigureAwait(false)
         };
         FilePair?[] pending = [.. pairs];

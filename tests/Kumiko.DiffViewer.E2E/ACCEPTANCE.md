@@ -188,6 +188,19 @@ Open repository
 - A repository on a host without a gh account shows an error, or one GitHub
   refuses shows none.
 
+Launching from other tools (T3 actions, terminals)
+
+- `--pr` does not open the open pull request whose head is the checkout's
+  current branch (also in a worktree or over SSH); `--pr=N` or a pull request
+  URL does not open that one; a branch without one, a detached HEAD or a
+  repository without a GitHub remote fails without saying so, or the
+  working tree flashes before the pull request.
+- A second launch while Diff runs starts a second app, is dropped, or replaces
+  the diff of an open window. A launch for the worktree or `--pr` a window
+  already shows opens another window instead of focusing and reloading it; a
+  window that switched elsewhere since is still taken for it. A closed window
+  keeps its watcher and loads running.
+
 Text selection
 
 - Dragging over characters of a line does not select exactly them, or selects

@@ -68,6 +68,9 @@ internal abstract partial record Msg
     public sealed record PullsExpired(long Generation) : Msg;
     public sealed record RefreshPulls : Msg;
     public sealed record OpenPull(PullRequest Pull) : Msg;
+    /// <summary>Looks up the pull request the request's PullQuery names (from --pr), then shows it.</summary>
+    public sealed record FindPull : Msg;
+    public sealed record PullFound(long Generation, PullRequest Pull) : Msg;
     /// <summary>A background load of a listed pull request finished; no document means it failed.</summary>
     public sealed record PullPrefetched(string Key, DiffDocument? Document) : Msg;
     public sealed record CommitsFound(string Project, ImmutableArray<Commit> Commits) : Msg;

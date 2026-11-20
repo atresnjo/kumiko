@@ -35,6 +35,8 @@ internal sealed partial class DiffApp : IKumiko<Model, Msg>
             return Palette(model, palette.Query);
         if (message is Msg.RefreshPulls)
             return FetchPulls(model);
+        if (message is Msg.FindPull)
+            return FindPull(model);
         if (message is Msg.PullsFound pulls)
             return PullsFound(model, pulls);
         if (message is Msg.PullsExpired expired)
@@ -96,6 +98,7 @@ internal sealed partial class DiffApp : IKumiko<Model, Msg>
             HostRepos = model.HostRepos.SetItem(found.Host, new(found.Paths, false, found.Error))
         }, quick.Query, 0),
         Msg.OpenPull pull => OpenPull(model, pull.Pull),
+        Msg.PullFound found when found.Generation == model.Generation && model.Request.PullQuery is { } query => OpenPull(model, found.Pull, query),
         Msg.PullPrefetched prefetched => Prefetched(model, prefetched),
         Msg.OpenCommit commit => OpenCommit(model, commit.Commit),
         Msg.QuickStep step when model.Quick is { } quick => model with
@@ -114,7 +117,7 @@ internal sealed partial class DiffApp : IKumiko<Model, Msg>
             Loading = true
         },
         Msg.FinderStep or Msg.FinderAccept or Msg.SearchStep or Msg.SelectionStep or Msg.TextDrag or Msg.TextRelease => model,
-        Msg.QuickQuery or Msg.QuickStep or Msg.QuickAccept or Msg.OpenProject or Msg.Saved or Msg.PickHost or Msg.SearchHost or Msg.HostReposFound or Msg.ContextFound => model,
+        Msg.QuickQuery or Msg.QuickStep or Msg.QuickAccept or Msg.OpenProject or Msg.Saved or Msg.PickHost or Msg.SearchHost or Msg.HostReposFound or Msg.ContextFound or Msg.FindPull or Msg.PullFound => model,
         Msg.OpenQuick or Msg.RefreshPulls or Msg.PullsFound or Msg.PullsExpired => model,
         Msg.Navigate navigate => model with { Navigation = model.Navigation.Move(navigate.Request, "app") },
         _ => model

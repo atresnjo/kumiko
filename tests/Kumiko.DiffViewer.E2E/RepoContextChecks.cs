@@ -1,5 +1,6 @@
 using DiffViewer.Sources;
 using Kumiko.Icons;
+using Kumiko.Runtime;
 using Kumiko.UI;
 
 namespace DiffViewer.E2E;
@@ -35,6 +36,7 @@ internal static class RepoContextChecks
             repo.Write("src/a.ts", "export const a = 2;\n");
             using var github = new HistoryChecks.FakeGitHub();
             Palette(h, repo, scratch, home, github);
+            Launches(h, repo, scratch, home, github);
         }
         finally
         {
@@ -96,5 +98,60 @@ internal static class RepoContextChecks
         t.Settle();
         h.Check(M().Quick!.Items.Select(i => i.Hint).SequenceEqual(["#7", "#9", "#3"]), "# lists the open repository's pull requests first");
         t.Key(Key.Escape);
+    }
+
+    /// <summary>
+    /// What a T3 action or a terminal asks for: --pr finds the pull request of the checkout's branch, and a running
+    /// Diff routes a later launch to the window that already shows it.
+    /// </summary>
+    static void Launches(Harness h, Repository repo, string scratch, string home, HistoryChecks.FakeGitHub github)
+    {
+        var feature = Path.Combine(scratch, "widgets-feature");
+        h.Check(Arguments.Parse(["--pr"], feature) is { Kind: SourceKind.PullRequest, PullQuery: "", Pull: null } pr && pr.Path == feature &&
+            Arguments.Parse(["--repo=box:~/app", "--pr=7"], "/tmp") is { Kind: SourceKind.PullRequest, Host: "box", Path: "~/app", PullQuery: "7" } &&
+            Arguments.Parse(["--pr=https://github.com/acme/widgets/pull/7"], feature).PullQuery == "https://github.com/acme/widgets/pull/7",
+            "--pr, --pr=N and --pr=URL ask for a pull request of the checkout");
+        Model Find(string[] args, string directory)
+        {
+            var request = Arguments.Parse(args, directory);
+            using var program = DiffApp.CreateProgram(DiffApp.Init with
+            {
+                Request = request,
+                SshHome = home,
+                GitHub = new GitHubConfig(github.Gh, github.Api)
+            }, new KumikoServices().Add<IFullScreen>(new NoFullScreen()));
+            program.RetainHistory = false;
+            using var t = new Tester(program, new(1280, 820, DevMode: true));
+            t.Settle();
+            var flashed = false;
+            program.Send(new Msg.FindPull());
+            for (int i = 0; i < 2000 && program.Model is { Request.Pull: null, Error: null }; i++)
+            {
+                flashed |= program.Model.Document.Files.Length > 0;
+                Thread.Sleep(5);
+                t.Settle(1);
+            }
+            h.Check(!flashed, $"looking up {string.Join(' ', args)} shows no working tree meanwhile");
+            return program.Model;
+        }
+        var branch = Find(["--pr"], feature);
+        h.Check(branch.Request is { Kind: SourceKind.PullRequest, Pull.Number: 9, PullQuery: "" } && branch.Error is null,
+            $"--pr in a worktree opens the open pull request of its branch ({branch.Request.Pull?.Number}, {branch.Error})");
+        h.Check(Find(["--pr=7"], feature).Request.Pull?.Number == 7 && Find(["--pr=https://github.com/acme/widgets/pull/7"], "/").Request.Pull?.Number == 7,
+            "--pr=N and a pull request URL open that pull request");
+        var none = Find(["--pr"], repo.Root);
+        h.Check(none is { Request.Pull: null, Loading: false } && none.Error == "No open pull request in acme/widgets has main as its head branch.",
+            $"a branch without a pull request says so ({none.Error})");
+
+        // A running Diff focuses the window that already shows what a later launch asks for.
+        using var opened = Harness.Open(new(SourceKind.WorkingTree, repo.Root, "HEAD"));
+        var worktree = opened.Model;
+        h.Check(DiffWindows.Shows(worktree, Arguments.Parse([], repo.Root)) && DiffWindows.Shows(worktree, Arguments.Parse(["--repo=" + repo.Root], "/")) &&
+            !DiffWindows.Shows(worktree, Arguments.Parse(["--staged"], repo.Root)) && !DiffWindows.Shows(worktree, Arguments.Parse([], feature)),
+            "a launch for the worktree a window shows is routed to it, other sources and worktrees are not");
+        h.Check(DiffWindows.Shows(branch, Arguments.Parse(["--pr"], feature)) && !DiffWindows.Shows(branch, Arguments.Parse(["--pr=7"], feature)) &&
+            !DiffWindows.Shows(branch, Arguments.Parse([], feature)), "a launch for the --pr a window shows is routed to it");
+        var moved = DiffApp.Update(branch, new Msg.OpenProject(repo.Root)).Item1;
+        h.Check(!DiffWindows.Shows(moved, Arguments.Parse(["--pr"], feature)), "a window that switched elsewhere no longer takes that launch");
     }
 }

@@ -84,10 +84,7 @@ public static class GitHub
     /// </summary>
     public static async Task<(ImmutableArray<PullRequest> Pulls, string? Error)> RepositoryPulls(GitHubConfig config, GitRemote remote, CancellationToken token)
     {
-        var accounts = await Accounts(config, token).ConfigureAwait(false);
-        var usable = accounts.Where(a => a.Host.Equals(remote.Host, StringComparison.OrdinalIgnoreCase)).ToArray();
-        if (usable.Length == 0 && !remote.Host.Contains('.', StringComparison.Ordinal))
-            usable = [.. accounts.Where(a => a.Host == "github.com")];
+        var usable = await Usable(config, remote, token).ConfigureAwait(false);
         string? failure = null;
         foreach (var account in usable)
         {
@@ -95,10 +92,7 @@ public static class GitHub
             {
                 using var json = await Get(account, await Token(account, token).ConfigureAwait(false),
                     $"repos/{remote.Repository}/pulls?state=open&sort=updated&direction=desc&per_page=50", token).ConfigureAwait(false);
-                return ([.. json.RootElement.EnumerateArray().Select(item => new PullRequest(account, remote.Repository, item.GetProperty("number").GetInt32(),
-                    item.GetProperty("title").GetString() ?? "", item.GetProperty("user").GetProperty("login").GetString() ?? "",
-                    item.TryGetProperty("draft", out var draft) && draft.ValueKind == JsonValueKind.True, item.GetProperty("updated_at").GetDateTimeOffset(),
-                    item.GetProperty("html_url").GetString() ?? ""))], null);
+                return ([.. json.RootElement.EnumerateArray().Select(item => RepositoryPull(account, remote.Repository, item))], null);
             }
             catch (Exception error) when (error is IOException or HttpRequestException or JsonException or KeyNotFoundException or InvalidOperationException)
             {
@@ -106,6 +100,73 @@ public static class GitHub
             }
         }
         return ([], failure);
+    }
+
+    /// <summary>The accounts of a remote's host; an alias without a dot is taken for github.com.</summary>
+    static async Task<GitHubAccount[]> Usable(GitHubConfig config, GitRemote remote, CancellationToken token)
+    {
+        var accounts = await Accounts(config, token).ConfigureAwait(false);
+        var usable = accounts.Where(a => a.Host.Equals(remote.Host, StringComparison.OrdinalIgnoreCase)).ToArray();
+        return usable.Length == 0 && !remote.Host.Contains('.', StringComparison.Ordinal) ? [.. accounts.Where(a => a.Host == "github.com")] : usable;
+    }
+
+    static PullRequest RepositoryPull(GitHubAccount account, string repository, JsonElement item) => new(account, repository,
+        item.GetProperty("number").GetInt32(), item.GetProperty("title").GetString() ?? "", item.GetProperty("user").GetProperty("login").GetString() ?? "",
+        item.TryGetProperty("draft", out var draft) && draft.ValueKind == JsonValueKind.True, item.GetProperty("updated_at").GetDateTimeOffset(),
+        item.GetProperty("html_url").GetString() ?? "");
+
+    /// <summary>
+    /// The pull request --pr asks for: a pull request URL, a number in the checkout's GitHub repository, or (empty) the
+    /// open one whose head is the checkout's current branch. Failures say what is missing.
+    /// </summary>
+    public static async Task<PullRequest> FindPull(GitHubConfig config, Place checkout, string query, Func<string, string>? resolve, CancellationToken token)
+    {
+        GitRemote remote;
+        int number = 0;
+        string? branch = null;
+        if (Uri.TryCreate(query, UriKind.Absolute, out var uri) && uri.AbsolutePath.Trim('/').Split('/') is [var owner, var name, "pull", var digits, ..] &&
+            int.TryParse(digits, out number))
+            remote = new(uri.Host.ToLowerInvariant(), owner + "/" + name);
+        else
+        {
+            var (_, url) = await RepoInfo.Read(checkout, token).ConfigureAwait(false);
+            remote = (url is null ? null : RepoInfo.Parse(url, resolve)) ?? throw new IOException("The repository has no GitHub remote.");
+            if (query.Length > 0 && !int.TryParse(query.TrimStart('#'), out number))
+                throw new IOException($"--pr={query} is neither a pull request number nor a pull request URL.");
+            if (query.Length == 0)
+            {
+                branch = (await Git.Text(checkout, token, "rev-parse", "--abbrev-ref", "HEAD").ConfigureAwait(false)).Trim();
+                if (branch == "HEAD")
+                    throw new IOException("The checkout is on a detached HEAD, so it has no pull request.");
+            }
+        }
+        var usable = await Usable(config, remote, token).ConfigureAwait(false);
+        if (usable.Length == 0)
+            throw new IOException($"No gh account for {remote.Host}. Run gh auth login --hostname {remote.Host}.");
+        Exception? failure = null;
+        foreach (var account in usable)
+        {
+            try
+            {
+                var key = await Token(account, token).ConfigureAwait(false);
+                if (branch is null)
+                {
+                    using var one = await Get(account, key, $"repos/{remote.Repository}/pulls/{number}", token).ConfigureAwait(false);
+                    return RepositoryPull(account, remote.Repository, one.RootElement);
+                }
+                using var open = await Get(account, key, $"repos/{remote.Repository}/pulls?state=open&per_page=100", token).ConfigureAwait(false);
+                // Matching on the head branch alone also finds pull requests from forks.
+                foreach (var item in open.RootElement.EnumerateArray())
+                    if (item.TryGetProperty("head", out var head) && head.TryGetProperty("ref", out var reference) && reference.GetString() == branch)
+                        return RepositoryPull(account, remote.Repository, item);
+                throw new IOException($"No open pull request in {remote.Repository} has {branch} as its head branch.");
+            }
+            catch (Exception error) when (error is HttpRequestException or JsonException or KeyNotFoundException or InvalidOperationException)
+            {
+                failure = error;
+            }
+        }
+        throw new IOException($"{remote.Repository}: {failure?.Message}", failure);
     }
 
     static PullRequest Pull(GitHubAccount account, JsonElement item)

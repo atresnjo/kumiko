@@ -24,6 +24,20 @@ artifacts/aot/diff/DiffViewer --repo=/path/to/repo
 
 A first argument naming an existing folder is the repository (`-- ~/code/app main`).
 
+## Opening from T3 and other tools
+
+Diff runs once per user. A later launch hands its arguments to the running app, which
+focuses (and reloads) the window already showing what they ask for, or opens a new window,
+so an open diff is never replaced; `--new-instance` opts out. `--pr` opens the open pull
+request whose head is the checkout's current branch (`--pr=123` or a pull request URL for
+another), looked up with gh before anything loads. With the app in `/Applications`, a T3
+Action (run in the thread's worktree) is one line:
+
+```sh
+open -n -a Diff --args --repo="$PWD"        # the worktree's changes
+open -n -a Diff --args --repo="$PWD" --pr   # the pull request of its branch
+```
+
 ## Remote checkouts over SSH
 
 A checkout on another machine opens the same way, read with your `ssh` client: Git runs

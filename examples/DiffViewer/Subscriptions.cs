@@ -18,7 +18,9 @@ internal sealed partial class DiffApp
         // A pull request still loading in the background is shown by that load; a failed one loads here.
         var prefetching = model is { Zen: null, Request.Pull: { } pull } &&
             model.Prefetched.GetValueOrDefault(PrefetchKey(pull, whitespace)) is { Document: null, Failed: false };
-        if (model.Loading && !prefetching)
+        // A --pr launch loads once its pull request is found.
+        var unresolved = model.Request is { Kind: SourceKind.PullRequest, Pull: null };
+        if (model.Loading && !prefetching && !unresolved)
             yield return Sub<Msg>.Run($"load:{generation}",
                 async token => new Msg.Loaded(generation, await Loader.Load(request, whitespace, token, whole).ConfigureAwait(false)),
                 error => new Msg.Failed(generation, error.Message));

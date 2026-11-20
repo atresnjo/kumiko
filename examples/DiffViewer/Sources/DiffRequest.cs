@@ -34,6 +34,14 @@ public sealed record DiffRequest(SourceKind Kind, string Path, string? Base = nu
     {
         get; init;
     }
+    /// <summary>
+    /// A pull request to look up before it shows (from --pr): empty for the checkout's current branch, a number, or
+    /// a pull request URL. Pull stays null until it is found.
+    /// </summary>
+    public string? PullQuery
+    {
+        get; init;
+    }
     /// <summary>What Revisions show, such as a commit's subject, in place of "Base → Target".</summary>
     public string? Title
     {
