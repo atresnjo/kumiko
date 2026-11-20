@@ -125,7 +125,8 @@ public static class Ssh
             RedirectStandardError = true,
             CreateNoWindow = true
         };
-        string[] options = ["-T", "-o", "BatchMode=yes", "-o", "ConnectTimeout=10", "-o", "ServerAliveInterval=15"];
+        // Source text compresses several times over, which is most of a load's time on a slow link.
+        string[] options = ["-T", "-o", "BatchMode=yes", "-o", "ConnectTimeout=10", "-o", "ServerAliveInterval=15", "-o", "Compression=yes"];
         foreach (var option in options)
             start.ArgumentList.Add(option);
         if (Multiplex is { } folder)

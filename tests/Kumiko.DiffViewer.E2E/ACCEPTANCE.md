@@ -206,7 +206,12 @@ Launching from other tools (T3 actions, terminals)
   the SSH host) and diffing merge base to head there; a pull request whose
   commits are already present is fetched again; a failed or hanging fetch,
   or a checkout of another repository, does not fall back to the API. The
-  open repository's pull requests are preloaded through the API.
+  open repository's pull requests are preloaded through the API. A pull
+  request opened from a checkout on an SSH host is read there although a
+  local clone of the same repository is known. Blobs over SSH are asked for
+  one round trip each, a file over 1 MiB is carried over a slow link instead
+  of being shown as too large (with its size), or the SSH link is not
+  compressed.
 
 Text selection
 

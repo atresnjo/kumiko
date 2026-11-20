@@ -39,6 +39,12 @@ public sealed record FileDiff(
     bool OldMissingNewline,
     bool NewMissingNewline)
 {
+    /// <summary>The larger size of a side that was not read because it is too large to carry over SSH; 0 otherwise.</summary>
+    public long Omitted
+    {
+        get; init;
+    }
+
     public string Name => System.IO.Path.GetFileName(Path);
     public string Directory => System.IO.Path.GetDirectoryName(Path)?.Replace('\\', '/') ?? "";
     public string Text(DiffLine line) => line.Kind == LineKind.Removed ? OldLines[line.Old] : NewLines[line.New];
@@ -96,7 +102,10 @@ public static class Differ
         newLines = Keep(newLines, keepNew);
         return new(pair.Path, pair.OldPath, pair.Status, binary, language, oldLines, newLines, oldTokens, newTokens, hunks,
             ImmutableCollectionsMarshal.AsImmutableArray(lines), ImmutableCollectionsMarshal.AsImmutableArray(starts),
-            emphasis, additions, deletions, columns, pair.Old.MissingFinalNewline, pair.New.MissingFinalNewline);
+            emphasis, additions, deletions, columns, pair.Old.MissingFinalNewline, pair.New.MissingFinalNewline)
+        {
+            Omitted = Math.Max(pair.Old.Omitted, pair.New.Omitted)
+        };
     }
 
     /// <summary>Marks one side's shown lines: every kind but <paramref name="other"/>, the other side's own lines.</summary>

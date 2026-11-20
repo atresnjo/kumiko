@@ -126,7 +126,8 @@ internal static class RemoteChecks
         h.Check(far.Files.Length == 8 && far.Files.Any(f => f.Path == "src/ünïcode 'q'.ts") && far.Files.Single(f => f.Path == "logo.bin").Binary,
             "remote paths with spaces, quotes and Unicode, and binary files, load");
         h.Check(far.Root == repo.Root && far.Detail.Contains("box", StringComparison.Ordinal), $"the document names the remote root and its host ({far.Root}, {far.Detail})");
-        h.Check(sessions.Length is > 0 and <= 6 && sessions.All(s => s.StartsWith("box\t", StringComparison.Ordinal)),
+        // toplevel, HEAD, diff, untracked, blob sizes, blobs, working files: one session each, never one per file.
+        h.Check(sessions.Length is > 0 and <= 7 && sessions.All(s => s.StartsWith("box\t", StringComparison.Ordinal)),
             $"every Git call runs over SSH on the host, in a bounded number of sessions ({sessions.Length})");
         h.Check(sessions.Count(s => s.Contains("tar", StringComparison.Ordinal)) == 1, "the working-tree files arrive in one stream, not one session each");
         h.Check(!remote.Watches, "a remote checkout starts no local file watcher");
@@ -143,6 +144,16 @@ internal static class RemoteChecks
         var range = Load(new(SourceKind.Revisions, remotePath, commits[1].Sha, commits[0].Sha) { Host = "box" });
         h.Check(Same(range, Load(new(SourceKind.Revisions, repo.Root, commits[1].Sha, commits[0].Sha))) && range.Files.Length == 8,
             "a remote commit range matches the local one");
+        // A generated megabyte file is not carried over SSH; the same range read locally shows it.
+        repo.Write("docs/schema.json", string.Concat(Enumerable.Repeat("{\"field\": \"value\"},\n", 80_000)));
+        repo.Write("src/app.ts", "export const changed = true;\n");
+        repo.Commit("third");
+        var third = repo.Git("rev-parse", "HEAD").Trim();
+        var large = Load(new(SourceKind.Revisions, remotePath, commits[0].Sha, third) { Host = "box" });
+        var schema = large.Files.Single(f => f.Path == "docs/schema.json");
+        h.Check(schema is { Binary: true, Omitted: > 1_000_000 } && large.Files.Single(f => f.Path == "src/app.ts").Additions == 1 &&
+            Load(new(SourceKind.Revisions, repo.Root, commits[0].Sha, third)).Files.Single(f => f.Path == "docs/schema.json").Additions == 80_000,
+            $"a file over 1 MiB is not carried over SSH but named with its size, small ones are; locally it shows ({schema.Omitted})");
     }
 
     /// <summary>Switching sources, commits and recents keep the host; remote and local projects never mix.</summary>

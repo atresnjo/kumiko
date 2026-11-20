@@ -42,6 +42,11 @@ public sealed record DiffRequest(SourceKind Kind, string Path, string? Base = nu
     {
         get; init;
     }
+    /// <summary>
+    /// Local checkouts that may be clones of a pull request's repository; the first whose remote is that repository
+    /// serves it through Git ahead of the checkout it was opened from, which may sit behind a slow SSH link.
+    /// </summary>
+    public System.Collections.Immutable.ImmutableArray<string> Clones { get; init; } = [];
     /// <summary>What Revisions show, such as a commit's subject, in place of "Base → Target".</summary>
     public string? Title
     {

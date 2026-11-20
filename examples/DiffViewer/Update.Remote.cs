@@ -138,11 +138,16 @@ internal sealed partial class DiffApp
         {
             Pull = pull,
             Host = model.Request.Host,
-            PullQuery = query
+            PullQuery = query,
+            Clones = LocalCheckouts(model)
         });
         return opened.Zen is null && model.Prefetched.GetValueOrDefault(PrefetchKey(pull, model.IgnoreWhitespace))?.Document is { } document
             ? Loaded(opened, document) : opened;
     }
+
+    /// <summary>The known local checkouts (not worktrees), any of which may be a clone of a pull request's repository.</summary>
+    static System.Collections.Immutable.ImmutableArray<string> LocalCheckouts(Model model) =>
+        [.. model.Projects.Where(p => !p.Worktree && !Remote.TryParse(p.Path, out _, out _)).Select(p => p.Path)];
 
     const int PrefetchCount = 5;
 
@@ -161,6 +166,7 @@ internal sealed partial class DiffApp
         var whitespace = model.IgnoreWhitespace;
         var path = model.ProjectPath;
         var host = model.Request.Host;
+        var clones = LocalCheckouts(model);
         // The open repository's pull requests come from its checkout through Git when opened, which is quick; before
         // its remote is known none are preloaded, so no API load starts for one of them.
         if (model.Context is { Loading: true })
@@ -178,7 +184,8 @@ internal sealed partial class DiffApp
             var request = new DiffRequest(SourceKind.PullRequest, path)
             {
                 Pull = pull,
-                Host = host
+                Host = host,
+                Clones = clones
             };
             return Cmd<Msg>.Run("prefetch", async token => (Msg)new Msg.PullPrefetched(key, await Loader.Load(request, whitespace, token).ConfigureAwait(false)),
                 _ => new Msg.PullPrefetched(key, null));

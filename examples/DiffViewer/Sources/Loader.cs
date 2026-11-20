@@ -40,13 +40,14 @@ public static class Loader
         return new(title, detail, root, [.. shown]);
     }
 
-    static async Task<(string, string, string, List<FilePair>)> GitPairs(DiffRequest request, CancellationToken token)
+    /// <param name="knownRoot">The checkout's root when the caller knows it, which saves a round trip over SSH.</param>
+    static async Task<(string, string, string, List<FilePair>)> GitPairs(DiffRequest request, CancellationToken token, string? knownRoot = null)
     {
         var host = request.Host;
         string root;
         try
         {
-            root = (await Git.Text(new Place(request.Path, host), token, "rev-parse", "--show-toplevel").ConfigureAwait(false)).Trim();
+            root = knownRoot ?? (await Git.Text(new Place(request.Path, host), token, "rev-parse", "--show-toplevel").ConfigureAwait(false)).Trim();
         }
         catch (IOException error) when (host is not null && error.Message.Contains("not a git repository", StringComparison.OrdinalIgnoreCase))
         {
@@ -54,9 +55,9 @@ public static class Loader
                 "to list the repositories on it.", error);
         }
         var at = new Place(root, host);
-        var hasHead = await Exists(at, "HEAD", token).ConfigureAwait(false);
         var from = request.Base ?? "HEAD";
-        if (from == "HEAD" && !hasHead)
+        // Only a comparison with HEAD needs to know whether the repository has commits yet.
+        if (from == "HEAD" && !await Exists(at, ["HEAD"], token).ConfigureAwait(false))
             from = EmptyTree;
         var arguments = new List<string> { "diff", "--name-status", "-z", "-M", "--no-ext-diff" };
         string? to = null;
@@ -107,31 +108,48 @@ public static class Loader
         var remoteFiles = host is not null && request.Kind == SourceKind.WorkingTree
             ? Ssh.ReadFiles(at, [.. changes.Where(c => c.Status != FileStatus.Deleted).Select(c => c.Path).Distinct(StringComparer.Ordinal)], token)
             : null;
-        var pairs = new List<FilePair>(changes.Count);
-        Dictionary<string, byte[]>? working = null;
-        await using (var blobs = new BlobReader(at))
+        // Every blob is asked for at once (old sides, and new ones that come from Git), then read as it streams back.
+        var names = new List<string>(changes.Count * 2);
+        var slots = new (int Old, int New)[changes.Count];
+        for (int i = 0; i < changes.Count; i++)
         {
-            foreach (var (status, path, oldPath) in changes)
+            var (status, path, oldPath) = changes[i];
+            int Ask(string name)
             {
-                token.ThrowIfCancellationRequested();
-                var old = status == FileStatus.Added && oldPath is null ? TextFile.Empty
-                    : TextFile.Decode(await blobs.Read($"{from}:{oldPath ?? path}", token).ConfigureAwait(false) ?? []);
-                TextFile next;
-                if (status == FileStatus.Deleted)
-                    next = TextFile.Empty;
-                else if (request.Kind == SourceKind.Staged)
-                    next = TextFile.Decode(await blobs.Read(":" + path, token).ConfigureAwait(false) ?? []);
-                else if (to is not null)
-                    next = TextFile.Decode(await blobs.Read($"{to}:{path}", token).ConfigureAwait(false) ?? []);
-                else if (remoteFiles is not null)
-                {
-                    working ??= await remoteFiles.ConfigureAwait(false);
-                    next = working.TryGetValue(path, out var bytes) ? TextFile.Decode(bytes) : TextFile.Empty;
-                }
-                else
-                    next = ReadWorking(Path.Combine(root, path));
-                pairs.Add(new(path, oldPath, status, old, next));
+                names.Add(name);
+                return names.Count - 1;
             }
+            slots[i] = (status == FileStatus.Added && oldPath is null ? -1 : Ask($"{from}:{oldPath ?? path}"),
+                status == FileStatus.Deleted ? -1 : request.Kind == SourceKind.Staged ? Ask(":" + path) : to is not null ? Ask($"{to}:{path}") : -2);
+        }
+        // Over SSH, blobs above the limit (generated schemas, bundles) are named with their size instead of carried.
+        var sizes = host is not null && names.Count > 0 ? await BlobReader.Sizes(at, names, token).ConfigureAwait(false) : null;
+        var carried = sizes is null ? names : [.. names.Where((_, i) => sizes[i] <= RemoteBlobLimit)];
+        byte[]?[] read;
+        await using (var reader = new BlobReader(at))
+            read = carried.Count == 0 ? [] : await reader.ReadAll(carried, token).ConfigureAwait(false);
+        var blobs = new byte[]?[names.Count];
+        for (int i = 0, next = 0; i < names.Count; i++)
+            blobs[i] = sizes is null || sizes[i] <= RemoteBlobLimit ? read[next++] : null;
+        var working = remoteFiles is null ? null : await remoteFiles.ConfigureAwait(false);
+        var pairs = new List<FilePair>(changes.Count);
+        for (int i = 0; i < changes.Count; i++)
+        {
+            token.ThrowIfCancellationRequested();
+            var (status, path, oldPath) = changes[i];
+            var (oldSlot, newSlot) = slots[i];
+            TextFile Side(int slot) => sizes is not null && sizes[slot] > RemoteBlobLimit ? TextFile.TooLarge(sizes[slot]) : TextFile.Decode(blobs[slot] ?? []);
+            var old = oldSlot < 0 ? TextFile.Empty : Side(oldSlot);
+            // -1: no new side; -2: the working tree's file, from the remote stream or the disk.
+            var next = newSlot >= 0 ? Side(newSlot) : newSlot == -1 ? TextFile.Empty
+                : working is not null ? working.TryGetValue(path, out var bytes) ? TextFile.Decode(bytes) : TextFile.Empty
+                : ReadWorking(Path.Combine(root, path));
+            pairs.Add(new(path, oldPath, status, old, next));
+            // The raw bytes go once decoded, so a large diff never holds both.
+            if (oldSlot >= 0)
+                blobs[oldSlot] = null;
+            if (newSlot >= 0)
+                blobs[newSlot] = null;
         }
         var name = Path.GetFileName(root);
         var detail = request.Kind switch
@@ -146,36 +164,71 @@ public static class Loader
         return (name, detail, root, pairs);
     }
 
+    /// <summary>The largest blob carried over SSH; larger ones show their size, and a local clone shows them.</summary>
+    const long RemoteBlobLimit = 1 << 20;
+
     /// <summary>A fetch that takes longer falls back to GitHub's API.</summary>
-    static readonly TimeSpan FetchLimit = TimeSpan.FromSeconds(90);
+    static readonly TimeSpan FetchLimit = TimeSpan.FromMinutes(3);
 
     /// <summary>
-    /// A pull request's files. When the checkout it was opened from (locally or on an SSH host) has the pull request's
-    /// repository as its remote, Git alone serves it: ls-remote names its head and GitHub's merge ref, whose first
-    /// parent is the base tip (the remote's default branch without one), missing commits are fetched without writing
-    /// any ref, and merge base to head is diffed as revisions. Otherwise, or when Git fails, GitHub's API serves it.
+    /// A pull request's files, through Git when a checkout of its repository is at hand: a known local clone first,
+    /// then the checkout it was opened from (locally or on an SSH host). ls-remote names its head and GitHub's merge
+    /// ref, whose first parent is the base tip (the remote's default branch without one); missing commits are fetched
+    /// without writing any ref; merge base to head is diffed as revisions. Otherwise, or when Git fails, GitHub's API
+    /// serves it.
     /// </summary>
     static async Task<(string, string, string, List<FilePair>)> PullPairs(DiffRequest request, CancellationToken token)
     {
         var pull = request.Pull ?? throw new IOException("The pull request has not been found yet.");
-        try
+        var opened = new Place(request.Path, request.Host);
+        foreach (var at in LocalClones(request.Clones, pull.Repository).Append(opened).Distinct())
         {
-            using var limit = CancellationTokenSource.CreateLinkedTokenSource(token);
-            limit.CancelAfter(FetchLimit);
-            if (await FromCheckout(request, pull, limit.Token).ConfigureAwait(false) is { } pairs)
-                return ($"{pull.Repository} #{pull.Number}", pull.Title, "", pairs);
-        }
-        catch (Exception error) when (error is IOException or System.ComponentModel.Win32Exception ||
-            error is OperationCanceledException && !token.IsCancellationRequested)
-        {
-            // The API below serves pull requests Git cannot reach: no access, a deleted head, a hung fetch.
+            try
+            {
+                using var limit = CancellationTokenSource.CreateLinkedTokenSource(token);
+                limit.CancelAfter(FetchLimit);
+                if (await FromCheckout(at, pull, limit.Token).ConfigureAwait(false) is { } pairs)
+                    return ($"{pull.Repository} #{pull.Number}", pull.Title, "", pairs);
+            }
+            catch (Exception error) when (error is IOException or System.ComponentModel.Win32Exception ||
+                error is OperationCanceledException && !token.IsCancellationRequested)
+            {
+                // The next checkout, or the API below, serves pull requests Git cannot reach here.
+            }
         }
         return await GitHub.Pairs(pull, token).ConfigureAwait(false);
     }
 
-    static async Task<List<FilePair>?> FromCheckout(DiffRequest request, PullRequest pull, CancellationToken token)
+    /// <summary>
+    /// The candidates whose .git/config names the repository as a remote, read lazily (no Git process); folders named
+    /// like the repository are tried first.
+    /// </summary>
+    static IEnumerable<Place> LocalClones(IEnumerable<string> candidates, string repository)
     {
-        var at = new Place(request.Path, request.Host);
+        var name = repository[(repository.LastIndexOf('/') + 1)..];
+        foreach (var path in candidates.OrderBy(p => Path.GetFileName(p).Equals(name, StringComparison.OrdinalIgnoreCase) ? 0 : 1))
+            if (RemoteUrls(path).Any(url => string.Equals(RepoInfo.Parse(url)?.Repository, repository, StringComparison.OrdinalIgnoreCase)))
+                yield return new Place(path);
+    }
+
+    static string[] RemoteUrls(string checkout)
+    {
+        try
+        {
+            var config = Path.Combine(checkout, ".git", "config");
+            return File.Exists(config) ? [.. File.ReadLines(config).Select(line => line.Trim())
+                .Where(line => line.StartsWith("url", StringComparison.Ordinal) && line.Contains('=', StringComparison.Ordinal))
+                .Select(line => line[(line.IndexOf('=', StringComparison.Ordinal) + 1)..].Trim())] : [];
+        }
+        catch (Exception error) when (error is IOException or UnauthorizedAccessException)
+        {
+            return [];
+        }
+    }
+
+    /// <summary>The pull request's files from a checkout whose remote is its repository; null for another repository.</summary>
+    static async Task<List<FilePair>?> FromCheckout(Place at, PullRequest pull, CancellationToken token)
+    {
         if (await RepoInfo.Remote(at, token).ConfigureAwait(false) is not { } remote ||
             !string.Equals(RepoInfo.Parse(remote.Url)?.Repository, pull.Repository, StringComparison.OrdinalIgnoreCase))
             return null;
@@ -189,20 +242,21 @@ public static class Loader
         var merge = listed.GetValueOrDefault(mergeRef);
         var tip = merge ?? listed.GetValueOrDefault("HEAD") ?? throw new IOException("The remote names no default branch.");
         // Only what is missing comes over the network; no ref is written, so the checkout's branches stay as they were.
-        if (!await Exists(at, head, token).ConfigureAwait(false) || !await Exists(at, tip, token).ConfigureAwait(false))
+        if (!await Exists(at, [head, tip], token).ConfigureAwait(false))
             await Git.Run(at, token, ["fetch", "--quiet", "--no-tags", "--no-write-fetch-head", remote.Name, headRef,
                 .. merge is null ? new[] { "HEAD" } : [mergeRef]]).ConfigureAwait(false);
-        var baseTip = merge is null ? tip : (await Git.Text(at, token, "rev-parse", merge + "^1").ConfigureAwait(false)).Trim();
-        var from = (await Git.Text(at, token, "merge-base", baseTip, head).ConfigureAwait(false)).Trim();
-        var (_, _, _, pairs) = await GitPairs(new(SourceKind.Revisions, request.Path, from, head) { Host = request.Host }, token).ConfigureAwait(false);
+        var from = (await Git.Text(at, token, "merge-base", merge is null ? tip : merge + "^1", head).ConfigureAwait(false)).Trim();
+        // Every Git call is a round trip over SSH, so the root is not asked for again.
+        var (_, _, _, pairs) = await GitPairs(new(SourceKind.Revisions, at.Path, from, head) { Host = at.Host }, token, at.Path).ConfigureAwait(false);
         return pairs;
     }
 
-    static async Task<bool> Exists(Place at, string revision, CancellationToken token)
+    /// <summary>True when every revision names a commit present in the checkout, asked in one Git call.</summary>
+    static async Task<bool> Exists(Place at, string[] revisions, CancellationToken token)
     {
         try
         {
-            await Git.Run(at, token, "rev-parse", "--verify", "--quiet", revision + "^{commit}").ConfigureAwait(false);
+            await Git.Run(at, token, ["rev-parse", "--quiet", .. revisions.Select(r => r + "^{commit}")]).ConfigureAwait(false);
             return true;
         }
         catch (IOException)

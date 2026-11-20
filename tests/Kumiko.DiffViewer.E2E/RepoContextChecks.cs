@@ -209,6 +209,11 @@ internal static class RepoContextChecks
         Publish("a.ts", "export const a = 3;\n");
         var updated = Loader.Load(Request(7), false, CancellationToken.None).GetAwaiter().GetResult();
         h.Check(updated.Files.Select(f => f.Path).SequenceEqual(["src/a.ts", "src/sort.ts"]) && !Since(before).Any(), "an updated pull request shows its new head");
+        // Opened from another checkout (here a folder that is no repository, as a server checkout would be far away),
+        // the pull request still comes from a known local clone of its repository.
+        var elsewhere = Request(7) with { Path = scratch, Clones = [Path.Combine(scratch, "home"), repo.Root] };
+        var cloned = Loader.Load(elsewhere, false, CancellationToken.None).GetAwaiter().GetResult();
+        h.Check(cloned.Files.Length == 2 && !Since(before).Any(), "a known local clone of the pull request's repository serves it");
         before = github.Fetches.Count;
         string failure;
         try

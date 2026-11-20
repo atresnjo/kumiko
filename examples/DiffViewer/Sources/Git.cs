@@ -115,7 +115,8 @@ public sealed class BlobReader : IAsyncDisposable
         process = Process.Start(start) ?? throw new IOException("Could not start git cat-file.");
         input = process.StandardInput;
         input.AutoFlush = false;
-        output = process.StandardOutput.BaseStream;
+        // Headers are read a byte at a time; a buffer keeps that from becoming a system call each.
+        output = new BufferedStream(process.StandardOutput.BaseStream, 1 << 16);
         _ = process.StandardError.ReadToEndAsync();
     }
 
@@ -125,6 +126,60 @@ public sealed class BlobReader : IAsyncDisposable
         await input.WriteAsync(name.AsMemory(), token).ConfigureAwait(false);
         await input.WriteAsync("\n".AsMemory(), token).ConfigureAwait(false);
         await input.FlushAsync(token).ConfigureAwait(false);
+        return await Answer(token).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Many objects in one exchange: every name is sent while the answers stream back in order, so a diff costs one
+    /// round trip rather than one per file, which over SSH is the whole difference.
+    /// </summary>
+    public async Task<byte[]?[]> ReadAll(IReadOnlyList<string> names, CancellationToken token)
+    {
+        var requests = Task.Run(async () =>
+        {
+            foreach (var name in names)
+            {
+                await input.WriteAsync(name.AsMemory(), token).ConfigureAwait(false);
+                await input.WriteAsync("\n".AsMemory(), token).ConfigureAwait(false);
+            }
+            await input.FlushAsync(token).ConfigureAwait(false);
+        }, token);
+        var answers = new byte[]?[names.Count];
+        for (int i = 0; i < answers.Length; i++)
+            answers[i] = await Answer(token).ConfigureAwait(false);
+        await requests.ConfigureAwait(false);
+        return answers;
+    }
+
+    /// <summary>
+    /// The sizes of many objects in one exchange through <c>git cat-file --batch-check</c>; -1 for a missing one.
+    /// Over SSH this tells which blobs are too large to carry before any is sent.
+    /// </summary>
+    public static async Task<long[]> Sizes(Place at, IReadOnlyList<string> names, CancellationToken token)
+    {
+        using var process = Process.Start(Git.Start(at, ["cat-file", "--batch-check"])) ?? throw new IOException("Could not start git cat-file.");
+        using var cancel = token.Register(() => Git.Kill(process));
+        _ = process.StandardError.ReadToEndAsync(token);
+        var requests = Task.Run(async () =>
+        {
+            foreach (var name in names)
+                await process.StandardInput.WriteAsync((name + "\n").AsMemory(), token).ConfigureAwait(false);
+            process.StandardInput.Close();
+        }, token);
+        var sizes = new long[names.Count];
+        for (int i = 0; i < sizes.Length; i++)
+        {
+            var line = await process.StandardOutput.ReadLineAsync(token).ConfigureAwait(false) ?? throw new IOException("git cat-file ended early.");
+            var parts = line.Split(' ');
+            sizes[i] = line.EndsWith(" missing", StringComparison.Ordinal) || line.EndsWith(" ambiguous", StringComparison.Ordinal) || parts.Length < 3 ||
+                !long.TryParse(parts[^1], out var size) ? -1 : size;
+        }
+        await requests.ConfigureAwait(false);
+        return sizes;
+    }
+
+    async Task<byte[]?> Answer(CancellationToken token)
+    {
         int length = 0;
         while (true)
         {
