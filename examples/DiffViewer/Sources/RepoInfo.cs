@@ -32,18 +32,24 @@ public static class RepoInfo
                 : branch.StartsWith("refs/heads/", StringComparison.Ordinal) ? branch["refs/heads/".Length..] : branch;
             worktrees.Add(new(path, branch, worktrees.Count == 0));
         }
-        string? url = null;
+        return (worktrees.ToImmutable(), (await Remote(at, token).ConfigureAwait(false))?.Url);
+    }
+
+    /// <summary>The name and URL of origin, else of the first remote; null without remotes.</summary>
+    public static async Task<(string Name, string Url)?> Remote(Place at, CancellationToken token)
+    {
         try
         {
             var remotes = (await Git.Text(at, token, "config", "--get-regexp", @"^remote\..*\.url$").ConfigureAwait(false))
                 .Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(line => line.Split(' ', 2)).Where(parts => parts.Length == 2).ToArray();
-            url = (remotes.FirstOrDefault(r => r[0] == "remote.origin.url") ?? remotes.FirstOrDefault())?[1].Trim();
+            var remote = remotes.FirstOrDefault(r => r[0] == "remote.origin.url") ?? remotes.FirstOrDefault();
+            return remote is null ? null : (remote[0]["remote.".Length..^".url".Length], remote[1].Trim());
         }
         catch (IOException)
         {
             // Git exits with 1 when the repository has no remotes.
+            return null;
         }
-        return (worktrees.ToImmutable(), url);
     }
 
     /// <summary>

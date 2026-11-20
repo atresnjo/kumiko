@@ -199,7 +199,14 @@ Launching from other tools (T3 actions, terminals)
   the diff of an open window. A launch for the worktree or `--pr` a window
   already shows opens another window instead of focusing and reloading it; a
   window that switched elsewhere since is still taken for it. A closed window
-  keeps its watcher and loads running.
+  keeps its watcher and loads running. Reloading, or toggling whitespace,
+  while `--pr` is still being looked up leaves the window loading forever.
+- A pull request of the open repository is read file by file through
+  GitHub's API instead of fetching its head into the checkout (locally or on
+  the SSH host) and diffing merge base to head there; a pull request whose
+  commits are already present is fetched again; a failed or hanging fetch,
+  or a checkout of another repository, does not fall back to the API. The
+  open repository's pull requests are preloaded through the API.
 
 Text selection
 

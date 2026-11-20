@@ -267,6 +267,7 @@ internal static class HistoryChecks
             }
             Fetches.Enqueue((token, path));
             Hold.Wait(TimeSpan.FromSeconds(20));
+
             return path switch
             {
                 "/repos/acme/widgets/pulls/7" => (200, $$"""

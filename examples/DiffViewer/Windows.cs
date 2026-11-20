@@ -24,8 +24,6 @@ internal sealed class DiffWindows(App app, Func<DiffRequest, Model> initial, Win
         // Outside a repository (opened from Finder or the Dock, whose folder is /), start in the project palette.
         if (!Arguments.InRepository(request))
             program.Send(new Msg.OpenQuick());
-        if (request.PullQuery is not null)
-            program.Send(new Msg.FindPull());
         var window = app.NewWindow(options with { DevMode = devMode }, program);
         fullScreen.Window = window;
         open.Add((program, window));

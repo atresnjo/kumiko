@@ -100,13 +100,17 @@ with the gh account of that host and open like any other, so `#` lists them firs
 With [gh](https://cli.github.com) installed, the palette also lists the open pull
 requests that involve any account `gh auth status` shows (authored, assigned, review
 requested or mentioned), each once, newest first; `#` (or "Pull Requests…") lists only
-them. `Enter` shows one from its merge base to its head, read through the GitHub API
-with the token of the account that found it, so no local clone is needed. The list is
+them. `Enter` shows one from its merge base to its head. A pull request of the open
+repository comes from its checkout (locally or on the SSH host) through Git alone:
+`ls-remote` names its head and GitHub's merge ref (whose first parent is the base), missing
+commits are fetched without writing any ref, and the diff is local; a 246-file pull request
+opens in about 2–3 s instead of 45 s through the API. Others, or one Git cannot reach, are
+read through the GitHub API with the token of the account that found them. The list is
 kept for a minute and searched again the next time the palette shows it after that;
 "Refresh Pull Requests" searches at once. Tokens come from `gh auth token` for each
 request and are only sent to that account's API host.
 
-The first five pull requests the palette shows load in the background, so choosing one
+The first five pull requests of other repositories the palette shows load in the background, so choosing one
 shows it at once; one chosen while it still loads waits for that load instead of
 starting another. A background load is kept until its pull request changes on GitHub
 or leaves the list, and one GitHub refuses is not retried until then (choosing it

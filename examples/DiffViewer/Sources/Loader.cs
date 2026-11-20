@@ -19,7 +19,7 @@ public static class Loader
         {
             SourceKind.Paths => Folders.Pairs(request.Path, request.Target!, token),
             SourceKind.Demo => Demo.Pairs(),
-            SourceKind.PullRequest => await GitHub.Pairs(request.Pull ?? throw new IOException("The pull request has not been found yet."), token).ConfigureAwait(false),
+            SourceKind.PullRequest => await PullPairs(request, token).ConfigureAwait(false),
             _ => await GitPairs(request, token).ConfigureAwait(false)
         };
         FilePair?[] pending = [.. pairs];
@@ -144,6 +144,58 @@ public static class Loader
         if (host is not null)
             detail += " on " + Remote.Name(host);
         return (name, detail, root, pairs);
+    }
+
+    /// <summary>A fetch that takes longer falls back to GitHub's API.</summary>
+    static readonly TimeSpan FetchLimit = TimeSpan.FromSeconds(90);
+
+    /// <summary>
+    /// A pull request's files. When the checkout it was opened from (locally or on an SSH host) has the pull request's
+    /// repository as its remote, Git alone serves it: ls-remote names its head and GitHub's merge ref, whose first
+    /// parent is the base tip (the remote's default branch without one), missing commits are fetched without writing
+    /// any ref, and merge base to head is diffed as revisions. Otherwise, or when Git fails, GitHub's API serves it.
+    /// </summary>
+    static async Task<(string, string, string, List<FilePair>)> PullPairs(DiffRequest request, CancellationToken token)
+    {
+        var pull = request.Pull ?? throw new IOException("The pull request has not been found yet.");
+        try
+        {
+            using var limit = CancellationTokenSource.CreateLinkedTokenSource(token);
+            limit.CancelAfter(FetchLimit);
+            if (await FromCheckout(request, pull, limit.Token).ConfigureAwait(false) is { } pairs)
+                return ($"{pull.Repository} #{pull.Number}", pull.Title, "", pairs);
+        }
+        catch (Exception error) when (error is IOException or System.ComponentModel.Win32Exception ||
+            error is OperationCanceledException && !token.IsCancellationRequested)
+        {
+            // The API below serves pull requests Git cannot reach: no access, a deleted head, a hung fetch.
+        }
+        return await GitHub.Pairs(pull, token).ConfigureAwait(false);
+    }
+
+    static async Task<List<FilePair>?> FromCheckout(DiffRequest request, PullRequest pull, CancellationToken token)
+    {
+        var at = new Place(request.Path, request.Host);
+        if (await RepoInfo.Remote(at, token).ConfigureAwait(false) is not { } remote ||
+            !string.Equals(RepoInfo.Parse(remote.Url)?.Repository, pull.Repository, StringComparison.OrdinalIgnoreCase))
+            return null;
+        var number = pull.Number.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        string headRef = $"refs/pull/{number}/head", mergeRef = $"refs/pull/{number}/merge";
+        var listed = (await Git.Text(at, token, "ls-remote", remote.Name, "HEAD", headRef, mergeRef).ConfigureAwait(false))
+            .Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(line => line.Split('\t')).Where(f => f.Length == 2)
+            .ToDictionary(f => f[1], f => f[0], StringComparer.Ordinal);
+        if (!listed.TryGetValue(headRef, out var head))
+            return null;
+        var merge = listed.GetValueOrDefault(mergeRef);
+        var tip = merge ?? listed.GetValueOrDefault("HEAD") ?? throw new IOException("The remote names no default branch.");
+        // Only what is missing comes over the network; no ref is written, so the checkout's branches stay as they were.
+        if (!await Exists(at, head, token).ConfigureAwait(false) || !await Exists(at, tip, token).ConfigureAwait(false))
+            await Git.Run(at, token, ["fetch", "--quiet", "--no-tags", "--no-write-fetch-head", remote.Name, headRef,
+                .. merge is null ? new[] { "HEAD" } : [mergeRef]]).ConfigureAwait(false);
+        var baseTip = merge is null ? tip : (await Git.Text(at, token, "rev-parse", merge + "^1").ConfigureAwait(false)).Trim();
+        var from = (await Git.Text(at, token, "merge-base", baseTip, head).ConfigureAwait(false)).Trim();
+        var (_, _, _, pairs) = await GitPairs(new(SourceKind.Revisions, request.Path, from, head) { Host = request.Host }, token).ConfigureAwait(false);
+        return pairs;
     }
 
     static async Task<bool> Exists(Place at, string revision, CancellationToken token)

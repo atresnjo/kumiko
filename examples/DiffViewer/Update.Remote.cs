@@ -144,24 +144,6 @@ internal sealed partial class DiffApp
             ? Loaded(opened, document) : opened;
     }
 
-    /// <summary>
-    /// Looks up the pull request of a --pr launch in the checkout's GitHub repository; nothing loads meanwhile, and a
-    /// failure shows why. SSH aliases in the remote resolve through the local SSH configuration.
-    /// </summary>
-    static (Model, Cmd<Msg>) FindPull(Model model)
-    {
-        if (model.Request is not { Kind: SourceKind.PullRequest, Pull: null, PullQuery: { } query } request)
-            return (model, Cmd<Msg>.None);
-        var generation = model.Generation;
-        if (model.GitHub is not { } config)
-            return (model with { Loading = false, Error = "Opening a pull request needs gh: brew install gh, then gh auth login." }, Cmd<Msg>.None);
-        var home = model.SshHome;
-        var place = new Place(request.Path, request.Host);
-        return (model with { Loading = true, Error = null }, Cmd<Msg>.Run("find-pull", async token => (Msg)new Msg.PullFound(generation,
-            await GitHub.FindPull(config, place, query, home is null ? null : alias => SshConfig.HostName(home, alias) ?? alias, token).ConfigureAwait(false)),
-            error => new Msg.Failed(generation, error.Message)));
-    }
-
     const int PrefetchCount = 5;
 
     /// <summary>Names a background load: the pull request as last updated, and the whitespace setting it was diffed with.</summary>
@@ -179,8 +161,14 @@ internal sealed partial class DiffApp
         var whitespace = model.IgnoreWhitespace;
         var path = model.ProjectPath;
         var host = model.Request.Host;
+        // The open repository's pull requests come from its checkout through Git when opened, which is quick; before
+        // its remote is known none are preloaded, so no API load starts for one of them.
+        if (model.Context is { Loading: true })
+            return (model, Cmd<Msg>.None);
+        var local = model.Context is { Remote: { } remote } context && context.Project == model.ProjectId ? remote.Repository : null;
         var wanted = quick.Items.Skip(QuickOpen.FirstVisible(quick.Selected, quick.Items.Length)).Take(QuickOpen.Rows)
-            .Select(item => item.Message).OfType<Msg.OpenPull>().Take(PrefetchCount).Select(open => open.Pull)
+            .Select(item => item.Message).OfType<Msg.OpenPull>().Select(open => open.Pull)
+            .Where(pull => !string.Equals(pull.Repository, local, StringComparison.OrdinalIgnoreCase)).Take(PrefetchCount)
             .Where(pull => !model.Prefetched.ContainsKey(PrefetchKey(pull, whitespace))).ToImmutableArray();
         if (wanted.IsEmpty)
             return (model, Cmd<Msg>.None);

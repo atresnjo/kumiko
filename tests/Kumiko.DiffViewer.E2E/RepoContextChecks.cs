@@ -37,6 +37,7 @@ internal static class RepoContextChecks
             using var github = new HistoryChecks.FakeGitHub();
             Palette(h, repo, scratch, home, github);
             Launches(h, repo, scratch, home, github);
+            PullViaGit(h, repo, scratch, github);
         }
         finally
         {
@@ -93,6 +94,8 @@ internal static class RepoContextChecks
             "the repository's open pull requests are listed from one request, drafts marked");
         h.Check(items.Where(i => i.Group == "Pull requests").Select(i => i.Hint).SequenceEqual(["#3"]),
             "other pull requests leave out the ones of the open repository");
+        h.Check(M().Prefetched.Keys.All(k => !k.Contains("/acme/widgets/", StringComparison.Ordinal)) && !M().Prefetched.IsEmpty,
+            "the open repository's pull requests are not preloaded through the API; other ones are");
         h.Artifact(t, "repo-context");
         t.TypeText("#");
         t.Settle();
@@ -111,7 +114,7 @@ internal static class RepoContextChecks
             Arguments.Parse(["--repo=box:~/app", "--pr=7"], "/tmp") is { Kind: SourceKind.PullRequest, Host: "box", Path: "~/app", PullQuery: "7" } &&
             Arguments.Parse(["--pr=https://github.com/acme/widgets/pull/7"], feature).PullQuery == "https://github.com/acme/widgets/pull/7",
             "--pr, --pr=N and --pr=URL ask for a pull request of the checkout");
-        Model Find(string[] args, string directory)
+        Model Find(string[] args, string directory, bool reload = false)
         {
             var request = Arguments.Parse(args, directory);
             using var program = DiffApp.CreateProgram(DiffApp.Init with
@@ -123,8 +126,13 @@ internal static class RepoContextChecks
             program.RetainHistory = false;
             using var t = new Tester(program, new(1280, 820, DevMode: true));
             t.Settle();
+            // Reloading while the pull request is looked up starts the lookup again instead of waiting forever.
+            if (reload)
+            {
+                program.Send(new Msg.Reload());
+                program.Send(new Msg.ToggleWhitespace());
+            }
             var flashed = false;
-            program.Send(new Msg.FindPull());
             for (int i = 0; i < 2000 && program.Model is { Request.Pull: null, Error: null }; i++)
             {
                 flashed |= program.Model.Document.Files.Length > 0;
@@ -137,6 +145,7 @@ internal static class RepoContextChecks
         var branch = Find(["--pr"], feature);
         h.Check(branch.Request is { Kind: SourceKind.PullRequest, Pull.Number: 9, PullQuery: "" } && branch.Error is null,
             $"--pr in a worktree opens the open pull request of its branch ({branch.Request.Pull?.Number}, {branch.Error})");
+        h.Check(Find(["--pr"], feature, reload: true).Request.Pull?.Number == 9, "reloading during the lookup still opens the pull request");
         h.Check(Find(["--pr=7"], feature).Request.Pull?.Number == 7 && Find(["--pr=https://github.com/acme/widgets/pull/7"], "/").Request.Pull?.Number == 7,
             "--pr=N and a pull request URL open that pull request");
         var none = Find(["--pr"], repo.Root);
@@ -153,5 +162,64 @@ internal static class RepoContextChecks
             !DiffWindows.Shows(branch, Arguments.Parse([], feature)), "a launch for the --pr a window shows is routed to it");
         var moved = DiffApp.Update(branch, new Msg.OpenProject(repo.Root)).Item1;
         h.Check(!DiffWindows.Shows(moved, Arguments.Parse(["--pr"], feature)), "a window that switched elsewhere no longer takes that launch");
+    }
+
+    /// <summary>
+    /// A pull request of the open repository comes from Git alone: ls-remote names its head and GitHub's merge ref
+    /// (whose first parent is the base), missing commits are fetched from the checkout's remote (a bare repository
+    /// standing in for GitHub through url.insteadOf), and merge base to head is diffed there. No API request is made.
+    /// A pull request Git cannot reach falls back to the API.
+    /// </summary>
+    static void PullViaGit(Harness h, Repository repo, string scratch, HistoryChecks.FakeGitHub github)
+    {
+        var origin = Path.Combine(scratch, "widgets-origin.git");
+        repo.Git("init", "-q", "--bare", "-b", "main", origin);
+        repo.Git("config", "url." + origin + ".insteadOf", "git@github-work:acme/widgets.git");
+        repo.Git("push", "-q", "origin", "main");
+        var contributor = Path.Combine(scratch, "contributor");
+        repo.Git("clone", "-q", origin, contributor);
+        void Publish(string file, string text)
+        {
+            repo.Git("-C", contributor, "checkout", "-q", "-B", "sorting");
+            File.WriteAllText(Path.Combine(contributor, "src", file), text);
+            repo.Git("-C", contributor, "add", "-A");
+            repo.Git("-C", contributor, "commit", "-q", "-m", "Add widget sorting");
+            repo.Git("-C", contributor, "push", "-q", "-f", "origin", "HEAD:refs/pull/7/head");
+            // GitHub's test merge of the head into the base: its first parent is the base's tip.
+            repo.Git("-C", contributor, "checkout", "-q", "--detach", "origin/main");
+            repo.Git("-C", contributor, "merge", "-q", "--no-ff", "-m", "Merge pull request 7", "sorting");
+            repo.Git("-C", contributor, "push", "-q", "-f", "origin", "HEAD:refs/pull/7/merge");
+        }
+        Publish("sort.ts", "export const order = \"desc\";\n");
+        var account = new GitHubAccount(new GitHubConfig(github.Gh, github.Api), "github.com", "alice");
+        DiffRequest Request(int number) => new(SourceKind.PullRequest, repo.Root)
+        {
+            Pull = new PullRequest(account, "acme/widgets", number, "Add widget sorting", "alice", false, DateTimeOffset.UnixEpoch,
+                $"https://github.com/acme/widgets/pull/{number}")
+        };
+        IEnumerable<string> Since(int count) => github.Fetches.Skip(count).Select(f => f.Path);
+        var before = github.Fetches.Count;
+        var fetched = Loader.Load(Request(7), false, CancellationToken.None).GetAwaiter().GetResult();
+        h.Check(fetched.Files.Select(f => (f.Path, f.Status)).SequenceEqual([("src/sort.ts", Core.FileStatus.Added)]) &&
+            fetched is { Title: "acme/widgets #7", Detail: "Add widget sorting" },
+            $"a pull request of the open repository shows its changes from the merge base ({string.Join(", ", fetched.Files.Select(f => f.Path))})");
+        var head = repo.Git("-C", contributor, "rev-parse", "sorting").Trim();
+        h.Check(!Since(before).Any() && repo.Git("cat-file", "-t", head).Trim() == "commit",
+            $"its head is fetched into the checkout without asking GitHub's API ({string.Join(", ", Since(before))})");
+        Publish("a.ts", "export const a = 3;\n");
+        var updated = Loader.Load(Request(7), false, CancellationToken.None).GetAwaiter().GetResult();
+        h.Check(updated.Files.Select(f => f.Path).SequenceEqual(["src/a.ts", "src/sort.ts"]) && !Since(before).Any(), "an updated pull request shows its new head");
+        before = github.Fetches.Count;
+        string failure;
+        try
+        {
+            Loader.Load(Request(8), false, CancellationToken.None).GetAwaiter().GetResult();
+            failure = "loaded";
+        }
+        catch (Exception error) when (error is HttpRequestException or IOException)
+        {
+            failure = error.Message;
+        }
+        h.Check(Since(before).Contains("/repos/acme/widgets/pulls/8"), $"a pull request Git cannot reach falls back to the API ({failure})");
     }
 }
