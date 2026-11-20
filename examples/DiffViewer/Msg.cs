@@ -71,6 +71,9 @@ internal abstract partial record Msg
     /// <summary>A background load of a listed pull request finished; no document means it failed.</summary>
     public sealed record PullPrefetched(string Key, DiffDocument? Document) : Msg;
     public sealed record CommitsFound(string Project, ImmutableArray<Commit> Commits) : Msg;
+    public sealed record HostsFound(ImmutableArray<SshHost> Hosts) : Msg;
+    /// <summary>Fills the palette's query with <c>host:~/</c>, keeping it open for the path.</summary>
+    public sealed record PickHost(string Alias) : Msg;
     /// <summary>Shows a commit of the open project against its first parent.</summary>
     public sealed record OpenCommit(Commit Commit) : Msg;
     /// <summary>A background save finished; nothing changes.</summary>

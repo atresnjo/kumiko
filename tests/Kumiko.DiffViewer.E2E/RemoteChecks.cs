@@ -39,6 +39,7 @@ internal static class RemoteChecks
             Loads(h, repo, log);
             Palette(h, repo, scratch);
             Failures(h);
+            SshHostChecks.Run(h, scratch);
         }
         finally
         {

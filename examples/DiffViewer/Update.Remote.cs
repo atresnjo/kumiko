@@ -28,7 +28,9 @@ internal sealed partial class DiffApp
             : Cmd<Msg>.Run("commits", async token => (Msg)new Msg.CommitsFound(project, await Commits.Log(place, token).ConfigureAwait(false)),
                 _ => new Msg.CommitsFound(project, []));
         var (searched, pulls) = next.Pulls is { Loading: false } list && (!list.Loaded || list.Stale) ? FetchPulls(next) : (next, Cmd<Msg>.None);
-        return (searched, Cmd<Msg>.Batch(commits, pulls));
+        var hosts = next.SshHome is not { } home ? Cmd<Msg>.None
+            : Cmd<Msg>.Run("ssh-hosts", _ => Task.Run(() => (Msg)new Msg.HostsFound(SshConfig.Hosts(home))), _ => new Msg.HostsFound([]));
+        return (searched, Cmd<Msg>.Batch(commits, pulls, hosts));
     }
 
     /// <summary>Searches pull requests of every gh account; the cached list stays listed until the result arrives.</summary>

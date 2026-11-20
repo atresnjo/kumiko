@@ -83,6 +83,7 @@ internal sealed partial class DiffApp : IKumiko<Model, Msg>
         Msg.SearchStep step when model.Search is { Found.Length: > 0 } search => Step(model, search, step.Direction),
         Msg.CloseOverlay => model with { Finder = null, Search = null, Help = false, Quick = null },
         Msg.CommitsFound commits => CommitsFound(model, commits),
+        Msg.HostsFound hosts => Requery(model with { SshHosts = hosts.Hosts }),
         Msg.OpenPull pull => OpenPull(model, pull.Pull),
         Msg.PullPrefetched prefetched => Prefetched(model, prefetched),
         Msg.OpenCommit commit => OpenCommit(model, commit.Commit),
@@ -103,7 +104,7 @@ internal sealed partial class DiffApp : IKumiko<Model, Msg>
             Loading = true
         },
         Msg.FinderStep or Msg.FinderAccept or Msg.SearchStep or Msg.SelectionStep or Msg.TextDrag or Msg.TextRelease => model,
-        Msg.QuickQuery or Msg.QuickStep or Msg.QuickAccept or Msg.OpenProject or Msg.Saved => model,
+        Msg.QuickQuery or Msg.QuickStep or Msg.QuickAccept or Msg.OpenProject or Msg.Saved or Msg.PickHost => model,
         Msg.OpenQuick or Msg.RefreshPulls or Msg.PullsFound or Msg.PullsExpired => model,
         Msg.Navigate navigate => model with { Navigation = model.Navigation.Move(navigate.Request, "app") },
         _ => model

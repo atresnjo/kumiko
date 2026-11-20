@@ -43,10 +43,13 @@ arrive in one `tar` stream. A load's calls share one connection, kept for a minu
 `/tmp/kumiko-diff-$USER` (or `$XDG_RUNTIME_DIR`), so reloading opens no new login.
 `DIFF_SSH` names another client, such as a wrapper adding `-i` or `-J` options.
 
-Remote checkouts are remembered with their host in the palette's recent list, and typing
-`host:/path` or `host:~/path` in `⌘K` opens one. Staged changes, commits, pull requests
-and "Show Working Tree Changes" stay on that host. The disk is not watched remotely:
-press `r` to reload.
+`⌘K` lists the hosts of `~/.ssh/config` (and the files it `Include`s) under "SSH hosts",
+leaving out wildcard patterns, `Match` blocks and Git hosting services such as GitHub.
+`Enter` on a host fills in `host:~/` and keeps the palette open for the path; that host's
+recent checkouts are listed beside it, narrowed as you type. Typing `host:/path` or
+`host:~/path` directly works too, and opened checkouts are remembered with their host.
+Staged changes, commits, pull requests and "Show Working Tree Changes" stay on that host.
+The disk is not watched remotely: press `r` to reload.
 
 ## Projects and worktrees
 

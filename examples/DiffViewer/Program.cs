@@ -50,7 +50,8 @@ using var app = new App(new("Diff"));
 var fullScreen = new WindowFullScreen(app);
 using var program = DiffApp.CreateProgram(initial with
 {
-    GitHub = GitHubConfig.Default()
+    GitHub = GitHubConfig.Default(),
+    SshHome = store.Home
 }, new KumikoServices().Add<IFullScreen>(fullScreen));
 if (outside)
     program.Send(new Msg.OpenQuick());

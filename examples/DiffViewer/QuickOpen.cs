@@ -17,6 +17,11 @@ internal sealed record QuickItem(string Id, string Label, string Detail, string 
 internal sealed record QuickOpen(string Query = "", int Selected = 0)
 {
     public ImmutableArray<QuickItem> Items { get; init; } = [];
+    /// <summary>Changes when an update replaces the typed query, so the field starts afresh with the caret at its end.</summary>
+    public int Field
+    {
+        get; init;
+    }
 
     public const int Limit = 200;
     /// <summary>Rows the palette shows at once, a window around the highlight.</summary>
@@ -37,13 +42,15 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
             '#' => PullItems(model),
             '@' => CommitItems(model),
             _ when text.Length == 0 => [.. ProjectItems(model, true), .. PullItems(model), .. CommitItems(model).Take(RecentCommits),
-                .. ProjectItems(model, false), .. Commands(model)],
-            _ => [.. PathItem(model, text), .. ProjectItems(model, true), .. ProjectItems(model, false), .. PullItems(model),
+                .. HostItems(model), .. ProjectItems(model, false), .. Commands(model)],
+            _ => [.. PathItem(model, text), .. ProjectItems(model, true), .. HostItems(model), .. ProjectItems(model, false), .. PullItems(model),
                 .. CommitItems(model), .. Commands(model)]
         };
         if (text.Length == 0)
             return [.. pool.Take(Limit)];
-        if (text.StartsWith('/') || text.StartsWith('~') || Remote.TryParse(text, out _, out _))
+        if (Remote.TryParse(text, out var host, out var path))
+            return [.. pool.Take(1), .. HostRecents(model, host, path, text)];
+        if (text.StartsWith('/') || text.StartsWith('~'))
             return [.. pool.Take(1)];
         return [.. pool.Select(item => (Item: item, Score: Score(text, item)))
             .Where(r => r.Score >= 0).OrderByDescending(r => r.Score).Take(Limit).Select(r => r.Item)];
@@ -105,6 +112,22 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
             yield return new("pull:" + pull.Url, pull.Title, current ? "current · " + detail : detail, group, icon, new Msg.OpenPull(pull),
                 "#" + pull.Number.ToString(System.Globalization.CultureInfo.InvariantCulture));
         }
+    }
+
+    /// <summary>The SSH hosts of ~/.ssh/config; choosing one fills in <c>host:~/</c> for the path.</summary>
+    static IEnumerable<QuickItem> HostItems(Model model) => model.SshHosts.Select(host =>
+        new QuickItem("host:" + host.Alias, host.Alias, host.Address, "SSH hosts", Hugeicons.CloudServer, new Msg.PickHost(host.Alias), "SSH"));
+
+    /// <summary>
+    /// Recent checkouts on the host of a typed <c>host:path</c> whose path matches what is typed after the home or
+    /// root; the typed checkout itself is the path row.
+    /// </summary>
+    static IEnumerable<QuickItem> HostRecents(Model model, string host, string path, string typed)
+    {
+        var part = path.StartsWith("~/", StringComparison.Ordinal) ? path[2..] : path.TrimStart('~', '/');
+        foreach (var recent in model.Recent)
+            if (recent != typed && Remote.TryParse(recent, out var other, out var where) && other == host && (part.Length == 0 || Fuzzy(part, where) >= 0))
+                yield return Item(model, new(recent, Path.GetFileName(recent), ""), "Recent");
     }
 
     /// <summary>The open project's newest commits; the one being shown is marked.</summary>

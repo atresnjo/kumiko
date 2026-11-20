@@ -73,7 +73,15 @@ Remote checkouts (SSH)
   local project with the same path as current, or reopens a recent remote
   checkout as a local folder. Switching to staged changes, a commit or a pull
   request and back loses the host.
-- Tests reach a real host or the user's SSH configuration.
+- ⌘K does not list the `Host` aliases of `~/.ssh/config` and the files it
+  `Include`s, or lists wildcard or negated patterns, `Match` blocks, Git hosting
+  hosts (github.com and aliases whose HostName is one) or one alias twice. A
+  host's detail is not its user@HostName.
+- Choosing a host closes the palette instead of filling in `host:~/` with the
+  field ready for the path. While a `host:path` is typed, that host's recent
+  checkouts are not offered beside it.
+- Tests reach a real host or the user's SSH configuration; offscreen runs list
+  the user's hosts.
 
 Viewing and keyboard
 

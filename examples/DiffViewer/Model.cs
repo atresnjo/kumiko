@@ -184,6 +184,13 @@ internal sealed record Model
     /// <summary>The newest commits of <see cref="CommitsOf"/>, read each time the palette opens.</summary>
     public ImmutableArray<Commit> Commits { get; init; } = [];
     public string CommitsOf { get; init; } = "";
+    /// <summary>The home folder whose ~/.ssh/config lists hosts in the palette; null (offscreen runs) lists none.</summary>
+    public string? SshHome
+    {
+        get; init;
+    }
+    /// <summary>The SSH hosts, read again each time the palette opens.</summary>
+    public ImmutableArray<SshHost> SshHosts { get; init; } = [];
     /// <summary>Where projects are cached and recent ones saved; null keeps the palette to the open project.</summary>
     public ProjectStore? Store
     {

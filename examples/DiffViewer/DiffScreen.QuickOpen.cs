@@ -38,8 +38,8 @@ internal sealed partial class DiffScreen
         using (C.Div(key: "input").Row().FillWidth().ItemsCenter().Gap(Space.S2).Px(Space.S1))
         {
             C.Icon(Hugeicons.Search01, 15, p.Muted, key: "icon");
-            Ui.TextField("query", "Open project", quick.Query, static text => new Msg.QuickQuery(text),
-                new("Projects, # pull requests, @ commits, > commands", width - 120)
+            Ui.TextField("query" + quick.Field.ToString(C.Culture), "Open project", quick.Query, static text => new Msg.QuickQuery(text),
+                new("Projects, hosts, # pull requests, @ commits, > commands", width - 120)
                 {
                     AutoFocus = true
                 });

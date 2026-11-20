@@ -16,7 +16,7 @@ internal sealed partial class DiffApp
                 selected = i;
         return model with
         {
-            Quick = new QuickOpen(query, Math.Clamp(selected, 0, Math.Max(0, items.Length - 1))) { Items = items }
+            Quick = new QuickOpen(query, Math.Clamp(selected, 0, Math.Max(0, items.Length - 1))) { Items = items, Field = model.Quick?.Field ?? 0 }
         };
     }
 
@@ -39,6 +39,12 @@ internal sealed partial class DiffApp
         // Refreshing pull requests keeps the palette open to show them.
         if (at < quick.Items.Length && quick.Items[at].Message is Msg.RefreshPulls)
             return FetchPulls(model);
+        // A host keeps the palette open, with its name filled in, for the path.
+        if (at < quick.Items.Length && quick.Items[at].Message is Msg.PickHost pick)
+        {
+            var picked = Quick(model, pick.Alias + ":~/", 0);
+            return (picked with { Quick = picked.Quick! with { Field = quick.Field + 1 } }, Cmd<Msg>.None);
+        }
         var closed = model with
         {
             Quick = null
