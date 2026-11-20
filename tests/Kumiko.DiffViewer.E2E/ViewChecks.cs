@@ -197,7 +197,9 @@ internal static class ViewChecks
         h.Check(model.CursorFile.Path == "src/a.ts" && after == before, $"a reload keeps the cursor on its line ({before} / {after})");
         program.Send(new Msg.Loaded(model.Generation - 1, DiffDocument.Empty));
         t.Settle();
-        h.Check(program.Model.Document == document, "results of an older load are ignored");
+        // The edit's own watcher reload may land meanwhile; what must never show is the stale, empty result.
+        h.Check(!ReferenceEquals(program.Model.Document, DiffDocument.Empty) && program.Model.Document.Files.Length == document.Files.Length,
+            "results of an older load are ignored");
     }
 
     static Rect Node(Tester t, string text)

@@ -38,20 +38,25 @@ internal sealed partial class DiffScreen
         using (C.Div(key: "input").Row().FillWidth().ItemsCenter().Gap(Space.S2).Px(Space.S1))
         {
             C.Icon(Hugeicons.Search01, 15, p.Muted, key: "icon");
-            Ui.TextField("query", "Open project", quick.Query, static text => new Msg.QuickQuery(text),
-                new("Projects, # pull requests, @ commits, > commands", width - 120)
+            Ui.TextField("query" + quick.Field.ToString(C.Culture), "Open project", quick.Query, static text => new Msg.QuickQuery(text),
+                new("Projects, hosts, # pull requests, @ commits, > commands", width - 150)
                 {
                     AutoFocus = true
                 });
-            var status = Model.Pulls.Loading ? "Loading pull requests…" : Model.Scanning ? "Scanning…" : $"{Model.Projects.Length.ToString(C.Culture)} projects";
-            C.Text(status, new(11, Color: p.Muted), key: "status");
+            // The field shows the host being searched.
+            var status = Model.HostRepos.Values.Any(r => r.Loading) ? "Finding repos…" : Model.Pulls.Loading ? "Loading pull requests…"
+                : Model.Scanning ? "Scanning…" : $"{Model.Projects.Length.ToString(C.Culture)} projects";
+            using (C.Div(key: "status").Flex().MinWidth(0).Clip())
+                C.Text(status, new(11, Color: p.Muted)
+                {
+                    Overflow = TextOverflow.Ellipsis
+                }, key: "text");
         }
         int first = QuickOpen.FirstVisible(selected, items.Length);
-        var grouped = quick.Query.Length == 0;
         for (int i = first; i < Math.Min(items.Length, first + QuickRows); i++)
         {
             var item = items[i];
-            if (grouped && (i == first || items[i - 1].Group != item.Group))
+            if (i == first || items[i - 1].Group != item.Group)
                 using (C.Div(key: "group:" + item.Group + i.ToString(C.Culture)).FillWidth().Height(22).Row().Items(Align.End).Px(Space.S2))
                     C.Text(item.Group.ToUpperInvariant(), new(10.5f, Weight.Semibold, p.Muted), key: "text");
             QuickRow(p, item, i, i == selected);

@@ -17,6 +17,11 @@ internal sealed record QuickItem(string Id, string Label, string Detail, string 
 internal sealed record QuickOpen(string Query = "", int Selected = 0)
 {
     public ImmutableArray<QuickItem> Items { get; init; } = [];
+    /// <summary>Changes when an update replaces the typed query, so the field starts afresh with the caret at its end.</summary>
+    public int Field
+    {
+        get; init;
+    }
 
     public const int Limit = 200;
     /// <summary>Rows the palette shows at once, a window around the highlight.</summary>
@@ -34,19 +39,28 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
         IEnumerable<QuickItem> pool = scope switch
         {
             '>' => Commands(model),
-            '#' => PullItems(model),
+            '#' => [.. RepoPullItems(model), .. PullItems(model)],
             '@' => CommitItems(model),
-            _ when text.Length == 0 => [.. ProjectItems(model, true), .. PullItems(model), .. CommitItems(model).Take(RecentCommits),
-                .. ProjectItems(model, false), .. Commands(model)],
-            _ => [.. PathItem(model, text), .. ProjectItems(model, true), .. ProjectItems(model, false), .. PullItems(model),
-                .. CommitItems(model), .. Commands(model)]
+            // The open repository first: its worktrees, then its pull requests, then recent projects and the rest.
+            _ when text.Length == 0 => [.. ProjectItems(model, true).Where(i => i.Group == Worktrees), .. RepoPullItems(model),
+                .. ProjectItems(model, true).Where(i => i.Group != Worktrees), .. PullItems(model), .. CommitItems(model).Take(RecentCommits),
+                .. HostItems(model), .. ProjectItems(model, false), .. Commands(model)],
+            _ => [.. PathItem(model, text), .. ProjectItems(model, true), .. RepoPullItems(model), .. HostItems(model), .. ProjectItems(model, false),
+                .. PullItems(model), .. CommitItems(model), .. Commands(model)]
         };
         if (text.Length == 0)
             return [.. pool.Take(Limit)];
+        // On a host, its recent checkouts and repositories come before the bare path, so Enter opens a repository.
+        if (Remote.TryParse(text, out var host, out var path))
+            return [.. HostRecents(model, host, path, text), .. HostRepositories(model, host, path, text), .. pool.Take(1)];
         if (text.StartsWith('/') || text.StartsWith('~'))
             return [.. pool.Take(1)];
-        return [.. pool.Select(item => (Item: item, Score: Score(text, item)))
-            .Where(r => r.Score >= 0).OrderByDescending(r => r.Score).Take(Limit).Select(r => r.Item)];
+        // Matches stay in their groups, so each shows under its heading: groups by their best match, rows by score.
+        // The best match overall stays first, for Enter.
+        return [.. pool.Select(item => (Item: item, Score: Score(text, item))).Where(r => r.Score >= 0)
+            .GroupBy(r => r.Item.Group, StringComparer.Ordinal)
+            .Select((group, order) => (Best: group.Max(r => r.Score), Order: order, Rows: group.OrderByDescending(r => r.Score)))
+            .OrderByDescending(g => g.Best).ThenBy(g => g.Order).SelectMany(g => g.Rows).Take(Limit).Select(r => r.Item)];
     }
 
     static double Score(string query, QuickItem item)
@@ -59,9 +73,14 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
         return score < 0 ? score : score + (item.Group == "Recent" ? 25 : 0);
     }
 
-    /// <summary>A typed absolute or home-relative path opens as a project.</summary>
+    /// <summary>A typed absolute or home-relative path, or a remote host:path, opens as a project.</summary>
     static IEnumerable<QuickItem> PathItem(Model model, string text)
     {
+        if (Remote.TryParse(text, out _, out _))
+        {
+            yield return new("path:" + text, "Open " + text, "over SSH", "Open", Hugeicons.FolderCloud, new Msg.OpenProject(text));
+            yield break;
+        }
         if (!(text.StartsWith('/') || text.StartsWith('~')))
             yield break;
         var path = text.StartsWith('~') && model.Store is { } store ? store.Home + text[1..] : text;
@@ -74,16 +93,45 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
     /// </summary>
     static IEnumerable<QuickItem> ProjectItems(Model model, bool near)
     {
-        var current = model.ProjectPath;
+        var current = model.ProjectId;
         var family = model.Projects.FirstOrDefault(p => p.Path == current)?.Family ?? current;
         var siblings = model.Projects.Where(p => p.Family == family).ToImmutableArray();
-        var worktrees = siblings.Length > 1 ? siblings.Select(p => Item(model, p, "Worktrees")) : [];
+        // Git's own list once read (it covers remote checkouts too), else the worktrees discovery found.
+        var listed = ContextWorktrees(model);
+        var worktrees = listed.Length > 1 ? listed.Select(p => Item(model, p, Worktrees))
+            : siblings.Length > 1 ? siblings.Select(p => Item(model, p, Worktrees)) : [];
         var recent = model.Recent.Select(path => Item(model, model.Projects.FirstOrDefault(p => p.Path == path) ?? new(path, Path.GetFileName(path), ""), "Recent"));
         var shown = worktrees.Concat(recent).DistinctBy(item => item.Id, StringComparer.Ordinal).ToImmutableArray();
         if (near)
             return shown;
-        var listed = shown.Select(item => item.Id).ToImmutableHashSet(StringComparer.Ordinal);
-        return model.Projects.Select(p => Item(model, p, "Projects")).Where(item => !listed.Contains(item.Id));
+        var ids = shown.Select(item => item.Id).ToImmutableHashSet(StringComparer.Ordinal);
+        return model.Projects.Select(p => Item(model, p, "Projects")).Where(item => !ids.Contains(item.Id));
+    }
+
+    const string Worktrees = "Worktrees";
+
+    /// <summary>The open repository's worktrees as Git lists them, main first, named as discovery names them.</summary>
+    static ImmutableArray<Project> ContextWorktrees(Model model)
+    {
+        if (model.Context is not { } context || context.Project != model.ProjectId || context.Worktrees.IsEmpty)
+            return [];
+        var host = model.Request.Host;
+        string Id(string path) => host is null ? path : Remote.Format(host, path);
+        var main = context.Worktrees[0];
+        var name = Path.GetFileName(main.Path);
+        return [.. context.Worktrees.OrderBy(w => !w.Main).ThenBy(w => Path.GetFileName(w.Path), StringComparer.OrdinalIgnoreCase)
+            .Select(w => new Project(Id(w.Path), w.Main ? name : name + "/" + Path.GetFileName(w.Path), w.Branch, w.Main ? null : Id(main.Path)))];
+    }
+
+    /// <summary>The open repository's pull requests on GitHub; a failed read shows its reason.</summary>
+    static IEnumerable<QuickItem> RepoPullItems(Model model)
+    {
+        if (model.Context is not { Remote: { } remote } context || context.Project != model.ProjectId)
+            return [];
+        var group = "Pull requests · " + remote.Name;
+        var error = context.Error is { } reason ? [new QuickItem("repo-pulls:error", "Pull requests of " + remote.Repository + " unavailable", reason, group,
+            Hugeicons.Alert02, new Msg.OpenQuick("#"))] : Array.Empty<QuickItem>();
+        return error.Concat(context.Pulls.Select(pull => PullItem(model, pull, group, false)));
     }
 
     /// <summary>Open pull requests of the gh accounts; a failed search shows its reason as a row that retries.</summary>
@@ -92,20 +140,60 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
         const string group = "Pull requests";
         if (model.Pulls.Error is { } error)
             yield return new("pulls:error", "Pull requests unavailable", error, group, Hugeicons.Alert02, new Msg.RefreshPulls());
+        // The open repository's pull requests are listed above, on their own.
+        var above = RepoPullItems(model).Select(item => item.Id).ToImmutableHashSet(StringComparer.Ordinal);
         foreach (var pull in model.Pulls.Items)
-        {
-            var current = model.Request.Pull?.Url == pull.Url;
-            var icon = current ? Hugeicons.Tick02 : pull.Draft ? Hugeicons.GitPullRequestDraft : Hugeicons.GitPullRequest;
-            var detail = $"{pull.Repository} · {pull.Author}{(pull.Draft ? " · draft" : "")}";
-            yield return new("pull:" + pull.Url, pull.Title, current ? "current · " + detail : detail, group, icon, new Msg.OpenPull(pull),
-                "#" + pull.Number.ToString(System.Globalization.CultureInfo.InvariantCulture));
-        }
+            if (!above.Contains("pull:" + pull.Url))
+                yield return PullItem(model, pull, group, true);
+    }
+
+    static QuickItem PullItem(Model model, PullRequest pull, string group, bool repository)
+    {
+        var current = model.Request.Pull?.Url == pull.Url;
+        var icon = current ? Hugeicons.Tick02 : pull.Draft ? Hugeicons.GitPullRequestDraft : Hugeicons.GitPullRequest;
+        var detail = $"{(repository ? pull.Repository + " · " : "")}{pull.Author}{(pull.Draft ? " · draft" : "")}";
+        return new("pull:" + pull.Url, pull.Title, current ? "current · " + detail : detail, group, icon, new Msg.OpenPull(pull),
+            "#" + pull.Number.ToString(System.Globalization.CultureInfo.InvariantCulture));
+    }
+
+    /// <summary>The SSH hosts of ~/.ssh/config; choosing one fills in <c>host:~/</c> for the path.</summary>
+    static IEnumerable<QuickItem> HostItems(Model model) => model.SshHosts.Select(host =>
+        new QuickItem("host:" + host.Alias, host.Alias, host.Address, "SSH hosts", Hugeicons.ComputerTerminal01, new Msg.PickHost(host.Alias), "SSH"));
+
+    /// <summary>
+    /// Recent checkouts on the host of a typed <c>host:path</c> whose path matches what is typed after the home or
+    /// root; the typed checkout itself is the path row.
+    /// </summary>
+    static IEnumerable<QuickItem> HostRecents(Model model, string host, string path, string typed)
+    {
+        var part = path.StartsWith("~/", StringComparison.Ordinal) ? path[2..] : path.TrimStart('~', '/');
+        foreach (var recent in model.Recent)
+            if (recent != typed && Remote.TryParse(recent, out var other, out var where) && other == host && (part.Length == 0 || Fuzzy(part, where) >= 0))
+                yield return Item(model, new(recent, Path.GetFileName(recent), ""), "Recent");
+    }
+
+    /// <summary>
+    /// The repositories found on a host whose path matches what is typed, best matches first; a failed search is a
+    /// row that searches again.
+    /// </summary>
+    static IEnumerable<QuickItem> HostRepositories(Model model, string host, string path, string typed)
+    {
+        if (!model.HostRepos.TryGetValue(host, out var found))
+            return [];
+        var group = "On " + Remote.Name(host);
+        if (found.Error is { } error)
+            return [new("repos:error:" + host, "Could not list repositories on " + Remote.Name(host), error, group, Hugeicons.Alert02, new Msg.SearchHost(host))];
+        var part = path.StartsWith("~/", StringComparison.Ordinal) ? path[2..] : path.TrimStart('~', '/');
+        var recent = model.Recent.ToImmutableHashSet(StringComparer.Ordinal);
+        return found.Paths.Select(where => (Id: Remote.Format(host, where), Where: where, Score: part.Length == 0 ? 0 : Fuzzy(part, where)))
+            .Where(r => r.Score >= 0 && r.Id != typed && !recent.Contains(r.Id)).OrderByDescending(r => r.Score)
+            .Select(r => Item(model, new(r.Id, r.Where == "~" ? "~" : Path.GetFileName(r.Where), ""), group));
     }
 
     /// <summary>The open project's newest commits; the one being shown is marked.</summary>
     static IEnumerable<QuickItem> CommitItems(Model model)
     {
-        if (model.CommitsOf != model.ProjectPath)
+        if (model.CommitsOf != model.ProjectId)
             yield break;
         foreach (var commit in model.Commits)
         {
@@ -117,9 +205,11 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
 
     static QuickItem Item(Model model, Project project, string group)
     {
-        var current = project.Path == model.ProjectPath;
+        var current = project.Path == model.ProjectId;
         var path = model.Store?.Tilde(project.Path) ?? project.Path;
-        var icon = current ? Hugeicons.Tick02 : project.Worktree ? Hugeicons.GitFork : Hugeicons.FolderGit;
+        var remote = Remote.TryParse(project.Path, out _, out _);
+        // A folder is always a repository (a cloud folder one on a host); a terminal is an SSH host.
+        var icon = current ? Hugeicons.Tick02 : remote ? Hugeicons.FolderCloud : project.Worktree ? Hugeicons.GitFork : Hugeicons.FolderGit;
         return new("project:" + project.Path, project.Name, current ? "current · " + path : path, group, icon, new Msg.OpenProject(project.Path), project.Branch);
     }
 

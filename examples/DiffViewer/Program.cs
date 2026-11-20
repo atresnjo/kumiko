@@ -21,7 +21,8 @@ string[] offscreenOptions = ["--kumiko-snapshot", "--kumiko-tree", "--kumiko-aud
 if (args.Contains("--kumiko-agent") || offscreenOptions.Any(option => Dev.Option(args, option) is not null))
 {
     // Offscreen snapshots render one settled frame, so they load before the first build instead of in the background.
-    if (args.Any(a => a.StartsWith("--kumiko-snapshot", StringComparison.Ordinal) || a.StartsWith("--kumiko-tree", StringComparison.Ordinal)))
+    // A --pr launch has no document until its pull request is found, which needs the network; it is not preloaded.
+    if (request.PullQuery is null && args.Any(a => a.StartsWith("--kumiko-snapshot", StringComparison.Ordinal) || a.StartsWith("--kumiko-tree", StringComparison.Ordinal)))
     {
         var document = Loader.Load(request, false, CancellationToken.None).GetAwaiter().GetResult();
         initial = DiffApp.Update(initial, new Msg.Loaded(initial.Generation, document)).Item1;
@@ -47,23 +48,25 @@ if (args.Contains("--kumiko-agent") || offscreenOptions.Any(option => Dev.Option
 if (Dev.Option(args, "--kumiko-culture") is { } culture)
     CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo(culture);
 using var app = new App(new("Diff"));
-var fullScreen = new WindowFullScreen(app);
-using var program = DiffApp.CreateProgram(initial with
+// Diff runs once per user: a later launch (a T3 action, a terminal, `open -n -a Diff --args ...`) hands its
+// arguments to the running app, which shows them in a window, and exits here. --new-instance opts out.
+if (!args.Contains("--new-instance") && !app.RequestSingleInstanceLock("dev.kumiko.diff"))
+    return;
+var github = GitHubConfig.Default();
+Model Initial(DiffRequest request) => DiffApp.Init with
 {
-    GitHub = GitHubConfig.Default()
-}, new KumikoServices().Add<IFullScreen>(fullScreen));
-if (outside)
-    program.Send(new Msg.OpenQuick());
-// A long-running viewer keeps only the current model; reloads would otherwise retain every document.
-program.RetainHistory = false;
-program.DevMode = args.Contains("--kumiko-dev");
-program.DebugEnabled = args.Contains("--kumiko-debug");
+    Request = request,
+    Store = store,
+    Recent = ProjectFiles.Recent(store),
+    GitHub = github,
+    SshHome = store.Home,
+    Loading = Arguments.InRepository(request)
+};
+var windows = new DiffWindows(app, Initial, options, args.Contains("--kumiko-dev"), args.Contains("--kumiko-debug"));
+var program = windows.Open(request);
 if (Dev.Option(args, "--kumiko-record") is { } record)
     program.Record(record);
-fullScreen.Window = app.NewWindow(options with
-{
-    DevMode = program.DevMode
-}, program);
 if (HotReload.Watching)
     HotReload.Persist(program, app, Path.Combine(AppContext.BaseDirectory, "kumiko-hot", "Diff.json"));
+app.SecondInstance += windows.Launch;
 app.Run();

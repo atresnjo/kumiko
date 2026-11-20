@@ -11,6 +11,14 @@ public sealed record TextFile(ImmutableArray<string> Lines, bool Binary, bool Mi
     /// <summary>Longer lines are cut for display; minified files would otherwise shape megabyte strings.</summary>
     public const int MaxColumns = 4000;
     public static TextFile Empty { get; } = new([], false, false);
+    /// <summary>The size of a side that was not read (too large to carry over SSH); 0 when it was read.</summary>
+    public long Omitted
+    {
+        get; init;
+    }
+
+    /// <summary>A side too large to read, shown like a binary file with its size.</summary>
+    public static TextFile TooLarge(long size) => new([], true, false) { Omitted = size };
 
     /// <summary>
     /// Decodes bytes as UTF-8 (a BOM is dropped and invalid sequences become U+FFFD). A NUL byte in the first

@@ -97,6 +97,16 @@ internal sealed record PullPrefetch(DiffDocument? Document, bool Failed);
 /// <summary>Zen mode's file, by path so it survives reloads, and the view mode to return to.</summary>
 internal sealed record ZenView(string Path, ViewMode Return);
 
+/// <summary>
+/// The open repository as the palette shows it on top: its worktrees and remote from Git, and that remote's open pull
+/// requests from GitHub. Project is the ProjectId it describes; a reload keeps the previous one listed until it arrives.
+/// </summary>
+internal sealed record RepoContext(string Project, ImmutableArray<Worktree> Worktrees, GitRemote? Remote, ImmutableArray<PullRequest> Pulls,
+    string? Error, bool Loading);
+
+/// <summary>The Git checkouts found on a host while the palette shows it: searching, found, or the reason it failed.</summary>
+internal sealed record RemoteRepos(ImmutableArray<string> Paths, bool Loading, string? Error);
+
 internal sealed record Model
 {
     public NavigationHistory<string> Navigation { get; init; } = NavigationHistory<string>.Start("diff");
@@ -184,6 +194,20 @@ internal sealed record Model
     /// <summary>The newest commits of <see cref="CommitsOf"/>, read each time the palette opens.</summary>
     public ImmutableArray<Commit> Commits { get; init; } = [];
     public string CommitsOf { get; init; } = "";
+    /// <summary>The home folder whose ~/.ssh/config lists hosts in the palette; null (offscreen runs) lists none.</summary>
+    public string? SshHome
+    {
+        get; init;
+    }
+    /// <summary>The SSH hosts, read again each time the palette opens.</summary>
+    public ImmutableArray<SshHost> SshHosts { get; init; } = [];
+    /// <summary>The open repository's worktrees and pull requests, read each time the palette opens.</summary>
+    public RepoContext? Context
+    {
+        get; init;
+    }
+    /// <summary>Repositories found on each host typed in the palette, searched once each time the palette opens.</summary>
+    public ImmutableDictionary<string, RemoteRepos> HostRepos { get; init; } = ImmutableDictionary<string, RemoteRepos>.Empty.WithComparers(StringComparer.Ordinal);
     /// <summary>Where projects are cached and recent ones saved; null keeps the palette to the open project.</summary>
     public ProjectStore? Store
     {
@@ -207,6 +231,10 @@ internal sealed record Model
     }
     /// <summary>The open repository's top folder once loaded, otherwise the requested path.</summary>
     public string ProjectPath => Document.Root.Length > 0 && Request.Kind is not (SourceKind.Paths or SourceKind.Demo or SourceKind.PullRequest) ? Document.Root : Request.Path;
+    /// <summary>The open project where it is: ProjectPath on Request.Host, if any.</summary>
+    public Place ProjectPlace => new(ProjectPath, Request.Host);
+    /// <summary>How the palette and the recent list name the open project: its path, or host:path for a remote one.</summary>
+    public string ProjectId => ProjectPlace.Id;
 
     public FileDiff? CursorFile => Cursor >= 0 && Cursor < Layout.Count ? Document.Files[Layout.Rows[Cursor].File] : null;
     public int CursorFileIndex => Cursor >= 0 && Cursor < Layout.Count ? Layout.Rows[Cursor].File : -1;

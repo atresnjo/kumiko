@@ -3,7 +3,10 @@ using System.Text;
 
 namespace DiffViewer.Sources;
 
-/// <summary>Runs Git with an argument list (never a shell), without prompts, pagers or optional locks.</summary>
+/// <summary>
+/// Runs Git with an argument list, without prompts, pagers or optional locks. Locally no shell is involved; on a remote
+/// host every argument is quoted for its shell.
+/// </summary>
 public static class Git
 {
     static readonly string[] Fallbacks = ["/opt/homebrew/bin/git", "/usr/local/bin/git", "/usr/bin/git"];
@@ -24,11 +27,19 @@ public static class Git
         return Fallbacks.FirstOrDefault(File.Exists) ?? "git";
     }
 
-    public static ProcessStartInfo Start(string directory, IEnumerable<string> arguments)
+    /// <summary>Git in a local folder, or on a remote host through ssh with the same environment.</summary>
+    public static ProcessStartInfo Start(Place at, IEnumerable<string> arguments)
     {
+        if (at.Host is { } host)
+        {
+            // A non-interactive login may lack Homebrew's folders in PATH.
+            var script = "PATH=\"$PATH:/usr/local/bin:/opt/homebrew/bin\"; export PATH GIT_TERMINAL_PROMPT=0 GIT_PAGER=cat GIT_OPTIONAL_LOCKS=0 LC_ALL=C; " +
+                "exec git -C " + Remote.QuotePath(at.Path) + string.Concat(arguments.Select(argument => " " + Remote.Quote(argument)));
+            return Ssh.Start(host, script);
+        }
         var start = new ProcessStartInfo(Executable)
         {
-            WorkingDirectory = directory,
+            WorkingDirectory = at.Path,
             UseShellExecute = false,
             RedirectStandardInput = true,
             RedirectStandardOutput = true,
@@ -45,9 +56,9 @@ public static class Git
     }
 
     /// <summary>Runs Git to completion and returns standard output as bytes; a failure throws its stderr.</summary>
-    public static async Task<byte[]> Run(string directory, CancellationToken token, params string[] arguments)
+    public static async Task<byte[]> Run(Place at, CancellationToken token, params string[] arguments)
     {
-        using var process = Process.Start(Start(directory, arguments)) ?? throw new IOException("Could not start git.");
+        using var process = Process.Start(Start(at, arguments)) ?? throw new IOException(at.Host is null ? "Could not start git." : "Could not start ssh.");
         process.StandardInput.Close();
         using var cancel = token.Register(() => Kill(process));
         using var output = new MemoryStream();
@@ -55,14 +66,17 @@ public static class Git
         var error = process.StandardError.ReadToEndAsync(token);
         await process.WaitForExitAsync(token).ConfigureAwait(false);
         await copy.ConfigureAwait(false);
-        var message = await error.ConfigureAwait(false);
+        // Over ssh, standard error is only read for a failure: a shared connection may hold it open.
+        if (at.Host is not null && process.ExitCode == 0)
+            return output.ToArray();
+        var message = at.Host is null ? await error.ConfigureAwait(false) : await Ssh.Errors(error).ConfigureAwait(false);
         if (process.ExitCode != 0)
             throw new IOException(message.Trim().Length > 0 ? message.Trim() : $"git {arguments.FirstOrDefault()} exited with {process.ExitCode}.");
         return output.ToArray();
     }
 
-    public static async Task<string> Text(string directory, CancellationToken token, params string[] arguments) =>
-        Encoding.UTF8.GetString(await Run(directory, token, arguments).ConfigureAwait(false));
+    public static async Task<string> Text(Place at, CancellationToken token, params string[] arguments) =>
+        Encoding.UTF8.GetString(await Run(at, token, arguments).ConfigureAwait(false));
 
     internal static void Kill(Process process)
     {
@@ -95,13 +109,14 @@ public sealed class BlobReader : IAsyncDisposable
     readonly StreamWriter input;
     readonly byte[] header = new byte[512];
 
-    public BlobReader(string directory)
+    public BlobReader(Place at)
     {
-        var start = Git.Start(directory, ["cat-file", "--batch"]);
+        var start = Git.Start(at, ["cat-file", "--batch"]);
         process = Process.Start(start) ?? throw new IOException("Could not start git cat-file.");
         input = process.StandardInput;
         input.AutoFlush = false;
-        output = process.StandardOutput.BaseStream;
+        // Headers are read a byte at a time; a buffer keeps that from becoming a system call each.
+        output = new BufferedStream(process.StandardOutput.BaseStream, 1 << 16);
         _ = process.StandardError.ReadToEndAsync();
     }
 
@@ -111,6 +126,60 @@ public sealed class BlobReader : IAsyncDisposable
         await input.WriteAsync(name.AsMemory(), token).ConfigureAwait(false);
         await input.WriteAsync("\n".AsMemory(), token).ConfigureAwait(false);
         await input.FlushAsync(token).ConfigureAwait(false);
+        return await Answer(token).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Many objects in one exchange: every name is sent while the answers stream back in order, so a diff costs one
+    /// round trip rather than one per file, which over SSH is the whole difference.
+    /// </summary>
+    public async Task<byte[]?[]> ReadAll(IReadOnlyList<string> names, CancellationToken token)
+    {
+        var requests = Task.Run(async () =>
+        {
+            foreach (var name in names)
+            {
+                await input.WriteAsync(name.AsMemory(), token).ConfigureAwait(false);
+                await input.WriteAsync("\n".AsMemory(), token).ConfigureAwait(false);
+            }
+            await input.FlushAsync(token).ConfigureAwait(false);
+        }, token);
+        var answers = new byte[]?[names.Count];
+        for (int i = 0; i < answers.Length; i++)
+            answers[i] = await Answer(token).ConfigureAwait(false);
+        await requests.ConfigureAwait(false);
+        return answers;
+    }
+
+    /// <summary>
+    /// The sizes of many objects in one exchange through <c>git cat-file --batch-check</c>; -1 for a missing one.
+    /// Over SSH this tells which blobs are too large to carry before any is sent.
+    /// </summary>
+    public static async Task<long[]> Sizes(Place at, IReadOnlyList<string> names, CancellationToken token)
+    {
+        using var process = Process.Start(Git.Start(at, ["cat-file", "--batch-check"])) ?? throw new IOException("Could not start git cat-file.");
+        using var cancel = token.Register(() => Git.Kill(process));
+        _ = process.StandardError.ReadToEndAsync(token);
+        var requests = Task.Run(async () =>
+        {
+            foreach (var name in names)
+                await process.StandardInput.WriteAsync((name + "\n").AsMemory(), token).ConfigureAwait(false);
+            process.StandardInput.Close();
+        }, token);
+        var sizes = new long[names.Count];
+        for (int i = 0; i < sizes.Length; i++)
+        {
+            var line = await process.StandardOutput.ReadLineAsync(token).ConfigureAwait(false) ?? throw new IOException("git cat-file ended early.");
+            var parts = line.Split(' ');
+            sizes[i] = line.EndsWith(" missing", StringComparison.Ordinal) || line.EndsWith(" ambiguous", StringComparison.Ordinal) || parts.Length < 3 ||
+                !long.TryParse(parts[^1], out var size) ? -1 : size;
+        }
+        await requests.ConfigureAwait(false);
+        return sizes;
+    }
+
+    async Task<byte[]?> Answer(CancellationToken token)
+    {
         int length = 0;
         while (true)
         {

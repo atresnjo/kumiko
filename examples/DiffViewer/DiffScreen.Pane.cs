@@ -176,7 +176,8 @@ internal sealed partial class DiffScreen
     void Note(Palette p, FileDiff file, bool cursor)
     {
         using var row = C.Div(key: "note").Row().SizeFull().ItemsCenter().Px(Space.S5).Background(cursor ? p.AccentSoft : p.Canvas);
-        var text = file.Binary ? "Binary file not shown" : file.OldLines.IsEmpty && file.NewLines.IsEmpty ? "Empty file" : "No content changes";
+        var text = file.Omitted > 0 ? $"Too large to show over SSH ({(file.Omitted / 1048576.0).ToString("0.0", C.Culture)} MB); a local clone shows it"
+            : file.Binary ? "Binary file not shown" : file.OldLines.IsEmpty && file.NewLines.IsEmpty ? "Empty file" : "No content changes";
         C.Text(text, new(12, Color: p.Muted), key: "text");
     }
 

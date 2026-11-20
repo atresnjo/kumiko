@@ -18,7 +18,19 @@ internal sealed partial class DiffApp
         // A pull request still loading in the background is shown by that load; a failed one loads here.
         var prefetching = model is { Zen: null, Request.Pull: { } pull } &&
             model.Prefetched.GetValueOrDefault(PrefetchKey(pull, whitespace)) is { Document: null, Failed: false };
-        if (model.Loading && !prefetching)
+        // A --pr launch loads once its pull request is found; keyed by generation, a reload looks it up again.
+        var unresolved = model.Request is { Kind: SourceKind.PullRequest, Pull: null };
+        if (model.Loading && unresolved && model.Request.PullQuery is { } query)
+        {
+            var github = model.GitHub;
+            var home = model.SshHome;
+            var checkout = new Place(request.Path, request.Host);
+            yield return Sub<Msg>.Run($"find-pull:{generation}", async token => new Msg.PullFound(generation,
+                await GitHub.FindPull(github ?? throw new IOException("Opening a pull request needs gh: brew install gh, then gh auth login."), checkout, query,
+                    home is null ? null : alias => SshConfig.HostName(home, alias) ?? alias, token).ConfigureAwait(false)),
+                error => new Msg.Failed(generation, error.Message));
+        }
+        if (model.Loading && !prefetching && !unresolved)
             yield return Sub<Msg>.Run($"load:{generation}",
                 async token => new Msg.Loaded(generation, await Loader.Load(request, whitespace, token, whole).ConfigureAwait(false)),
                 error => new Msg.Failed(generation, error.Message));

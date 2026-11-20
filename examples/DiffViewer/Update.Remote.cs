@@ -15,19 +15,44 @@ internal sealed partial class DiffApp
     /// </summary>
     static (Model, Cmd<Msg>) Palette(Model model, string query)
     {
+        var project = model.ProjectId;
+        var place = model.ProjectPlace;
+        var git = model.Request.Kind is not (SourceKind.Paths or SourceKind.Demo);
         var next = Quick(model with
         {
             Finder = null,
             Search = null,
             Help = false,
-            Scanning = model.Scanning || !model.Scanned && model.Store is not null
+            Scanning = model.Scanning || !model.Scanned && model.Store is not null,
+            HostRepos = model.HostRepos.Clear(),
+            // The previous read stays listed while the repository is read again.
+            Context = !git ? null : model.Context?.Project == project ? model.Context with { Loading = true } : new(project, [], null, [], null, true)
         }, query, 0);
-        var project = next.ProjectPath;
+        var github = next.GitHub;
+        var sshHome = next.SshHome;
+        var context = !git ? Cmd<Msg>.None : Cmd<Msg>.Run("context", token => ReadContext(project, place, github, sshHome, token),
+            error => new Msg.ContextFound(project, [], null, [], error.Message));
         var commits = next.Request.Kind is SourceKind.Paths or SourceKind.Demo ? Cmd<Msg>.None
-            : Cmd<Msg>.Run("commits", async token => (Msg)new Msg.CommitsFound(project, await Commits.Log(project, token).ConfigureAwait(false)),
+            : Cmd<Msg>.Run("commits", async token => (Msg)new Msg.CommitsFound(project, await Commits.Log(place, token).ConfigureAwait(false)),
                 _ => new Msg.CommitsFound(project, []));
         var (searched, pulls) = next.Pulls is { Loading: false } list && (!list.Loaded || list.Stale) ? FetchPulls(next) : (next, Cmd<Msg>.None);
-        return (searched, Cmd<Msg>.Batch(commits, pulls));
+        var hosts = next.SshHome is not { } home ? Cmd<Msg>.None
+            : Cmd<Msg>.Run("ssh-hosts", _ => Task.Run(() => (Msg)new Msg.HostsFound(SshConfig.Hosts(home))), _ => new Msg.HostsFound([]));
+        var (found, repos) = SearchHost(searched);
+        return (found, Cmd<Msg>.Batch(commits, pulls, hosts, repos, context));
+    }
+
+    /// <summary>
+    /// The open repository's worktrees and remote, then the remote's open pull requests. An SSH alias in the remote
+    /// resolves through the local SSH configuration, where aliases for second GitHub accounts live.
+    /// </summary>
+    static async Task<Msg> ReadContext(string project, Place place, GitHubConfig? github, string? sshHome, CancellationToken token)
+    {
+        var (worktrees, url) = await RepoInfo.Read(place, token).ConfigureAwait(false);
+        var remote = url is null ? null : RepoInfo.Parse(url, sshHome is null ? null : alias => SshConfig.HostName(sshHome, alias) ?? alias);
+        var (pulls, error) = remote is not null && github is not null
+            ? await GitHub.RepositoryPulls(github, remote, token).ConfigureAwait(false) : ([], null);
+        return new Msg.ContextFound(project, worktrees, remote, pulls, error);
     }
 
     /// <summary>Searches pull requests of every gh account; the cached list stays listed until the result arrives.</summary>
@@ -59,7 +84,8 @@ internal sealed partial class DiffApp
             return (model, Cmd<Msg>.None);
         var items = found.Pulls.IsEmpty && found.Error is not null ? model.Pulls.Items : found.Pulls;
         // Background loads of pull requests that left the list, or changed since, are dropped.
-        var keys = items.SelectMany(pull => new[] { PrefetchKey(pull, false), PrefetchKey(pull, true) }).ToImmutableHashSet(StringComparer.Ordinal);
+        var keys = items.Concat(model.Context?.Pulls ?? []).SelectMany(pull => new[] { PrefetchKey(pull, false), PrefetchKey(pull, true) })
+            .ToImmutableHashSet(StringComparer.Ordinal);
         var next = Requery(model with
         {
             Prefetched = model.Prefetched.RemoveRange(model.Prefetched.Keys.Where(key => !keys.Contains(key))),
@@ -96,7 +122,7 @@ internal sealed partial class DiffApp
         return next.Quick is null ? (next, Cmd<Msg>.None) : FetchPulls(next);
     }
 
-    static Model CommitsFound(Model model, Msg.CommitsFound found) => found.Project != model.ProjectPath ? model : Requery(model with
+    static Model CommitsFound(Model model, Msg.CommitsFound found) => found.Project != model.ProjectId ? model : Requery(model with
     {
         Commits = found.Commits,
         CommitsOf = found.Project
@@ -106,15 +132,22 @@ internal sealed partial class DiffApp
     /// A pull request replaces the diff; the local project stays the palette's current project. One loaded in the
     /// background shows at once. Zen mode reads its file whole, so it always loads.
     /// </summary>
-    static Model OpenPull(Model model, PullRequest pull)
+    static Model OpenPull(Model model, PullRequest pull, string? query = null)
     {
         var opened = Open(model, new(SourceKind.PullRequest, model.ProjectPath)
         {
-            Pull = pull
+            Pull = pull,
+            Host = model.Request.Host,
+            PullQuery = query,
+            Clones = LocalCheckouts(model)
         });
         return opened.Zen is null && model.Prefetched.GetValueOrDefault(PrefetchKey(pull, model.IgnoreWhitespace))?.Document is { } document
             ? Loaded(opened, document) : opened;
     }
+
+    /// <summary>The known local checkouts (not worktrees), any of which may be a clone of a pull request's repository.</summary>
+    static System.Collections.Immutable.ImmutableArray<string> LocalCheckouts(Model model) =>
+        [.. model.Projects.Where(p => !p.Worktree && !Remote.TryParse(p.Path, out _, out _)).Select(p => p.Path)];
 
     const int PrefetchCount = 5;
 
@@ -132,8 +165,16 @@ internal sealed partial class DiffApp
             return (model, Cmd<Msg>.None);
         var whitespace = model.IgnoreWhitespace;
         var path = model.ProjectPath;
+        var host = model.Request.Host;
+        var clones = LocalCheckouts(model);
+        // The open repository's pull requests come from its checkout through Git when opened, which is quick; before
+        // its remote is known none are preloaded, so no API load starts for one of them.
+        if (model.Context is { Loading: true })
+            return (model, Cmd<Msg>.None);
+        var local = model.Context is { Remote: { } remote } context && context.Project == model.ProjectId ? remote.Repository : null;
         var wanted = quick.Items.Skip(QuickOpen.FirstVisible(quick.Selected, quick.Items.Length)).Take(QuickOpen.Rows)
-            .Select(item => item.Message).OfType<Msg.OpenPull>().Take(PrefetchCount).Select(open => open.Pull)
+            .Select(item => item.Message).OfType<Msg.OpenPull>().Select(open => open.Pull)
+            .Where(pull => !string.Equals(pull.Repository, local, StringComparison.OrdinalIgnoreCase)).Take(PrefetchCount)
             .Where(pull => !model.Prefetched.ContainsKey(PrefetchKey(pull, whitespace))).ToImmutableArray();
         if (wanted.IsEmpty)
             return (model, Cmd<Msg>.None);
@@ -142,7 +183,9 @@ internal sealed partial class DiffApp
             var key = PrefetchKey(pull, whitespace);
             var request = new DiffRequest(SourceKind.PullRequest, path)
             {
-                Pull = pull
+                Pull = pull,
+                Host = host,
+                Clones = clones
             };
             return Cmd<Msg>.Run("prefetch", async token => (Msg)new Msg.PullPrefetched(key, await Loader.Load(request, whitespace, token).ConfigureAwait(false)),
                 _ => new Msg.PullPrefetched(key, null));
@@ -170,7 +213,8 @@ internal sealed partial class DiffApp
     static Model OpenCommit(Model model, Commit commit) => Open(model, new(SourceKind.Revisions, model.ProjectPath,
         commit.Parent.Length > 0 ? commit.Parent : Loader.EmptyTree, commit.Sha)
     {
-        Title = commit.Subject
+        Title = commit.Subject,
+        Host = model.Request.Host
     });
 
     /// <summary>Rebuilds an open palette's rows after its sources change, keeping the highlighted row.</summary>
