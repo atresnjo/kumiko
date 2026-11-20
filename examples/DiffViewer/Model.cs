@@ -97,6 +97,9 @@ internal sealed record PullPrefetch(DiffDocument? Document, bool Failed);
 /// <summary>Zen mode's file, by path so it survives reloads, and the view mode to return to.</summary>
 internal sealed record ZenView(string Path, ViewMode Return);
 
+/// <summary>The Git checkouts found on a host while the palette shows it: searching, found, or the reason it failed.</summary>
+internal sealed record RemoteRepos(ImmutableArray<string> Paths, bool Loading, string? Error);
+
 internal sealed record Model
 {
     public NavigationHistory<string> Navigation { get; init; } = NavigationHistory<string>.Start("diff");
@@ -191,6 +194,8 @@ internal sealed record Model
     }
     /// <summary>The SSH hosts, read again each time the palette opens.</summary>
     public ImmutableArray<SshHost> SshHosts { get; init; } = [];
+    /// <summary>Repositories found on each host typed in the palette, searched once each time the palette opens.</summary>
+    public ImmutableDictionary<string, RemoteRepos> HostRepos { get; init; } = ImmutableDictionary<string, RemoteRepos>.Empty.WithComparers(StringComparer.Ordinal);
     /// <summary>Where projects are cached and recent ones saved; null keeps the palette to the open project.</summary>
     public ProjectStore? Store
     {

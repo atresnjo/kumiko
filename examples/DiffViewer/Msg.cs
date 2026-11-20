@@ -74,6 +74,10 @@ internal abstract partial record Msg
     public sealed record HostsFound(ImmutableArray<SshHost> Hosts) : Msg;
     /// <summary>Fills the palette's query with <c>host:~/</c>, keeping it open for the path.</summary>
     public sealed record PickHost(string Alias) : Msg;
+    /// <summary>A search for repositories on a host finished; an error says why it failed.</summary>
+    public sealed record HostReposFound(string Host, ImmutableArray<string> Paths, string? Error) : Msg;
+    /// <summary>Searches a host for repositories again, keeping the palette open.</summary>
+    public sealed record SearchHost(string Host) : Msg;
     /// <summary>Shows a commit of the open project against its first parent.</summary>
     public sealed record OpenCommit(Commit Commit) : Msg;
     /// <summary>A background save finished; nothing changes.</summary>

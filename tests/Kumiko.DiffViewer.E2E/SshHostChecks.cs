@@ -10,7 +10,8 @@ namespace DiffViewer.E2E;
 /// </summary>
 internal static class SshHostChecks
 {
-    public static void Run(Harness h, string scratch)
+    /// <param name="remoteHome">The stand-in host's home folder, where its repositories are made.</param>
+    public static void Run(Harness h, string scratch, string remoteHome)
     {
         var home = Path.Combine(scratch, "ssh-home");
         var ssh = Path.Combine(home, ".ssh");
@@ -66,21 +67,39 @@ internal static class SshHostChecks
         h.Check(rows.Select(r => r.Label).SequenceEqual(["staging", "devbox", "build-1", "build-2"]) && rows[1].Detail == "me@203.0.113.10" &&
             rows.All(r => r.Icon == Hugeicons.CloudServer), "Command+K lists the SSH hosts with their address");
         h.Artifact(t, "ssh-hosts");
+        // The host's repositories: two to find, three a search must not report.
+        foreach (var folder in new[] { "code/api/.git", "code/node_modules/dep/.git", ".cache/tool/.git", "a/b/c/d/too-deep/.git" })
+            Directory.CreateDirectory(Path.Combine(remoteHome, folder));
         t.TypeText("devb");
         t.Settle();
         h.Check(M().Quick!.Items[0].Id == "host:devbox", "typing a host's name ranks it first");
         t.Key(Key.Enter);
         t.Settle();
-        var picked = M().Quick;
-        h.Check(picked is { Query: "devbox:~/" } && picked.Items[0].Message is Msg.OpenProject { Path: "devbox:~/" },
-            "choosing a host keeps the palette open with host:~/ filled in");
-        h.Check(picked!.Items.Length == 2 && picked.Items[1].Id == "project:devbox:/home/me/code/billing",
-            "the host's recent checkouts are offered beside the typed path");
-        t.TypeText("code");
+        h.Check(M().Quick is { Query: "devbox:~/" }, "choosing a host keeps the palette open with host:~/ filled in");
+        for (int i = 0; i < 2000 && M().HostRepos.GetValueOrDefault("devbox") is not { Loading: false }; i++)
+        {
+            Thread.Sleep(5);
+            t.Settle(1);
+        }
+        var found = M().HostRepos["devbox"];
+        var inHome = found.Paths.Where(p => p.StartsWith('~')).ToArray();
+        h.Check(found.Error is null && inHome.SequenceEqual(["~/code/api", "~/o'neil app"]),
+            $"the host's repositories are found in one search, not in hidden, dependency or deep folders ({string.Join(", ", inHome)})");
+        var picked = M().Quick!;
+        h.Check(picked.Items[0].Id == "project:devbox:/home/me/code/billing" && picked.Items.Any(i => i.Id == "project:devbox:~/code/api") &&
+            picked.Items[^1].Message is Msg.OpenProject { Path: "devbox:~/" } && picked.Selected == 0,
+            "the host's recent checkouts and repositories come before the bare path, the first one highlighted");
+        h.Artifact(t, "ssh-host-repos");
+        t.TypeText("api");
         t.Settle();
-        h.Check(M().Quick!.Query == "devbox:~/code" && M().Quick!.Items.Length == 2, $"typing continues the path after the host ({M().Quick!.Query})");
+        var narrowed = M().Quick!;
+        h.Check(narrowed.Query == "devbox:~/api" && narrowed.Items[0].Id == "project:devbox:~/code/api" &&
+            !narrowed.Items.Any(i => i.Id.Contains("o'neil", StringComparison.Ordinal) || i.Id.EndsWith("billing", StringComparison.Ordinal)) &&
+            narrowed.Items[^1].Message is Msg.OpenProject { Path: "devbox:~/api" },
+            $"typing continues the path after the host and narrows its repositories ({narrowed.Query}: {string.Join(", ", narrowed.Items.Select(i => i.Id))})");
         h.Artifact(t, "ssh-host-path");
         t.Key(Key.Enter);
-        h.Check(M() is { Quick: null, Request: { Kind: SourceKind.WorkingTree, Host: "devbox", Path: "~/code" } }, "Enter opens the path on that host");
+        h.Check(M() is { Quick: null, Request: { Kind: SourceKind.WorkingTree, Host: "devbox", Path: "~/code/api" } }, "Enter opens the highlighted repository on that host");
+        h.Check(M().HostRepos.Count == 1, "each host is searched once while the palette is open");
     }
 }

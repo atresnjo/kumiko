@@ -39,12 +39,18 @@ internal sealed partial class DiffScreen
         {
             C.Icon(Hugeicons.Search01, 15, p.Muted, key: "icon");
             Ui.TextField("query" + quick.Field.ToString(C.Culture), "Open project", quick.Query, static text => new Msg.QuickQuery(text),
-                new("Projects, hosts, # pull requests, @ commits, > commands", width - 120)
+                new("Projects, hosts, # pull requests, @ commits, > commands", width - 150)
                 {
                     AutoFocus = true
                 });
-            var status = Model.Pulls.Loading ? "Loading pull requests…" : Model.Scanning ? "Scanning…" : $"{Model.Projects.Length.ToString(C.Culture)} projects";
-            C.Text(status, new(11, Color: p.Muted), key: "status");
+            // The field shows the host being searched.
+            var status = Model.HostRepos.Values.Any(r => r.Loading) ? "Finding repos…" : Model.Pulls.Loading ? "Loading pull requests…"
+                : Model.Scanning ? "Scanning…" : $"{Model.Projects.Length.ToString(C.Culture)} projects";
+            using (C.Div(key: "status").Flex().MinWidth(0).Clip())
+                C.Text(status, new(11, Color: p.Muted)
+                {
+                    Overflow = TextOverflow.Ellipsis
+                }, key: "text");
         }
         int first = QuickOpen.FirstVisible(selected, items.Length);
         var grouped = quick.Query.Length == 0;

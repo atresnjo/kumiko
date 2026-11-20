@@ -43,8 +43,10 @@ internal sealed partial class DiffApp
         if (at < quick.Items.Length && quick.Items[at].Message is Msg.PickHost pick)
         {
             var picked = Quick(model, pick.Alias + ":~/", 0);
-            return (picked with { Quick = picked.Quick! with { Field = quick.Field + 1 } }, Cmd<Msg>.None);
+            return SearchHost(picked with { Quick = picked.Quick! with { Field = quick.Field + 1 } });
         }
+        if (at < quick.Items.Length && quick.Items[at].Message is Msg.SearchHost again)
+            return SearchHost(model with { HostRepos = model.HostRepos.Remove(again.Host) });
         var closed = model with
         {
             Quick = null
@@ -79,6 +81,24 @@ internal sealed partial class DiffApp
             Help = false,
             Quick = null
         };
+    }
+
+    /// <summary>
+    /// Searches the host of a typed <c>host:path</c> for repositories, once per palette session; the palette lists
+    /// them while the query names that host.
+    /// </summary>
+    static (Model, Cmd<Msg>) SearchHost(Model model)
+    {
+        if (model.Quick is not { Query: var query } || query.Length == 0 || query[0] is '>' or '#' or '@' ||
+            !Remote.TryParse(query.Trim(), out var host, out _) || model.HostRepos.ContainsKey(host))
+            return (model, Cmd<Msg>.None);
+        var searching = model with
+        {
+            HostRepos = model.HostRepos.SetItem(host, new([], true, null))
+        };
+        return (searching, Cmd<Msg>.Run("repos:" + host,
+            async token => (Msg)new Msg.HostReposFound(host, await Ssh.Repositories(host, token).ConfigureAwait(false), null),
+            error => new Msg.HostReposFound(host, [], error.Message)));
     }
 
     /// <summary>Puts a loaded repository first in the recent list and saves the list off the UI thread.</summary>

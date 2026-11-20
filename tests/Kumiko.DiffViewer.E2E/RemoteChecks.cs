@@ -39,7 +39,7 @@ internal static class RemoteChecks
             Loads(h, repo, log);
             Palette(h, repo, scratch);
             Failures(h);
-            SshHostChecks.Run(h, scratch);
+            SshHostChecks.Run(h, scratch, home);
         }
         finally
         {
@@ -190,6 +190,9 @@ internal static class RemoteChecks
         }
         var down = Message(new(SourceKind.WorkingTree, "~/app", "HEAD") { Host = "down" });
         h.Check(down.Contains("Connection refused", StringComparison.Ordinal), $"an unreachable host fails with SSH's message ({down})");
+        var plain = Message(new(SourceKind.WorkingTree, "~", "HEAD") { Host = "box" });
+        h.Check(plain.StartsWith("box:~ is not a Git repository. Press ⌘K and choose box", StringComparison.Ordinal),
+            $"a remote folder outside any repository is named, with how to choose one ({plain})");
         var missing = Message(new(SourceKind.WorkingTree, "~/missing", "HEAD") { Host = "box" });
         h.Check(missing.Contains("missing", StringComparison.Ordinal) && !missing.Contains("timed out", StringComparison.Ordinal),
             $"a missing remote folder fails with Git's message ({missing})");

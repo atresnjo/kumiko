@@ -45,8 +45,11 @@ arrive in one `tar` stream. A load's calls share one connection, kept for a minu
 
 `⌘K` lists the hosts of `~/.ssh/config` (and the files it `Include`s) under "SSH hosts",
 leaving out wildcard patterns, `Match` blocks and Git hosting services such as GitHub.
-`Enter` on a host fills in `host:~/` and keeps the palette open for the path; that host's
-recent checkouts are listed beside it, narrowed as you type. Typing `host:/path` or
+`Enter` on a host fills in `host:~/` and keeps the palette open: one SSH call finds the Git
+repositories on it (below the home folder, four levels deep, and `/srv`, `/var/www`, `/opt`,
+three; never inside hidden or `node_modules` folders), listed after that host's recent
+checkouts and narrowed by the path you type, the bare path last. Opening a remote folder
+that is not a repository says so. Typing `host:/path` or
 `host:~/path` directly works too, and opened checkouts are remembered with their host.
 Staged changes, commits, pull requests and "Show Working Tree Changes" stay on that host.
 The disk is not watched remotely: press `r` to reload.

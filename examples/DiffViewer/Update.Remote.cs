@@ -20,7 +20,8 @@ internal sealed partial class DiffApp
             Finder = null,
             Search = null,
             Help = false,
-            Scanning = model.Scanning || !model.Scanned && model.Store is not null
+            Scanning = model.Scanning || !model.Scanned && model.Store is not null,
+            HostRepos = model.HostRepos.Clear()
         }, query, 0);
         var project = next.ProjectId;
         var place = next.ProjectPlace;
@@ -30,7 +31,8 @@ internal sealed partial class DiffApp
         var (searched, pulls) = next.Pulls is { Loading: false } list && (!list.Loaded || list.Stale) ? FetchPulls(next) : (next, Cmd<Msg>.None);
         var hosts = next.SshHome is not { } home ? Cmd<Msg>.None
             : Cmd<Msg>.Run("ssh-hosts", _ => Task.Run(() => (Msg)new Msg.HostsFound(SshConfig.Hosts(home))), _ => new Msg.HostsFound([]));
-        return (searched, Cmd<Msg>.Batch(commits, pulls, hosts));
+        var (found, repos) = SearchHost(searched);
+        return (found, Cmd<Msg>.Batch(commits, pulls, hosts, repos));
     }
 
     /// <summary>Searches pull requests of every gh account; the cached list stays listed until the result arrives.</summary>

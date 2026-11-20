@@ -79,7 +79,13 @@ Remote checkouts (SSH)
   host's detail is not its user@HostName.
 - Choosing a host closes the palette instead of filling in `host:~/` with the
   field ready for the path. While a `host:path` is typed, that host's recent
-  checkouts are not offered beside it.
+  checkouts and the Git repositories found on it (home, /srv, /var/www, /opt;
+  not inside hidden or dependency folders) are not offered, are not narrowed by
+  the typed path, or come after the bare path row, so Enter right after
+  choosing a host opens the home folder. The host is searched more than once
+  per palette session, or a failed search shows no reason.
+- Opening a remote folder that is not a repository shows only Git's message,
+  without naming the folder and how to choose a repository.
 - Tests reach a real host or the user's SSH configuration; offscreen runs list
   the user's hosts.
 

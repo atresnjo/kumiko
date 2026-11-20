@@ -48,8 +48,9 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
         };
         if (text.Length == 0)
             return [.. pool.Take(Limit)];
+        // On a host, its recent checkouts and repositories come before the bare path, so Enter opens a repository.
         if (Remote.TryParse(text, out var host, out var path))
-            return [.. pool.Take(1), .. HostRecents(model, host, path, text)];
+            return [.. HostRecents(model, host, path, text), .. HostRepositories(model, host, path, text), .. pool.Take(1)];
         if (text.StartsWith('/') || text.StartsWith('~'))
             return [.. pool.Take(1)];
         return [.. pool.Select(item => (Item: item, Score: Score(text, item)))
@@ -128,6 +129,24 @@ internal sealed record QuickOpen(string Query = "", int Selected = 0)
         foreach (var recent in model.Recent)
             if (recent != typed && Remote.TryParse(recent, out var other, out var where) && other == host && (part.Length == 0 || Fuzzy(part, where) >= 0))
                 yield return Item(model, new(recent, Path.GetFileName(recent), ""), "Recent");
+    }
+
+    /// <summary>
+    /// The repositories found on a host whose path matches what is typed, best matches first; a failed search is a
+    /// row that searches again.
+    /// </summary>
+    static IEnumerable<QuickItem> HostRepositories(Model model, string host, string path, string typed)
+    {
+        if (!model.HostRepos.TryGetValue(host, out var found))
+            return [];
+        var group = "On " + Remote.Name(host);
+        if (found.Error is { } error)
+            return [new("repos:error:" + host, "Could not list repositories on " + Remote.Name(host), error, group, Hugeicons.Alert02, new Msg.SearchHost(host))];
+        var part = path.StartsWith("~/", StringComparison.Ordinal) ? path[2..] : path.TrimStart('~', '/');
+        var recent = model.Recent.ToImmutableHashSet(StringComparer.Ordinal);
+        return found.Paths.Select(where => (Id: Remote.Format(host, where), Where: where, Score: part.Length == 0 ? 0 : Fuzzy(part, where)))
+            .Where(r => r.Score >= 0 && r.Id != typed && !recent.Contains(r.Id)).OrderByDescending(r => r.Score)
+            .Select(r => Item(model, new(r.Id, r.Where == "~" ? "~" : Path.GetFileName(r.Where), ""), group));
     }
 
     /// <summary>The open project's newest commits; the one being shown is marked.</summary>

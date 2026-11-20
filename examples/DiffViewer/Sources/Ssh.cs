@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Formats.Tar;
 using System.Text;
@@ -150,6 +151,38 @@ public static class Ssh
         {
             return "";
         }
+    }
+
+    /// <summary>Repositories listed at most, so a host full of checkouts keeps the palette quick.</summary>
+    public const int RepositoryLimit = 500;
+
+    /// <summary>
+    /// Git checkouts on a host, found in one session: below the home folder (four levels deep) and below /srv,
+    /// /var/www and /opt (three), never inside hidden or node_modules folders. Paths below the home start with ~.
+    /// </summary>
+    public static async Task<ImmutableArray<string>> Repositories(string host, CancellationToken token)
+    {
+        const string script = "printf '%s\\n' \"$HOME\"; for r in \"$HOME\" /srv /var/www /opt; do [ -d \"$r\" ] || continue; " +
+            "d=3; [ \"$r\" = \"$HOME\" ] && d=4; find \"$r\" -maxdepth $d \\( -name node_modules -o \\( -name '.?*' ! -name .git \\) \\) -prune " +
+            "-o -name .git -print -prune 2>/dev/null; done; exit 0";
+        using var process = Process.Start(Start(host, script)) ?? throw new IOException("Could not start ssh.");
+        process.StandardInput.Close();
+        using var cancel = token.Register(() => Git.Kill(process));
+        var error = process.StandardError.ReadToEndAsync(token);
+        var output = await process.StandardOutput.ReadToEndAsync(token).ConfigureAwait(false);
+        await process.WaitForExitAsync(token).ConfigureAwait(false);
+        if (process.ExitCode != 0)
+        {
+            var message = (await Errors(error).ConfigureAwait(false)).Trim();
+            throw new IOException(message.Length > 0 ? message : $"Listing repositories over ssh exited with {process.ExitCode}.");
+        }
+        var lines = output.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+        if (lines.Length == 0)
+            return [];
+        var home = lines[0].TrimEnd('/');
+        return [.. lines.Skip(1).Where(l => l.EndsWith("/.git", StringComparison.Ordinal)).Select(l => l[..^"/.git".Length])
+            .Select(path => path == home ? "~" : home.Length > 0 && path.StartsWith(home + "/", StringComparison.Ordinal) ? "~" + path[home.Length..] : path)
+            .Distinct(StringComparer.Ordinal).OrderBy(path => path[0] == '~' ? 0 : 1).ThenBy(path => path, StringComparer.Ordinal).Take(RepositoryLimit)];
     }
 
     /// <summary>

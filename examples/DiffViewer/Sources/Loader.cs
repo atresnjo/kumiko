@@ -43,7 +43,16 @@ public static class Loader
     static async Task<(string, string, string, List<FilePair>)> GitPairs(DiffRequest request, CancellationToken token)
     {
         var host = request.Host;
-        var root = (await Git.Text(new Place(request.Path, host), token, "rev-parse", "--show-toplevel").ConfigureAwait(false)).Trim();
+        string root;
+        try
+        {
+            root = (await Git.Text(new Place(request.Path, host), token, "rev-parse", "--show-toplevel").ConfigureAwait(false)).Trim();
+        }
+        catch (IOException error) when (host is not null && error.Message.Contains("not a git repository", StringComparison.OrdinalIgnoreCase))
+        {
+            throw new IOException($"{Remote.Format(host, request.Path)} is not a Git repository. Press ⌘K and choose {Remote.Name(host)} " +
+                "to list the repositories on it.", error);
+        }
         var at = new Place(root, host);
         var hasHead = await Exists(at, "HEAD", token).ConfigureAwait(false);
         var from = request.Base ?? "HEAD";
