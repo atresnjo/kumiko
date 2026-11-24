@@ -24,6 +24,50 @@ artifacts/aot/diff/DiffViewer --repo=/path/to/repo
 
 A first argument naming an existing folder is the repository (`-- ~/code/app main`).
 
+## Opening from T3 and other tools
+
+Diff runs once per user. A later launch hands its arguments to the running app, which
+focuses (and reloads) the window already showing what they ask for, or opens a new window,
+so an open diff is never replaced; `--new-instance` opts out. `--pr` opens the open pull
+request whose head is the checkout's current branch (`--pr=123` or a pull request URL for
+another), looked up with gh before anything loads. With the app in `/Applications`, a T3
+Action (run in the thread's worktree) is one line:
+
+```sh
+open -n -a Diff --args --repo="$PWD"        # the worktree's changes
+open -n -a Diff --args --repo="$PWD" --pr   # the pull request of its branch
+```
+
+## Remote checkouts over SSH
+
+A checkout on another machine opens the same way, read with your `ssh` client: Git runs
+on the host, so nothing is cloned or mounted locally.
+
+```sh
+dotnet run --project examples/DiffViewer -c Release -- devbox:~/code/app            # working tree on devbox
+dotnet run --project examples/DiffViewer -c Release -- me@devbox:/srv/app main..feature
+dotnet run --project examples/DiffViewer -c Release -- ssh://me@devbox:2222/srv/app --staged
+dotnet run --project examples/DiffViewer -c Release -- --ssh=devbox --repo=code/app  # relative to the remote home
+```
+
+The host is anything `ssh` accepts, including aliases from `~/.ssh/config`. It must log
+in without prompts (a key or an agent; the host already in `known_hosts`), and needs Git,
+`sh` and `tar`. Each Git call is one quoted `sh -c` script; the changed working-tree files
+arrive in one `tar` stream. A load's calls share one connection, kept for a minute in
+`/tmp/kumiko-diff-$USER` (or `$XDG_RUNTIME_DIR`), so reloading opens no new login.
+`DIFF_SSH` names another client, such as a wrapper adding `-i` or `-J` options.
+
+`⌘K` lists the hosts of `~/.ssh/config` (and the files it `Include`s) under "SSH hosts",
+leaving out wildcard patterns, `Match` blocks and Git hosting services such as GitHub.
+`Enter` on a host fills in `host:~/` and keeps the palette open: one SSH call finds the Git
+repositories on it (below the home folder, four levels deep, and `/srv`, `/var/www`, `/opt`,
+three; never inside hidden or `node_modules` folders), listed after that host's recent
+checkouts and narrowed by the path you type, the bare path last. Opening a remote folder
+that is not a repository says so. Typing `host:/path` or
+`host:~/path` directly works too, and opened checkouts are remembered with their host.
+Staged changes, commits, pull requests and "Show Working Tree Changes" stay on that host.
+The disk is not watched remotely: press `r` to reload.
+
 ## Projects and worktrees
 
 `⌘K` (or `⌘O`, or the folder button) opens a palette of projects, after
@@ -42,18 +86,31 @@ launch while a fresh scan runs the first time it opens (or on "Rescan Projects")
 State lives in `~/.kumiko-diff/` (`DIFF_HOME` or `--state-dir=PATH`); add scan roots
 with `DIFF_ROOTS` (platform path separator).
 
+## The open repository
+
+The palette starts with the open repository: its worktrees as Git lists them (also on an
+SSH host), the current one marked, then its open pull requests on GitHub, before recent
+projects and other pull requests. The repository is found from its `origin` remote
+(`git@host:owner/repo.git`, `https://host/owner/repo`, `ssh://…`); an SSH alias such as
+`git@github-work:owner/repo.git` resolves through `~/.ssh/config`. Its pull requests are read
+with the gh account of that host and open like any other, so `#` lists them first too.
+
 ## Pull requests and commits
 
 With [gh](https://cli.github.com) installed, the palette also lists the open pull
 requests that involve any account `gh auth status` shows (authored, assigned, review
 requested or mentioned), each once, newest first; `#` (or "Pull Requests…") lists only
-them. `Enter` shows one from its merge base to its head, read through the GitHub API
-with the token of the account that found it, so no local clone is needed. The list is
+them. `Enter` shows one from its merge base to its head. A pull request of the open
+repository comes from its checkout (locally or on the SSH host) through Git alone:
+`ls-remote` names its head and GitHub's merge ref (whose first parent is the base), missing
+commits are fetched without writing any ref, and the diff is local; a 246-file pull request
+opens in about 2–3 s instead of 45 s through the API. Others, or one Git cannot reach, are
+read through the GitHub API with the token of the account that found them. The list is
 kept for a minute and searched again the next time the palette shows it after that;
 "Refresh Pull Requests" searches at once. Tokens come from `gh auth token` for each
 request and are only sent to that account's API host.
 
-The first five pull requests the palette shows load in the background, so choosing one
+The first five pull requests of other repositories the palette shows load in the background, so choosing one
 shows it at once; one chosen while it still loads waits for that load instead of
 starting another. A background load is kept until its pull request changes on GitHub
 or leaves the list, and one GitHub refuses is not retried until then (choosing it
@@ -123,7 +180,7 @@ cursor, a file header to fold it, or a sidebar entry to jump to its file.
   Myers fallback, slider/indent heuristics and a hard work budget, plus word-level
   emphasis for paired lines. 100k lines with 1000 edits diff in about 11 ms; two
   unrelated 200k-line files in about 45 ms.
-- **Loading** (`Sources/`): Git runs with argument lists, never a shell; every old
+- **Loading** (`Sources/`): Git runs with argument lists, never a local shell; every old
   blob comes through one `git cat-file --batch` process. Files are diffed and
   highlighted in parallel on worker threads. Whole files feed the diff and the
   highlighter, then only shown lines keep their text and colours, so memory follows

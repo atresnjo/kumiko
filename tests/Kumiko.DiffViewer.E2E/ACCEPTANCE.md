@@ -56,6 +56,43 @@ Sources
   line's text, number or colour (a block comment opened above a hunk must still
   colour the hunk's lines as comment).
 
+Remote checkouts (SSH)
+
+- `host:/path`, `host:~/path`, `ssh://user@host:port/path` or `--ssh=HOST` with
+  `--repo=` / a path do not select a remote checkout, or a revision argument such
+  as `main..feature` or `HEAD~1` is taken for a host.
+- A remote working tree, staged change or commit range differs from the same
+  checkout loaded locally: staged, unstaged, untracked, deleted, renamed, binary
+  or non-UTF-8 files, or paths with spaces and Unicode, go missing or change.
+- Any Git call for a remote checkout runs locally, a path is not quoted for the
+  remote shell, `~` is not the remote home, or each working-tree file starts its
+  own SSH session.
+- An unreachable host or missing folder hangs, prompts, or fails without the
+  SSH or Git message. A remote checkout starts a local file watcher.
+- The palette lists a remote checkout's commits from a local repository, marks a
+  local project with the same path as current, or reopens a recent remote
+  checkout as a local folder. Switching to staged changes, a commit or a pull
+  request and back loses the host.
+- ⌘K does not list the `Host` aliases of `~/.ssh/config` and the files it
+  `Include`s, or lists wildcard or negated patterns, `Match` blocks, Git hosting
+  hosts (github.com and aliases whose HostName is one) or one alias twice. A
+  host's detail is not its user@HostName.
+- Choosing a host closes the palette instead of filling in `host:~/` with the
+  field ready for the path. While a `host:path` is typed, that host's recent
+  checkouts and the Git repositories found on it (home, /srv, /var/www, /opt;
+  not inside hidden or dependency folders) are not offered, are not narrowed by
+  the typed path, or come after the bare path row, so Enter right after
+  choosing a host opens the home folder. The host is searched more than once
+  per palette session, or a failed search shows no reason.
+- With a query, the palette mixes projects, hosts, commits, pull requests and
+  commands in one ranked list without headings: a group's rows are not
+  together under its heading, groups are not ordered by their best match (the
+  best match is not first), or a host and a remote repository share an icon.
+- Opening a remote folder that is not a repository shows only Git's message,
+  without naming the folder and how to choose a repository.
+- Tests reach a real host or the user's SSH configuration; offscreen runs list
+  the user's hosts.
+
 Viewing and keyboard
 
 - Scrolling builds rows for the whole diff instead of the viewport; a 100k-line
@@ -137,6 +174,44 @@ Pull requests and commits
   still loads is fetched a second time. A refused one is retried while it is
   unchanged; an updated one keeps its earlier load.
 - Tests use the user's gh accounts, tokens or the network.
+
+Open repository
+
+- The palette does not start with the open repository's worktrees (local or
+  on an SSH host, from Git, the current one marked) and then its open pull
+  requests from GitHub, before recent projects and other pull requests; or a
+  pull request of the open repository is listed twice.
+- The repository is not found from its remote: `git@host:owner/repo.git`,
+  `https://host/owner/repo`, `ssh://git@host:22/owner/repo.git`, or an SSH
+  alias whose HostName is the GitHub host (`git@github-work:owner/repo.git`).
+  Local paths and `file://` remotes are taken for GitHub repositories.
+- A repository on a host without a gh account shows an error, or one GitHub
+  refuses shows none.
+
+Launching from other tools (T3 actions, terminals)
+
+- `--pr` does not open the open pull request whose head is the checkout's
+  current branch (also in a worktree or over SSH); `--pr=N` or a pull request
+  URL does not open that one; a branch without one, a detached HEAD or a
+  repository without a GitHub remote fails without saying so, or the
+  working tree flashes before the pull request.
+- A second launch while Diff runs starts a second app, is dropped, or replaces
+  the diff of an open window. A launch for the worktree or `--pr` a window
+  already shows opens another window instead of focusing and reloading it; a
+  window that switched elsewhere since is still taken for it. A closed window
+  keeps its watcher and loads running. Reloading, or toggling whitespace,
+  while `--pr` is still being looked up leaves the window loading forever.
+- A pull request of the open repository is read file by file through
+  GitHub's API instead of fetching its head into the checkout (locally or on
+  the SSH host) and diffing merge base to head there; a pull request whose
+  commits are already present is fetched again; a failed or hanging fetch,
+  or a checkout of another repository, does not fall back to the API. The
+  open repository's pull requests are preloaded through the API. A pull
+  request opened from a checkout on an SSH host is read there although a
+  local clone of the same repository is known. Blobs over SSH are asked for
+  one round trip each, a file over 1 MiB is carried over a slow link instead
+  of being shown as too large (with its size), or the SSH link is not
+  compressed.
 
 Text selection
 

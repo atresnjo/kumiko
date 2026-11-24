@@ -27,6 +27,8 @@ internal sealed partial class DiffApp : IKumiko<Model, Msg>
             return Remember(Loaded(model, loaded.Document));
         if (message is Msg.QuickAccept accept && model.Quick is { } quick)
             return Accept(model, quick, accept.Index);
+        if (message is Msg.QuickQuery query && model.Quick is not null)
+            return SearchHost(Quick(model, query.Query, 0));
         if (message is Msg.OpenProject open)
             return (OpenProject(model, open.Path), Cmd<Msg>.None);
         if (message is Msg.OpenQuick palette)
@@ -83,10 +85,20 @@ internal sealed partial class DiffApp : IKumiko<Model, Msg>
         Msg.SearchStep step when model.Search is { Found.Length: > 0 } search => Step(model, search, step.Direction),
         Msg.CloseOverlay => model with { Finder = null, Search = null, Help = false, Quick = null },
         Msg.CommitsFound commits => CommitsFound(model, commits),
+        Msg.HostsFound hosts => Requery(model with { SshHosts = hosts.Hosts }),
+        Msg.ContextFound found when found.Project == model.ProjectId => Requery(model with
+        {
+            Context = new(found.Project, found.Worktrees, found.Remote, found.Pulls, found.Error, false)
+        }),
+        // Results move the highlight to the first row: a repository, not the bare path typed so far.
+        Msg.HostReposFound found when model.Quick is { } quick => Quick(model with
+        {
+            HostRepos = model.HostRepos.SetItem(found.Host, new(found.Paths, false, found.Error))
+        }, quick.Query, 0),
         Msg.OpenPull pull => OpenPull(model, pull.Pull),
+        Msg.PullFound found when found.Generation == model.Generation && model.Request.PullQuery is { } query => OpenPull(model, found.Pull, query),
         Msg.PullPrefetched prefetched => Prefetched(model, prefetched),
         Msg.OpenCommit commit => OpenCommit(model, commit.Commit),
-        Msg.QuickQuery query when model.Quick is not null => Quick(model, query.Query, 0),
         Msg.QuickStep step when model.Quick is { } quick => model with
         {
             Quick = quick with
@@ -98,12 +110,12 @@ internal sealed partial class DiffApp : IKumiko<Model, Msg>
         Msg.Rescan => model with { Scanning = model.Store is not null, Scanned = false },
         Msg.SetSource source => model with
         {
-            Request = new(source.Kind, model.ProjectPath, "HEAD"),
+            Request = new(source.Kind, model.ProjectPath, "HEAD") { Host = model.Request.Host },
             Generation = model.Generation + 1,
             Loading = true
         },
         Msg.FinderStep or Msg.FinderAccept or Msg.SearchStep or Msg.SelectionStep or Msg.TextDrag or Msg.TextRelease => model,
-        Msg.QuickQuery or Msg.QuickStep or Msg.QuickAccept or Msg.OpenProject or Msg.Saved => model,
+        Msg.QuickQuery or Msg.QuickStep or Msg.QuickAccept or Msg.OpenProject or Msg.Saved or Msg.PickHost or Msg.SearchHost or Msg.HostReposFound or Msg.ContextFound or Msg.PullFound => model,
         Msg.OpenQuick or Msg.RefreshPulls or Msg.PullsFound or Msg.PullsExpired => model,
         Msg.Navigate navigate => model with { Navigation = model.Navigation.Move(navigate.Request, "app") },
         _ => model
